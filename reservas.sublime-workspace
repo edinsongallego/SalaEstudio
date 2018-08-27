@@ -1,0 +1,444 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"inc",
+				"incl1\tinclude_once …"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"col-sm",
+				"col-sm-5"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"esta",
+				"estado"
+			],
+			[
+				"ses",
+				"session_start"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"b",
+				"buttton"
+			],
+			[
+				"id",
+				"id_cliente"
+			],
+			[
+				"user",
+				"user_name"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"btn",
+				"btn-success"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 203.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ide",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"identi",
+				"Indentation: Reindent Lines"
+			]
+		],
+		"width": 404.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/ppI-SalaEstudio/reservas.php",
+		"/C/xampp/htdocs/ppI-SalaEstudio/js/custom.js",
+		"/C/xampp/htdocs/SalaEstudio/consulta.php",
+		"/C/xampp/htdocs/SalaEstudio/cargar_lista.php",
+		"/C/xampp/htdocs/SalaEstudio/contactenos.php",
+		"/C/xampp/htdocs/proyectoSalaestudio2018/cargar_lista.php",
+		"/C/xampp/htdocs/proyectoSalaestudio2018/conexion.php",
+		"/C/xampp/htdocs/proyectoSalaestudio2018/consulta.php",
+		"/C/xampp/htdocs/proyectoSalaestudio2018/reserva.php",
+		"/C/xampp/htdocs/proyectoSalaestudio2018/reservas.php",
+		"/C/xampp/htdocs/SalaEstudio/reservas.php",
+		"/C/xampp/htdocs/SalaEstudio/reserva.php",
+		"/C/xampp/htdocs/SalaEstudio/navbar_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/navbar_docente.php",
+		"/C/xampp/htdocs/SalaEstudio/perfil.php",
+		"/D/Nueva carpeta/SalaEstudio/navbar_docente.php",
+		"/C/xampp/htdocs/SalaEstudio/registro_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/nuevo_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/classes/Login.php",
+		"/D/Nueva carpeta/SalaEstudio/registroUsers.php",
+		"/C/xampp/htdocs/SalaEstudio/registroUsers.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/editar_clientes.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/editar_productos.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/editar_usuarios.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/registro_banda2.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/registro_usuarios.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/registro_clientes.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/registro_productos.php",
+		"/C/xampp/htdocs/SalaEstudio/clientes.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/nuevo_usuario.php",
+		"/D/Nueva carpeta/SalaEstudio/usuarios.php",
+		"/C/xampp/htdocs/SalaEstudio/facturas.php",
+		"/C/xampp/htdocs/SalaEstudio/nueva_factura.php",
+		"/C/xampp/htdocs/SalaEstudio/editar_factura.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/editar_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_usuario.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/insertarUsuarios2.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/nuevo_usuario2.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/head.php",
+		"/C/xampp/htdocs/SalaEstudio/footer.php",
+		"/C/xampp/htdocs/SalaEstudio/navbar.php",
+		"/C/xampp/htdocs/SalaEstudio/usuarios.php",
+		"/C/xampp/htdocs/SalaEstudio/banda.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/buscar_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/cambiar_password.php",
+		"/C/xampp/htdocs/SalaEstudio/recupar_contrasena.php",
+		"/C/xampp/htdocs/SalaEstudio/validaremail.php",
+		"/C/xampp/htdocs/SalaEstudio/config/conexion.php",
+		"/C/xampp/htdocs/SalaEstudio/restablecer.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_password.php",
+		"/C/xampp/htdocs/SalaEstudio/antes_validaremail.php",
+		"/C/xampp/htdocs/SalaEstudio/cambiarpassword.php",
+		"/C/xampp/htdocs/SalaEstudio/recuperarContraseña.php",
+		"/C/xampp/htdocs/SalaEstudio/login.php",
+		"/C/xampp/htdocs/SalaEstudio/config/db.php",
+		"/C/xampp/htdocs/SalaEstudio/home.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/buscar_usuarios.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_cliente.php",
+		"/C/xampp/htdocs/SalaEstudio/navbar-home.php",
+		"/C/xampp/htdocs/SalaEstudio/nosotros.php",
+		"/C/xampp/htdocs/SalaEstudio/productos.php",
+		"/C/xampp/htdocs/SalaEstudio/home_banda.php",
+		"/C/xampp/htdocs/SalaEstudio/js/usuarios.js",
+		"/C/xampp/htdocs/SalaEstudio/index.php",
+		"/C/xampp/htdocs/SalaEstudio/js/clientes.js",
+		"/C/xampp/htdocs/SalaEstudio/ajax/nuevo_cliente.php",
+		"/C/xampp/htdocs/SalaEstudio/js/banda.js",
+		"/C/xampp/htdocs/SalaEstudio/reserva.html",
+		"/C/xampp/htdocs/SalaEstudio/pdf/_class/locale.class.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/agregar_facturacion.php",
+		"/C/xampp/htdocs/SalaEstudio/js/facturas.js",
+		"/C/xampp/htdocs/SalaEstudio/ajax/buscar_facturas.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/productos_factura.php",
+		"/C/xampp/htdocs/SalaEstudio/pdf/documentos/ver_factura.php",
+		"/C/xampp/htdocs/SalaEstudio/js/nueva_factura.js",
+		"/C/xampp/htdocs/SalaEstudio/pdf/documentos/res/factura_html.php",
+		"/C/Users/ACER/Desktop/recuperar contaseña/ppi santiago/PPI-SalaEstudio/reserva.php",
+		"/C/Users/ACER/Desktop/recuperar contaseña/ppi santiago/PPI-SalaEstudio/reserva.html",
+		"/C/Users/ACER/Desktop/recuperar contaseña/index.html",
+		"/C/xampp/htdocs/SalaEstudio/css/custom.css",
+		"/C/xampp/htdocs/SalaEstudio/ajax/is_logged.php",
+		"/C/xampp/htdocs/SalaEstudio/css/fullcalendar.min.css",
+		"/C/Users/ACER/Desktop/recuperar contaseña/validaremail.php",
+		"/C/xampp/htdocs/SalaEstudio/salaestudiodb.sql",
+		"/C/Users/ACER/Desktop/recuperar contaseña/restablecer.php",
+		"/C/Users/ACER/Desktop/recuperar contaseña/cambiarpassword.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_facturacion.php",
+		"/C/xampp/htdocs/SalaEstudio/css/index.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/buscar_productos.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/buscar_clientes.php",
+		"/C/xampp/htdocs/SalaEstudio/servicios.php",
+		"/C/xampp/htdocs/Facturacion/ajax/nuevo_usuario2.php",
+		"/C/xampp/htdocs/Facturacion/registroUsers.php",
+		"/C/xampp/htdocs/Facturacion/login.php",
+		"/C/xampp/htdocs/Facturacion/modal/registro_usuarios.php",
+		"/C/xampp/htdocs/Facturacion/usuarios.php",
+		"/C/xampp/htdocs/Facturacion/head.php",
+		"/C/xampp/htdocs/Facturacion/navbar.php",
+		"/C/xampp/htdocs/Facturacion/nueva_factura.php",
+		"/C/xampp/htdocs/Facturacion/footer.php",
+		"/C/xampp/htdocs/Facturacion/facturas.php",
+		"/C/xampp/htdocs/Facturacion/editar_factura.php",
+		"/C/xampp/htdocs/Facturacion/clientes.php",
+		"/C/xampp/htdocs/Facturacion/productos.php",
+		"/C/xampp/mysql/bin/my.ini",
+		"/C/xampp/htdocs/SalaEstudio/registrousers2.php",
+		"/C/xampp/htdocs/SalaEstudio/libraries/password_compatibility_library.php",
+		"/C/xampp/htdocs/SalaEstudio/css/login.css",
+		"/C/xampp/htdocs/SalaEstudio/ajax/nuevo_producto.php",
+		"/C/xampp/htdocs/SalaEstudio/modal/registro_usuarios2.php",
+		"/C/xampp/htdocs/SalaEstudio/classes/index.php",
+		"/C/xampp/htdocs/SalaEstudio/ajax/editar_factura.php",
+		"/C/xampp/htdocs/SalaEstudio/js/editar_factura.js",
+		"/C/xampp/htdocs/SalaEstudio/js/VentanaCentrada.js",
+		"/C/xampp/htdocs/SalaEstudio/pdf/html2pdf.class.php",
+		"/C/xampp/htdocs/SalaEstudio/MenuBanda.php",
+		"/C/xampp/htdocs/SalaEstudio/navbarbanda.php",
+		"/C/xampp/htdocs/SalaEstudio/img/logo.jpg",
+		"/C/xampp/htdocs/SalaEstudio/img/logo.png",
+		"/C/xampp/htdocs/SalaEstudio/funciones.php",
+		"/C/xampp/htdocs/crud-example/navbar.php",
+		"/C/xampp/htdocs/crud-example/login.php",
+		"/C/xampp/htdocs/crud-example/css/custom.css",
+		"/C/xampp/htdocs/crud-example/usuarios.php",
+		"/C/xampp/htdocs/crud-example/head.php",
+		"/C/xampp/htdocs/crud-example/index.php",
+		"/C/xampp/htdocs/SalaestudioPHP/Salaestudio_php-master/autenticar_usuarios/iniciosesion.php"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "reservas.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"validaremail.php",
+				"validaremail.php"
+			],
+			[
+				"index",
+				"index.php"
+			],
+			[
+				"Login",
+				"classes\\Login.php"
+			],
+			[
+				"navbar.php",
+				"navbar.php"
+			],
+			[
+				"usuari",
+				"usuarios.php"
+			],
+			[
+				"foo",
+				"footer.php"
+			],
+			[
+				"reser",
+				"reservas.php"
+			],
+			[
+				"head",
+				"head.php"
+			],
+			[
+				"nab",
+				"navbar_banda.php"
+			],
+			[
+				"na",
+				"navbar.php"
+			],
+			[
+				"perfi",
+				"perfil.php"
+			],
+			[
+				"nav",
+				"navbar.php"
+			],
+			[
+				"recu",
+				"recuperarContraseña.php"
+			],
+			[
+				"navbar_banda.php",
+				"navbar_banda.php"
+			],
+			[
+				"head.php",
+				"head.php"
+			],
+			[
+				"per",
+				"perfil.php"
+			],
+			[
+				"validar",
+				"validaremail.php"
+			],
+			[
+				"restablecer.php",
+				"restablecer.php"
+			],
+			[
+				"usuario",
+				"usuarios.php"
+			],
+			[
+				"config/conexion.php",
+				"config\\conexion.php"
+			],
+			[
+				"config/db.php",
+				"config\\db.php"
+			],
+			[
+				"valida",
+				"validaremail.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 259.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

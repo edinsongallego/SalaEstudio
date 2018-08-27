@@ -1,0 +1,76 @@
+<?php
+
+$title="Sala Estudio";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include("head.php");?>
+</head>
+<body>
+	<?php
+	include("navbar-home.php");
+	?>
+
+<!DOCTYPE html>
+	<html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+		<title>Sala Estudio</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- CSS  -->
+		<link href="css/login.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link rel=icon href=img/logo.png  type="image/png">
+		<?php include("head.php");?>
+	</head>
+	<body>
+	
+		<div class="container">
+			<div class="card card-container">
+				<img id="profile-img" class="profile-img-card" src="img/logo.png" />
+				<p id="profile-name" class="profile-name-card"></p>
+				<form method="post" accept-charset="utf-8" action="login.php" name="loginform" autocomplete="off" role="form" class="form-signin">
+			<div class="row">
+				
+				
+			<div id="resultados_ajax2"></div>
+					<form>
+						<div class="form-group">
+							<input type="text" name="nombres" class="form-control" placeholder="*Ingrese Nombres*"title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+
+							
+						</div>
+						<div class="form-group">
+							<input type="text" name="apellidos" class="form-control" placeholder="*Ingrese Apellidos"title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+						</div>
+
+						<div class="form-group">
+							<input type="text" name="email" class="form-control" placeholder="*Ingrese Email"value="" size='30' maxlength='100' title='direccion de correo' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="text" name="msj" class="form-control" placeholder="Ingrese Mensaje*">
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+<?php
+include("footer.php");
+?>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	</body>
+</html>
