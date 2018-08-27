@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 	header("location: login.php");
 	exit;
 }
-
+ //Hola eta es una prueba de versionamiento   
 /* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
