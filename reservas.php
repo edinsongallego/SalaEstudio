@@ -1,6 +1,6 @@
 
 <?php $title = "Reservas | Sala Estudio";
-
+//echo date("Y-m-d H:i:s");
 include_once "classes/Login.php";
 
 //if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -29,7 +29,7 @@ if(!Login::inicioSession()){
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/moment.min.js"></script>
-	<script src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script src="js/alertify.js"></script>
 	<!-- FULL CALENDAR -->
@@ -39,9 +39,13 @@ if(!Login::inicioSession()){
 
 	<script src="js/bootstrap-clockpicker.js"></script>
 	<link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 	<style>
 		.fc th{
 			padding: 10px 0px;
@@ -55,10 +59,13 @@ if(!Login::inicioSession()){
 	<?php 
   if ($_SESSION['CS_TIPO_USUARIO_ID']==1) {
     include("navbar.php");
+   
   }elseif ($_SESSION['CS_TIPO_USUARIO_ID']==2) {
     include("navbar_banda.php");
+  
   }elseif ($_SESSION['CS_TIPO_USUARIO_ID']==4) {
     include("navbar_docente.php");
+    
   } 
 	?>
 	<div class="container">
@@ -73,13 +80,21 @@ if(!Login::inicioSession()){
 <script>
 		$(document).ready(function(){
 		$('#CalendarioWeb').fullCalendar({
+                        /*validRange: function(nowDate){
+                            //(console.log( nowDate.subtract(1, 'day'))
+                            return {start: nowDate.subtract(1, 'day')} //to prevent anterior dates
+                        },*/
+
+            defaultView:"month",
 			header:{
 				left: 'today,prev,next',
 				center: 'title',
-				right: 'month,basicWeek,basicDay, agendaWeek, agendaDay'
+				right: 'month, agendaWeek, agendaDay'
 			},
 			dayClick:function(date, jsEvent, view){
-
+                if (moment().diff(date, 'days') > 0) {
+                     alertify.error("Este dia no esta habilitado para reservas");
+                }else{
 				asignarValorestexto(false, "#btnagregar");
 				asignarValorestexto(true, "#btnmodificar");
 				asignarValorestexto(true, "#btneliminar");
@@ -88,11 +103,13 @@ if(!Login::inicioSession()){
 				limpiarFormulario();
 				obtenerlista();
 				obtenerauto();
-				$("#txtfechainicial").val(date.format());
-				$("#txtfechafinal").val(date.format());
+				$("#txtfechainicial").val(date.format("YYYY-MM-DD"));
+				$("#txtfechafinal").val(date.format("YYYY-MM-DD"));
 				$("#Modalevento").modal();
+                            }
 			},
 			showNonCurrentDates: false,
+			hiddenDays: [0],
 			events:'http://localhost/SalaEstudio/reserva.php',
 			eventClick:function(calEvent, jsEvent, view){
 				asignarValorestexto(true, "#btnagregar");
@@ -122,6 +139,30 @@ if(!Login::inicioSession()){
 				alertify.success("Reserva modificada con éxito");
 			}
 		});
+
+		$('#txthoraini, #txthorafin').clockpicker({
+			donetext: "Seleccionar",
+	        twelvehour: true         
+	    });
+
+	    $("#txtdocumento").select2({
+		  ajax: {
+		    url: 'consulta.php',
+		    dataType: 'json',
+		    data: function (params) {
+		      var query = {
+		        search: params.term,
+		        page: params.page || 1
+		      }
+
+		      // Query parameters will be ?search=[term]&page=[page]
+		      return query;
+		    },
+		     results: function (data, page) {
+                return { results: data.results };
+            }
+		  }
+		});
 	});
 </script>
 
@@ -143,7 +184,8 @@ if(!Login::inicioSession()){
 		<div class="row">
       		<div class="form-group col-md-8">
       			<label><b>Documento:</b></label>
-		      	<input type="text" id="txtdocumento" class="form-control" placeholder="Documento cliente" onkeypress="return valida(event)" maxlength="11"><br/>
+		      	<select id="txtdocumento" style="width: 99%">
+		      	</select><br/>
 		    </div>
 		    <div class="form-group col-md-4">
       			<label><b>Sala:</b></label>
@@ -157,13 +199,14 @@ if(!Login::inicioSession()){
 		    </div>
 		    <div class="form-group col-md-4">
       			<label><b>Hora Inicial:</b></label>
-      			<div class="input-group clockpicker" data-autoclose="true">
+      			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)"><br/>
 		      	</div>
 		    </div>
+
 		    <div class="form-group col-md-4">
       			<label><b>Hora Final:</b></label>
-      			<div class="input-group clockpicker" data-autoclose="true">
+      			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)" maxlength="250"><br/>
 		      	</div>
 		    </div>  		
@@ -186,8 +229,8 @@ if(!Login::inicioSession()){
       	</div>  	
       </div>
       <div class="modal-footer">
-      	<button type="button" id="btnagregar" class="btn btn-success"><b>Guardar</b></button>
-		<button type="button" id="btnmodificar" class="btn btn-success"><b>Modificar</b></button>
+      	<button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
+		<button type="button" id="btnmodificar" class="btn btn-primary"><b>Modificar</b></button>
 		<button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
 		<button type="button" class="btn btn-default" data-dismiss="modal"><b>Cerrar</b></button> 
   	  </div>
@@ -333,16 +376,20 @@ function EnviarInformacion(accion, objEvento, modal){
 	$.ajax({
 		type:'POST',
 		url:'reserva.php?accion='+accion,
+		dataType: "JSON",
 		data:objEvento,
 		success:function(msg){
+			console.log(msg);
 			if(accion=='guardar')
 			{
-				if(msg){
+				if(msg.respuesta == "exitoso"){
 					$('#CalendarioWeb').fullCalendar('refetchEvents');
 					if(!modal){
 						$("#Modalevento").modal('toggle');
 						alertify.success("Guardada con éxito");
 					}	
+				}else{
+					alertify.error("Ya existe una reserva en ese horario!");
 				}
 			}
 			if(accion=='eliminar')
@@ -482,8 +529,8 @@ function soloLetras(e){
  }
  function CompararHoras(sHora1, sHora2) {
     
-    var arHora1 = sHora1.split(":");
-    var arHora2 = sHora2.split(":");
+    var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
+    var arHora2 = moment(sHora2, "h:mm:ss A").format("HH:mm:ss").split(":");
     
     // Obtener horas y minutos (hora 1)
     var hh1 = parseInt(arHora1[0],10);

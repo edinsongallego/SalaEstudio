@@ -12,7 +12,11 @@ require_once("config/db.php");
 
 
 ?>
-
+<style type="text/css">
+	label{
+		color: white;
+	}
+</style>
 <nav class="navbar navbar-default ">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,20 +65,22 @@ require_once("config/db.php");
 </head>
 <body>
 	<div class="container">
-		<div class="card card-container">
+		<div class="card card-container" style="width:40%">
 			<img id="profile-img" class="profile-img-card" src="img/logo.png" />
 			<p id="profile-name" class="profile-name-card"></p>
 			<form method="post" accept-charset="utf-8" id="guardar_usuario2" name="guardar_usuario2" autocomplete="off" role="form" class="form-signin">
 
 				<div id="resultados_ajax2"></div>
 
+				<ul class="errorMessages" style="color: red; display: none"></ul>
 
-
-				<input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia()" id="miInput" class="form-control" minlength="8" maxlength="15" required >
+				<label for="NM_DOCUMENTO_ID">Identificación:</label>
+				<input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="8" maxlength="15" required >
 
 				<p>
-					<select name="CS_TIPO_DOCUMENTO_ID" id="CS_TIPO_DOCUMENTO_ID" title="Tipo Documento ( campo requerido)" class="form-control" required >
-						<option value=" ">*Seleccione una opción</option>
+					<label for="CS_TIPO_DOCUMENTO_ID">Tipo Documento:</label>
+					<select required="required" name="CS_TIPO_DOCUMENTO_ID" id="CS_TIPO_DOCUMENTO_ID" title="Tipo Documento ( campo requerido)" class="form-control" >
+						<option value style="display: none" selected>*Seleccione una opción</option>
 						<option value="1">Cedula Ciudadania</option>
 						<option value="2">Tarjeta Identidad</option>
 						<option value="3">Pasaporte</option>
@@ -84,22 +90,26 @@ require_once("config/db.php");
 
 				</p>
 				
-				<input type="text" class="form-control" id="DS_NOMBRES_USUARIO" name="DS_NOMBRES_USUARIO" placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+				<label for="DS_NOMBRES_USUARIO">Nombre:</label>
+				<input type="text" class="form-control" id="DS_NOMBRES_USUARIO" name="DS_NOMBRES_USUARIO" placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia(this)" id="miInput" class="form-control"  required>
 
-				
-				<input type="text" class="form-control" id="DS_APELLIDOS_USUARIO" name="DS_APELLIDOS_USUARIO" placeholder="*Apellidos" title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+				<label for="DS_APELLIDOS_USUARIO">Apellidos:</label>
+				<input type="text" class="form-control" id="DS_APELLIDOS_USUARIO" name="DS_APELLIDOS_USUARIO" placeholder="*Apellidos" title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia(this)" id="miInput" class="form-control"  required>
 
-				
-				<input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)"  onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
+				<label for="NM_TELEFONO">Teléfono:</label>
+				<input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event, this)" onblur="limpia(this)" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
 
-				<input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)"  onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
+				<label for="NM_CELULAR">Celular:</label>
+				<input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event, this)" class="form-control" minlength="10" maxlength="10"  required>
 
-				<input type="Email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title=''Dirección de correo' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
+				<label for="DS_CORREO">Email:</label>
+				<input type="email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title=''Dirección de correo' onKeyUp="validateMail(this)" class="form-control" required>
 
 
 				<p>
+					<label for="CS_TIPO_USUARIO_ID">Tipo Usuario:</label>
 					<select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" title="Tipo Usuario( campo requerido)" class="form-control"  required>
-						<option value="">Seleccione</option>
+						<option value style="display: none">Seleccione</option>
 						<option value="2">Usuario normal | Banda</option>
 						<option value="4">Docente</option>
 
@@ -118,7 +128,9 @@ require_once("config/db.php");
 		</div><!-- /card-container -->
 	</div><!-- /container -->
 
-
+            <?php
+			include("footer.php");
+			?>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -129,32 +141,51 @@ require_once("config/db.php");
 </html>
 
 <script>
-	$( "#guardar_usuario2" ).submit(function( event ) {
-		$('#registrarse').attr("disabled", true);
+	$(document).ready(function(){
+		$("#NM_CELULAR, #NM_TELEFONO").keyup(function(e){
+			var valorInicial = $(this).val();
+			var valor = $(this).val().replace(/^0*/, '');
+			if(valorInicial.length != valor.length)
+				$(this).val(valor);
+		});
+	 
+		$( "#guardar_usuario2" ).submit(function( event ) {
 
-		var parametros = $(this).serialize();
-		$.ajax({
-			type: "POST",
-			url: "ajax/nuevo_usuario2.php",
-			data: parametros,
-			beforeSend: function(objeto){
-				$("#resultados_ajax2").html("Mensaje: Cargando...");
-			},
-			success: function(datos){
-				$("#resultados_ajax2").html(datos);
-				$('#registrarse').attr("disabled", false);
-			//load(1);
-			$("#guardar_usuario2")[0].reset();
-		}
-	});
-		event.preventDefault();
-	})
+			event.preventDefault();
+			if($('#guardar_usuario2')[0].checkValidity()){
+				if(validateMail(document.getElementById("DS_CORREO"))){ 
+					$('#registrarse').attr("disabled", true);
 
+					var parametros = $(this).serialize();
+					$.ajax({
+						type: "POST",
+						url: "ajax/nuevo_usuario2.php",
+						data: parametros,
+						beforeSend: function(objeto){
+							$("#resultados_ajax2").html("Mensaje: Cargando...");
+						},
+						success: function(datos){
+							$("#resultados_ajax2").html(datos);
+							$('#registrarse').attr("disabled", false);
+						//load(1);
+						$("#guardar_usuario2")[0].reset();
+						}
+					});
+				}else{
+					$("#DS_CORREO").focus();
+					alertify.error("Verifique la estructura del correo.")
+				}
+			}
+		});
+
+	});	
 
 </script>
 <script>
 
-	function numeros(e){
+	function numeros(e,t){
+		//.replace(/^0*/, '')return false;
+		//console.log($(t).val()+ String.fromCharCode(key).toLowerCase());
 		key = e.keyCode || e.which;
 
 		var key = window.Event ? e.which : e.keyCode;
@@ -175,10 +206,11 @@ require_once("config/db.php");
 		if(letras.indexOf(tecla)==-1 && !tecla_especial)
 			return false;
 	}
- 
+
  function pierdeFoco(e){
     var valor = e.value.replace(/^0*/, '');
     e.value = valor;
+    return true;
  }
 
 	function soloLetras(e) {
@@ -199,19 +231,19 @@ require_once("config/db.php");
 			return false;
 	}
 
-	function limpia() {
-		var val = document.getElementById("miInput").value;
+	function limpia(e) {
+		var val = $(e).val();
 		var tam = val.length;
 		for(i = 0; i < tam; i++) {
 			if(!isNaN(val[i]))
-				document.getElementById("miInput").value = '';
+				$(this).val('');
 		}
 	}
 
-	function validateMail(idMail)
+	function validateMail(object)
 	{
     //Creamos un objeto 
-    object=document.getElementById(idMail);
+   // object=document.getElementById(idMail);
     valueForm=object.value;
 
     // Patron para el correo
@@ -220,12 +252,56 @@ require_once("config/db.php");
     {
         //Mail correcto
         object.style.color="#000";
-        return;
+        return true;
     }
     //Mail incorrecto
     object.style.color="#f00";
+    return false;
 }
 //-->
+
+var createAllErrors = function() {
+        var form = $( this ),
+            errorList = $( "ul.errorMessages", form );
+
+        var showAllErrorMessages = function() {
+            errorList.empty();
+
+            // Find all invalid fields within the form.
+            var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
+
+                // Find the field's corresponding label
+                var label = $( "label[for=" + node.id + "] "),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || 'Invalid value.';
+
+                errorList
+                    .show()
+                    .append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
+            });
+        };
+
+        // Support Safari
+        form.on( "submit", function( event ) {
+            if ( this.checkValidity && !this.checkValidity() ) {
+                $( this ).find( ":invalid" ).first().focus();
+                event.preventDefault();
+            }
+        });
+
+        $( "input[type=submit], button:not([type=button])", form )
+            .on( "click", showAllErrorMessages);
+
+        $( "input", form ).on( "keypress", function( event ) {
+            var type = $( this ).attr( "type" );
+            if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
+              && event.keyCode == 13 ) {
+                showAllErrorMessages();
+            }
+        });
+    };
+    
+    //	$( "form" ).each( createAllErrors );
 </script>
 
 

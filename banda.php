@@ -32,7 +32,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 					</div>
 					<h4><i class='glyphicon glyphicon-search'></i> Buscar Banda</h4>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body"style="height:700px;">
 					<?php
 					include("modal/registro_banda2.php");
 					include("modal/editar_banda.php");

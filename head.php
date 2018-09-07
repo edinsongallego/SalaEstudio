@@ -13,9 +13,9 @@
 	<link rel="stylesheet" href="css/fullcalendar.min.css">
 
 	<link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
 
 
-
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css?v=<php echo uniqid(); >">
 	<link rel=icon href='img/logo.png' sizes="32x32" type="image/png">

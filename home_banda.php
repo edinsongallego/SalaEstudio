@@ -30,6 +30,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 		include("modal/registro_banda.php");
 		?>
 		<div class="container">
+			<div class="panel-body" style="height:600px;">
 
 		</div>
 		<hr>

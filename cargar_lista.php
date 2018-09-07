@@ -8,7 +8,7 @@ require_once 'config/conexion.php';
 	$result = $mysql->query($query);
 	$listas = '<option value="0">Seleccionar</option>';
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
-		$listas .= "<option value = '$row[CS_SALA_ID]'>$row[DS_NOMBRE_SALA]</option>";
+		$listas .= "<option value = '$row[CS_SALA_ID]'>$row[DS_NOMBRE_SALA] | Valor hora:$row[NM_VALOR_HORA_SALA]</option>";
 	}
 	return $listas;
 

@@ -30,7 +30,7 @@
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Facturas</h4>
 		</div>
-			<div class="panel-body">
+			<div class="panel-body"style="height:500px;">
 				<form class="form-horizontal" role="form" id="datos_cotizacion"autocomplete="off">
 				
 						<div class="form-group row">

@@ -29,7 +29,7 @@
 		<div class="panel-heading">
 			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Factura</h4>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body"style="height:400px;">
 		<?php 
 			include("modal/buscar_productos.php");
 			include("modal/registro_clientes.php");

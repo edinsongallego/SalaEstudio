@@ -72,7 +72,7 @@ if ($login->isUserLoggedIn() == true) {
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><img src="img/logo.png" width="100" height="100"></a>
+					<a class="navbar-brand" href="#"><img src="img/logo.png" width="80" height="80"></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,6 +97,7 @@ if ($login->isUserLoggedIn() == true) {
 		</nav>
 
 		<div class="container">
+			
 			<div class="card card-container">
 				<img id="profile-img" class="profile-img-card" src="img/logo.png" />
 				<p id="profile-name" class="profile-name-card"></p>
@@ -178,6 +179,7 @@ if ($login->isUserLoggedIn() == true) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 
 	</body>
 	</html>

@@ -6,18 +6,17 @@ $accion= (isset($_GET['accion']))?$_GET['accion']:'leer';
 
 switch ($accion) {
  	case 'guardar':
- 		$consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where CS_SALA_ID=:sala and 	DT_FECHA_INICIAL BETWEEN :start and :end");
+ 		$consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=:sala and start BETWEEN :start and :end");
  		$res=$consulta->execute(array(
  			"sala"=> $_POST['sala'],
 		 	"start"=> $_POST['start'],
 		 	"end"=> $_POST['end']
  		));
- 		/*$filas=$res->fetchAll();
- 		if(count($filas)>0){
- 			echo json_encode("error");
+ 		if($consulta->rowCount()>0){
+ 			echo json_encode(array("respuesta" => "error"));
 		 	break;
  		}
- 		else{*/
+ 		else{
  			$sentenciaSQL = $pdo->prepare("INSERT INTO rs_reserva_sala(documento, sala, start, end, title, 	DS_ESTADO)VALUES(:documento,:sala,:start,:end,:title,:estado)");
 			$respuesta=$sentenciaSQL->execute(array(
 		 		"documento"=> $_POST['documento'],
@@ -28,9 +27,9 @@ switch ($accion) {
 		 		"estado"=>"Activo"
 
 		 	));
-		 	echo json_encode($respuesta);
+		 	echo json_encode(array("respuesta" => "exitoso"));
 		 	break;
- 		//}
+ 		}
 	case 'eliminar':
  		$respuesta = false;
  		if(isset($_POST['id'])){
@@ -57,8 +56,10 @@ switch ($accion) {
  		break;
  	
  	default:
+ 	session_start();
+ 	//print_r($_SESSION);
 	 		//Seleccionar los eventos de la bd
-			$query= $pdo->prepare("SELECT * FROM rs_reserva_sala");
+			$query= $pdo->prepare("SELECT *,  IF(documento=".$_SESSION["NM_DOCUMENTO_ID"].",'true', 'false') AS editable FROM rs_reserva_sala");
 			$query-> execute();
 
 			$resultado = $query->fetchAll(PDO::FETCH_ASSOC);

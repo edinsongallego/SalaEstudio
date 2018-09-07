@@ -13,8 +13,12 @@
 		//$count=$rw_user['user_id'];
 		$count = mysqli_num_rows($query);
 		if ($count==1){
-
-			if ($delete1=mysqli_query($con,"delete from us_banda_usuario where CS_BANDA_ID='".$user_id."'")){
+                    try {
+                        $delete1=mysqli_query($con,"delete from us_banda_usuario where CS_BANDA_ID='".$user_id."'");
+                    } catch (Exception $ex) {
+                        var_dump(mysql_error());die;
+                    }
+			if ($delete1){
 				?>
 				<div class="alert alert-success alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -22,13 +26,23 @@
 				</div>
 				<?php
 			}else {
+                            //echo "<pre>";print_r();echo "</pre>";
+                            $errores = mysqli_error_list($con);
+                            if(isset($errores[0]) && $errores[0]["errno"] == 1451){
+                                ?>
+				<div class="alert alert-warning alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Cuidado!</strong> Error de llave foranea.
+				</div>
+				<?php
+                            }else{
 				?>
 				<div class="alert alert-danger alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<strong>Error!</strong> Lo siento algo ha salido mal intenta nuevamente.
 				</div>
 				<?php
-
+                            }
 			}
 
 		} else {

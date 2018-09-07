@@ -31,6 +31,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 		?>
 		<div class="container">
 			<div class="row">
+				<div class="panel-body" style="height:600px;">
 
 				<div class="col-md-10">
 
@@ -42,7 +43,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 
 
 
-						<div class="form-group">
+						<div class="form-group" >
 							<label for="tipo_usu" class="col-sm-3 control-label">*Tipo Identificación</label>
 							<div class="col-sm-8">
 

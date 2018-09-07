@@ -34,7 +34,7 @@
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Clientes</h4>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body" style="height:500px;">
 		
 			
 			

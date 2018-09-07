@@ -13,7 +13,7 @@ $title="Sala Estudio";
 	?>
 
 	<div class="container">
-		<h2 class="text-center">LA SALA ESTUDIO</h2> 
+		<h2 class="text-center">BIEVENIDO A LA SALA ESTUDIO</h2> 
 		<h4 class="text-center">SALAS DE ENSAYO - ESTUDIO DE GRABACION</h4>  
 
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -50,30 +50,105 @@ $title="Sala Estudio";
 			</a>
 		</div>
 		<br><br>
-		<div class="container">
-			<div class="row">
-				<h4 class="text-center">La Sala Estudio</h4>
-				<h6 class="text-center">¡Aprendiendo a jugar, jugando para aprender!</h6>
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-3">
-					<img src="img/img1.png" align="center" class="img-responsive text-center">
-					<h3 style="color: #26a5d0;margin-left: 2rem;">Calidad</h3>
-					<h4 style="text-align: center;float: left;width: 45%;">Equipos e infraestructura de alta calidad</h4>
-				</div>
-				<div class="col-md-3">
-					<img src="img/img2.png" class="img-responsive text-center">
-					<h3 style="color: #26a5d0;margin-left: 2rem;">Faclidad</h3>
-					<h4 style="text-align: center;float: left;width: 45%;">Acceso facil a datos y reservas</h4>
-				</div>
-				<div class="col-md-3">
-					<img src="img/img3.png" class="img-responsive text-center">
-					<h3 style="color: #26a5d0;margin-left: 1rem;">Comodidad</h3>
-					<h4 style="text-align: center;float: left;width: 45%;">El uso del servicio con comodidad y seguridad</h4>
+		<div class="container setcton_top_nosotros">
+			<div class="container_stud margin_bottom_section">
+				<!--<h1 class="titles_all_page margin_bottom_section" style="text-align: center;">NOSOTROS</h1>
+					<p style="text-align: center;">La sala Estudio es un lugar muy acogedor donde podrás ensayar con tu banda como todo un profesional. Contamos con dos salas de ensayo insonorizadas, dotadas con equipos e instrumentos de excelente calidad&nbsp; y personal calificado, en su mayoría músicos, que entienden tus necesidades brindándote un excelente servicio y que te hacen sentir como en casa . Es un sitio con más de 10 años en el mercado. En diciembre del 2016 La sala estudio pasa a hacer parte de BYPASS, un estudio de grabación y producción&nbsp; para artistas, composición musical, produccion y post producción de audio, foley y locuciones. Desde entonces contamos con el espacio adecuado para que puedes grabar a tu banda de una manera profesional.</p>
+					<p style="text-align: center;"> 
+				<div class="ContentServices"> -->
+			<!--		</p> 
+			</div>
+			<div class="container_stud">-->
+
+											<!-- the loop -->
+													<!-- ********** -->
+								<!--<div class="itemHServices">
+								<div class="inner_item_h_Service cover" style="background: url(img/galery_1-1.jpg);height: 300px;">
+									<div class="absolute">
+										<div class="hover_service suave">
+											<div class="left_p_s suave"></div>
+											<div class="right_p_s suave"></div>
+											<div class="rel">
+												<div class="center suave_two">
+													<div class="icon_serv">
+														<div class="absolute"><div class="rel"><div class="center"><i class="glyphicon glyphicon-headphones"></i></div></div></div>
+														<img src="img/dumy.png">
+													</div>
+													<h2 class="h2service" style="color: white">Misión</h2>
+													<div class="h3service" style="color: white"><p>La Sala Estudio es una empresa de músicos para músicos. Nos dedicamos a brindarte la mejor experiencia en tu ensayo y a que te sientas como en casa, para que con tu banda o si lo deseas tu solo, practiques y desarrolles tus habilidades musicales de una manera profesional.&nbsp; Prestamos el servicio de renta salas de ensayo por horas para todo tipo de bandas de diferentes géneros musicales.&nbsp;La Sala Estudio hace parte de Bypass Estudio, por lo que contamos con un estudio de grabación profesional en donde podrás hacer realidad la produccion y grabación de tus canciones.</p>
+</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<img src="img/dummy_services.png">
+								</div>
+							</div>-->
+							<!-- ********** -->
+																	
+
+											<!-- the loop -->
+													<!-- ********** -->
+							<!-- <div class="itemHServices">
+								<div class="inner_item_h_Service cover" style="height: 300px; background: url(img/vision_foto.jpg)">
+									<div class="absolute">
+										<div class="hover_service suave">
+											<div class="left_p_s suave"></div>
+											<div class="right_p_s suave"></div>
+											<div class="rel">
+												<div class="center suave_two">
+													<div class="icon_serv">
+														<div class="absolute"><div class="rel"><div class="center"><i class="glyphicon glyphicon-music"></i></div></div></div>
+														<img src="img/dumy.png">
+													</div>
+													<h2 class="h2service" style="color: white;">Visión</h2>
+													<div class="h3service" style="color: white;"><p>La Sala Estudio en el 2020, será el sitio por excelencia y más concurrido en donde las bandas de la ciudad quieran ir a ensayar y grabar sus canciones.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<img src="http://lasalaestudio.com/wp-content/themes/lasalaestudio/img/dummy_services.png">
+								</div>
+							</div>-->
+							<!-- ********** -->
+																	
+											<!-- the loop -->
+													<!-- ********** -->
+							<!--<div class="itemHServices">
+								<div class="inner_item_h_Service cover" style="height:300px ; background: url(img/objecitovs_foto.jpg)">
+									<div class="absolute">
+										<div class="hover_service suave">
+											<div class="left_p_s suave"></div>
+											<div class="right_p_s suave"></div>
+											<div class="rel">
+												<div class="center suave_two">
+													<div class="icon_serv">
+														<div class="absolute"><div class="rel"><div class="center"><i class="glyphicon glyphicon-phone"></i></div></div></div>
+														<img src="img/dumy.png">
+													</div>
+													<h2 class="h2service" style="color: white;">Valores</h2>
+													<div class="h3service" style="color: white;"><p style="text-align: left;">Servicio: Nos apasiona la música y que te sientas como en casa. Nos encanta hacerte sentir bien.</p>
+<p style="text-align: left;">Puntualidad: Sabemos que el tiempo es dinero, nos encanta ser cumplidos en los horarios.</p>
+<p style="text-align: left;">Pasión: Nuestra pasión por la música contagia.</p>
+<p style="text-align: left;">Honestidad: Realizamos todas las operaciones con trasparencia y rectitud.</p>
+<p style="text-align: left;">Mística: Realizamos nuestro trabajo bien desde el principio, con la convicción de entregar lo mejor.</p>
+<p style="text-align: left;">Confianza: Cumplimos con lo prometido al ofrecer el mejor servicio a un precio justo y razonable.</p>
+</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<img src="img/dummy_services.png">
+								</div>
+							</div>-->
+							<!-- ********** -->
+																	
+
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>  
 
 
 
@@ -86,9 +161,24 @@ $title="Sala Estudio";
 
 </div>
 <hr>
+
+
+
+
 <?php
 include("footer.php");
 ?>
+
+<script type="text/javascript">
+	jQuery(".nosotros_nav").click(function(e) {
+		e.preventDefault();
+		var height_header = jQuery(".head_primary").height();
+	    jQuery('html, body').animate({
+	        scrollTop: jQuery(".setcton_top_nosotros").offset().top-(height_header+5)
+	    }, 600);
+	});
+</script>
+
 <script type="text/javascript" src="js/clientes.js"></script>
 </body>
 </html>

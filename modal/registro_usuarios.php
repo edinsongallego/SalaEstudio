@@ -19,7 +19,7 @@
 							
 								<label for="Identificación" class="col-sm-3 control-label">*Identificación</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia()" id="miInput" class="form-control" minlength="8" maxlength="15" required >
+									<input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="8" maxlength="15" required >
 								</div>
 							</div>
 							<div class="form-group">
@@ -28,7 +28,7 @@
 								<div class="col-sm-8">
 
 									<select name="CS_TIPO_DOCUMENTO_ID" id="CS_TIPO_DOCUMENTO_ID" class="form-control" required>
-										<option value=" ">Seleccione</option>
+										<option value style="display: none">Seleccione</option>
 										<option value="1">Cedula Ciudadania</option>
 										<option value="2">Tarjeta Identidad</option>
 										<option value="3">Pasaporte</option>
@@ -41,19 +41,19 @@
 							<div class="form-group">
 								<label for="firstname" class="col-sm-3 control-label">*Nombres</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="DS_NOMBRES_USUARIO" name="DS_NOMBRES_USUARIO" placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+									<input type="text" class="form-control" id="DS_NOMBRES_USUARIO" name="DS_NOMBRES_USUARIO" placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia(this)" id="miInput" class="form-control"  required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="lastname" class="col-sm-3 control-label">*Apellidos</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="DS_APELLIDOS_USUARIO" name="DS_APELLIDOS_USUARIO" placeholder="*Apellidos" title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
+									<input type="text" class="form-control" id="DS_APELLIDOS_USUARIO" name="DS_APELLIDOS_USUARIO" placeholder="*Apellidos" title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia(this)" id="miInput" class="form-control"  required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="Teléfono" class="col-sm-3 control-label">*Teléfono</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
+									<input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
 
 				
 								</div>
@@ -62,14 +62,14 @@
 							<div class="form-group">
 								<label for="Celular" class="col-sm-3 control-label">*Celular</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
+									<input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
 
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="user_Email" class="col-sm-3 control-label">*Email</label>
 								<div class="col-sm-8">
-									<input type="Email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='direccion de correo' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
+									<input type="Email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='direccion de correo' onKeyUp="javascript:validateMail(this)" class="form-control" required>
 
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 								<div class="col-sm-8">
 									
 									<select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" class="form-control">
-										<option value="">Seleccione</option>
+										<option value style="display: none">Seleccione</option>
 										<option value="1">Administrador</option>
 										<option value="2">Usuario normal | Banda</option>
 										<option value="4">Docente</option>
@@ -105,7 +105,17 @@
 	}
 	?>
 	
-	<script>
+	<script type="text/javascript">
+	setTimeout(function(){
+		$(document).ready(function(){
+			$("#NM_CELULAR, #NM_TELEFONO").keyup(function(e){
+				var valorInicial = $(this).val();
+				var valor = $(this).val().replace(/^0*/, '');
+				if(valorInicial.length != valor.length)
+					$(this).val(valor);
+			});
+		});
+	},500);
 
 		function numeros(e){
 		key = e.keyCode || e.which;
@@ -151,15 +161,15 @@
 				return false;
 		}
 
-		function limpia() {
-			var val = document.getElementById("miInput").value;
+		
+		function limpia(e) {
+			var val = $(e).val();
 			var tam = val.length;
 			for(i = 0; i < tam; i++) {
 				if(!isNaN(val[i]))
-					document.getElementById("miInput").value = '';
+					$(this).val('');
 			}
 		}
-
 
 //-->
 </script>
@@ -167,10 +177,10 @@
 
 <script>
 
-	function validateMail(idMail)
+	function validateMail(object)
 	{
     //Creamos un objeto 
-    object=document.getElementById(idMail);
+    //object=document.getElementById(idMail);
     valueForm=object.value;
 
     // Patron para el correo
@@ -179,10 +189,11 @@
     {
         //Mail correcto
         object.style.color="#000";
-        return;
+        return true;
     }
     //Mail incorrecto
     object.style.color="#f00";
+    return false;
 }
 //-->
 </script>

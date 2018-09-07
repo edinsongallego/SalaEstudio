@@ -138,3 +138,292 @@ http://work.smarchal.com/twbscolor/
   padding: 0px 5px;
 }
 
+.footer_bg{
+  padding: 40px 0px; position: relative; background: rgba(0,0,0,0.86); z-index: 1;
+}
+
+.footer_bg{
+    padding: 20px 0;
+  }
+
+.conainerSuscript{
+  position: relative; padding: 40px 0px;
+}
+
+.suscriptions{
+  position: relative; background: #141414
+}
+
+.subfooter{
+  position: relative; height: 50px; background: #0A0A0A
+}
+
+.subfooter{
+
+}
+
+.text_right{
+  text-align: right;
+}
+
+.subfooter .Log_header{
+    position: absolute; left: 0px; top: 0px; bottom: 0px; width: 300px; background: none;
+}
+.subfooter .menu_header{
+  position: absolute; left: 350px; right: 0px; bottom: 0px; top: 0px;
+}
+
+.menu_header{
+  position: absolute; left: 200px; right: 0px; bottom: 0px; top: 0px;
+}
+
+.menu_header ul{padding: 0; margin: 0; text-align: right;}
+.menu_header li{
+    list-style: none;
+    display: inline-block;
+    padding: 2px 14px;
+}
+.menu_header a{text-decoration: none; color: #fff;}
+
+.site-footer:before,
+.site-footer:after {
+  content: "";
+  display: table;
+  table-layout: fixed;
+}
+
+.site-footer:after {
+  clear: both;
+}
+
+.cover{-webkit-background-size: cover !important;-moz-background-size: cover !important;-o-background-size: cover !important;background-size: cover !important;background-position: center center !important;}
+
+.absolute {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    z-index: 1;
+}
+
+.cover_video_osi{
+  position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px; z-index: 2; opacity: 0.5;
+}
+
+.container_stud{
+  position: relative; width: 1200px; margin: 0 auto; max-width: 1200px;
+}
+.text_right{
+  text-align: right;
+}
+
+.ContentServices{
+  position: relative;
+}
+
+.itemHServices{
+  position: relative; width: 33.33%; display: inline-block; vertical-align: top; margin-right: -4px; outline: 1px solid rgba(255,255,255,0.05)
+}
+
+.right_p_s{
+    width: 0;
+    height: 0;
+    border-bottom: 35px solid #FF2A2A;
+    border-left: 35px solid transparent;
+    position: absolute;
+    right: -25px;
+    bottom: -25px;
+    z-index: 3
+}
+.h3service{
+  position: relative; font-weight: 500; font-size: 15px; text-align: center; padding: 0 25px; opacity: 0.8; margin-top: 12px;
+  height: 150px; overflow: hidden;
+}
+
+
+.with_height{height: 100%;}
+@media only screen and (max-width : 1300px) {
+  .container_stud{ width: 940px; }
+}
+@media only screen and (max-width : 980px) {
+
+  .h2service {
+      font-size: 18px;
+      padding: 0 10px;
+      margin-bottom: 8px;
+      margin-top: 3px;
+  }
+
+  .h3service {
+      font-weight: 500;
+      font-size: 13px;
+      padding: 0 10px;
+      opacity: 0.8;
+      margin-top: 0px;
+  }
+
+  .icon_serv { width: 40px; margin-bottom: 0px; font-size: 17px;}
+
+  .container_stud{ width: auto; margin: 0px 20px; }
+
+  .right_p_s {
+      width: 0;height: 0;border-bottom: 20px solid #FF2A2A;border-left: 20px solid transparent;position: absolute;right: 0;bottom: 0;z-index: 3;
+  }
+
+  .itemHServices{
+    width: 100%; margin-bottom: 20px;
+  }
+  .logo_fot{
+    margin: 0 auto;
+  }
+
+  .inner_item_h_Service .center{
+    top: 0px; opacity: 1
+  }
+
+  .left_p_s {
+      width: 0;height: 0;border-top: 20px solid #FF2A2A;border-right: 20px solid transparent;position: absolute;left: 0;top: 0;z-index: 3;
+  }
+
+  .subfooter .Log_header{
+    width: 100%;
+  }
+  .menu_header{
+    display: none
+  }
+
+}
+
+
+.left_p_s{
+    width: 0;
+    height: 0;
+    border-top: 35px solid #FF2A2A;
+    border-right: 35px solid transparent;
+    position: absolute;
+    left: -25px;
+    top: -25px;
+    z-index: 3
+}
+
+.logo_fot{
+  position: relative; width: 100px; margin-bottom: 18px;
+}
+
+.ContentServices{
+  position: relative;
+}
+
+.inner_item_h_Service{
+    margin: 0
+  }
+
+.inner_item_h_Service{
+  position: relative; margin: 0 24px;
+}
+
+.rel{position: relative; display: table; height: 100%; width: 100%;}
+
+.canvas_video_spacio .rel{
+  z-index: 4
+}
+
+.copycipy{
+  font-size: 12px; opacity: 0.6
+}
+
+.center{position: relative; vertical-align: middle; display: table-cell;}
+
+.suave_two, .suave_two:hover, .suave_two:active{-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
+
+.icon_serv{
+    position: relative;
+    width: 85px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border: 2px solid #FF2A2A;
+    text-align: center;
+    color: #ff1709;
+    font-size: 30px;
+}
+
+.h2service{
+  position: relative; font-weight: 500; font-size: 21px; text-align: center; padding: 0 25px; margin-bottom: 12px;
+}
+
+.container_stud{
+  position: relative; width: 1200px; margin: 0 auto; max-width: 1200px;
+}
+
+.hover_service{
+  position: absolute; width: 100%; height: 100%; background: rgba(15,15,15,0); z-index: 5; cursor: pointer; left: 0px; top: 0px; overflow: hidden;
+}
+
+.hover_service .center{
+  position: relative; top: 10px; opacity: 0;
+}
+
+.suave, .suave:hover, .suave:active{-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out;}
+
+.suave_two, .suave_two:hover, .suave_two:active{-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
+
+.inner_item_h_Service:hover .hover_service{
+  background: rgba(15,15,15,0.95);
+}
+.inner_item_h_Service:hover .left_p_s{
+  left: 0px; top: 0px;
+}
+
+.innerTwoColums:hover .left_p_s{
+  left: 0px; top: 0px;
+}
+
+.inner_item_h_Service:hover .right_p_s{
+  right: 0px; bottom: 0px;
+}
+.inner_item_h_Service:hover .center{
+  opacity: 1; top: 0;
+}
+
+.innerTwoColums:hover .right_p_s{
+  right: 0px; bottom: 0px;
+}
+
+.itemRecient{
+  position: relative; padding: 10px 0; margin: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.imgResient{position: absolute; width: 80px; left: 0px; top: 0px; background: #6A6A6A;}
+.label_resient{position: relative; padding-left: 95px;}
+
+.absolute {position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px; z-index: 1}
+
+
+img {
+  border-style: none;
+}
+
+img {
+  height: auto; display: block;
+}
+
+.co_red{
+    color: #e21e25;
+    position: relative;
+    margin-top: -6px !important;
+    font-weight: 600 !important;
+}
+
+
+#colophon h4{
+  opacity: 0.8; margin-top: 0px; font-weight: 400; font-size: 14px; margin-bottom: 10px;
+}
+
+#colophon h3{
+    color: #e21e25;
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 0px;
+}
+

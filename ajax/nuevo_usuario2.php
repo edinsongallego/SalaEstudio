@@ -72,6 +72,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 if ($query_check_user == 1) {
                     $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
                 } else {
+                   // echo $NM_DOCUMENTO_ID;die;
 					// write new user's data into database
                     $sql = "INSERT INTO us_usuario (NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID)
                             VALUES('".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2);";
@@ -83,6 +84,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     if ($query_new_user_insert) {
                         $messages[] = "La cuenta ha sido creada con éxito.";
                     } else {
+                        //var_dump(mysqli_error($con));
                         $errors[] = "Lo sentimos , el registro falló. el Número de identificación ya está en uso..";
                     }
                 }

@@ -33,7 +33,7 @@ if(!Login::inicioSession()){
 					</div>
 					<h4><i class='glyphicon glyphicon-search'></i> Buscar Usuarios</h4>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" style="height:700px;">
 					<?php
 					include("modal/registro_usuarios.php");
 					include("modal/editar_usuarios.php");
@@ -83,24 +83,34 @@ if(!Login::inicioSession()){
 		</html>
 		<script>
 			$( "#guardar_usuario" ).submit(function( event ) {
-				$('#guardar_datos').attr("disabled", true);
-
-				var parametros = $(this).serialize();
-				$.ajax({
-					type: "POST",
-					url: "ajax/nuevo_usuario.php",
-					data: parametros,
-					beforeSend: function(objeto){
-						$("#resultados_ajax").html("Mensaje: Cargando...");
-					},
-					success: function(datos){
-						$("#resultados_ajax").html(datos);
-						$('#guardar_datos').attr("disabled", false);
-						load(1);
-						$("#guardar_usuario")[0].reset();
-					}
-				});
 				event.preventDefault();
+				if($('#guardar_usuario')[0].checkValidity()){
+					if(validateMail(document.getElementById("DS_CORREO"))){
+
+					$('#guardar_datos').attr("disabled", true);
+
+						var parametros = $(this).serialize();
+						$.ajax({
+							type: "POST",
+							url: "ajax/nuevo_usuario.php",
+							data: parametros,
+							beforeSend: function(objeto){
+								$("#resultados_ajax").html("Mensaje: Cargando...");
+							},
+							success: function(datos){
+								$("#resultados_ajax").html(datos);
+								$('#guardar_datos').attr("disabled", false);
+								load(1);
+								$("#guardar_usuario")[0].reset();
+								setTimeout(function(){ $("#myModal").modal('toggle'); },800);
+							}
+						});
+					}else{
+						$("#DS_CORREO").focus();
+						alertify.error("Verifique la estructura del correo.")
+					}
+				}
+				
 			})
 
 			$( "#editar_usuario" ).submit(function( event ) {
