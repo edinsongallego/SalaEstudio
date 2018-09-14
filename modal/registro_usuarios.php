@@ -82,9 +82,13 @@
 									
 									<select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" class="form-control">
 										<option value style="display: none">Seleccione</option>
-										<option value="1">Administrador</option>
-										<option value="2">Usuario normal | Banda</option>
-										<option value="4">Docente</option>
+										<?php 
+											foreach (Login::obtenerListadoPerfiles() as $row) {
+											 	?>
+											 	<option value="<?php echo $row["CS_TIPO_USUARIO"];?>"><?php echo $row["DS_NOMBRE_TIPO_USUARIO"];?></option>
+											 	<?php
+											 } 
+										?>
 
 									</select>
 

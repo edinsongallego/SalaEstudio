@@ -21,10 +21,12 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$codigo=mysqli_real_escape_string($con,(strip_tags($_POST["codigo"],ENT_QUOTES)));
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
+		$descripcion=mysqli_real_escape_string($con,(strip_tags($_POST["descripcion"],ENT_QUOTES)));
 		$estado=intval($_POST['estado']);
+		$unidad=intval($_POST['unidad']);
 		$precio_venta=floatval($_POST['precio']);
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO products (codigo_producto, nombre_producto, status_producto, date_added, precio_producto) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta')";
+		$sql="INSERT INTO tp_producto (DS_CODIGO_PRODUCTO, DS_NOMBRE_PRODUCTO, NM_ESTADO, DT_FECHA_CREACION, DB_PRECIO_VENTA_UND, DS_DESCRIPCION_PRODUCTO, FK_UNIDAD) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta', '$descripcion', '$unidad')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Producto ha sido ingresado satisfactoriamente.";

@@ -43,7 +43,27 @@
 				  <input type="text" class="form-control" id="mod_precio" name="mod_precio" placeholder="Precio de venta del producto" required pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$" title="Ingresa sólo números con 0 ó 2 decimales" maxlength="8">
 				</div>
 			  </div>
+			  <div class="form-group">
+				<label for="unidad" class="col-sm-3 control-label">Unidad</label>
+				<div class="col-sm-8">
+				  <select class="form-control" required id="mod_unidad" name="mod_unidad">
+				  	<option value selected style="display: none">Seleccionar unidad</option>
+				  	<?php 
+				  		foreach (Producto::obtenerUnidades() as $row) { ?>
+				  		<option value="<?php echo $row['CS_UNIDAD_ID']; ?>"><?php echo $row['DS_DESCRIPCION_UNIDAD']; ?>(<?php echo $row['DS_NOMBRE_UNIDAD']; ?>)</option>
+				  	<?php		
+				  		}
+				  	?>
+				  </select>
+				</div>
+			  </div>
 			 
+			  <div class="form-group">
+				<label for="descripcion" class="col-sm-3 control-label">Descipción</label>
+				<div class="col-sm-8">
+				  <textarea class="form-control" id="mod_descripcion" name="mod_descripcion" placeholder="Descripción del producto"></textarea>
+				</div>
+			  </div> 
 			 
 			
 		  </div>

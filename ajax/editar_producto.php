@@ -27,7 +27,9 @@
 		$estado=intval($_POST['mod_estado']);
 		$precio_venta=floatval($_POST['mod_precio']);
 		$id_producto=$_POST['mod_id'];
-		$sql="UPDATE products SET codigo_producto='".$codigo."', nombre_producto='".$nombre."', status_producto='".$estado."', precio_producto='".$precio_venta."' WHERE id_producto='".$id_producto."'";
+		$unidad=$_POST['mod_unidad'];
+		$descripcion=$_POST['mod_descripcion'];
+		$sql="UPDATE tp_producto SET DS_CODIGO_PRODUCTO='".$codigo."', DS_NOMBRE_PRODUCTO='".$nombre."', NM_ESTADO='".$estado."', DB_PRECIO_VENTA_UND='".$precio_venta."', DS_DESCRIPCION_PRODUCTO ='".$descripcion."', FK_UNIDAD = '".$unidad."' WHERE CS_PRODUCTO_ID='".$id_producto."'";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
 				$messages[] = "Producto ha sido actualizado satisfactoriamente.";

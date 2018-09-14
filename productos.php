@@ -9,7 +9,7 @@
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
-	
+	require_once "classes/Producto.php";
 	$active_facturas="";
 	$active_productos="active";
 	$active_clientes="";
@@ -116,6 +116,9 @@ $( "#editar_producto" ).submit(function( event ) {
 			$("#resultados_ajax2").html(datos);
 			$('#actualizar_datos').attr("disabled", false);
 			load(1);
+			setTimeout(function(){
+				$("#myModal2").modal('toggle');
+			},1000);
 		  }
 	});
   event.preventDefault();
@@ -126,9 +129,13 @@ $( "#editar_producto" ).submit(function( event ) {
 			var nombre_producto = $("#nombre_producto"+id).val();
 			var estado = $("#estado"+id).val();
 			var precio_producto = $("#precio_producto"+id).val();
+			var unidad_producto = $("#unidad_producto"+id).val();
+			var descripcion_producto  = $("#descripcion_producto"+id).val();
 			$("#mod_id").val(id);
 			$("#mod_codigo").val(codigo_producto);
 			$("#mod_nombre").val(nombre_producto);
+			$("#mod_unidad").val(unidad_producto);
 			$("#mod_precio").val(precio_producto);
+			$("#mod_descripcion").val(descripcion_producto);
 		}
 </script>

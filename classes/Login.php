@@ -39,6 +39,25 @@ class Login
         }
     }
 
+    public static function obtenerListadoPerfiles($id = array()){
+        $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if (count($id) > 0) {
+            $sql = "SELECT * FROM us_tipo_usuario WHERE CS_TIPO_USUARIO IN (".implode(",", $id).")";
+        }else{
+            $sql = "SELECT * FROM us_tipo_usuario";
+        }
+
+        $db_connection->query($sql);
+        
+        $result = $db_connection->query($sql);
+        $r = array();
+         while($row = $result->fetch_assoc())
+            $r[] = $row;
+        $db_connection->close();
+        return $r;    
+
+    }
+
     /**
      * log in with post data
      */
