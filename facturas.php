@@ -26,11 +26,11 @@
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
-				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Factura</a>
+				<a  href="ventas.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Venta</a>
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Facturas</h4>
 		</div>
-			<div class="panel-body"style="height:500px;">
+			<div class="panel-body"style="    height: auto;min-height: 500px;">
 				<form class="form-horizontal" role="form" id="datos_cotizacion"autocomplete="off">
 				
 						<div class="form-group row">

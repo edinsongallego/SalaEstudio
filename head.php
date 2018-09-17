@@ -17,5 +17,5 @@
 
 
 
-	<link rel="stylesheet" type="text/css" href="css/custom.css?v=<php echo uniqid(); >">
+	<link rel="stylesheet" type="text/css" href="css/custom.css?v=<?php echo uniqid(); ?>">
 	<link rel=icon href='img/logo.png' sizes="32x32" type="image/png">

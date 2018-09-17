@@ -1,59 +1,60 @@
-<style type="text/css">
-<!--
-table { vertical-align: top; }
-tr    { vertical-align: top; }
-td    { vertical-align: top; }
-.midnight-blue{
-	background:#2c3e50;
-	padding: 4px 4px 4px;
-	color:white;
-	font-weight:bold;
-	font-size:12px;
-}
-.silver{
-	background:white;
-	padding: 3px 4px 3px;
-}
-.clouds{
-	background:#ecf0f1;
-	padding: 3px 4px 3px;
-}
-.border-top{
-	border-top: solid 1px #bdc3c7;
-	
-}
-.border-left{
-	border-left: solid 1px #bdc3c7;
-}
-.border-right{
-	border-right: solid 1px #bdc3c7;
-}
-.border-bottom{
-	border-bottom: solid 1px #bdc3c7;
-}
-table.page_footer {width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;}
-}
--->
-</style>
-<page backtop="15mm" backbottom="15mm" backleft="15mm" backright="15mm" style="font-size: 12pt; font-family: arial" >
-        <page_footer>
+<!DOCTYPE html> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+	<style type="text/css">
+		table { vertical-align: top; }
+		tr    { vertical-align: top; }
+		td    { vertical-align: top; }
+		.midnight-blue{
+			background:#a6a8a9;
+			padding: 4px 4px 4px;
+			color:white;
+			font-weight:bold;
+			font-size:12px;
+		}
+		.silver{
+			background:white;
+			padding: 3px 4px 3px;
+		}
+		.clouds{
+			background:#ecf0f1;
+			padding: 3px 4px 3px;
+		}
+		.border-top{
+			border-top: solid 1px #bdc3c7;
+			
+		}
+		.border-left{
+			border-left: solid 1px #bdc3c7;
+		}
+		.border-right{
+			border-right: solid 1px #bdc3c7;
+		}
+		.border-bottom{
+			border-bottom: solid 1px #bdc3c7;
+		}
+		table.page_footer {width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;}
+		}
+
+	</style>
+</head>
+<body>
         <table class="page_footer">
             <tr>
 
                 <td style="width: 50%; text-align: left">
-                    P&aacute;gina [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo "obedalvarado.pw "; echo  $anio=date('Y'); ?>
+                    &copy; <?php echo "Copyright@"; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>
-    </page_footer>
     <table cellspacing="0" style="width: 100%;">
         <tr>
 
-            <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="../../img/logo.jpg" alt="Logo"><br>
+            <td style="width: 25%; color: #444444;background-color: black;text-align: center;">
+                <img style="width: 50%;" src="<?php echo BASE_URL; ?>img/logo.png" alt="Logo"><br>
                 
             </td>
 			<td style="width: 50%; color: #34495e;font-size:12px;text-align:center">
@@ -61,7 +62,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
 				Email: <?php echo EMAIL_EMPRESA;?>
-                
             </td>
 			<td style="width: 25%;text-align:right">
 			FACTURA Nº <?php echo $numero_factura;?>
@@ -80,21 +80,27 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:50%;" >
 			<?php 
-				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
-				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nombre_cliente'];
-				echo "<br>";
-				echo $rw_cliente['direccion_cliente'];
-				echo "<br> Teléfono: ";
-				echo $rw_cliente['telefono_cliente'];
-				echo "<br> Email: ";
-				echo $rw_cliente['email_cliente'];
+				echo $rw_factura['DESC_CLIENTE'];
+				if (!is_null($rw_factura["NM_CLIENTE_ID"])) {
+					echo "<br>";
+					echo $rw_factura['DS_DIRECCION'];
+					echo "<br> Teléfono: ";
+					echo $rw_factura['NM_TELEFONO'];
+					echo "<br> Celular: ";
+					echo $rw_factura['NM_TELEFONO'];
+					echo "<br> Email: ";
+					echo $rw_factura['DS_CORREO'];
+				}
 			?>
 			
 		   </td>
         </tr>
         
-   
+        <?php if (!is_null($rw_factura['DS_NOTAS_FACTURA'])) { ?>
+        <tr><td><br></td></tr>
+        <tr><td style="width:50%;" class='midnight-blue'>NOTAS</td></tr>
+        <tr><td><?php echo $rw_factura['DS_NOTAS_FACTURA']; ?></td></tr>
+   		<?php } ?>
     </table>
     
        <br>
@@ -107,12 +113,10 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
            <td style="width:35%;">
 			<?php 
-				$sql_user=mysqli_query($con,"select * from users where user_id='$id_vendedor'");
-				$rw_user=mysqli_fetch_array($sql_user);
-				echo $rw_user['firstname']." ".$rw_user['lastname'];
+				echo $rw_factura["VENDEDOR"];
 			?>
 		   </td>
-		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($fecha_factura));?></td>
+		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($rw_factura["DT_FECHA_CREACION"]));?></td>
 		   <td style="width:40%;" >
 				<?php 
 				if ($condiciones==1){echo "Efectivo";}
@@ -130,32 +134,38 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
+            <th style="width: 10%;text-align:center" class='midnight-blue'>CÓDIGO</th>
+            <th style="width: 40%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 10%;text-align:center" class='midnight-blue'>CANT.</th>
-            <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO UNIT.</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO TOTAL</th>
+            <th style="width: 20%;text-align: right" class='midnight-blue'>PRECIO TOTAL</th>
             
         </tr>
 
 <?php
 $nums=1;
 $sumador_total=0;
-$sql=mysqli_query($con, "select * from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.id_factura='".$id_factura."'");
+$sql=mysqli_query($con, "SELECT
+							ft_factura_detalle.NM_PRECIO_UNITARIO,
+							ft_factura_detalle.CS_PRODUCTO_ID,
+							ft_factura_detalle.NM_PRECIO_TOTAL_PRODUCTO,
+							ft_factura_detalle.NM_CANTIDAD_COMPRA,
+							ft_factura_detalle.CS_FACTURA_ID,
+							ft_factura_detalle.NM_ID_DETALLE_FACTURA,
+							fac.NM_PRECIO_TOTAL,
+							fac.NM_PRECIO_SUBTOTAL,
+							tp_producto.DS_CODIGO_PRODUCTO,
+							tp_producto.DS_NOMBRE_PRODUCTO,
+							tp_producto.DS_DESCRIPCION_PRODUCTO,
+							tp_producto.NM_PRECIO_UNITARIO_COMPRA_UND
+						FROM
+						ft_factura AS fac
+						INNER JOIN ft_factura_detalle ON ft_factura_detalle.CS_FACTURA_ID = fac.CS_FACTURA_ID
+						INNER JOIN tp_producto ON ft_factura_detalle.CS_PRODUCTO_ID = tp_producto.CS_PRODUCTO_ID
+						WHERE fac.CS_FACTURA_ID='".$id_factura."'");
 
 while ($row=mysqli_fetch_array($sql))
 	{
-	$id_producto=$row["id_producto"];
-	$codigo_producto=$row['codigo_producto'];
-	$cantidad=$row['cantidad'];
-	$nombre_producto=$row['nombre_producto'];
-	
-	$precio_venta=$row['precio_venta'];
-	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
-	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-	$precio_total=$precio_venta_r*$cantidad;
-	$precio_total_f=number_format($precio_total,2);//Precio total formateado
-	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
-	$sumador_total+=$precio_total_r;//Sumador
 	if ($nums%2==0){
 		$clase="clouds";
 	} else {
@@ -164,10 +174,11 @@ while ($row=mysqli_fetch_array($sql))
 	?>
 
         <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $row["DS_CODIGO_PRODUCTO"]; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 35%; text-align: left"><?php echo $row["DS_NOMBRE_PRODUCTO"];?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: center"><?php echo $row["NM_CANTIDAD_COMPRA"]; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 20%; text-align: right"><?php echo number_format($row["NM_PRECIO_UNITARIO"],2); ?></td>
+            <td class='<?php echo $clase;?>' style="width: 20%; text-align: right"><?php echo number_format($row["NM_PRECIO_TOTAL_PRODUCTO"],2); ?></td>
             
         </tr>
 
@@ -176,22 +187,19 @@ while ($row=mysqli_fetch_array($sql))
 	
 	$nums++;
 	}
-	$subtotal=number_format($sumador_total,2,'.','');
-	$total_iva=($subtotal * TAX )/100;
-	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal+$total_iva;
+	
 ?>
 	  
         <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL &#36; </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
+            <td colspan="4" style="widtd: 85%; text-align: right;"><br>SUBTOTAL &#36; </td>
+            <td style="widtd: 15%; text-align: right;"> <br><?php echo number_format($rw_factura["NM_PRECIO_SUBTOTAL"],2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IVA (<?php echo TAX; ?>)% &#36; </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
+            <td colspan="4" style="widtd: 85%; text-align: right;">IVA (<?php echo 16; ?>)% &#36; </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($rw_factura["NM_PRECIO_IVA"],2);?></td>
         </tr><tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL &#36; </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
+            <td colspan="4" style="widtd: 85%; text-align: right;">TOTAL &#36; </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($rw_factura["NM_PRECIO_TOTAL"],2);?></td>
         </tr>
     </table>
 	
@@ -199,9 +207,7 @@ while ($row=mysqli_fetch_array($sql))
 	
 	<br>
 	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
-	
-	
-	  
 
-</page>
 
+</body>
+</html>

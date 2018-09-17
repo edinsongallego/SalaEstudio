@@ -1,51 +1,66 @@
 <?php
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
-	session_start();
-	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
-        header("location: ../../login.php");
+	include_once "../../classes/Factura.php";
+	include_once "../../classes/Login.php";
+	require_once '../../vendor/autoload.php';
+	use mikehaertl\wkhtmlto\Pdf;
+	if(!Login::inicioSession()){
+		header("location: ../../login.php");
 		exit;
-    }
-	/* Connect To Database*/
+	}
+    /* Connect To Database*/
 	include("../../config/db.php");
 	include("../../config/conexion.php");
 	$id_factura= intval($_GET['id_factura']);
-	$sql_count=mysqli_query($con,"select * from facturas where id_factura='".$id_factura."'");
-	$count=mysqli_num_rows($sql_count);
-	if ($count==0)
+	$SQL = "SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR FROM ft_factura fac
+								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
+								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID
+								WHERE CS_FACTURA_ID='".$id_factura."'";
+	$sql_count=mysqli_query($con,$SQL);
+	
+	$sql_factura=mysqli_fetch_array($sql_count);
+
+	if (count($sql_factura)==0)
 	{
 	echo "<script>alert('Factura no encontrada')</script>";
 	echo "<script>window.close();</script>";
 	exit;
+	}else{
+		$rw_factura = $sql_factura;
 	}
-	$sql_factura=mysqli_query($con,"select * from facturas where id_factura='".$id_factura."'");
-	$rw_factura=mysqli_fetch_array($sql_factura);
-	$numero_factura=$rw_factura['numero_factura'];
-	$id_cliente=$rw_factura['id_cliente'];
-	$id_vendedor=$rw_factura['id_vendedor'];
-	$fecha_factura=$rw_factura['fecha_factura'];
-	$condiciones=$rw_factura['condiciones'];
+	$numero_factura=$rw_factura['DS_CODIGO_FACTURA'];
+	$id_cliente=$rw_factura['NM_CLIENTE_ID'];
+	$id_vendedor=$rw_factura['NM_VENDEDOR_ID'];
+	$fecha_factura=$rw_factura['DT_FECHA_CREACION'];
+	$condiciones=1;
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
     // get the HTML
      ob_start();
      include(dirname('__FILE__').'/res/ver_factura_html.php');
-    $content = ob_get_clean();
+	 $html = ob_get_contents();
+     ob_end_clean();
+     //echo $html;die;
+     $pdf = new Pdf;
+		// On some systems you may have to set the path to the wkhtmltopdf executable
+		// $pdf->binary = 'C:\...';
 
-    try
-    {
-        // init HTML2PDF
-        $html2pdf = new HTML2PDF('P', 'LETTER', 'es', true, 'UTF-8', array(0, 0, 0, 0));
-        // display the full page
-        $html2pdf->pdf->SetDisplayMode('fullpage');
-        // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        // send the PDF
-        $html2pdf->Output('Factura.pdf');
-    }
-    catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
-    }
+	    $pdf->addPage($html);
+
+		$pdf->setOptions(array(
+		    //'use-xserver',
+		    'binary' => 'C:/wkhtmltopdf/bin/wkhtmltopdf',
+		    'ignoreWarnings' => true,
+		    'commandOptions' => array(
+		        'useExec' => true,      // Can help if generation fails without a useful error message
+		        //'enableXvfb' => true,
+		        'procEnv' => array(
+		            // Check the output of 'locale' on your system to find supported languages
+		            'LANG' => 'es_ES.utf-8',
+		        ),
+		    ),
+		));
+		if (!$pdf->send()) {
+		    $error = $pdf->getError();
+		    print_r($error);
+		    // ... handle error here
+		}
+	    die();

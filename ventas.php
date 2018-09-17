@@ -1,6 +1,7 @@
 <?php
+include_once "classes/Factura.php";
 include_once "classes/Login.php";
-
+$scriptID = uniqid();
 //if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
 if(!Login::inicioSession()){
 	header("location: login.php");
@@ -32,23 +33,32 @@ if(!Login::inicioSession()){
 			    background-color: #040404bf;
 			    border-color: #040404bf;
 			}
+			#table_productos tbody tr td{
+				text-align: center;
+			}
+			#table_productos thead tr th{
+				text-align: center;
+			}
 		</style>
 	</head>
 	<body>
 		<?php
 		include("navbar.php");
-		$num_fact = 1;
+		$num_fact = Factura::obtenerSiguienteConsecutivoFactura();
+		//print_r($num_fact);die;
 		?>
 	<div class="container container-fluid">
+		<form role="form" id="frm_factura_venta"> 
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">FACTURA DE VENTA</h3>
 			</div>
 			<div class="panel-body">
+				<div class="row" id="respuestaFac" style="margin: 15px;"></div>
 				<div class="row">
 	                <div class="form-group col-lg-6">
 	                    <label class="label-result-content" for="factura">FACTURA: </label><br>
-	                    <pre class="result-content" style="width: 100%;" id="factura"><?php echo str_pad($num_fact, 10, "0", STR_PAD_LEFT);?></pre>
+	                    <input type="text" required name="Venta[codigo]" id="" class="form-control" value="<?php echo str_pad($num_fact[0], 10, "0", STR_PAD_LEFT);?>"/>
 	                </div>
 	                <div class="form-group col-lg-6">
 	                    <label class="label-result-content" for="atendidoPOR">Atendido por: </label><br>
@@ -63,7 +73,12 @@ if(!Login::inicioSession()){
 	                    <pre class="result-content" style="width: 100%;"><span style="margin-right: 5px" class="glyphicon glyphicon-dashboard"></span><div id="reloj"name="reloj" style="display: inline;"></div></pre>
 	                </div>
 	            </div>
-			
+				<div class="row">
+	                <div class="form-group col-lg-12">
+	                	<label class="" for="nota_venta">Notas de la factura: </label>
+	                	<textarea class="form-control" id="nota_venta" name="Venta[nota]" placeholder="Notas sobre la factura"></textarea>
+	                </div>
+	            </div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">DATOS DE CLIENTE</h3>
@@ -107,7 +122,6 @@ if(!Login::inicioSession()){
 		            </div>
 				</div>
 			</div>
-<div class="col-lg-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">PRODUCTOS</h3>
@@ -150,85 +164,79 @@ if(!Login::inicioSession()){
 					</div>
 				</div>
 			</div>
-</div>
-<div class="col-lg-12">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h3 class="panel-title">DETALLE DE LA FACTURA</h3>
-		</div>
-		<div class="panel-body">
-
-
-
-			<div class="row">
-				<div class="col-xs-9 ">
-				          <input type="hidden" id="act_FinalizarVenta" value="Activation">
-				 <table class="table" width="80%" id="table"> 
-				   
-				<tbody><tr id="carrito">
-				  <th id="thCodigo" class="tablaHeader">IdPro</th>
-				    <th id="thNombre" class="tablaHeader">Descripcion</th>
-				      <th id="thCant" class="tablaHeader">Cant</th>
-				        <th id="thPrecio" class="tablaHeader">Precio C/U</th>
-				    
-				            <th id="" class="tablaHeader">Total</th>
-				            <th id="tablaHeader2">Quitar</th>
-				</tr>
-				   </tbody></table>
-				          <div id="scroll" overflow="auto" width="80%">
-				        <table class="table table-striped table-hover" border="0">
-
-				                  <tbody><tr>
-				  <th id="thCodigo">3</th>
-				    <th id="thNombre">BOLSO RS21 MODEL JS43 </th>
-				      <th id="thCant">2</th>
-				        <th id="thPrecio">2567.92</th>
-				        
-				            <th>5135.84</th>
-				<th id="operaciones"><a href="../controlador/Controlador.php?codigo=3&amp;cant=2&amp;SumarInventario"> <img src="../img/papelera.png" width="20px;"></a></th>
-				</tr>
-				              
-				            </tbody></table>
-				     </div>
-
-				  
-				 </div>
-
-				  <div class="col-xs-3 ">
-				    <table width="90%;" class="table">
-				          <tbody><tr>
-				        <th>Iva:</th>
-				        <td>616.3008</td>
-				      </tr>
-
-				        <tr>
-				        <th>SubTotal:</th>
-				        <td> 4519.5392</td>
-				      </tr>
-
-				        <tr>
-				        <th class="Total">Total:</th>
-				        <td class="Total">5135.84</td>
-				      </tr>
-				    </tbody></table>
-				  </div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">DETALLE DE LA FACTURA</h3>
 				</div>
+				<div class="panel-body">
+
+
+
+					<div class="row">
+						<div class="col-xs-12">
+						<table style="width: 100%;">
+						 <tr>
+						 	<td style="vertical-align: top;">
+						 		<table class="table table-bordered" width="80%" id="table_productos"> 
+									<thead>
+									<tr>
+								  		<th id="thCodigo" class="tablaHeader">CÓDIGO</th>
+								    	<th id="thNombre" class="tablaHeader">NOMBRE</th>
+								      	<th id="thCant" class="tablaHeader">CANTIDAD</th>
+								        <th id="thPrecio" class="tablaHeader">PRECIO C/U</th>				    
+								        <th id="" class="tablaHeader">TOTAL</th>
+								        <th id="tablaHeader2" colspan="2">QUITAR</th>
+									</tr>
+								   </thead>
+						            <tbody>
+						            </tbody>
+						            <tfoot>
+						            	<tr>
+									        <th colspan="5" style="text-align: right;">Iva:</th>
+									        <td id="iva" colspan="2"><span>0</span> <input type="hidden" name="Venta[precio_iva]" class="precio_iva" value="0"></td>
+									      </tr>
+
+									        <tr>
+									        <th colspan="5" style="text-align: right;">SubTotal:</th>
+									        <td id="subtotal" colspan="2"><span>0</span> <input type="hidden" name="Venta[precio_subtotal]" class="precio_subtotal" value="0"></td>
+									      </tr>
+
+									        <tr>
+									        <th colspan="5" style="text-align: right;" class="Total">Total:</th>
+									        <td id="total" colspan="2"><span>0</span> <input type="hidden" name="Venta[precio_total]" class="precio_total" value="0"></td>
+									      </tr>
+						            </tfoot>
+						       </table>
+						    </td>
+						  </tr>
+						</table>
+						     </div>
+
+						  
+
+						
+						</div>
 
 
 
 
 
 
-		</div>
-	</div>
-</div>
+				</div>
+			</div>
+			</div>
+			<div class="panel-footer text-center">
+				<input type="submit" class="btn btn-primary" value="Enviar">
+				<button class="btn btn-danger" value="">Cencelar</button>
 			</div>
 		</div>
+		</form>
 	</div>
 
 	<?php
 		include("footer.php");
 	?>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-	<script src="js/ventas.js"></script>
+	<script src="js/ventas.js?c=<?php echo $scriptID;?>"></script>
+	<script src="js/factura.js?c=<?php echo $scriptID;?>"></script>
 

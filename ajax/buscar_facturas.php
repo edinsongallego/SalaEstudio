@@ -33,14 +33,14 @@
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		  $sTable = "facturas, clientes, users";
 		 $sWhere = "";
-		 $sWhere.=" WHERE facturas.id_cliente=clientes.id_cliente and facturas.id_vendedor=users.user_id";
+		 $sWhere.=" WHERE 1";
 		if ( $_GET['q'] != "" )
 		{
-		$sWhere.= " and  (clientes.nombre_cliente like '%$q%' or facturas.numero_factura like '%$q%')";
+		$sWhere.= " and  (DESC_CLIENTE like '%$q%' or DS_CODIGO_FACTURA like '%$q%')";
 			
 		}
 		
-		$sWhere.=" order by facturas.id_factura desc";
+		$sWhere.=" order by CS_FACTURA_ID desc";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -48,13 +48,21 @@
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
-		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
-		$row= mysqli_fetch_array($count_query);
-		$numrows = $row['numrows'];
+		
+		$count_query   = mysqli_query($con, "SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR FROM ft_factura fac
+								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
+								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID) tmp  $sWhere");
+		$row = mysqli_fetch_array($count_query);
+
+		$numrows = count($row);
 		$total_pages = ceil($numrows/$per_page);
 		$reload = './facturas.php';
 		//main query to fetch the data
-		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
+		$sql="SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR FROM ft_factura fac
+								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
+								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID) tmp 
+								$sWhere
+								LIMIT $offset,$per_page";
 		$query = mysqli_query($con, $sql);
 		//loop through fetched data
 		if ($numrows>0){
@@ -74,17 +82,17 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-						$id_factura=$row['id_factura'];
-						$numero_factura=$row['numero_factura'];
-						$fecha=date("d/m/Y", strtotime($row['fecha_factura']));
-						$nombre_cliente=$row['nombre_cliente'];
-						$telefono_cliente=$row['telefono_cliente'];
-						$email_cliente=$row['email_cliente'];
-						$nombre_vendedor=$row['firstname']." ".$row['lastname'];
-						$estado_factura=$row['estado_factura'];
+						$id_factura=$row['CS_FACTURA_ID'];
+						$numero_factura=$row['DS_CODIGO_FACTURA'];
+						$fecha=date("d/m/Y", strtotime($row['DT_FECHA_CREACION']));
+						$nombre_cliente=$row['DESC_CLIENTE'];
+						$telefono_cliente=$row['NM_TELEFONO'];
+						$email_cliente=$row['DS_CORREO'];
+						$nombre_vendedor=$row['VENDEDOR'];
+						$estado_factura=1;
 						if ($estado_factura==1){$text_estado="Pagada";$label_class='label-success';}
 						else{$text_estado="Pendiente";$label_class='label-warning';}
-						$total_venta=$row['total_venta'];
+						$total_venta=$row['NM_PRECIO_TOTAL'];
 					?>
 					<tr>
 						<td><?php echo $numero_factura; ?></td>
@@ -94,9 +102,9 @@
 						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class='text-right'><?php echo number_format ($total_venta,2); ?></td>					
 					<td class="text-right">
-						<a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> 
+						<!-- <a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> -->
 						<a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
-						<a href="#" class='btn btn-default' title='Borrar factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+						<!--<a href="#" class='btn btn-default' title='Borrar factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>-->
 					</td>
 						
 					</tr>

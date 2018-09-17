@@ -4,7 +4,13 @@
 		</p>
 	</div>
 </div> -->
-
+<div id="loading">
+	                <ul class="bokeh">
+	                    <li></li>
+	                    <li></li>
+	                    <li></li>
+	                </ul>
+	            </div>
 <footer id="colophon" class="site-footer cover setcton_top_contactenos" style="background: url(img/footer.jpg)">
 		<div class="footer_bg">
 			<div class="container_stud">
@@ -87,6 +93,7 @@
 			</div>
 		</div>
 	</div>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
