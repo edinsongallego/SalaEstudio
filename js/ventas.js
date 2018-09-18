@@ -4,6 +4,7 @@ $(document).ready(function(){
 	cargarProductosFactura();
 	$("#id_cliente").select2({
 		allowClear: true,
+		placeholder: "Seleccione un clienete",
 	  	ajax: {
 	  	cache: true,
 	    url: 'ajax/autocomplete/clientes.php',
@@ -36,20 +37,17 @@ $(document).ready(function(){
 			if ($("#table_productos tbody tr").length>0) {
 				$('#loading').show();
 				$.get("ajax/agregar_factura.php?"+$("#frm_factura_venta").serialize()+"&Venta%5Bcliente%5D="+$("#id_cliente").select2("data")[0].text,function(r){
-					console.log(r);
 					if (r.result) {
-						$("#codigo").val(r.consecutivoFactura);
 						limpiarFormulario();
 						imprimir_factura(r.idFactura);
+						$("#codigo").val(r.consecutivoFactura);
+						cargarProductosFactura();
 					}
 					$("#respuestaFac").html(r.htmlResult);
 					$("#respuestaFac").focus();
 					$('html, body').animate({ scrollTop: $('#respuestaFac').offset().top-10 }, 'slow');
 					$('#loading').hide();
 					
-					setTimeout(function(){
-						$("#respuestaFac").hide();	
-					},1500);
 				},"JSON");
 
 			}else{
@@ -114,7 +112,8 @@ $(document).ready(function(){
 function limpiarFormulario() {
 	$("#frm_factura_venta")[0].reset();
 	$("#table_productos tbody").html("");
-
+	
+	$("#id_cliente").empty().trigger('change');
 	$("#iva span").html("0");
 	$("#subtotal span").html("0");
 	$("#total span").html("0");

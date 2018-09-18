@@ -63,6 +63,6 @@
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/facturas.js"></script>
+	<script type="text/javascript" src="js/facturas.js?v=<?php echo uniqid(); ?>"></script>
   </body>
 </html>

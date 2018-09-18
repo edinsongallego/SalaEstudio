@@ -49,18 +49,20 @@
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
 		
-		$count_query   = mysqli_query($con, "SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR FROM ft_factura fac
+		$count_query   = mysqli_query($con, "SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR, est.DES_ESTADO FROM ft_factura fac
 								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
-								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID) tmp  $sWhere");
+								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID
+								INNER JOIN ft_estado est ON est.ID_ESTADO = fac.ID_ESTADO) tmp  $sWhere");
 		$row = mysqli_fetch_array($count_query);
 
 		$numrows = count($row);
 		$total_pages = ceil($numrows/$per_page);
 		$reload = './facturas.php';
 		//main query to fetch the data
-		$sql="SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR FROM ft_factura fac
+		$sql="SELECT * FROM (SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR, est.DES_ESTADO FROM ft_factura fac
 								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
-								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID) tmp 
+								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID
+								INNER JOIN ft_estado est ON est.ID_ESTADO = fac.ID_ESTADO) tmp 
 								$sWhere
 								LIMIT $offset,$per_page";
 		$query = mysqli_query($con, $sql);
@@ -72,6 +74,7 @@
 			  <table class="table">
 				<tr  class="info">
 					<th>#</th>
+					<th>Código</th>
 					<th>Fecha</th>
 					<th>Cliente</th>
 					<th>Vendedor</th>
@@ -90,20 +93,30 @@
 						$email_cliente=$row['DS_CORREO'];
 						$nombre_vendedor=$row['VENDEDOR'];
 						$estado_factura=1;
-						if ($estado_factura==1){$text_estado="Pagada";$label_class='label-success';}
-						else{$text_estado="Pendiente";$label_class='label-warning';}
+						if ($row["ID_ESTADO"]==1){$text_estado=$row["DES_ESTADO"];$label_class='label-success';}
+						else if($row["ID_ESTADO"]==2){$text_estado=$row["DES_ESTADO"];$label_class='label-warning';}
 						$total_venta=$row['NM_PRECIO_TOTAL'];
 					?>
 					<tr>
+						<td><?php echo $id_factura; ?></td>
 						<td><?php echo $numero_factura; ?></td>
 						<td><?php echo $fecha; ?></td>
-						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a></td>
+						<td><?php if(!empty($row["NM_CLIENTE_ID"])){?>
+							<a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a>
+						<?php }else{ ?>
+							<?php echo $nombre_cliente;?>
+						<?php }?>
+
+						</td>
 						<td><?php echo $nombre_vendedor; ?></td>
 						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class='text-right'><?php echo number_format ($total_venta,2); ?></td>					
 					<td class="text-right">
 						<!-- <a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> -->
 						<a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
+						<?php if ($row["ID_ESTADO"]==2){?>
+							<a href="#" class='btn btn-primary' title='Realizar pago de factura' onclick="realizar_pago_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-usd"></i></a> 
+						<?php } ?>
 						<!--<a href="#" class='btn btn-default' title='Borrar factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>-->
 					</td>
 						

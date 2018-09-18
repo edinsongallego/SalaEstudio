@@ -58,7 +58,7 @@ if(!Login::inicioSession()){
 				<div class="row">
 	                <div class="form-group col-lg-6">
 	                    <label class="label-result-content" for="factura">FACTURA: </label><br>
-	                    <input type="text" required name="Venta[codigo]" id="" class="form-control" value="<?php echo str_pad($num_fact[0], 10, "0", STR_PAD_LEFT);?>"/>
+	                    <input type="text" required name="Venta[codigo]" id="codigo" class="form-control" value="<?php echo str_pad($num_fact[0], 10, "0", STR_PAD_LEFT);?>"/>
 	                </div>
 	                <div class="form-group col-lg-6">
 	                    <label class="label-result-content" for="atendidoPOR">Atendido por: </label><br>
@@ -78,6 +78,20 @@ if(!Login::inicioSession()){
 	                	<label class="" for="nota_venta">Notas de la factura: </label>
 	                	<textarea class="form-control" id="nota_venta" name="Venta[nota]" placeholder="Notas sobre la factura"></textarea>
 	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="form-group col-lg-12">
+	            		<label class="" for="estado">Estado: </label><br>
+	            		<?php foreach(Factura::obtenerEstadoFactura() as $row){?>
+							  <label>
+							    <input type="radio" 
+							           name="Venta[estado] required" 
+							           value="<?php echo $row[0];?>"
+							           <?php echo ($row[0]==1?"checked":""); ?>>
+							    	<?php echo $row[1];?>
+							  </label>
+						<?php } ?>
+					</div>
 	            </div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">

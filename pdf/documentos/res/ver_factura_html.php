@@ -53,18 +53,19 @@
     <table cellspacing="0" style="width: 100%;">
         <tr>
 
-            <td style="width: 25%; color: #444444;background-color: black;text-align: center;">
+            <td style="width: 20%; color: #444444;background-color: black;text-align: center;">
                 <img style="width: 50%;" src="<?php echo BASE_URL; ?>img/logo.png" alt="Logo"><br>
                 
             </td>
-			<td style="width: 50%; color: #34495e;font-size:12px;text-align:center">
+			<td style="width: 45%; color: #34495e;font-size:12px;text-align:center;padding-left: 100px">
                 <span style="color: #34495e;font-size:14px;font-weight:bold"><?php echo NOMBRE_EMPRESA;?></span>
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
 				Email: <?php echo EMAIL_EMPRESA;?>
             </td>
-			<td style="width: 25%;text-align:right">
-			FACTURA Nº <?php echo $numero_factura;?>
+			<td style="width: 35%;text-align:right">
+			FACTURA Nº <?php echo $numero_factura;?><br>
+			ESTADO: <?php echo strtoupper($rw_factura["DES_ESTADO"]);?>
 			</td>
 			
         </tr>
@@ -96,7 +97,7 @@
 		   </td>
         </tr>
         
-        <?php if (!is_null($rw_factura['DS_NOTAS_FACTURA'])) { ?>
+        <?php if (!empty($rw_factura['DS_NOTAS_FACTURA'])) { ?>
         <tr><td><br></td></tr>
         <tr><td style="width:50%;" class='midnight-blue'>NOTAS</td></tr>
         <tr><td><?php echo $rw_factura['DS_NOTAS_FACTURA']; ?></td></tr>

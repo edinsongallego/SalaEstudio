@@ -1,6 +1,7 @@
 <?php
  session_start();    
  include_once "../classes/Factura.php";     
+ include_once "../classes/Inventario.php";     
 //rint_r($_SESSION["NM_DOCUMENTO_ID"]);
 //print_r($_REQUEST['PRODUCTO']);die;
 // checking for minimum PHP version
@@ -17,6 +18,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "Falta el cliente";
         }  elseif (empty($_REQUEST['Venta']["codigo"])){
             $errors[] = "Falta el código de la factura.";
+        }  elseif (empty($_REQUEST['Venta']["estado"])){
+            $errors[] = "Falta el estado de la factura.";
         }  elseif (!isset($_REQUEST['PRODUCTO'])) {
             $errors[] = "Se deben adicionar productos a la venta.";
         }  elseif (count($_REQUEST['PRODUCTO'])<=0) {
@@ -28,16 +31,20 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             	$_REQUEST['Venta']["id_cliente"] = "null";
             else
             	$_REQUEST['Venta']["cliente"] = null;
-           $sql = "INSERT INTO ft_factura (DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, DT_FECHA_CREACION, NM_CLIENTE_ID, DS_CLIENTE)
-                            VALUES('".$_REQUEST['Venta']['codigo']."', '".$_SESSION["NM_DOCUMENTO_ID"]."','".$_REQUEST['Venta']["nota"]."', '".$_REQUEST['Venta']['precio_subtotal']."', ".$_REQUEST['Venta']['precio_total']. ",".$_REQUEST['Venta']['precio_iva'].",'".date("Y-m-d h:i:s")."',".$_REQUEST['Venta']["id_cliente"].",'".$_REQUEST['Venta']["cliente"]."');";
-
+            $sql = "INSERT INTO ft_factura (DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, DT_FECHA_CREACION, NM_CLIENTE_ID, DS_CLIENTE,ID_ESTADO)
+                            VALUES('".$_REQUEST['Venta']['codigo']."', '".$_SESSION["NM_DOCUMENTO_ID"]."','".$_REQUEST['Venta']["nota"]."', '".$_REQUEST['Venta']['precio_subtotal']."', ".$_REQUEST['Venta']['precio_total']. ",".$_REQUEST['Venta']['precio_iva'].",'".date("Y-m-d h:i:s")."',".$_REQUEST['Venta']["id_cliente"].",'".$_REQUEST['Venta']["cliente"]."', '".$_REQUEST['Venta']["estado"]."');";
+            
             $query_new_user_insert = mysqli_query($con,$sql);
             if ($query_new_user_insert) {
 	            $id_factura = mysqli_insert_id($con);
 
 	            foreach ($_REQUEST['PRODUCTO'] as $id_producto => $producto) {
 	            	$SQL = "INSERT INTO ft_factura_detalle(CS_FACTURA_ID,NM_CANTIDAD_COMPRA,CS_PRODUCTO_ID, NM_PRECIO_TOTAL_PRODUCTO, NM_PRECIO_UNITARIO) VALUES('".$id_factura."','".$producto['CANTIDAD_PRODUCTO']."','".$producto['ID_PRODUCTO']."','".$producto['PRECIO_TOTAL_PRODUCTO']."','".$producto['PRECIO_PRODUCTO']."')";
-	            	mysqli_query($con,$SQL);
+	            	if(mysqli_query($con,$SQL)){
+	            		continue;
+	            	}else{
+	            		$messages[] = "Error insertando el detalle de la factura ".$id_factura;
+	            	}
 	            }
 
                 $messages[] = "La factura fue creada exitosamente.";
@@ -62,7 +69,13 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 
         }
         if (isset($messages)){
-        	$respuesta["result"] = true;
+           
+
+        	if ($_REQUEST['Venta']["estado"] == 1) {
+        		Inventario::descontarProductosInventario($_REQUEST['PRODUCTO'],$con);
+        	}
+
+           $respuesta["result"] = true;
            $respuesta["htmlResult"] = '<div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>¡Bien hecho!</strong>';

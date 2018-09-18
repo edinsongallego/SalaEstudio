@@ -48,7 +48,40 @@ if(!Login::inicioSession()){
 		?>
 	<div class="container container-fluid">
 
-
+		<form role="form" id="frm_factura_venta"> 
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">CARGAR INVENTARIO DE PRODUCTOS</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row" id="respuestaInv" style="margin: 15px;"></div>
+					<div class="row">
+		                <div class="form-group col-lg-6">
+		                    <label class="label-result-content" for="factura">Producto: </label><br>
+		                    <select name="Inventario[id_producto]" required="required" id="id_producto" style="width:100%"></select>
+		                </div>
+		                 <div class="form-group col-lg-6">
+		                 	<label class="label-result-content" for="factura">Fecha entrada: </label>
+	                    	<pre class="result-content" style="width: 100%;" id="fecha"><span class="glyphicon glyphicon-calendar" style="margin-right: 5px"></span><?php echo date("Y-m-d"); ?></pre>
+	                	</div>
+	                </div>
+	                <div class="row">
+		                <div class="form-group col-lg-6">
+		                    <label class="label-result-content" for="factura">Cantidad: </label><br>
+		                    <input type="text" required name="Inventario[cantidad]" id="cantidad" class="form-control" value=""/>
+		                </div>
+		                <div class="form-group col-lg-6">
+		                    <label class="label-result-content" for="factura">Precio de compra: </label><br>
+		                    <input type="text" required name="Inventario[precio_co]" id="precio_co" class="form-control" value=""/>
+		                </div>
+			        </div>
+		        </div>
+		        <div class="panel-footer text-center">
+					<input type="submit" class="btn btn-primary" value="Enviar">
+					<button class="btn btn-danger" value="">Cencelar</button>
+			</div>
+		    </div>
+		</form>
 	</div>
 
 <?php

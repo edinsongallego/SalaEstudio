@@ -1,5 +1,5 @@
 function imprimir_factura(id_factura){
-	VentanaCentrada('./pdf/documentos/ver_factura.php?id_factura='+id_factura,'Factura','','1024','768','true');
+	VentanaCentrada('pdf/documentos/ver_factura.php?id_factura='+id_factura,'Factura','','1024','768','true');
 }
 
 function VentanaCentrada(theURL,winName,features, myWidth, myHeight, isCenter) { //v3.0
@@ -11,3 +11,4 @@ function VentanaCentrada(theURL,winName,features, myWidth, myHeight, isCenter) {
   }
   window.open(theURL,winName,features+((features!='')?',':'')+'width='+myWidth+',height='+myHeight);
 }
+

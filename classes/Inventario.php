@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * 
+ */
+class Inventario
+{
+	static $cnn;
+	public function __construct()
+	{
+
+	}
+
+	public static function descontarProductosInventario($productos, $cnn)
+	{
+		self::$cnn = $cnn;
+
+		foreach ($productos as $id_producto => $producto) {
+    		$entradasInventario = self::obtenerProductoInventario($producto["ID_PRODUCTO"]);
+			$cantidad = $producto["CANTIDAD_PRODUCTO"];
+			//Debemos atualizar las cantidades que tienen los productos del inventario
+			foreach ($entradasInventario as $row) {
+				if($row['NM_CANTIDAD_INVENTARIO'] >= $cantidad){
+					self::disminuirInventarioProducto($row['CS_INVENTARIO_ID'], $cantidad);
+					$cantidad = 0;
+					break;
+				}else{
+					self::disminuirInventarioProducto($row['CS_INVENTARIO_ID'], $row['NM_CANTIDAD_INVENTARIO']);
+					$cantidad = $cantidad - $row['NM_CANTIDAD_INVENTARIO'];
+					continue;
+				}
+			}
+		}
+	}
+
+	public static function disminuirInventarioProducto($id_inventario, $cantidad)
+	{
+		$SQL = "UPDATE tp_inventario_producto SET NM_CANTIDAD_INVENTARIO = NM_CANTIDAD_INVENTARIO - $cantidad WHERE CS_INVENTARIO_ID = $id_inventario";
+		return mysqli_query(self::$cnn,$SQL); 
+	}
+
+	public static function obtenerProductoInventario($id_producto)
+	{
+		$SQL = "SELECT * FROM tp_inventario_producto 
+				WHERE CS_PRODUCTO_ID = '$id_producto'
+				ORDER BY NM_CANTIDAD_INVENTARIO DESC
+				";
+		$result=mysqli_query(self::$cnn,$SQL); 
+		return mysqli_fetch_all($result, MYSQLI_ASSOC);
+	}
+}
