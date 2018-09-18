@@ -69,11 +69,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 
         }
         if (isset($messages)){
-           
-
-        	if ($_REQUEST['Venta']["estado"] == 1) {
+        	/*if ($_REQUEST['Venta']["estado"] == 1) {
         		Inventario::descontarProductosInventario($_REQUEST['PRODUCTO'],$con);
-        	}
+        	} */
 
            $respuesta["result"] = true;
            $respuesta["htmlResult"] = '<div class="alert alert-success" role="alert">

@@ -17,12 +17,12 @@ $id_factura = intval($_GET['id_factura']);
 
 $productos = Factura::obtenerProductosFactura($id_factura,$con);
 
-foreach ($productos AS $row) {
+/* foreach ($productos AS $row) {
 	if ($row["CANTIDAD_PRODUCTO"] > $row["CANTIDAD_INVENTARIO"]) {
 		echo json_encode(array("result" => false, "mensaje" => "No existe suficiente inventario del producto: ".$row["DS_PRODUCTO"]."."));
 		die;	
 	}
-}
+} */
 
 if(Factura::pagarFactura($id_factura,$con)){
 	Inventario::descontarProductosInventario($productos, $con);
