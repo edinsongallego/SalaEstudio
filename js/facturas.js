@@ -46,7 +46,7 @@ function imprimir_factura(id_factura){
 }
 
 function realizar_pago_factura(id_factura) {
-	if (confirm("Esta acción descargará los productos de inventario, ¿Esta seguro de realizar esta acción?")) {
+	if (confirm("¿Esta seguro de realizar el pago de esta factura?")) {
 		$('#loading').show();
 		$.get("ajax/realizar_pago_factura.php?id_factura="+id_factura,function(r){
 			if (r.result) {
