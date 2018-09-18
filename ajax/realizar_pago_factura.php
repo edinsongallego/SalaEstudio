@@ -25,7 +25,7 @@ $productos = Factura::obtenerProductosFactura($id_factura,$con);
 } */
 
 if(Factura::pagarFactura($id_factura,$con)){
-	Inventario::descontarProductosInventario($productos, $con);
+	//Inventario::descontarProductosInventario($productos, $con);
 	echo json_encode(array("result" => true, "mensaje" => "La factura fue pagada exitosamente."));
 }else{
 	echo json_encode(array("result" => false, "mensaje" => "Se presento un error, cambiando el estado de la factura."));
