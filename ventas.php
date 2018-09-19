@@ -241,7 +241,7 @@ if(!Login::inicioSession()){
 			</div>
 			<div class="panel-footer text-center">
 				<input type="submit" class="btn btn-primary" value="Enviar">
-				<button class="btn btn-danger" value="">Cencelar</button>
+				<button class="btn btn-danger" value="">Cancelar</button>
 			</div>
 		</div>
 		</form>

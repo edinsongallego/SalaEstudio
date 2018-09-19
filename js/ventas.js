@@ -4,7 +4,7 @@ $(document).ready(function(){
 	cargarProductosFactura();
 	$("#id_cliente").select2({
 		allowClear: true,
-		placeholder: "Seleccione un clienete",
+		placeholder: "Seleccione un cliente",
 	  	ajax: {
 	  	cache: true,
 	    url: 'ajax/autocomplete/clientes.php',
