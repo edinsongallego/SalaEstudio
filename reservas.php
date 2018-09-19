@@ -78,7 +78,7 @@ if(!Login::inicioSession()){
 
 
 <script>
-		$(document).ready(function(){
+		$(document).ready(function(){ 
 		$('#CalendarioWeb').fullCalendar({
                         /*validRange: function(nowDate){
                             //(console.log( nowDate.subtract(1, 'day'))
@@ -102,7 +102,6 @@ if(!Login::inicioSession()){
 				asignarValorestexto(true, "#txtfechainicial");
 				limpiarFormulario();
 				obtenerlista();
-				obtenerauto();
 				$("#txtfechainicial").val(date.format("YYYY-MM-DD"));
 				$("#txtfechafinal").val(date.format("YYYY-MM-DD"));
 				$("#Modalevento").modal();
@@ -112,37 +111,46 @@ if(!Login::inicioSession()){
 			hiddenDays: [0],
 			events:'http://localhost/SalaEstudio/reserva.php',
 			eventClick:function(calEvent, jsEvent, view){
-				asignarValorestexto(true, "#btnagregar");
-				asignarValorestexto(false, "#btnmodificar");
-				asignarValorestexto(false, "#btneliminar");
-				asignarValorestexto(true, "#chkcondiciones");
-				asignarValorestexto(true, "#txtfechainicial");
-				setearCampos(calEvent, jsEvent, view);
+				if(calEvent.editable == "1"){
+					asignarValorestexto(true, "#btnagregar");
+					asignarValorestexto(false, "#btnmodificar");
+					asignarValorestexto(false, "#btneliminar");
+					asignarValorestexto(false, "#chkcondiciones");
+					asignarValorestexto(true, "#txtfechainicial");
+					setearCampos(calEvent, jsEvent, view);
 
-				$("#Modalevento").modal();
+					$("#Modalevento").modal();
+				}else{
+					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
+				}
 			},
 			editable:true,
 			eventDrop:function(calEvent){
+				if(calEvent.editable == "1"){
+					$('#txtid').val(calEvent.id);
+					$('#txtdocumento').val(calEvent.documento);
+					$('#txtsala').val(calEvent.sala);
+					$('#txtdescripcion').val(calEvent.title);
+					FechaHoraini = calEvent.start.format().split("T");
+					$('#txtfechainicial').val(FechaHoraini[0]);
+					$('#txthoraini').val(FechaHoraini[1]);
+					FechaHorafin = calEvent.end.format().split("T");
+					$('#txtfechafinal').val(FechaHorafin[0]);
+					$('#txthorafin').val(FechaHorafin[1]);
+					RecolectarDatosGUI();
+					EnviarInformacion('modificar',NuevoEvento, true);
+					alertify.success("Reserva modificada con éxito");
+				}else{
+					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto..");
+				}
 
-				$('#txtid').val(calEvent.id);
-				$('#txtdocumento').val(calEvent.documento);
-				$('#txtsala').val(calEvent.sala);
-				$('#txtdescripcion').val(calEvent.title);
-				FechaHoraini = calEvent.start.format().split("T");
-				$('#txtfechainicial').val(FechaHoraini[0]);
-				$('#txthoraini').val(FechaHoraini[1]);
-				FechaHorafin = calEvent.end.format().split("T");
-				$('#txtfechafinal').val(FechaHorafin[0]);
-				$('#txthorafin').val(FechaHorafin[1]);
-				RecolectarDatosGUI();
-				EnviarInformacion('modificar',NuevoEvento, true);
-				alertify.success("Reserva modificada con éxito");
+				
 			}
 		});
 
 		$('#txthoraini, #txthorafin').clockpicker({
-			donetext: "Seleccionar",
-	        twelvehour: true         
+			donetext: "Seleccionar"
+			//twelvehour: true       
 	    });
 
 	    $("#txtdocumento").select2({
@@ -326,38 +334,7 @@ function RecolectarDatosGUI(){
 		
 	};
 }
-function obtenerauto(){
-	  $( "#txtdocumento" ).autocomplete({
-	    minLength: 2,
-	    source: function( request, response ) {
-	        $.ajax({
-	            url: "consulta.php",
-	            dataType: "json",
-	            data: {
-	            	acao: 'autocomplete',
-	                parametro: $('#txtdocumento').val()
-	            },
-	            success: function(data) {
-	               response(data);
-	               //("por aqui");
-	            }
-	        });
-	    },
-	    focus: function( event, ui ) {
-	        $("#txtdocumento").val( ui.item.NM_DOCUMENTO_ID);
-	        return false;
-	    },
-	    select: function( event, ui ) {
-	        $("#txtdocumento").val( ui.item.NM_DOCUMENTO_ID);
-	        return false;
-	    }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a><b>Documento: </b>" + item.NM_DOCUMENTO_ID + "<br><b>Nombre: </b>" + item.DS_NOMBRES_USUARIO + " - <b> Apellidos: </b>" + item.DS_APELLIDOS_USUARIO + "</a><br>" )
-        .appendTo( ul );
-    }; 
-}
+
 
 function obtenerlista(){
 	$.ajax({
@@ -441,6 +418,7 @@ function setearCampos(calEvent, jsEvent, view){
 		FechaHorafin = calEvent.end._i.split(" ");
 		$('#txtfechafinal').val(FechaHorafin[0]);
 		$('#txthorafin').val(FechaHorafin[1]);
+
 		//docu = calEvent.sala;
 		//alert(docu);
 		

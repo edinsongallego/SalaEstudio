@@ -14,14 +14,14 @@
 			<form class="form-horizontal" method="post" id="guardar_producto" name="guardar_producto"autocomplete="off">
 			<div id="resultados_ajax_productos"></div>
 			  <div class="form-group">
-				<label for="codigo" class="col-sm-3 control-label">Código</label>
+				<label for="codigo" class="col-sm-3 control-label">*Código</label>
 				<div class="col-sm-8">
 				  <input type="text" class="form-control" minlength="3" maxlength="15"id="codigo" name="codigo" placeholder="Código del producto" required>
 				</div>
 			  </div>
 			  
 			  <div class="form-group">
-				<label for="nombre" class="col-sm-3 control-label">Nombre</label>
+				<label for="nombre" class="col-sm-3 control-label">*Nombre</label>
 				<div class="col-sm-8">
 					<textarea class="form-control" id="nombre" name="nombre" placeholder="Nombre del producto" required maxlength="255" ></textarea>
 				  
@@ -29,7 +29,7 @@
 			  </div>
 			  
 			  <div class="form-group">
-				<label for="estado" class="col-sm-3 control-label">Estado</label>
+				<label for="estado" class="col-sm-3 control-label">*Estado</label>
 				<div class="col-sm-8">
 				 <select class="form-control" id="estado" name="estado" required>
 					<option value="">-- Selecciona estado --</option>
@@ -39,14 +39,14 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label for="precio" class="col-sm-3 control-label">Precio</label>
+				<label for="precio" class="col-sm-3 control-label">*Precio</label>
 				<div class="col-sm-8">
-				  <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio de venta del producto" required pattern="^[0-9]{1,5}(\.[0-9]{0,2})?$" title="Ingresa sólo números con 0 ó 2 decimales" maxlength="8">
+				  <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio de venta del producto" required pattern="^[0-9]{1,6}?$" title="Ingresa sólo números" maxlength="8">
 				</div>
 			  </div> 
 			  
 			  <div class="form-group">
-				<label for="unidad" class="col-sm-3 control-label">Unidad</label>
+				<label for="unidad" class="col-sm-3 control-label">*Unidad</label>
 				<div class="col-sm-8">
 				  <select class="form-control" required id="unidad" name="unidad">
 				  	<option value selected style="display: none">Seleccionar unidad</option>
@@ -61,7 +61,7 @@
 			  </div>
 			 
 			  <div class="form-group">
-				<label for="descripcion" class="col-sm-3 control-label">Descipción</label>
+				<label for="descripcion" class="col-sm-3 control-label">Descripción</label>
 				<div class="col-sm-8">
 				  <textarea class="form-control" name="descripcion" placeholder="Descripción del producto"></textarea>
 				</div>

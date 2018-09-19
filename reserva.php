@@ -59,12 +59,32 @@ switch ($accion) {
  	session_start();
  	//print_r($_SESSION);
 	 		//Seleccionar los eventos de la bd
-			$query= $pdo->prepare("SELECT *,  IF(documento=".$_SESSION["NM_DOCUMENTO_ID"].",'true', 'false') AS editable FROM rs_reserva_sala");
-			$query-> execute();
 
-			$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
-			echo json_encode($resultado);
- 		break;
+			$query1= $pdo->prepare("SELECT CS_TIPO_USUARIO_ID FROM us_usuario WHERE NM_DOCUMENTO_ID=".$_SESSION["NM_DOCUMENTO_ID"]."");
+			$query1-> execute();
+			$resultado1 = $query1->fetch(PDO::FETCH_ASSOC);
+			//print_r($resultado1);
+			if($resultado1["CS_TIPO_USUARIO_ID"] == 1){
+
+				$query= $pdo->prepare("SELECT *, true AS editable FROM rs_reserva_sala");
+				$query-> execute();
+
+				$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($resultado);
+				break;
+			}
+			else{
+
+				$query= $pdo->prepare("SELECT *,  IF(documento=".$_SESSION["NM_DOCUMENTO_ID"].",true, false) AS editable FROM rs_reserva_sala");
+				$query-> execute();
+
+				$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($resultado);
+				break;
+			
+
+			}
+				
  } 
 
 
