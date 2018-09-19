@@ -1,6 +1,7 @@
 <?php
 include_once "classes/Factura.php";
 include_once "classes/Login.php";
+
 $scriptID = uniqid();
 //if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
 if(!Login::inicioSession()){
@@ -80,7 +81,7 @@ if(!Login::inicioSession()){
 	                </div>
 	            </div>
 	            <div class="row">
-	            	<div class="form-group col-lg-12">
+	            	<div class="form-group col-lg-6">
 	            		<label class="" for="estado">Estado: </label><br>
 	            		<?php foreach(Factura::obtenerEstadoFactura() as $row){?>
 							  <label>
@@ -92,6 +93,19 @@ if(!Login::inicioSession()){
 							  </label>
 						<?php } ?>
 					</div>
+					<div class="form-group col-lg-6">
+	                	<label class="label-result-content" for="ultima_compra">Forma de pago: </label>
+	                	<select name="Venta[id_forma_pago]" class="form-control" required="required" id="id_forma_pago" style="width:100%">
+	                		<option value style="display: none" selected></option>
+	                		<?php
+	                			foreach (Factura::obtenerMediosDePago($con) as $row) {
+	                		?>
+	                			<option value="<?php echo $row["ID_FORMA_PAGO"]; ?>"><?php echo $row["DES_FORMA_PAGO"]; ?></option>
+	                		<?php		
+	                			}
+	                		 ?>
+	                	</select>
+	                </div>
 	            </div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -132,6 +146,13 @@ if(!Login::inicioSession()){
 		                <div class="form-group col-lg-6">
 		                    <label class="label-result-content" for="ultima_compra">Ultima compra: </label><br>
 		                    <pre class="result-content" style="width: 100%;" id="ultima_compra"></pre>
+		                </div>
+
+		            </div>
+		            <div class="row">
+		                <div class="form-group col-lg-12">
+		                    <label class="label-result-content" for="facturas_pendientes_por_pagar">Facturas pendientes: </label><br>
+		                    <pre class="result-content" style="width: 100%;height: auto;min-height:29px" id="facturas_pendientes_por_pagar"></pre>
 		                </div>
 		            </div>
 				</div>
@@ -251,6 +272,7 @@ if(!Login::inicioSession()){
 		include("footer.php");
 	?>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script src="js/jquery.number.min.js"></script>
 	<script src="js/ventas.js?c=<?php echo $scriptID;?>"></script>
 	<script src="js/factura.js?c=<?php echo $scriptID;?>"></script>
 

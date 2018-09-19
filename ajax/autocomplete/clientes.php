@@ -1,6 +1,7 @@
 <?php
 include("../../config/db.php");
 include("../../config/conexion.php");
+ include_once "../../classes/Factura.php";    
 /* If connection to database, run sql statement. */
 if ($con)
 {
@@ -10,7 +11,7 @@ if ($con)
     $resultado = array();
 
 	while ($row = mysqli_fetch_array($fetch, MYSQLI_ASSOC)) {
-		$resultado[] = array('id' => $row['NM_DOCUMENTO_ID'], "text" => $row['DS_NOMBRE'], 'modelo' => $row);
+		$resultado[] = array('id' => $row['NM_DOCUMENTO_ID'], "text" => $row['DS_NOMBRE'], 'modelo' => $row, 'facturasPendientes' => Factura::obtenerFacturasPendientesDePagoUsuario($row['NM_DOCUMENTO_ID'],$con));
 	}
 
 	if (count($resultado) > 0) {

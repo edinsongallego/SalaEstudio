@@ -24,6 +24,15 @@ class Factura
 
     }
 
+    public static function obtenerMediosDePago($cnn)
+    {
+        self::$cnn = $cnn;
+        $SQL = "SELECT * from ft_forma_pago";
+        mysqli_set_charset(self::$cnn,"utf8");
+        $result=mysqli_query(self::$cnn,$SQL); 
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
     public static function obtenerProductosFactura($id_factura, $cnn)
     {
         self::$cnn = $cnn;
@@ -32,6 +41,14 @@ class Factura
                 ";
         $result=mysqli_query(self::$cnn,$SQL); 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    public static function obtenerFacturasPendientesDePagoUsuario($id_cliente, $cnn)
+    {
+        self::$cnn = $cnn;
+        $SQL = "SELECT * from ft_factura t1 WHERE t1.ID_ESTADO = 2 AND t1.NM_CLIENTE_ID = '".$id_cliente."'";
+        $result=mysqli_query(self::$cnn,$SQL); 
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);   
     }
 
     public static function pagarFactura($id_factura, $cnn)

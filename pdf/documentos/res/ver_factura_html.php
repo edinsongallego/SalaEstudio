@@ -120,10 +120,7 @@
 		  <td style="width:25%;"><?php echo date("d/m/Y", strtotime($rw_factura["DT_FECHA_CREACION"]));?></td>
 		   <td style="width:40%;" >
 				<?php 
-				if ($condiciones==1){echo "Efectivo";}
-				elseif ($condiciones==2){echo "Cheque";}
-				elseif ($condiciones==3){echo "Transferencia bancaria";}
-				elseif ($condiciones==4){echo "Crédito";}
+				echo $rw_factura["DES_FORMA_PAGO"];
 				?>
 		   </td>
         </tr>

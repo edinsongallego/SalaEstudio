@@ -57,7 +57,7 @@ if(!Login::inicioSession()){
 					<div class="row" id="respuestaInv" style="margin: 15px;"></div>
 					<div class="row">
 		                <div class="form-group col-lg-6">
-		                    <label class="label-result-content" for="factura">Producto: </label><br>
+		                    <label class="label-result-content" for="id_producto">Producto: </label><br>
 		                    <select name="Inventario[id_producto]" required="required" id="id_producto" style="width:100%"></select>
 		                </div>
 		                 <div class="form-group col-lg-6">
@@ -88,6 +88,5 @@ if(!Login::inicioSession()){
 	include("footer.php");
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script src="js/ventas.js?c=<?php echo $scriptID;?>"></script>
-<script src="js/factura.js?c=<?php echo $scriptID;?>"></script>
+<script src="js/inventario.js?c=<?php echo $scriptID;?>"></script>
 

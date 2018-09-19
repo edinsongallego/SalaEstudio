@@ -111,7 +111,7 @@
 						<td><?php echo $nombre_vendedor; ?></td>
 						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class='text-right'><?php echo number_format ($total_venta,2); ?></td>					
-					<td class="text-right">
+					<td class="text-right" style="border-bottom: 1px solid;border-color: #dddddd;">
 						<!-- <a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> -->
 						<a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
 						<?php if ($row["ID_ESTADO"]==2){?>

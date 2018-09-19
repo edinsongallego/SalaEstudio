@@ -98,6 +98,16 @@ $(document).ready(function(){
 			$("#correo").html(cliente.modelo.DS_CORREO);
 			$("#direccion").html(cliente.modelo.DS_DIRECCION);
 			$("#ultima_compra").html(cliente.modelo.ULTIMA_COMPRA);
+			$("#facturas_pendientes_por_pagar").html("");
+			html = "<table class='table'><thead><tr><th>Código</th><th>Fecha</th><th>Valor Total</th</tr></thead><tbody>";
+			if(Object.keys(cliente.facturasPendientes).length>0){
+				$.when($.each(cliente.facturasPendientes,function(i, fac){
+					html += "<tr><td>"+fac.DS_CODIGO_FACTURA+"</td><td>"+fac.DT_FECHA_CREACION+"</td><td>"+$.number(fac.NM_PRECIO_TOTAL, 2 )+"</td></tr>";
+				})).done(function(){
+					html += "</tbody></table>";
+					$("#facturas_pendientes_por_pagar").html(html);
+				});
+			}
 		}else{
 			$("#cedula").html("");
 			$("#telefono").html("");
@@ -105,6 +115,7 @@ $(document).ready(function(){
 			$("#correo").html("");
 			$("#direccion").html("");
 			$("#ultima_compra").html("");
+			$("#facturas_pendientes_por_pagar").html("");
 		}
 });
 });
@@ -112,7 +123,7 @@ $(document).ready(function(){
 function limpiarFormulario() {
 	$("#frm_factura_venta")[0].reset();
 	$("#table_productos tbody").html("");
-	
+	$("#facturas_pendientes_por_pagar").html("");
 	$("#id_cliente").empty().trigger('change');
 	$("#iva span").html("0");
 	$("#subtotal span").html("0");

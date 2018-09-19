@@ -30,3 +30,5 @@ if(Factura::pagarFactura($id_factura,$con)){
 }else{
 	echo json_encode(array("result" => false, "mensaje" => "Se presento un error, cambiando el estado de la factura."));
 }
+
+mysqli_close($con);
