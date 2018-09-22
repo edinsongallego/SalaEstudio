@@ -428,7 +428,7 @@ img {
 }
 
 #loading {
-    z-index: 90;
+    z-index: 10000;
     opacity: 0.7;
     background: #4c4c4a scroll 0 0;
     height: 100%;
@@ -530,4 +530,3 @@ img {
 }
 }
 
-}
