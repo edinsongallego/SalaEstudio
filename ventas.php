@@ -167,7 +167,7 @@ if(!Login::inicioSession()){
 						<div class="form-group row">
 							<label for="q" class="col-md-2 control-label">Código o nombre</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="q" placeholder="Código o nombre del producto" onkeyup="cargarProductosFactura(1);">
+								<input type="text" class="form-control" id="q" placeholder="Código o nombre del producto"   autocomplete="off" onkeyup="cargarProductosFactura(1);">
 							</div>
 							<div class="col-md-2">
 								<button type="button" class="btn btn-default" onclick="cargarProductosFactura(1);">

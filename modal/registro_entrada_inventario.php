@@ -40,7 +40,7 @@
                 
 		        <div class="modal-footer">
                             <input type="submit" class="btn btn-primary" id="btn_enviar" value="Enviar">
-					<button class="btn btn-danger" value="" id="btn_cancelar">Cencelar</button>
+					<button class="btn btn-danger" value="" id="btn_cancelar">Cancelar</button>
 			</div>
             </div>
           </div>

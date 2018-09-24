@@ -57,7 +57,7 @@ $title = "Inventario | Sala Estudio";
                     <div class="panel-body" style="height: auto;min-height: 500px;">
                             <div class="form-group row">
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="q" placeholder="Nombre o código del producto" onkeyup='load(1);'>
+                                    <input type="text" class="form-control" id="q" placeholder="Nombre o código del producto" autocomplete="off" onkeyup='load(1);'>
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-default" onclick='load(1);'>
