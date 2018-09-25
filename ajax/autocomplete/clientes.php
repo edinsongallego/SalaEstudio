@@ -6,7 +6,11 @@ include("../../config/conexion.php");
 if ($con)
 {
 	$term = (isset($_REQUEST['search'])) ? $_REQUEST['search'] : '';
-	$fetch = mysqli_query($con,"SELECT * FROM (SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, (SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  WHERE DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' LIMIT 50"); 
+	$fetch = mysqli_query($con,"SELECT * FROM "
+                . "(SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, "
+                . "(SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  "
+                . "WHERE NM_ELIMINADO = 0 AND DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' "
+                . "LIMIT 50"); 
 
     $resultado = array();
 

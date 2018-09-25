@@ -1,5 +1,5 @@
 <?php
-include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
+include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
 // checking for minimum PHP version
 if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     exit("Sorry, Simple PHP Login does not run on a PHP version smaller than 5.3.7 !");
@@ -7,91 +7,82 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     // if you are using PHP 5.3 or PHP 5.4 you have to include the password_api_compatibility_library.php
     // (this library adds the PHP 5.5 password hashing functions to older versions of PHP)
     require_once("../libraries/password_compatibility_library.php");
-}		
-		if (empty($_POST['firstname2'])){
-			$errors[] = "Nombres vacíos";
-		} elseif (empty($_POST['lastname2'])){
-			$errors[] = "Apellidos vacíos";
-		} elseif (empty($_POST['estado'])){
-			$errors[] = "Estado Vacio";
-		} elseif (empty($_POST['tel'])){
-			$errors[] = "Telefono Vacio";
-		} elseif (empty($_POST['cel'])){
-			$errors[] = "Celular Vacio";
-		}  elseif (empty($_POST['user_email2'])) {
-            $errors[] = "El correo electrónico no puede estar vacío";
-        } elseif (strlen($_POST['user_email2']) > 64) {
-            $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
-        } elseif (!filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
-        } elseif (
-			!empty($_POST['firstname2'])
-			&& !empty($_POST['lastname2'])
-            && !empty($_POST['user_email2'])
-            && strlen($_POST['user_email2']) <= 64
-            && filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)
-          )
-         {
-            require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-			require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
-			
-				// escaping, additionally removing everything that could be (html/javascript-) code
-                $firstname = mysqli_real_escape_string($con,(strip_tags($_POST["firstname2"],ENT_QUOTES)));
-				$lastname = mysqli_real_escape_string($con,(strip_tags($_POST["lastname2"],ENT_QUOTES)));
-                $user_email = mysqli_real_escape_string($con,(strip_tags($_POST["user_email2"],ENT_QUOTES)));
-                $estado = mysqli_real_escape_string($con,(strip_tags($_POST["estado"],ENT_QUOTES)));
+}
+if (empty($_POST['firstname2'])) {
+    $errors[] = "Nombres vacíos";
+} elseif (empty($_POST['lastname2'])) {
+    $errors[] = "Apellidos vacíos";
+} elseif (empty($_POST['estado'])) {
+    $errors[] = "Estado Vacio";
+} elseif (empty($_POST['tel'])) {
+    $errors[] = "Telefono Vacio";
+} elseif (empty($_POST['cel'])) {
+    $errors[] = "Celular Vacio";
+} elseif (empty($_POST['user_email2'])) {
+    $errors[] = "El correo electrónico no puede estar vacío";
+} elseif (strlen($_POST['user_email2']) > 64) {
+    $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
+} elseif (!filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
+} elseif (
+        !empty($_POST['firstname2']) && !empty($_POST['lastname2']) && !empty($_POST['user_email2']) && strlen($_POST['user_email2']) <= 64 && filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)
+) {
+    require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+    require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
+    // escaping, additionally removing everything that could be (html/javascript-) code
+    $firstname = mysqli_real_escape_string($con, (strip_tags($_POST["firstname2"], ENT_QUOTES)));
+    $lastname = mysqli_real_escape_string($con, (strip_tags($_POST["lastname2"], ENT_QUOTES)));
+    $user_email = mysqli_real_escape_string($con, (strip_tags($_POST["user_email2"], ENT_QUOTES)));
+    $estado = mysqli_real_escape_string($con, (strip_tags($_POST["estado"], ENT_QUOTES)));
 
-                $tel = mysqli_real_escape_string($con,(strip_tags($_POST["tel"],ENT_QUOTES)));
+    $tel = mysqli_real_escape_string($con, (strip_tags($_POST["tel"], ENT_QUOTES)));
 
-                $cel = mysqli_real_escape_string($con,(strip_tags($_POST["cel"],ENT_QUOTES)));
-				
-				$user_id=intval($_POST['mod_id']);
-					
-               
-					// write new user's data into database
-                    $sql = "UPDATE us_usuario SET DS_NOMBRES_USUARIO='".$firstname."', DS_APELLIDOS_USUARIO='".$lastname."', DS_CORREO='".$user_email."', CS_ESTADO_ID='".$estado."',NM_CELULAR='".$cel."',NM_TELEFONO='".$tel."'
-                            WHERE NM_DOCUMENTO_ID='".$user_id."';";
-                    $query_update = mysqli_query($con,$sql);
+    $cel = mysqli_real_escape_string($con, (strip_tags($_POST["cel"], ENT_QUOTES)));
 
-                    // if user has been added successfully
-                    if ($query_update) {
-                        $messages[] = "La cuenta ha sido modificada con éxito.";
-                    } else {
-                        $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
-                    }
-                
-            
-        } else {
-            $errors[] = "Un error desconocido ocurrió.";
+    $direccion = mysqli_real_escape_string($con, (strip_tags($_POST["DS_DIRECCION"], ENT_QUOTES)));
+
+    $user_id = $_POST['mod_id'];
+
+
+    // write new user's data into database
+    $sql = "UPDATE us_usuario SET DS_DIRECCION = '" . $direccion . "', DS_NOMBRES_USUARIO='" . $firstname . "', DS_APELLIDOS_USUARIO='" . $lastname . "', DS_CORREO='" . $user_email . "', CS_ESTADO_ID='" . $estado . "',NM_CELULAR='" . $cel . "',NM_TELEFONO='" . $tel . "'
+                            WHERE NM_DOCUMENTO_ID='" . $user_id . "';";
+    $query_update = mysqli_query($con, $sql);
+
+    // if user has been added successfully
+    if ($query_update) {
+        $messages[] = "La cuenta ha sido modificada con éxito.";
+    } else {
+        $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
+    }
+} else {
+    $errors[] = "Un error desconocido ocurrió.";
+}
+
+if (isset($errors)) {
+    ?>
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> 
+    <?php
+    foreach ($errors as $error) {
+        echo $error;
+    }
+    ?>
+    </div>
+    <?php
+}
+if (isset($messages)) {
+    ?>
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Bien hecho!</strong>
+        <?php
+        foreach ($messages as $message) {
+            echo $message;
         }
-		
-		if (isset($errors)){
-			
-			?>
-			<div class="alert alert-danger" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<strong>Error!</strong> 
-					<?php
-						foreach ($errors as $error) {
-								echo $error;
-							}
-						?>
-			</div>
-			<?php
-			}
-			if (isset($messages)){
-				
-				?>
-				<div class="alert alert-success" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>¡Bien hecho!</strong>
-						<?php
-							foreach ($messages as $message) {
-									echo $message;
-								}
-							?>
-				</div>
-				<?php
-			}
-
+        ?>
+    </div>
+    <?php
+}
 ?>

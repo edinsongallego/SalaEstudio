@@ -111,6 +111,7 @@ if ($action == 'ajax') {
             $NM_TELEFONO = $row['NM_TELEFONO'];
             $NM_CELULAR = $row['NM_CELULAR'];
             $DT_FECHA_CREACION = date('d/m/Y', strtotime($row['DT_FECHA_CREACION']));
+            $DS_DIRECCION = $row['DS_DIRECCION'];
             ?>
 
                     <input type="hidden" value="<?php echo $row['DS_NOMBRES_USUARIO']; ?>" id="nombres<?php echo $NM_DOCUMENTO_ID; ?>">
@@ -124,7 +125,8 @@ if ($action == 'ajax') {
 
                     <input type="hidden" value="<?php echo $NM_CELULAR; ?>" id="celular<?php echo $NM_DOCUMENTO_ID; ?>">
 
-
+                   <input type="hidden" value="<?php echo $DS_DIRECCION; ?>" id="direccion<?php echo $NM_DOCUMENTO_ID; ?>">
+     
 
                     <tr>
                         <td><?php echo $NM_DOCUMENTO_ID; ?></td>

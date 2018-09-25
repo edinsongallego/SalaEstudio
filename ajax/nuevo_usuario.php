@@ -56,6 +56,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $CS_TIPO_USUARIO_ID = mysqli_real_escape_string($con,(strip_tags($_POST["CS_TIPO_USUARIO_ID"],ENT_QUOTES)));
 
                 $NM_DOCUMENTO_ID = mysqli_real_escape_string($con,(strip_tags($_POST["NM_DOCUMENTO_ID"],ENT_QUOTES)));
+                
+                $DS_DIRECCION = mysqli_real_escape_string($con,(strip_tags($_POST["DS_DIRECCION"],ENT_QUOTES)));
 
                 $DS_CORREO = mysqli_real_escape_string($con,(strip_tags($_POST["DS_CORREO"],ENT_QUOTES)));
                 $user_password = $_POST['NM_DOCUMENTO_ID'];
@@ -73,8 +75,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
                 } else {
                     // write new user's data into database
-                    $sql = "INSERT INTO us_usuario (NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID)
-                            VALUES('".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2);";
+                    $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID)
+                            VALUES('".$DS_DIRECCION."','".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2);";
 
 
                     $query_new_user_insert = mysqli_query($con,$sql);
@@ -83,7 +85,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     if ($query_new_user_insert) {
                         $messages[] = "La cuenta ha sido creada con éxito.";
                     } else {
-                        $errors[] = "Lo sentimos , el registro falló. el Número de identificación ya está en uso..";
+                        $errors[] = "Lo sentimos , el registro falló. ". mysqli_error($con);
                     }
                 }
             
