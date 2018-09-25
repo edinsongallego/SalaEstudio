@@ -19,14 +19,14 @@ if (isset($con)) {
                         <div class="form-group row">
                             <label for="firstname" class="col-sm-3 control-label">*Nombre Banda</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="DS_NOMBRE_BANDA" name="DS_NOMBRE_BANDA" placeholder="*Nombre Banda" onblur="limpia(this)" class="form-control" required>
+                                <input type="text" class="form-control" id="DS_NOMBRE_BANDA" name="DS_NOMBRE_BANDA" placeholder="*Nombre Banda"  class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="lastname" class="col-sm-3 control-label">*Descripción</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="DS_DESCRIPCION_BANDA" name="DS_DESCRIPCION_BANDA" placeholder="*Descripción Banda" onblur="limpia(this)" class="form-control" required>
+                                <input type="text" class="form-control" id="DS_DESCRIPCION_BANDA" name="DS_DESCRIPCION_BANDA" placeholder="*Descripción Banda" class="form-control" required>
                             </div>
                         </div>
 
