@@ -33,6 +33,7 @@
 	$id_cliente=$rw_factura['NM_CLIENTE_ID'];
 	$id_vendedor=$rw_factura['NM_VENDEDOR_ID'];
 	$fecha_factura=$rw_factura['DT_FECHA_CREACION'];
+        $porcentaje_incentivo_descuento=$rw_factura['NM_PORCENTAJE_DESCUENTO'];
 	$condiciones=1;
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
     // get the HTML

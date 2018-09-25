@@ -89,6 +89,10 @@ $(document).ready(function(){
 			alertify.error("Verifique la cantidad ingresada.");
 		}
 	});
+        
+        $("#porcentaje_descuento_incentivo").change(function(e){
+           calcular_totales();
+        });
 
 	$("#id_cliente").change(function(e){
 		if((cliente = $(this).select2("data")[0]) != undefined && cliente.id > 0 ){
@@ -98,6 +102,7 @@ $(document).ready(function(){
 			$("#correo").html(cliente.modelo.DS_CORREO);
 			$("#direccion").html(cliente.modelo.DS_DIRECCION);
 			$("#ultima_compra").html(cliente.modelo.ULTIMA_COMPRA);
+                        $("#porcentaje_descuento_incentivo").val(cliente.modelo.NM_PORCENTAJE_INCENTIVO);
 			$("#facturas_pendientes_por_pagar").html("");
 			html = "<table class='table'><thead><tr><th>Código</th><th>Fecha</th><th>Valor Total</th</tr></thead><tbody>";
 			if(Object.keys(cliente.facturasPendientes).length>0){
@@ -108,6 +113,7 @@ $(document).ready(function(){
 					$("#facturas_pendientes_por_pagar").html(html);
 				});
 			}
+                        calcular_totales();
 		}else{
 			$("#cedula").html("");
 			$("#telefono").html("");
@@ -131,22 +137,28 @@ function limpiarFormulario() {
 
 	$("#iva").find('.precio_iva').val(0);
 	$("#subtotal").find('.precio_subtotal').val(0);
+        $("#descuento").find('.precio_descuento').val(0);
 	$("#total").find('.precio_total').val(0);
 }
 
 function calcular_totales() {
-	var t_iva = 0, t_subtotal = 0, t_total=0;
+	var t_iva = 0, t_subtotal = 0, t_total=0, t_descuento = 0;
 	$("#table_productos tbody tr").each(function(i, tr){
-		t_iva += iva = parseFloat($(tr).find(".precio_total").val())*0.16;
+            	t_iva += iva = parseFloat($(tr).find(".precio_total").val())*0.16;
 		t_subtotal += subtotal = parseFloat($(tr).find(".precio_total").val());
 		t_total += iva + subtotal;
 	}).promise().done(function(){
-		$("#iva span").html(t_iva);
+		t_descuento = t_subtotal * (parseFloat($("#porcentaje_descuento_incentivo").val())/100);
+                console.log(t_descuento);
+                t_total = t_total - t_descuento;
+                $("#iva span").html(t_iva);
 		$("#subtotal span").html(t_subtotal);
 		$("#total span").html(t_total);
-
+                $("#descuento span").html(t_descuento);
+                
 		$("#iva").find('.precio_iva').val(t_iva);
 		$("#subtotal").find('.precio_subtotal').val(t_subtotal);
+                $("#descuento").find('.precio_descuento').val(t_descuento);
 		$("#total").find('.precio_total').val(t_total);
 		cargarProductosFactura();
 	});

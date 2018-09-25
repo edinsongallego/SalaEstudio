@@ -6,11 +6,15 @@ include("../../config/conexion.php");
 if ($con)
 {
 	$term = (isset($_REQUEST['search'])) ? $_REQUEST['search'] : '';
-	$fetch = mysqli_query($con,"SELECT * FROM "
-                . "(SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, "
-                . "(SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  "
+        $SQL = "SELECT * FROM "
+                . "(SELECT tu.NM_PORCENTAJE_INCENTIVO, cl.*, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, "
+                . "(SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA "
+                . "FROM us_usuario cl "
+                . "LEFT JOIN us_tipo_usuario tu ON tu.CS_TIPO_USUARIO = cl.CS_TIPO_USUARIO_ID "
+                . ") tmp  "
                 . "WHERE NM_ELIMINADO = 0 AND DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' "
-                . "LIMIT 50"); 
+                . "LIMIT 50";
+	$fetch = mysqli_query($con,$SQL); 
 
     $resultado = array();
 

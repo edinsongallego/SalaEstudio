@@ -31,8 +31,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             	$_REQUEST['Venta']["id_cliente"] = "null";
             else
             	$_REQUEST['Venta']["cliente"] = null;
-            $sql = "INSERT INTO ft_factura (DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, DT_FECHA_CREACION, NM_CLIENTE_ID, DS_CLIENTE,ID_ESTADO)
-                            VALUES('".$_REQUEST['Venta']['codigo']."', '".$_SESSION["NM_DOCUMENTO_ID"]."','".$_REQUEST['Venta']["nota"]."', '".$_REQUEST['Venta']['precio_subtotal']."', ".$_REQUEST['Venta']['precio_total']. ",".$_REQUEST['Venta']['precio_iva'].",'".date("Y-m-d h:i:s")."',".$_REQUEST['Venta']["id_cliente"].",'".$_REQUEST['Venta']["cliente"]."', '".$_REQUEST['Venta']["estado"]."');";
+            $sql = "INSERT INTO ft_factura (NM_PRECIO_DESCUENTO, NM_PORCENTAJE_DESCUENTO, DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, DT_FECHA_CREACION, NM_CLIENTE_ID, DS_CLIENTE,ID_ESTADO)
+                            VALUES('".$_REQUEST['Venta']['precio_descuento']."','".$_REQUEST['Venta']['porcentaje_descuento_incentivo']."','".$_REQUEST['Venta']['codigo']."', '".$_SESSION["NM_DOCUMENTO_ID"]."','".$_REQUEST['Venta']["nota"]."', '".$_REQUEST['Venta']['precio_subtotal']."', ".$_REQUEST['Venta']['precio_total']. ",".$_REQUEST['Venta']['precio_iva'].",'".date("Y-m-d h:i:s")."',".$_REQUEST['Venta']["id_cliente"].",'".$_REQUEST['Venta']["cliente"]."', '".$_REQUEST['Venta']["estado"]."');";
             
             $query_new_user_insert = mysqli_query($con,$sql);
             if ($query_new_user_insert) {
