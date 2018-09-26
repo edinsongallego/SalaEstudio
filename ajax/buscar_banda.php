@@ -62,10 +62,14 @@
 		$q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $aColumns = array('CS_BANDA_ID', 'DS_NOMBRE_BANDA','DS_DESCRIPCION_BANDA');//Columnas de busqueda
 		 $sTable = "us_banda_usuario";
-		 $sWhere = "";
+                 if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
+                    $sWhere = "WHERE 1 ";
+                 }else{
+                     $sWhere = "WHERE t2.NM_DOCUMENTO_ID = '".$_SESSION["NM_DOCUMENTO_ID"]."' AND t2.ES_LIDER = 1 ";
+                 }
 		 if ( $_GET['q'] != "" )
 		 {
-		 	$sWhere = "WHERE (";
+		 	$sWhere = " AND (";
 		 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		 	{
 		 		$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
@@ -73,7 +77,7 @@
 		 	$sWhere = substr_replace( $sWhere, "", -3 );
 		 	$sWhere .= ')';
 		 }
-		 $sWhere.=" order by CS_BANDA_ID desc";
+		 $sWhere.=" order by t1.CS_BANDA_ID desc";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -81,13 +85,22 @@
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
-		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+                if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
+                    $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM us_banda_usuario t1  $sWhere");
+                }else{
+                    $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t1.CS_BANDA_ID = t2.CS_BANDA_ID  $sWhere");
+                }
+                
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);
 		$reload = './usuarios.php';
 		//main query to fetch the data
-		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
+                if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
+                    $sql="SELECT * FROM  us_banda_usuario t1 $sWhere LIMIT $offset,$per_page";
+                }else{
+                    $sql="SELECT t1.* FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t1.CS_BANDA_ID = t2.CS_BANDA_ID $sWhere LIMIT $offset,$per_page";
+                }
 		$query = mysqli_query($con, $sql);
 		//loop through fetched data
 		if ($numrows>0){
@@ -134,9 +147,9 @@
 
 							<td ><span class="pull-right">
 								<a href="#" class='btn btn-default' title='Editar banda' onclick="obtener_datos_banda('<?php echo $CS_BANDA_ID;?>');" data-toggle="modal" data-target="#editarbanda"><i class="glyphicon glyphicon-edit"></i></a>
-								
+								<?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
 								<a href="#" class='btn btn-default' title='Borrar banda' onclick="eliminar('<?php echo $CS_BANDA_ID; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
-
+                                                                <?php } ?>    
 							</tr>
 							<?php
 						}

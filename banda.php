@@ -4,6 +4,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
     header("location: login.php");
     exit;
 }
+
 /* Connect To Database */
 require_once ("config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
 require_once ("config/conexion.php"); //Contiene funcion que conecta a la base de datos
@@ -23,14 +24,20 @@ $scriptID = uniqid();
     </head>
     <body>
         <?php
-        include("navbar.php");
+        if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
+            include("navbar.php");
+        }else{
+            include("navbar_banda.php");
+        }
         ?>
         <div class="container">
             <div class="panel panel-info">
                 <div class="panel-heading">
+                    <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
                     <div class="btn-group pull-right">
                         <button type='button' class="btn btn-info" id="btn_nueva_banda"><span class="glyphicon glyphicon-plus" ></span> Nuevo Banda</button>
                     </div>
+                    <?php } ?>
                     <h4><i class='glyphicon glyphicon-search'></i> Buscar Banda</h4>
                 </div>
                 <div class="panel-body"style="height:700px;">
