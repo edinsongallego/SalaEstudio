@@ -13,7 +13,7 @@ if (isset($con)) {
                 <div class="modal-body">
                         <div id="resultados_ajax2"></div>
                         <div class="form-group">
-                            <label for="firstname2" class="col-sm-3 control-label">Nombres</label>
+                            <label for="firstname2" class="col-sm-3 control-label">*Nombres</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="firstname2" name="firstname2" placeholder="Nombres"placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" class="form-control"  required>
                                 <input type="hidden" id="mod_id" name="mod_id">
@@ -22,7 +22,7 @@ if (isset($con)) {
 
                         </div>
                         <div class="form-group">
-                            <label for="lastname2" class="col-sm-3 control-label">Apellidos</label>
+                            <label for="lastname2" class="col-sm-3 control-label">*Apellidos</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="lastname2" name="lastname2" placeholder="*Apellidos" title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" class="form-control"  required>
                             </div>
@@ -44,7 +44,7 @@ if (isset($con)) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="user_email2" class="col-sm-3 control-label">Email</label>
+                            <label for="user_email2" class="col-sm-3 control-label">*Email</label>
                             <div class="col-sm-8">
                                 <input type="email" class="form-control" id="user_email2" name="user_email2" placeholder="Correo electrónico" required>
                             </div>
@@ -58,7 +58,7 @@ if (isset($con)) {
                         </div>
 
                         <div class="form-group">
-                            <label for="tipo_usu" class="col-sm-3 control-label">Estado</label>
+                            <label for="tipo_usu" class="col-sm-3 control-label">*Estado</label>
                             <div class="col-sm-8">
 
                                 <select name="estado" id="estado" class="form-control">

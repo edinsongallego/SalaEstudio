@@ -82,7 +82,7 @@ $title = "Ventas | Sala Estudio";
 	            </div>
 	            <div class="row">
 	            	<div class="form-group col-lg-6">
-	            		<label class="" for="estado">Estado: </label><br>
+	            		<label class="" for="estado">*Estado: </label><br>
                                 <?php foreach (Factura::obtenerEstadoFactura() as $row) { ?>
     							  <label>
     							    <input type="radio" 
@@ -94,7 +94,7 @@ $title = "Ventas | Sala Estudio";
                                 <?php } ?>
 					</div>
 					<div class="form-group col-lg-6">
-	                	<label class="label-result-content" for="ultima_compra">Forma de pago: </label>
+	                	<label class="label-result-content" for="ultima_compra">*Forma de pago: </label>
 	                	<select name="Venta[id_forma_pago]" class="form-control" required="required" id="id_forma_pago" style="width:100%">
 	                		<option value style="display: none" selected></option>
                                     <?php
@@ -114,27 +114,27 @@ $title = "Ventas | Sala Estudio";
 				<div class="panel-body">
 					<div class="row">
 		                <div class="form-group col-lg-6" style="vertical-align: top;">
-		                    <label class="label-result-content" for="id_cliente">Cliente: </label>
+		                    <label class="label-result-content" for="id_cliente">*Cliente: </label>
 		                    <select name="Venta[id_cliente]" required="required" id="id_cliente" style="width:100%"></select>
 		                </div>
 		                <div class="form-group col-lg-6">
-		                    <label class="label-result-content" for="cedula">Cédula: </label><br>
+		                    <label class="label-result-content" for="cedula">*Cédula: </label><br>
 		                    <pre class="result-content" style="width: 100%;" id="cedula"></pre>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <label class="label-result-content" for="telefono">Teléfono: </label><br>
+                                        <label class="label-result-content" for="telefono">*Teléfono: </label><br>
                                         <pre class="result-content" style="width: 100%;" id="telefono"></pre>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="label-result-content" for="celular">Celular: </label><br>
+                                        <label class="label-result-content" for="celular">*Celular: </label><br>
                                         <pre class="result-content" style="width: 100%;" id="celular"></pre>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <label class="label-result-content" for="correo">Correo: </label><br>
+                                        <label class="label-result-content" for="correo">*Email: </label><br>
                                         <pre class="result-content" style="width: 100%;" id="correo"></pre>
                                     </div>
                                     <div class="form-group col-lg-6">
