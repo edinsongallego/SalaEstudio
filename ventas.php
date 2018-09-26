@@ -148,8 +148,8 @@ $title = "Ventas | Sala Estudio";
                                         <pre class="result-content" style="width: 100%;" id="ultima_compra"></pre>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <label class="label-result-content" for="porcentaje_descuento_incentivo">Porcentaje(%) incentivo descuento: </label>
-                                        <input type="number" class="form-control" id="porcentaje_descuento_incentivo" name="Venta[porcentaje_descuento_incentivo]" value="0"/>
+                                        <!--<label class="label-result-content" for="porcentaje_descuento_incentivo">Porcentaje(%) incentivo descuento: </label> -->
+                                        <input type="hidden" class="form-control" id="porcentaje_descuento_incentivo" name="Venta[porcentaje_descuento_incentivo]" value="0"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -166,7 +166,6 @@ $title = "Ventas | Sala Estudio";
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form" id="datos_cotizacion" autocomplete="off">
-
                                     <div class="form-group row">
                                         <label for="q" class="col-md-2 control-label">Código o nombre</label>
                                         <div class="col-md-8">
@@ -177,11 +176,7 @@ $title = "Ventas | Sala Estudio";
                                                 <span class="glyphicon glyphicon-search"></span> Buscar</button>
                                             <span id="loader"></span>
                                         </div>
-
                                     </div>
-
-
-
                                 </form>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -239,7 +234,7 @@ $title = "Ventas | Sala Estudio";
                                                                 <td id="subtotal" colspan="2"><span>0</span> <input type="hidden" name="Venta[precio_subtotal]" class="precio_subtotal" value="0"></td>
                                                             </tr>
                                                             
-                                                            <tr>
+                                                            <tr style="display:none">
                                                                 <th colspan="5" style="text-align: right;">Descuento:</th>
                                                                 <td id="descuento" colspan="2"><span>0</span> <input type="hidden" name="Venta[precio_descuento]" class="precio_descuento" value="0"></td>
                                                             </tr>

@@ -9,10 +9,8 @@ if (isset($con)) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Agregar nueva banda</h4>
                 </div>
-                <div class="modal-body">
-
-
-                    <form class="form-horizontal" method="post" id="guardar_banda2" name="guardar_banda2" autocomplete="off">
+                <form class="form-horizontal" method="post" id="guardar_banda2" name="guardar_banda2" autocomplete="off">
+                    <div class="modal-body">
                         <div id="resultados_ajax_banda2"></div>
 
 
@@ -44,11 +42,11 @@ if (isset($con)) {
                                 <select required="required" style="width:100%" name="integrantes[]" class="form-control" id="id_integrantes"></select>
                             </div>
                         </div>
-                </div>
-                <div class="modal-footer" style="text-align: center;">
-                    <button id="btn_cancelar" class="btn btn-danger">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="guardar_datos_banda">Guardar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button id="btn_cancelar" class="btn btn-danger">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="guardar_datos_banda">Guardar</button>
+                    </div>
 
                 </form>
 

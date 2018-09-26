@@ -102,7 +102,7 @@ $(document).ready(function(){
 			$("#correo").html(cliente.modelo.DS_CORREO);
 			$("#direccion").html(cliente.modelo.DS_DIRECCION);
 			$("#ultima_compra").html(cliente.modelo.ULTIMA_COMPRA);
-                        $("#porcentaje_descuento_incentivo").val(cliente.modelo.NM_PORCENTAJE_INCENTIVO);
+                        //$("#porcentaje_descuento_incentivo").val(cliente.modelo.NM_PORCENTAJE_INCENTIVO);
 			$("#facturas_pendientes_por_pagar").html("");
 			html = "<table class='table'><thead><tr><th>Código</th><th>Fecha</th><th>Valor Total</th</tr></thead><tbody>";
 			if(Object.keys(cliente.facturasPendientes).length>0){
@@ -149,7 +149,7 @@ function calcular_totales() {
 		t_total += iva + subtotal;
 	}).promise().done(function(){
 		t_descuento = t_subtotal * (parseFloat($("#porcentaje_descuento_incentivo").val())/100);
-                console.log(t_descuento);
+                //console.log(t_descuento);
                 t_total = t_total - t_descuento;
                 $("#iva span").html(t_iva);
 		$("#subtotal span").html(t_subtotal);

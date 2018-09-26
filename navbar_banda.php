@@ -25,9 +25,7 @@
           <?php if ($_SESSION['RESTAURAR_CONTRASENA'] == 1): ?>
             <li class="<?php echo @$active_reservas;?>"><a href="" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Clave</a></li>
           <?php endif ?>  
-          <li class="<?php echo @$active_reg_banda;?>"><a href="registro_banda.php" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-headphones'></i>Registrar Banda</a></li>
-
-
+          <li class="<?php echo @$active_reg_banda;?>"><a href="banda.php" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i class="glyphicon glyphicon-headphones"></i>Banda</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
