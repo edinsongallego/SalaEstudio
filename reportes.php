@@ -59,7 +59,13 @@ $title = "Reportes | Sala Estudio";
                         <li><a data-toggle="tab" href="#r_reservas_anuales">Anual</a></li>
                     </ul>
                 </li>
-                <li><a class="dropdown-toggle" data-toggle="dropdown">Productos</a></li>
+                <li><a class="dropdown-toggle" data-toggle="dropdown">Productos<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#r_productos_diarios">Diario</a></li>
+                        <li><a data-toggle="tab" href="#r_productos_mensuales">Mensual</a></li>
+                        <li><a data-toggle="tab" href="#r_productos_anuales">Anual</a></li>
+                    </ul>
+                </li>
                 <li><a data-toggle="tab" href="#r_ventas">Deudores</a></li>
                 <li><a data-toggle="tab" href="#r_facturacion">Facturación</a></li>
                 <li style="float: right;" class="dropdown">
@@ -176,7 +182,15 @@ $title = "Reportes | Sala Estudio";
                     <h3>Menu 1</h3>
                     <p>Some content in menu 1.</p>
                 </div>
-                <div id="r_productos" class="tab-pane fade">
+                <div id="r_productos_diarios" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="r_productos_mensuales" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+                <div id="r_productos_anuales" class="tab-pane fade">
                     <h3>Menu 2</h3>
                     <p>Some content in menu 2.</p>
                 </div>
