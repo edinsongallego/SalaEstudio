@@ -28,6 +28,7 @@
 		  <li class="<?php echo @$active_reservas;?>"><a href="reservas.php"><i class='glyphicon glyphicon-user'></i> Reservas <span class="sr-only">(current)</span></a></li>
 			  <!--<li class="<?php echo $active_maestros;?>"><a href="reserva.html"><i class='glyphicon glyphicon-user'></i> Maestros <span class="sr-only">(current)</span></a></li>-->
         <li class="<?php echo @$active_banda;?>"><a href="banda.php" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-headphones'></i>Banda</a></li>
+        
         <?php if ($_SESSION['RESTAURAR_CONTRASENA'] == 1): ?>
         <li id="opt_menu_cambiar_clave" class="<?php echo $active_reservas;?>"><a href="" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Clave</a></li>
         <?php endif ?>

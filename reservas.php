@@ -1,6 +1,5 @@
 
 <?php $title = "Reservas | Sala Estudio";
-//echo date("Y-m-d H:i:s");
 include_once "classes/Login.php";
 
 //if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -70,9 +69,7 @@ if(!Login::inicioSession()){
 	?>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3 col-lg-3"></div>
-			<div class="col-sm-6 col-sm-6"><br/><br/><div id="CalendarioWeb"></div></div>
-			<div class="col-sm-3 col-lg-3"></div>
+			<div id="CalendarioWeb"></div>
 		</div>
 	</div>	
 
@@ -89,7 +86,13 @@ if(!Login::inicioSession()){
 			header:{
 				left: 'today,prev,next',
 				center: 'title',
-				right: 'month, agendaWeek, agendaDay'
+				right: 'month, agendaWeek'
+			},
+			businessHours:{
+				start: '08:00',
+	            end:   '24:00',
+	            dow: [ 1, 2, 3, 4, 5]
+
 			},
 			dayClick:function(date, jsEvent, view){
                 if (moment().diff(date, 'days') > 0) {
@@ -119,6 +122,7 @@ if(!Login::inicioSession()){
 					asignarValorestexto(true, "#txtfechainicial");
 					setearCampos(calEvent, jsEvent, view);
 
+
 					$("#Modalevento").modal();
 				}else{
 					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
@@ -139,18 +143,18 @@ if(!Login::inicioSession()){
 					$('#txthorafin').val(FechaHorafin[1]);
 					RecolectarDatosGUI();
 					EnviarInformacion('modificar',NuevoEvento, true);
-					alertify.success("Reserva modificada con éxito");
 				}else{
 					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto..");
 				}
 
 				
 			}
+
 		});
 
 		$('#txthoraini, #txthorafin').clockpicker({
 			donetext: "Seleccionar"
-			//twelvehour: true       
+
 	    });
 
 	    $("#txtdocumento").select2({
@@ -209,6 +213,9 @@ if(!Login::inicioSession()){
       			<label><b>Hora Inicial:</b></label>
       			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)"><br/>
+					<span class="input-group-addon">
+				        <span class="glyphicon glyphicon-time"></span>
+				    </span>
 		      	</div>
 		    </div>
 
@@ -216,7 +223,11 @@ if(!Login::inicioSession()){
       			<label><b>Hora Final:</b></label>
       			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)" maxlength="250"><br/>
+		      		<span class="input-group-addon">
+				      <span class="glyphicon glyphicon-time"></span>
+					</span>
 		      	</div>
+		      	
 		    </div>  		
 	    </div>
 	    <div class="row">
@@ -366,32 +377,33 @@ function EnviarInformacion(accion, objEvento, modal){
 						alertify.success("Guardada con éxito");
 					}	
 				}else{
-					alertify.error("Ya existe una reserva en ese horario!");
+					alertify.error("Ya existe una reserva en ese horarios");
 				}
 			}
 			if(accion=='eliminar')
 			{
-				if(msg){
+				if(msg.respuesta == "exitoso"){
 					$('#CalendarioWeb').fullCalendar('refetchEvents');
 					if(!modal){
 						$("#Modalevento").modal('toggle');
-						alertify.success("Reserva cancelada con éxito");
+						alertify.success("Reserva cancelada con exito");
 					}	
-				}
+				}else{
+					alertify.error("Las reservas se cancelan con 8 horas de anticipación");
+				}	
 			}
 			if(accion=='modificar')
 			{
-				if(msg){
+				if(msg.respuesta == "exitoso"){
 					$('#CalendarioWeb').fullCalendar('refetchEvents');
 					if(!modal){
 						$("#Modalevento").modal('toggle');
-						alertify.success("Reserva modificada con éxito");
+						alertify.success("Reserva modificada con exito");
 					}	
+				}else{
+					alertify.error("Ya existe una reserva en ese horario");
 				}
 			}
-		},
-		error:function(){
-			alertify.error("Ya existe una reserva en ese horario!");
 		}
 	});
 }
@@ -434,6 +446,7 @@ function validarcampos()
 	descripción = $('#txtdescripcion').val();
 	check = $('#chkcondiciones').val();
 	var string1 = CompararHoras(horaini, horafinal);
+	var sw = horadentro(horaini);
 	if(documento==""){
 		alertify.error("Campo Documento vacio");
 		return false;
@@ -456,6 +469,10 @@ function validarcampos()
 	}
 	if(string1 == "sHora1 IGUAL sHora2"){
 		alertify.error("Hora inicial y hora final son iguales");
+		return false;
+	}
+	if(sw == 1){
+		alertify.error("Las horas de atención son desde las 8 am a 11 pm");
 		return false;
 	}
 	if(horafinal==""){
@@ -526,7 +543,22 @@ function soloLetras(e){
     else 
         return "sHora1 IGUAL sHora2";
 }
+function horadentro(sHora1){
+	var sw = 0;
+	var horas = ['00', '01', '02', '03', '04', '05','06', '07'];
+	  var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
+	  var hh1 = parseInt(arHora1[0],10);
+	for(var i in horas){
+		if(hh1 == horas[i]){
+			sw = 1;
+			break;
+		}
+	}
+	return sw;
+}
 
 </script>
+
+
 </body>
 </html>

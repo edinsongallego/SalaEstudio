@@ -23,9 +23,12 @@
 
 							<h3>HORARIOS DE ATENCIÓN</h3>
 							<h4>LUN - VIE 8am a 11pm</h4>
+							<h4>SAB 9am a 11pm</h4>
 
 							<h3>RESERVAS</h3>
 							<h4>LUN - VIE 8am a 11pm</h4>
+							<h4>SAB 9am a 11pm</h4>
+
 						</div>
 					</div>
 					<div class="itemHServices">

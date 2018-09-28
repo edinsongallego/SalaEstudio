@@ -6,6 +6,11 @@ $accion= (isset($_GET['accion']))?$_GET['accion']:'leer';
 
 switch ($accion) {
  	case 'guardar':
+
+		/*$fecha1 = new DateTime();//fecha servidor
+ 		$fecha2 = DateTime::createFromFormat('Y-m-d H:i',$_POST['start']);
+ 		$intervalo = $fecha2->diff($fecha1);
+ 		print_r($intervalo);*/
  		$consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=:sala and start BETWEEN :start and :end");
  		$res=$consulta->execute(array(
  			"sala"=> $_POST['sala'],
@@ -31,30 +36,39 @@ switch ($accion) {
 		 	break;
  		}
 	case 'eliminar':
- 		$respuesta = false;
- 		if(isset($_POST['id'])){
-
- 			$sentenciaSQL = $pdo->prepare("DELETE FROM rs_reserva_sala WHERE id=:id");
- 			$respuesta=$sentenciaSQL->execute(array("id"=> $_POST['id']));
-
- 		}
- 		echo json_encode($respuesta);	
- 		break;
- 	case 'modificar':
- 		$sentenciaSQL = $pdo->prepare("UPDATE rs_reserva_sala SET documento=:documento, sala=:sala, start=:start, end=:end, title=:title WHERE id=:id");
-
- 		$respuesta=$sentenciaSQL->execute(array(
- 			"id"=> $_POST['id'],
- 			"documento"=> $_POST['documento'],
- 			"sala"=> $_POST['sala'],
- 			"start"=> $_POST['start'],
- 			"end"=> $_POST['end'],
- 			"title"=> $_POST['title']
- 		));
-
-		echo json_encode($respuesta);
- 		break;
  	
+ 		$fecha1 = new DateTime();//fecha servidor
+ 		$fecha2 = DateTime::createFromFormat('Y-m-d H:i:s',$_POST['start']);
+ 		$intervalo = $fecha1->diff($fecha2);
+		if ($intervalo->format('%d')==0 and $intervalo->format('%h')<8) {
+			echo json_encode(array("respuesta" => "error"));
+		 	break;
+		}else{
+			if(isset($_POST['id'])){
+	 			$sentenciaSQL = $pdo->prepare("DELETE FROM rs_reserva_sala WHERE id=:id");
+	 			$respuesta=$sentenciaSQL->execute(array("id"=> $_POST['id']));
+	 			echo json_encode(array("respuesta" => "exitoso"));
+				break;
+	 		}
+	 		
+		}	
+ 	case 'modificar':
+
+ 		
+	 		$sentenciaSQL = $pdo->prepare("UPDATE rs_reserva_sala SET documento=:documento, sala=:sala, start=:start, end=:end, title=:title WHERE id=:id");
+
+	 		$respuesta=$sentenciaSQL->execute(array(
+	 			"id"=> $_POST['id'],
+	 			"documento"=> $_POST['documento'],
+	 			"sala"=> $_POST['sala'],
+	 			"start"=> $_POST['start'],
+	 			"end"=> $_POST['end'],
+	 			"title"=> $_POST['title']
+	 		));
+	 		echo json_encode(array("respuesta" => "exitoso"));
+		 	break;
+ 		
+
  	default:
  	session_start();
  	//print_r($_SESSION);
