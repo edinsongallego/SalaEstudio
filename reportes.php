@@ -68,7 +68,7 @@ $title = "Reportes | Sala Estudio";
                         <li><a data-toggle="tab" href="#r_productos_anuales">Anual</a></li>
                     </ul>
                 </li>
-                <li><a data-toggle="tab" href="#r_ventas">Deudores</a></li>
+                <li><a data-toggle="tab" href="#r_deudores">Deudores</a></li>
                 <li><a data-toggle="tab" href="#r_facturacion">Facturación</a></li>
                 <li style="float: right;" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Exportar
@@ -262,9 +262,28 @@ $title = "Reportes | Sala Estudio";
                         </div>
                     </div>
                 </div>
-                <div id="r_ventas" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                <div id="r_deudores" class="tab-pane fade">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_deudores" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Factura</th>
+                                        <th>Notas</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Iva</th>
+                                        <th>Descuento</th>
+                                        <th>Sub total</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>        

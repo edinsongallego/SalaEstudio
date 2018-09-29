@@ -32,6 +32,10 @@ $(document).ready(function () {
             case "r_productos_anuales":
                 window.open("reportes_export.php?reporte=productos_anuales", '_blank');
                 break; 
+            case "r_deudores":
+                window.open("reportes_export.php?reporte=deudores", '_blank');
+                break;     
+             
         }
     });
 
@@ -66,6 +70,10 @@ $(document).ready(function () {
     $('a[href="#r_productos_anuales"]').click(function () {
         $('#tbl_productos_anuales tbody').html('<tr><td colspan=2 style="text-align: center;"><img style="margin-left: 48%;" src="./img/ajax-loader.gif"> Cargando...</td><tr>').load("ajax/reporte_productos_vendidos_anuales.php");
     });    
+    
+    $('a[href="#r_deudores"]').click(function () {
+        $('#tbl_deudores tbody').html('<tr><td colspan=2 style="text-align: center;"><img style="margin-left: 48%;" src="./img/ajax-loader.gif"> Cargando...</td><tr>').load("ajax/reporte_deudores.php");
+    });  
     
 });
 
@@ -102,6 +110,9 @@ function load(page) {
             break;   
         case "r_productos_anuales":    
             $('#tbl_productos_anuales tbody').load("ajax/reporte_productos_vendidos_anuales.php?page=" + page,{},function(){ $("#loading").toggle(); });
+            break;   
+        case "r_deudores":    
+            $('#tbl_deudores tbody').load("ajax/reporte_deudores.php?page=" + page,{},function(){ $("#loading").toggle(); });
             break;   
         
     }

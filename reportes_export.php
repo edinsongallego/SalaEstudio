@@ -55,6 +55,12 @@ switch ($_REQUEST["reporte"]) {
         include './ajax/cabecera_reporte.php';
         include './ajax/reporte_productos_vendidos_anuales.php';
         break;
+    case "deudores";
+        $columnas = array("Factura","Notas","Fecha","Cliente", "Iva", "Descuento", "Sub total", "Total");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_deudores.php';
+        break;
+    
     default:
         break;
 }
