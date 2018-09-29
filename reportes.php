@@ -59,8 +59,10 @@ $title = "Reportes | Sala Estudio";
                         <li><a data-toggle="tab" href="#r_reservas_anuales">Anual</a></li>
                     </ul>
                 </li>
-                <li><a class="dropdown-toggle" data-toggle="dropdown">Productos<span class="caret"></span></a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Venta de productos<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#r_productos">Todos</a></li>
                         <li><a data-toggle="tab" href="#r_productos_diarios">Diario</a></li>
                         <li><a data-toggle="tab" href="#r_productos_mensuales">Mensual</a></li>
                         <li><a data-toggle="tab" href="#r_productos_anuales">Anual</a></li>
@@ -182,17 +184,83 @@ $title = "Reportes | Sala Estudio";
                     <h3>Menu 1</h3>
                     <p>Some content in menu 1.</p>
                 </div>
+                <div id="r_productos" class="tab-pane fade">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_productos" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Producto</th>
+                                        <th>Factura</th>
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio unitario</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div id="r_productos_diarios" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_productos_diarias" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div id="r_productos_mensuales" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                <div id="r_productos_mensuales" class="tab-pane ">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_productos_mensuales" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div id="r_productos_anuales" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                <div id="r_productos_anuales" class="tab-pane ">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_productos_anuales" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Producto</th>
+                                        <th>Precio total</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div id="r_ventas" class="tab-pane fade">
                     <h3>Menu 2</h3>

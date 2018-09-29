@@ -30,6 +30,31 @@ switch ($_REQUEST["reporte"]) {
         include './ajax/cabecera_reporte.php';
         include './ajax/reporte_reservas_anuales.php';
         break;
+    case "productos";
+        $columnas = array("Producto","Factura","Fecha","Cantidad","Precio unitario","Precio total");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_productos_vendidos.php';
+        break;
+    case "productos_diarios";
+        $columnas = array("Fecha","Producto","Precio total","Cantidad");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_productos_vendidos_diarios.php';
+        break;
+    case "productos_mensuales";
+        $columnas = array("Fecha","Producto","Precio total","Cantidad");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_productos_vendidos_mensuales.php';
+        break;
+    case "productos_mensuales";
+        $columnas = array("Fecha","Producto","Precio total","Cantidad");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_productos_vendidos_mensuales.php';
+        break;
+    case "productos_anuales";
+        $columnas = array("Fecha","Producto","Precio total","Cantidad");
+        include './ajax/cabecera_reporte.php';
+        include './ajax/reporte_productos_vendidos_anuales.php';
+        break;
     default:
         break;
 }
