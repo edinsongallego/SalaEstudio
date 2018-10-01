@@ -69,7 +69,15 @@ $title = "Reportes | Sala Estudio";
                     </ul>
                 </li>
                 <li><a data-toggle="tab" href="#r_deudores">Deudores</a></li>
-                <li><a data-toggle="tab" href="#r_facturacion">Facturación</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Facturación<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#r_facturacion">Todos</a></li>
+                        <li><a data-toggle="tab" href="#r_facturacion_diarios">Diario</a></li>
+                        <li><a data-toggle="tab" href="#r_facturacion_mensuales">Mensual</a></li>
+                        <li><a data-toggle="tab" href="#r_facturacion_anuales">Anual</a></li>
+                    </ul>
+                </li>
                 <li style="float: right;" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Exportar
                         <span class="caret"></span></a>
@@ -96,7 +104,7 @@ $title = "Reportes | Sala Estudio";
                                 </thead>
                                 <tbody>
                                     <?php
-                                            include_once './ajax/reporte_inventario.php';
+                                    include_once './ajax/reporte_inventario.php';
                                     ?>
                                 </tbody>
                             </table>
@@ -118,7 +126,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -135,7 +143,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -152,7 +160,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -169,13 +177,13 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="r_reservas_mensuales" class="tab-pane fade">
                     <h3>Menu 1</h3>
                     <p>Some content in menu 1.</p>
@@ -199,7 +207,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -218,7 +226,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -237,7 +245,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -256,7 +264,7 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -279,12 +287,106 @@ $title = "Reportes | Sala Estudio";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+
+
+
+
+                <div id="r_facturacion" class="tab-pane fade">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_facturacion" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Factura</th>
+                                        <th>Notas</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Iva</th>
+                                        <th>Descuento</th>
+                                        <th>Sub total</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="r_facturacion_diarios" class="tab-pane fade">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_facturacion_diarias" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                        <th>Iva</th>
+                                        <th>Descuento</th>
+                                        <th>Sub total</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="r_facturacion_mensuales" class="tab-pane ">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_facturacion_mensuales" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                        <th>Iva</th>
+                                        <th>Descuento</th>
+                                        <th>Sub total</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="r_facturacion_anuales" class="tab-pane ">
+                    <div style="min-height: 533px;padding: 30px">
+                        <div class="table-responsive">
+                            <table id="tbl_facturacion_anuales" class="table table-bordered">
+                                <thead>
+                                    <tr class="">
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                        <th>Iva</th>
+                                        <th>Descuento</th>
+                                        <th>Sub total</th>
+                                        <th>Precio total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>                
+
+
+
+
             </div>
         </div>        
         <?php
