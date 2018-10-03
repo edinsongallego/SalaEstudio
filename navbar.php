@@ -18,14 +18,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<?php echo $active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Facturas <span class="sr-only">(current)</span></a></li>
+        <li class="<?php echo @$active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Facturas <span class="sr-only">(current)</span></a></li>
         <li class="<?php echo @$active_inventario;?>"><a href="inventario.php"><i class='glyphicon glyphicon-list'></i> Inventarios <span class="sr-only">(current)</span></a></li>
         <li class="<?php echo @$active_ventas;?>"><a href="ventas.php"><i class='glyphicon glyphicon-shopping-cart'></i> Ventas <span class="sr-only">(current)</span></a></li>
 
-        <li class="<?php echo $active_productos;?>"><a href="productos.php"><i class='glyphicon glyphicon-barcode'></i> Productos</a></li>
+        <li class="<?php echo @$active_productos;?>"><a href="productos.php"><i class='glyphicon glyphicon-barcode'></i> Productos</a></li>
 		
-	    <li class="<?php echo $active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li>
-		  <li class="<?php echo @$active_reservas;?>"><a href="reservas.php"><i class='glyphicon glyphicon-user'></i> Reservas <span class="sr-only">(current)</span></a></li>
+	    <li class="<?php echo @$active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li>
+		  <li class="<?php echo @$active_reservas;?>"><a href="salas.php"><i class='glyphicon glyphicon-user'></i> Reservas <span class="sr-only">(current)</span></a></li>
 			  <!--<li class="<?php echo $active_maestros;?>"><a href="reserva.html"><i class='glyphicon glyphicon-user'></i> Maestros <span class="sr-only">(current)</span></a></li>-->
         <li class="<?php echo @$active_banda;?>"><a href="banda.php" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-headphones'></i>Banda</a></li>
         <li class="<?php echo @$active_reporte;?>"><a href="reportes.php" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-dashboard'></i>Reportes</a></li>
