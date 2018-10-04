@@ -72,7 +72,7 @@ require_once("config/db.php");
                     <ul class="errorMessages" style="color: red; display: none"></ul>
 
                     <label for="NM_DOCUMENTO_ID">*Identificación:</label>
-                    <input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="8" maxlength="15" required >
+                    <input type="text" class="form-control" id="NM_DOCUMENTO_ID" name="NM_DOCUMENTO_ID" placeholder="*Identificación" title="Identificación ( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="5" maxlength="15" required >
 
                     <p>
                         <label for="CS_TIPO_DOCUMENTO_ID">*Tipo Documento:</label>
