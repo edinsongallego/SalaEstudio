@@ -3,8 +3,14 @@ header('Content-Type: application/json');
 $pdo = new PDO("mysql:dbname=salaestudiodb;host=localhost","root","root");
 
 $accion= (isset($_GET['accion']))?$_GET['accion']:'leer';
-
 switch ($accion) {
+	case 'obtenerUsuario':
+		$SQL = "SELECT NM_DOCUMENTO_ID AS id, CONCAT(NM_DOCUMENTO_ID, ' - ', DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) AS text FROM us_usuario WHERE NM_DOCUMENTO_ID = '".$_GET['NM_DOCUMENTO']."'";
+		$consulta = $pdo->prepare($SQL);
+		$consulta->execute();
+		$resultado1 = $consulta->fetch(PDO::FETCH_ASSOC);
+		echo json_encode($resultado1);
+		break;
  	case 'guardar':
 
 		$fecha1 = new DateTime();//fecha servidor
@@ -40,7 +46,7 @@ switch ($accion) {
 		 		}
 
  		}
- 	
+ 		break;
 	case 'eliminar':
  	
  		$fecha1 = new DateTime();//fecha servidor
@@ -57,7 +63,8 @@ switch ($accion) {
 				break;
 	 		}
 	 		
-		}	
+		}
+		break;	
  	case 'factura':
  			session_start();
  			$cons = $pdo->prepare("SELECT * FROM ft_factura where ID_RESERVA=:id and DS_NOTAS_FACTURA = 'Sala1'");
@@ -83,11 +90,16 @@ switch ($accion) {
 				$fecha2 = DateTime::createFromFormat('Y-m-d H:i:s',$_POST['end']);
 				$intervalo = $fecha1->diff($fecha2);
 
-				$subtotal = $resultado1["NM_VALOR_HORA_SALA"] * $intervalo->format('%h');
-				$iva = $subtotal * 0.16;
-				$total = $subtotal + $iva;
+				$consulta = $pdo->prepare("SELECT t2.NM_PORCENTAJE_INCENTIVO FROM us_usuario t1 INNER JOIN us_tipo_usuario t2 ON t1.CS_TIPO_USUARIO_ID = t2.CS_TIPO_USUARIO WHERE t1.NM_DOCUMENTO_ID = '".$_POST['documento']."'");
+				$consulta->execute();
+				$porcentaje_desc = $consulta->fetch(PDO::FETCH_ASSOC);
 
-				$sentenciaSQL = $pdo->prepare("INSERT INTO ft_factura(DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, NM_CLIENTE_ID, ID_ESTADO, ID_FORMA_PAGO, ID_RESERVA)VALUES('000000000".$factura."',".$_SESSION["NM_DOCUMENTO_ID"]." ,'Sala1',".$subtotal.",".$total.", ".$iva.", ".$_POST['documento'].", 2, 1, ".$_POST['id'].")");
+				$subtotal = $resultado1["NM_VALOR_HORA_SALA"] * $intervalo->format('%h');
+				$descuento = $subtotal*($porcentaje_desc["NM_PORCENTAJE_INCENTIVO"]/100);
+				$iva = $subtotal * 0.16;
+				$total = $subtotal + $iva - $descuento;
+
+				$sentenciaSQL = $pdo->prepare("INSERT INTO ft_factura(DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_DESCUENTO, NM_PRECIO_IVA, NM_CLIENTE_ID, ID_ESTADO, ID_FORMA_PAGO, ID_RESERVA, NM_PORCENTAJE_DESCUENTO) VALUES('".str_pad($factura, 10,"0", STR_PAD_LEFT)."',".$_SESSION["NM_DOCUMENTO_ID"]." ,'Sala1',".$subtotal.",".$total.",".$descuento.", ".$iva.", ".$_POST['documento'].", 2, 1, ".$_POST['id'].", ".$porcentaje_desc["NM_PORCENTAJE_INCENTIVO"].")");
 				$respuesta=$sentenciaSQL->execute();
 
 				$consulta2 = $pdo->prepare("SELECT max(CS_FACTURA_ID) FROM ft_factura");
@@ -98,10 +110,11 @@ switch ($accion) {
 				$sentenciaSQL = $pdo->prepare("INSERT INTO ft_factura_detalle(CS_FACTURA_ID, NM_CANTIDAD_COMPRA, CS_PRODUCTO_ID, NM_PRECIO_TOTAL_PRODUCTO, NM_PRECIO_UNITARIO)VALUES(".$resultado2['max(CS_FACTURA_ID)'].",1 ,4,".$total.", ".$resultado1["NM_VALOR_HORA_SALA"].")");
 				$respuesta=$sentenciaSQL->execute();
 
-				echo json_encode(array("respuesta" => "exitoso"));
+				echo json_encode(array("respuesta" => "exitoso", "id_factura" => $resultado2['max(CS_FACTURA_ID)']));
 				break;
 
  			}
+ 			break;
  	case 'multa':
 
  			session_start();

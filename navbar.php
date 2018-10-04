@@ -13,11 +13,11 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img src="img/logo.png" width="80" height="80"></a>
-    </div>
+    </div> 
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav"> 
         <li class="<?php echo @$active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Facturas <span class="sr-only">(current)</span></a></li>
         <li class="<?php echo @$active_inventario;?>"><a href="inventario.php"><i class='glyphicon glyphicon-list'></i> Inventarios <span class="sr-only">(current)</span></a></li>
         <li class="<?php echo @$active_ventas;?>"><a href="ventas.php"><i class='glyphicon glyphicon-shopping-cart'></i> Ventas <span class="sr-only">(current)</span></a></li>

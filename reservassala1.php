@@ -120,7 +120,6 @@ if(!Login::inicioSession()){
 					asignarValorestexto(false, "#chkcondiciones");
 					asignarValorestexto(true, "#txtfechainicial");
 					setearCampos(calEvent, jsEvent, view);
-					$("#Modalevento").modal();
 				}else{
 					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
 				}
@@ -154,7 +153,16 @@ if(!Login::inicioSession()){
 
 	    });
 
-	    $("#txtdocumento").select2({
+		crearSelect2Documento();
+	    
+	});
+
+	function crearSelect2Documento(data){
+		$("#txtdocumento").select2({
+			allowClear: true,
+	        language: "es",
+	        placeholder: "Seleccione al usuario",
+			data: processData(data).results,
 		  ajax: {
 		    url: 'consulta.php',
 		    dataType: 'json',
@@ -172,7 +180,14 @@ if(!Login::inicioSession()){
             }
 		  }
 		});
-	});
+	}
+
+	function processData(data) {
+	    var mapdata = $.map([data], function (obj) {
+	        return obj;
+	    });
+	    return {results: mapdata};
+	}
 </script>
 
 
@@ -352,7 +367,6 @@ function EnviarInformacion(accion, objEvento, modal){
 		dataType: "JSON",
 		data:objEvento,
 		success:function(msg){
-			console.log(msg);
 			if(accion=='guardar')
 			{
 				if(msg.respuesta == "hora") {
@@ -391,6 +405,7 @@ function EnviarInformacion(accion, objEvento, modal){
 					if(!modal){
 						$("#Modalevento").modal('toggle');
 						alertify.success("Factura creada con éxito");
+						setTimeout(function(){ imprimir_factura(msg.id_factura); },1500);
 					}	
 				}else{
 					alertify.error("La reserva seleccionada ya tiene una factura asociada");
@@ -424,8 +439,11 @@ function asignarValorestexto(sw, boton){
 }
 function setearCampos(calEvent, jsEvent, view){
 		// Mostrar informacion  del evento en los inputs
+		$.get("reservasala1.php?accion=obtenerUsuario&NM_DOCUMENTO="+calEvent.documento,{},function(data){
+			crearSelect2Documento(data);
+		},"JSON");
 		$('#txtid').val(calEvent.id);
-		$('#txtdocumento').val(calEvent.documento);
+		//$('#txtdocumento').val(calEvent.documento);
 		$('#txtdescripcion').val(calEvent.title);
 		FechaHoraini = calEvent.start._i.split(" ");
 		$('#txtfechainicial').val(FechaHoraini[0]);
@@ -433,7 +451,7 @@ function setearCampos(calEvent, jsEvent, view){
 		FechaHorafin = calEvent.end._i.split(" ");
 		$('#txtfechafinal').val(FechaHorafin[0]);
 		$('#txthorafin').val(FechaHorafin[1]);
-
+		$("#Modalevento").modal();
 		//docu = calEvent.sala;
 		//alert(docu);
 		
@@ -556,6 +574,8 @@ function horadentro(sHora1){
 }
 
 </script>
+<script type="text/javascript" src="js/VentanaCentrada.js"></script>
+<script type="text/javascript" src="js/facturas.js"></script>
 
 
 </body>

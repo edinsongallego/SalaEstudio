@@ -14,7 +14,7 @@
         </button>
         <a class="navbar-brand" href="#"><img src="img/logo.png" width="80" height="80"></a>
       </div>
-
+ 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         
