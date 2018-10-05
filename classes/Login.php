@@ -86,7 +86,7 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
-                $sql = "SELECT NM_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, RESTAURAR_CONTRASENA
+                $sql = "SELECT NM_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, RESTAURAR_CONTRASENA, NM_ELIMINADO
                 FROM us_usuario
                 WHERE DS_CORREO = '" . $DS_CORREO . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
@@ -119,6 +119,9 @@ class Login
 
                     if ($result_row->CS_ESTADO_ID == 2) {
                         $this->errors[] = "Usuario Inactivo favor comunicarse con el administrador";
+                        $_SESSION['user_login_status'] = 0;
+                    }else if ($result_row->NM_ELIMINADO == 1) {
+                        $this->errors[] = "Usuario eliminado favor comunicarse con el administrador";
                         $_SESSION['user_login_status'] = 0;
                     }
 

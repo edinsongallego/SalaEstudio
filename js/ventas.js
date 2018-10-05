@@ -94,6 +94,15 @@ $(document).ready(function(){
            calcular_totales();
         });
 
+        $('input[type=radio][name="Venta[estado]"]').change(function() {
+        	if($(this).val()==2){
+        		$("#id_forma_pago").parent().hide();
+        		$("#id_forma_pago").prop('selectedIndex',0);
+        	}else{
+				$("#id_forma_pago").parent().show();
+        	}
+        });
+
 	$("#id_cliente").change(function(e){
 		if((cliente = $(this).select2("data")[0]) != undefined && cliente.id > 0 ){
 			$("#cedula").html(cliente.modelo.NM_DOCUMENTO_ID);

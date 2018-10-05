@@ -25,8 +25,9 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$estado=intval($_POST['estado']);
 		$unidad=intval($_POST['unidad']);
 		$precio_venta=floatval($_POST['precio']);
+		$precio_compra=floatval($_POST['precio_compra']);
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO tp_producto (DS_CODIGO_PRODUCTO, DS_NOMBRE_PRODUCTO, NM_ESTADO, DT_FECHA_CREACION, DB_PRECIO_VENTA_UND, DS_DESCRIPCION_PRODUCTO, FK_UNIDAD) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta', '$descripcion', '$unidad')";
+		$sql="INSERT INTO tp_producto (DS_CODIGO_PRODUCTO, DS_NOMBRE_PRODUCTO, NM_ESTADO, DT_FECHA_CREACION, DB_PRECIO_VENTA_UND, DS_DESCRIPCION_PRODUCTO, FK_UNIDAD,NM_PRECIO_UNITARIO_COMPRA_UND) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta', '$descripcion', '$unidad', '$precio_compra')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Producto ha sido ingresado satisfactoriamente.";

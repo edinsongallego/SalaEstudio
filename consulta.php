@@ -11,7 +11,8 @@ $conexao = new PDO("mysql:dbname=salaestudiodb;host=localhost","root","root");
 
 // Verifica se foi solicitado uma consulta para o autocomplete
 //if($acao == 'autocomplete'):
-	$where = (!empty($parametro)) ? 'WHERE NM_DOCUMENTO_ID LIKE ?' : '';
+	$where = "WHERE NM_ELIMINADO = 0 AND CS_ESTADO_ID = 1";
+	$where .= (!empty($parametro)) ? ' AND NM_DOCUMENTO_ID LIKE ?' : '';
 	$sql = "SELECT NM_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO FROM us_usuario " . $where;
 
 	$stm = $conexao->prepare($sql);

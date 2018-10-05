@@ -99,7 +99,7 @@ $( "#guardar_producto" ).submit(function( event ) {
 		  }
 	});
   event.preventDefault();
-})
+});
 
 $( "#editar_producto" ).submit(function( event ) {
   $('#actualizar_datos').attr("disabled", true);
@@ -129,6 +129,7 @@ $( "#editar_producto" ).submit(function( event ) {
 			var nombre_producto = $("#nombre_producto"+id).val();
 			var estado = $("#estado"+id).val();
 			var precio_producto = $("#precio_producto"+id).val();
+			var precio_compra_producto = $("#precio_compra_producto"+id).val();
 			var unidad_producto = $("#unidad_producto"+id).val();
 			var descripcion_producto  = $("#descripcion_producto"+id).val();
 			$("#mod_id").val(id);
@@ -137,5 +138,6 @@ $( "#editar_producto" ).submit(function( event ) {
 			$("#mod_unidad").val(unidad_producto);
 			$("#mod_precio").val(precio_producto);
 			$("#mod_descripcion").val(descripcion_producto);
+			$("#mod_precio_compra").val(precio_compra_producto);
 		}
 </script>

@@ -85,8 +85,8 @@ $title = "Ventas | Sala Estudio";
 	            		<label class="" for="estado">*Estado: </label><br>
                                 <?php foreach (Factura::obtenerEstadoFactura() as $row) { ?>
     							  <label>
-    							    <input type="radio" 
-    							           name="Venta[estado] required" 
+    							    <input type="radio" required
+    							           name="Venta[estado]" 
     							           value="<?php echo $row[0]; ?>"
                                         <?php echo ($row[0] == 1 ? "checked" : ""); ?>>
                                         <?php echo $row[1]; ?>
@@ -94,8 +94,8 @@ $title = "Ventas | Sala Estudio";
                                 <?php } ?>
 					</div>
 					<div class="form-group col-lg-6">
-	                	<label class="label-result-content" for="ultima_compra">*Forma de pago: </label>
-	                	<select name="Venta[id_forma_pago]" class="form-control" required="required" id="id_forma_pago" style="width:100%">
+	                	<label class="label-result-content" for="ultima_compra">Forma de pago: </label>
+	                	<select name="Venta[id_forma_pago]" class="form-control" id="id_forma_pago" style="width:100%">
 	                		<option value style="display: none" selected></option>
                                     <?php
                                     foreach (Factura::obtenerMediosDePago($con) as $row) {

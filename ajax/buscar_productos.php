@@ -83,7 +83,8 @@
 					<th>Unidad</th>
 					<th>Estado</th>
 					<th>Agregado</th>
-					<th class='text-right'>Precio</th>
+					<th class='text-right'>Precio de venta</th>
+					<th class='text-right'>Precio de compra</th>
 					<th class='text-right'>Acciones</th>
 					
 				</tr>
@@ -97,12 +98,14 @@
 						else {$estado="Inactivo";}
 						$date_added= date('d/m/Y', strtotime($row['DT_FECHA_CREACION']));
 						$precio_producto=$row['DB_PRECIO_VENTA_UND'];
+						$precio_compra_producto=$row['NM_PRECIO_UNITARIO_COMPRA_UND'];
 					?>
 					
 					<input type="hidden" value="<?php echo $codigo_producto;?>" id="codigo_producto<?php echo $id_producto;?>">
 					<input type="hidden" value="<?php echo $nombre_producto;?>" id="nombre_producto<?php echo $id_producto;?>">
 					<input type="hidden" value="<?php echo $estado;?>" id="estado<?php echo $id_producto;?>">
 					<input type="hidden" value="<?php echo $precio_producto;?>" id="precio_producto<?php echo $id_producto;?>">
+					<input type="hidden" value="<?php echo $precio_compra_producto;?>" id="precio_compra_producto<?php echo $id_producto;?>">					
 					<input type="hidden" value="<?php echo $row['FK_UNIDAD'];?>" id="unidad_producto<?php echo $id_producto;?>">
 					<input type="hidden" value="<?php echo $row['DS_DESCRIPCION_PRODUCTO'];?>" id="descripcion_producto<?php echo $id_producto;?>">
 					<tr>
@@ -113,6 +116,7 @@
 						<td><?php echo $estado;?></td>
 						<td><?php echo $date_added;?></td>
 						<td><span class='pull-right'>$<?php echo number_format($precio_producto,2);?></span></td>
+						<td><span class='pull-right'>$<?php echo number_format($precio_compra_producto,2);?></span></td>
 					<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar producto' onclick="obtener_datos('<?php echo $id_producto;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 					<a href="#" class='btn btn-default' title='Borrar producto' onclick="eliminar('<?php echo $id_producto; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>

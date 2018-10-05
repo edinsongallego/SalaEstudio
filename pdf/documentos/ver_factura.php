@@ -15,7 +15,7 @@
 								LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
 								INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID
 								INNER JOIN ft_estado est ON est.ID_ESTADO = fac.ID_ESTADO 
-								INNER JOIN ft_forma_pago pag ON pag.ID_FORMA_PAGO = fac.ID_FORMA_PAGO 
+								LEFT JOIN ft_forma_pago pag ON pag.ID_FORMA_PAGO = fac.ID_FORMA_PAGO 
 								WHERE CS_FACTURA_ID='".$id_factura."'";
 	$sql_count=mysqli_query($con,$SQL);
 	
