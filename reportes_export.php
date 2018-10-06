@@ -65,21 +65,15 @@ if (isset($_REQUEST["reporte"])) {
             include './ajax/cabecera_reporte.php';
             include './ajax/reporte_facturacion.php';
             break;
-        default:
-            break;
         case "facturacion_diaria";
             $columnas = array("Fecha", "Cantidad", "Iva", "Descuento", "Sub total", "Precio total");
             include './ajax/cabecera_reporte.php';
             include './ajax/reporte_facturacion_diaria.php';
             break;
-        default:
-            break;
         case "facturacion_mensuales";
             $columnas = array("Fecha", "Cantidad", "Iva", "Descuento", "Sub total", "Precio total");
             include './ajax/cabecera_reporte.php';
             include './ajax/reporte_facturacion_mensual.php';
-            break;
-        default:
             break;
         case "facturacion_anuales";
             $columnas = array("Fecha", "Cantidad", "Iva", "Descuento", "Sub total", "Precio total");
@@ -87,8 +81,7 @@ if (isset($_REQUEST["reporte"])) {
             include './ajax/reporte_facturacion_anual.php';
             break;
         default:
-            break;
-        
+            die("Debe enviar parametros validos");        
         
     }
 
