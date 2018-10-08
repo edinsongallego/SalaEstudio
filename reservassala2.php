@@ -153,7 +153,15 @@ if(!Login::inicioSession()){
 
 	    });
 
-	    $("#txtdocumento").select2({
+		crearSelect2Documento();
+	});
+
+	function crearSelect2Documento(data){
+		$("#txtdocumento").select2({
+			allowClear: true,
+	        language: "es",
+	        placeholder: "Seleccione al usuario",
+			data: processData(data).results,
 		  ajax: {
 		    url: 'consulta.php',
 		    dataType: 'json',
@@ -171,7 +179,14 @@ if(!Login::inicioSession()){
             }
 		  }
 		});
-	});
+	}
+
+	function processData(data) {
+	    var mapdata = $.map([data], function (obj) {
+	        return obj;
+	    });
+	    return {results: mapdata};
+	}		
 </script>
 
 
@@ -335,11 +350,10 @@ $('#btnmulta').click(function(){
 function RecolectarDatosGUI(){
 	NuevoEvento= {
 		id:$('#txtid').val(),
-		title:$('#txtdescripcion').val(),
+		title:$('#txthoraini').val()+" - "+$('#txthorafin').val()+" - "+$('#txtdocumento').select2("data")[0].text+" - "+$('#txtdescripcion').val(),
 		start:$('#txtfechainicial').val()+" "+$('#txthoraini').val(),
 		end:$('#txtfechafinal').val()+" "+$('#txthorafin').val(),
-		documento:$('#txtdocumento').val()
-		
+		documento:$('#txtdocumento').val(),
 	};
 }
 
