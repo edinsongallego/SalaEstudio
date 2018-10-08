@@ -357,7 +357,7 @@ $('#btnmulta').click(function(){
 function RecolectarDatosGUI(){
 	NuevoEvento= {
 		id:$('#txtid').val(),
-		title:$('#txtdocumento').text()+"-"+$('#txtdescripcion').val(),
+		title:$('#txtdocumento').val()+"-"+$('#txtdescripcion').val(),
 		start:$('#txtfechainicial').val()+" "+$('#txthoraini').val(),
 		end:$('#txtfechafinal').val()+" "+$('#txthorafin').val(),
 		documento:$('#txtdocumento').val(),
