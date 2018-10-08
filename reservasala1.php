@@ -32,17 +32,19 @@ switch ($accion) {
 				 	break;
 		 		}
 		 		else{
-		 			$sentenciaSQL = $pdo->prepare("INSERT INTO rs_reserva_sala(documento, sala, start, end, title, 	DS_ESTADO)VALUES(:documento, 1,:start,:end,:title,:estado)");
-					$respuesta=$sentenciaSQL->execute(array(
-				 		"documento"=> $_POST['documento'],
-				 		"start"=> $_POST['start'],
-				 		"end"=> $_POST['end'],
-				 		"title"=> $_POST['title'],
-				 		"estado"=>"Activo"
 
-				 	));
-				 	echo json_encode(array("respuesta" => "exitoso"));
-				 	break;
+		 			 $sentenciaSQL = $pdo->prepare("INSERT INTO rs_reserva_sala(documento, sala, start, end, title, DS_ESTADO, color)VALUES(:documento, 1,:start,:end,:title,:estado,:color)");
+						$respuesta=$sentenciaSQL->execute(array(
+						"documento"=> $_POST['documento'],
+						"start"=> $_POST['start'],
+						"end"=> $_POST['end'],
+						"title"=> $_POST['title'],
+						"estado"=>"Activo",
+						"color"=> $_POST['color']
+
+						));
+						echo json_encode(array("respuesta" => "exitoso"));
+						break;
 		 		}
 
  		}
@@ -68,9 +70,9 @@ switch ($accion) {
  	case 'factura':
  			session_start();
  			$cons = $pdo->prepare("SELECT * FROM ft_factura where ID_RESERVA=:id and DS_NOTAS_FACTURA = 'Sala1'");
-		 		$resp=$cons->execute(array(
-				 	"id"=> $_POST['id']
-		 		));
+		 	$resp=$cons->execute(array(
+				"id"=> $_POST['id']
+		 	));
 		 	if($cons->rowCount()>0){
 	 			echo json_encode(array("respuesta" => "error"));
 	 			break;
@@ -146,7 +148,7 @@ switch ($accion) {
 				$iva = $subtotal * 0.16;
 				$total = $subtotal + $iva;
 
-				$sentenciaSQL = $pdo->prepare("INSERT INTO ft_factura(DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_IVA, NM_CLIENTE_ID, ID_ESTADO, ID_FORMA_PAGO, ID_RESERVA)VALUES('000000000".$factura."',".$_SESSION["NM_DOCUMENTO_ID"]." ,'Sala1 - Multa',".$subtotal.",".$total.", ".$iva.", ".$_POST['documento'].", 2, 1, ".$_POST['id'].")");
+				$sentenciaSQL = $pdo->prepare("INSERT INTO ft_factura(DS_CODIGO_FACTURA, NM_VENDEDOR_ID, DS_NOTAS_FACTURA, NM_PRECIO_SUBTOTAL, NM_PRECIO_TOTAL, NM_PRECIO_DESCUENTO, NM_PRECIO_IVA, NM_CLIENTE_ID, ID_ESTADO, ID_FORMA_PAGO, ID_RESERVA) VALUES('".str_pad($factura, 10,"0", STR_PAD_LEFT)."',".$_SESSION["NM_DOCUMENTO_ID"]." ,'Sala1',".$subtotal.",".$total.",0, ".$iva.", ".$_POST['documento'].", 2, 1, ".$_POST['id'].")");
 				$respuesta=$sentenciaSQL->execute();
 
 				$consulta2 = $pdo->prepare("SELECT max(CS_FACTURA_ID) FROM ft_factura");
@@ -160,7 +162,7 @@ switch ($accion) {
 				$sentenciaSQL = $pdo->prepare("INSERT INTO rs_multas_reserva(CS_RESERVA_ID, NM_VALOR_MULTA_SALA, DS_ESTADO)VALUES(".$_POST['id'].",".$total.", '1')");
 				$respuesta=$sentenciaSQL->execute();
 
-				echo json_encode(array("respuesta" => "exitoso"));
+				echo json_encode(array("respuesta" => "exitoso", "id_factura" => $resultado2['max(CS_FACTURA_ID)']));
 				break;
 
  			}

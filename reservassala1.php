@@ -82,7 +82,7 @@ if(!Login::inicioSession()){
                             return {start: nowDate.subtract(1, 'day')} //to prevent anterior dates
                         },*/
 
-            defaultView:"month",
+            defaultView:"agendaWeek",
 			header:{
 				left: 'today,prev,next',
 				center: 'title',
@@ -249,6 +249,12 @@ if(!Login::inicioSession()){
 		    </div>		
 	    </div>
 	    <div class="row">
+			<div class="form-group col-md-12">
+				<label><b>Seleccione color:</b></label>
+				<input type="color" id = "txtcolor">
+			</div>
+		</div>
+	    <div class="row">
       		<div class="form-group col-md-12">
       			<input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi"">terminos y condiciones</a></label>	
 		    </div>		
@@ -351,10 +357,11 @@ $('#btnmulta').click(function(){
 function RecolectarDatosGUI(){
 	NuevoEvento= {
 		id:$('#txtid').val(),
-		title:$('#txtdescripcion').val(),
+		title:$('#txtdocumento').text()+"-"+$('#txtdescripcion').val(),
 		start:$('#txtfechainicial').val()+" "+$('#txthoraini').val(),
 		end:$('#txtfechafinal').val()+" "+$('#txthorafin').val(),
-		documento:$('#txtdocumento').val()
+		documento:$('#txtdocumento').val(),
+		color:$('#txtcolor').val()
 		
 	};
 }
@@ -419,6 +426,7 @@ function EnviarInformacion(accion, objEvento, modal){
 					if(!modal){
 						$("#Modalevento").modal('toggle');
 						alertify.success("Multa creada con éxito");
+						setTimeout(function(){ imprimir_factura(msg.id_factura); },1500);
 					}	
 				}else{
 					alertify.error("La reserva seleccionada ya tiene una multa asociada");
