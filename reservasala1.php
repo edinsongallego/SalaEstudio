@@ -168,10 +168,7 @@ switch ($accion) {
  			}
 
  	default:
- 	session_start();
- 	//print_r($_SESSION);
-	 		//Seleccionar los eventos de la bd
-
+ 			session_start();
 			$query1= $pdo->prepare("SELECT CS_TIPO_USUARIO_ID FROM us_usuario WHERE NM_DOCUMENTO_ID=".$_SESSION["NM_DOCUMENTO_ID"]."");
 			$query1-> execute();
 			$resultado1 = $query1->fetch(PDO::FETCH_ASSOC);
