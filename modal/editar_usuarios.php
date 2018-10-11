@@ -58,17 +58,19 @@ if (isset($con)) {
                         </div>
 
                         <div class="form-group">
-                            <label for="tipo_usu" class="col-sm-3 control-label">*Estado</label>
+                            <label for="estado" class="col-sm-3 control-label">*Estado</label>
                             <div class="col-sm-8">
-
                                 <select name="estado" id="estado" class="form-control">
-
-
                                 </select>
-
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="enviar_correo" class="col-sm-3 control-label">Enviar correo de activación</label>
+                            <div class="col-sm-8" class="checkbox">
+                                <input type="checkbox" value="1" name="enviar_correo" id="enviar_correo" disabled="disabled">
+                            </div>
+                        </div>
 
                 </div>
                 <div class="modal-footer">
@@ -84,7 +86,17 @@ if (isset($con)) {
 ?>
 
 <script>
-
+    setTimeout(function(e){
+        $(document).ready(function(){
+            $("#estado").change(function(e){
+                if ($(this).val() == 1) {
+                    $("#enviar_correo").removeAttr("disabled");
+                }else{
+                    $("#enviar_correo").attr("disabled","disabled");
+                }
+            });
+        });
+    },100);
     function numeros(e) {
         key = e.keyCode || e.which;
 

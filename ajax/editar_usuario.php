@@ -45,9 +45,26 @@ if (empty($_POST['firstname2'])) {
 
 
     // write new user's data into database
-    $sql = "UPDATE us_usuario SET DS_DIRECCION = '" . $direccion . "', DS_NOMBRES_USUARIO='" . $firstname . "', DS_APELLIDOS_USUARIO='" . $lastname . "', DS_CORREO='" . $user_email . "', CS_ESTADO_ID='" . $estado . "',NM_CELULAR='" . $cel . "',NM_TELEFONO='" . $tel . "'
+    $sql = "UPDATE us_usuario SET DS_DIRECCION = '" . $direccion . "', DS_NOMBRES_USUARIO='" . $firstname . "', DS_APELLIDOS_USUARIO='" . $lastname . "', DS_CORREO='" . $user_email . "', CS_ESTADO_ID='" . $estado . "',NM_CELULAR='" . $cel . "',NM_TELEFONO='" . $tel . "', ENVIO_CORREO_ACTIVACION=1
                             WHERE NM_DOCUMENTO_ID='" . $user_id . "';";
     $query_update = mysqli_query($con, $sql);
+
+    if (isset($_POST["enviar_correo"]) && $_POST["enviar_correo"] == 1) {
+        $correo = "softban@gmail.com";
+        $headers = "From: $correo \r\n";
+        //$headers .= "Reply-To: $correo \r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $mensaje = "<html>"
+                . "<b>Hola ".$firstname."</b>, tu cuenta fue activada por <b>".$_SESSION["DS_NOMBRES_USUARIO"]."</b>, ya puede ingresar al aplicativo.<br/><br/>";
+        $mensaje .= "</html>";
+        if (mail($user_email, "Cuenta activa", $mensaje, $headers)) {
+            //echo "Mensaje enviado";
+            //header("Location:login.php");
+        }else{
+            die("Algo falló con el envió de correo");
+        }   
+    }
 
     // if user has been added successfully
     if ($query_update) {

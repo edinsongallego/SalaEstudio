@@ -85,7 +85,6 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
             $fetch = mysqli_query($con,$SQL); 
             $correo = "softban@gmail.com";
             $headers = "From: $correo \r\n";
-            //$headers .= "Reply-To: $correo \r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 

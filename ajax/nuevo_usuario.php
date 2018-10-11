@@ -75,8 +75,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
                 } else {
                     // write new user's data into database
-                    $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID)
-                            VALUES('".$DS_DIRECCION."','".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2);";
+                    $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, ENVIO_CORREO_ACTIVACION)
+                            VALUES('".$DS_DIRECCION."','".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2,1);";
 
 
                     $query_new_user_insert = mysqli_query($con,$sql);
