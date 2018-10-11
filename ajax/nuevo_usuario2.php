@@ -100,14 +100,14 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
             $datosUsuarios = mysqli_fetch_assoc($result);
             while ($row = mysqli_fetch_array($fetch, MYSQLI_ASSOC)) {
                 $mensaje = "<html>"
-                        . "<b>Hola ".$row["DS_NOMBRES_USUARIO"]."</b>, actualmente se registro un nuevo usuario en la aplicaición, te invitamos a que lo actives. Acontinuación te anexamos los datos de la cuenta registrada.<br/><br/>";
+                        . "<b>Hola ".$row["DS_NOMBRES_USUARIO"]."</b>, actualmente se registro un nuevo usuario en la aplicación, te invitamos a que lo actives. Acontinuación te anexamos los datos de la cuenta registrada.<br/><br/>";
                 $mensaje .= "<b>Nombre: </b>".$DS_NOMBRES_USUARIO. " ".$DS_APELLIDOS_USUARIO.".<br/>";
                 $mensaje .= "<b>Documento de identidad: </b>".$NM_DOCUMENTO_ID.".<br/>";
                 $mensaje .= "<b>Correo: </b>".$DS_CORREO.".<br/>";
                 $mensaje .= "<b>Celular: </b>".$NM_CELULAR.".<br/>";
                 $mensaje .= "<b>Tipo usuario: </b>".$datosUsuarios["DS_DESCRIPCION_TIPO_USUARIO"].".<br/>";
                 if(!is_null($datosUsuarios["DS_DESCRIPCION_BANDA"])){
-                    $mensaje .= "<b>Nombre de la bada a la que pertenece: </b>".$datosUsuarios["DS_DESCRIPCION_BANDA"].".<br/>";
+                    $mensaje .= "<b>Nombre de la banda a la que pertenece: </b>".$datosUsuarios["DS_DESCRIPCION_BANDA"].".<br/>";
                     $mensaje .= "<b>Es lider: </b>".$_POST["ES_LIDER"].".<br/>";
                 }
                 $mensaje .= "</html>";
