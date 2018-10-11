@@ -8,7 +8,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 
 // include the configs / constants for the database connection
 require_once("config/db.php");
+require_once("classes/Login.php");
 ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style type="text/css">
     label{
         color: white;
@@ -83,8 +85,23 @@ require_once("config/db.php");
                             <option value="3">Pasaporte</option>
                             <option value="4">Cedula Extranjera</option>
                         </select>
+                    </p>
 
+                    <p>
+                        <label for="BANDA_ID">Si es integrante, por favor seleccionela:</label>
+                        <select name="BANDA_ID" id="BANDA_ID" title="" class="form-control" >
+                        </select>
+                    </p>
 
+                    <p>
+                        <label for="ES_LIDER">Es lider de la banda:</label>
+                        <div class="radio" style="display: inline; margin-right: 20px">
+                          <label><input type="radio" value="No" name="ES_LIDER" checked>No</label>
+                        </div>
+                        <div class="radio" style="display: inline;">
+                          <label><input type="radio" value="Si" name="ES_LIDER" >Si</label>
+                        </div>
+                        
                     </p>
 
                     <label for="DS_NOMBRES_USUARIO">*Nombre:</label>
@@ -107,8 +124,13 @@ require_once("config/db.php");
                         <label for="CS_TIPO_USUARIO_ID">*Tipo Usuario:</label>
                         <select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" title="Tipo Usuario( campo requerido)" class="form-control"  required>
                             <option value style="display: none">Seleccione</option>
-                            <option value="2">Usuario normal | Banda</option>
-                            <option value="4">Docente</option>
+                            <?php
+                                foreach (Login::obtenerListadoPerfiles(array(2,3,4)) as $row) {
+                                    ?>
+                                    <option value="<?php echo $row["CS_TIPO_USUARIO"]; ?>"><?php echo $row["DS_NOMBRE_TIPO_USUARIO"]; ?></option>
+                                    <?php
+                                }
+                            ?>
                         </select>
                     </p>
 
@@ -136,8 +158,31 @@ require_once("config/db.php");
 
     </body>
 </html>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
+
+                        $('#BANDA_ID').select2({
+                            allowClear: false,
+                            language: "es",
+                            placeholder: "Seleccione una banda en caso de pertenecer a alguna",
+                            default: false,
+                            ajax: {
+                                url: 'ajax/autocomplete/bandas.php',
+                                cache: "true",
+                                type: 'POST',
+                                dataType: 'json',
+                                data: function (data, page) {
+                                    data["id_usuarios_existentes"] = $("#id_lider").val();
+                                    data["search"] = data.term;
+                                    return data;
+                                },
+                                results: function (data, page) {
+                                    return {results: data.results};
+                                }
+                            },
+                        });
+
+
                         $(document).ready(function () {
                             $("#NM_CELULAR, #NM_TELEFONO").keyup(function (e) {
                                 var valorInicial = $(this).val();
@@ -151,6 +196,7 @@ require_once("config/db.php");
                                 event.preventDefault();
                                 if ($('#guardar_usuario2')[0].checkValidity()) {
                                     if (validateMail(document.getElementById("DS_CORREO"))) {
+                                        $("#loading").show();
                                         $('#registrarse').attr("disabled", true);
 
                                         var parametros = $(this).serialize();
@@ -162,10 +208,15 @@ require_once("config/db.php");
                                                 $("#resultados_ajax2").html("Mensaje: Cargando...");
                                             },
                                             success: function (datos) {
+                                                $("#loading").hide();
                                                 $("#resultados_ajax2").html(datos);
+                                               // alertify.warning(datos);
                                                 $('#registrarse').attr("disabled", false);
+                                                $("#NM_DOCUMENTO_ID").focus();
+                                               // $("#BANDA_ID").empty().trigger('change');
                                                 //load(1);
                                                 $("#guardar_usuario2")[0].reset();
+                                                setTimeout(function(){$("#resultados_ajax2").html("");}, 8000);
                                             }
                                         });
                                     } else {

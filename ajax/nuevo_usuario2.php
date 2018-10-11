@@ -34,7 +34,7 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
     // escaping, additionally removing everything that could be (html/javascript-) code
     $DS_NOMBRES_USUARIO = mysqli_real_escape_string($con, (strip_tags($_POST["DS_NOMBRES_USUARIO"], ENT_QUOTES)));
-
+ 
     $CS_TIPO_DOCUMENTO_ID = mysqli_real_escape_string($con, (strip_tags($_POST["CS_TIPO_DOCUMENTO_ID"], ENT_QUOTES)));
 
     $DS_APELLIDOS_USUARIO = mysqli_real_escape_string($con, (strip_tags($_POST["DS_APELLIDOS_USUARIO"], ENT_QUOTES)));
@@ -75,6 +75,50 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
 
         // if user has been added successfully
         if ($query_new_user_insert) {
+
+            if(isset($_POST["BANDA_ID"]) && !empty($_POST["BANDA_ID"])){
+               $SQL = "INSERT INTO us_banda_detalle_usuario(NM_DOCUMENTO_ID,CS_BANDA_ID) VALUES('".$NM_DOCUMENTO_ID."', '".$_POST["BANDA_ID"]."')";
+               mysqli_query($con, $SQL);
+            }
+
+            $SQL = "SELECT DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, DS_CORREO FROM us_usuario WHERE CS_TIPO_USUARIO_ID = 1";
+            $fetch = mysqli_query($con,$SQL); 
+            $correo = "softban@gmail.com";
+            $headers = "From: $correo \r\n";
+            //$headers .= "Reply-To: $correo \r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+            $SQL = "SELECT us.*, tu.DS_DESCRIPCION_TIPO_USUARIO, t3.DS_DESCRIPCION_BANDA
+                    FROM us_usuario us 
+                    INNER JOIN us_tipo_usuario tu ON tu.CS_TIPO_USUARIO = us.CS_TIPO_USUARIO_ID
+                    LEFT JOIN us_banda_detalle_usuario t2 ON t2.NM_DOCUMENTO_ID = us.NM_DOCUMENTO_ID
+                    LEFT JOIN us_banda_usuario t3 ON t2.CS_BANDA_ID = t3.CS_BANDA_ID
+                    WHERE us.NM_DOCUMENTO_ID = '".$NM_DOCUMENTO_ID."'
+                    LIMIT 1";
+            $result = mysqli_query($con, $SQL);
+            $datosUsuarios = mysqli_fetch_assoc($result);
+            while ($row = mysqli_fetch_array($fetch, MYSQLI_ASSOC)) {
+                $mensaje = "<html>"
+                        . "<b>Hola ".$row["DS_NOMBRES_USUARIO"]."</b>, actualmente se registro un nuevo usuario en la aplicaición, te invitamos a que lo actives. Acontinuación te anexamos los datos de la cuenta registrada.<br/><br/>";
+                $mensaje .= "<b>Nombre: </b>".$DS_NOMBRES_USUARIO. " ".$DS_APELLIDOS_USUARIO.".<br/>";
+                $mensaje .= "<b>Documento de identidad: </b>".$NM_DOCUMENTO_ID.".<br/>";
+                $mensaje .= "<b>Correo: </b>".$DS_CORREO.".<br/>";
+                $mensaje .= "<b>Celular: </b>".$NM_CELULAR.".<br/>";
+                $mensaje .= "<b>Tipo usuario: </b>".$datosUsuarios["DS_DESCRIPCION_TIPO_USUARIO"].".<br/>";
+                if(!is_null($datosUsuarios["DS_DESCRIPCION_BANDA"])){
+                    $mensaje .= "<b>Nombre de la bada a la que pertenece: </b>".$datosUsuarios["DS_DESCRIPCION_BANDA"].".<br/>";
+                    $mensaje .= "<b>Es lider: </b>".$_POST["ES_LIDER"].".<br/>";
+                }
+                $mensaje .= "</html>";
+                if (mail($row["DS_CORREO"], "Cuenta registrada", $mensaje, $headers)) {
+                    //echo "Mensaje enviado";
+                    //header("Location:login.php");
+                }else{
+                    die("Algo falló con el envió de correo");
+                }                
+            }
+            
             $messages[] = "La cuenta ha sido creada con éxito.";
         } else {
             //var_dump(mysqli_error($con));
