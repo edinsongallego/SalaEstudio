@@ -87,22 +87,7 @@ require_once("classes/Login.php");
                         </select>
                     </p>
 
-                    <p>
-                        <label for="BANDA_ID">Si es integrante, por favor seleccionela:</label>
-                        <select name="BANDA_ID" id="BANDA_ID" title="" class="form-control" >
-                        </select>
-                    </p>
-
-                    <p>
-                        <label for="ES_LIDER">Es lider de la banda:</label>
-                        <div class="radio" style="display: inline; margin-right: 20px">
-                          <label><input type="radio" value="No" name="ES_LIDER" checked>No</label>
-                        </div>
-                        <div class="radio" style="display: inline;">
-                          <label><input type="radio" value="Si" name="ES_LIDER" >Si</label>
-                        </div>
-                        
-                    </p>
+                   
 
                     <label for="DS_NOMBRES_USUARIO">*Nombre:</label>
                     <input type="text" class="form-control" id="DS_NOMBRES_USUARIO" name="DS_NOMBRES_USUARIO" placeholder="*Nombres" title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia(this)" id="miInput" class="form-control"  required>
@@ -132,6 +117,22 @@ require_once("classes/Login.php");
                                 }
                             ?>
                         </select>
+                    </p>
+                     <p>
+                        <label for="BANDA_ID">Tienes Banda, por favor seleccionela:</label>
+                        <select name="BANDA_ID" id="BANDA_ID" title="" class="form-control" >
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="ES_LIDER">Es lider de la banda:</label>
+                        <div class="radio" style="display: inline; margin-right: 20px">
+                          <label><input type="radio" value="No" name="ES_LIDER" checked>No</label>
+                        </div>
+                        <div class="radio" style="display: inline;">
+                          <label><input type="radio" value="Si" name="ES_LIDER" >Si</label>
+                        </div>
+                        
                     </p>
 
                     <label for="DS_DIRECCION">Dirección:</label>
