@@ -9,11 +9,11 @@ if ($con) {
     if (isset($_REQUEST["id_usuarios_existentes"]) && !empty($_REQUEST["id_usuarios_existentes"])) {
         $no_usuarios = (is_array($_REQUEST["id_usuarios_existentes"])?implode(",", $_REQUEST["id_usuarios_existentes"]):$_REQUEST["id_usuarios_existentes"]);
         //echo 
-        $SQL = "SELECT * FROM (SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, (SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  WHERE NM_DOCUMENTO_ID NOT IN($no_usuarios) AND (DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%') LIMIT 50";
+        $SQL = "SELECT * FROM (SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, (SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  WHERE NM_ELIMINADO = 0 AND NM_DOCUMENTO_ID NOT IN($no_usuarios) AND (DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%') LIMIT 50";
         //die;
         $fetch = mysqli_query($con, $SQL);
     }else{
-        $fetch = mysqli_query($con, "SELECT * FROM (SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, (SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  WHERE DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' LIMIT 50");
+        $fetch = mysqli_query($con, "SELECT * FROM (SELECT *, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, (SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA FROM us_usuario cl) tmp  WHERE NM_ELIMINADO = 0 AND DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con, ($term)) . "%' LIMIT 50");
     }
     
 

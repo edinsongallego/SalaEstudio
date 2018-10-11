@@ -9,6 +9,24 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 // include the configs / constants for the database connection
 require_once("config/db.php");
 require_once("classes/Login.php");
+
+$login = new Login();
+
+
+
+// ... ask if we are logged in here:
+if ($login->isUserLoggedIn() == true) {
+    // the user is logged in. you can do whatever you want here.
+    // for demonstration purposes, we simply show the "you are logged in" view.
+    if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
+        header("location: usuarios.php");
+    }else{
+        header("location: home_banda.php");
+    }
+
+
+}
+
 ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style type="text/css">
@@ -44,7 +62,7 @@ require_once("classes/Login.php");
                 <li><a target="_blank" href="https://twitter.com/lasalaestudio"><img src='img/twitter.png'></img></a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php" target='_blank'><i class='glyphicon glyphicon-log-in'></i> Iniciar Sesiòn</a></li>
+                <li><a href="login.php"><i class='glyphicon glyphicon-log-in'></i> Iniciar Sesiòn</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -110,7 +128,7 @@ require_once("classes/Login.php");
                         <select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" title="Tipo Usuario( campo requerido)" class="form-control"  required>
                             <option value style="display: none">Seleccione</option>
                             <?php
-                                foreach (Login::obtenerListadoPerfiles(array(2,3,4)) as $row) {
+                                foreach (Login::obtenerListadoPerfiles(array(3,4)) as $row) {
                                     ?>
                                     <option value="<?php echo $row["CS_TIPO_USUARIO"]; ?>"><?php echo $row["DS_NOMBRE_TIPO_USUARIO"]; ?></option>
                                     <?php

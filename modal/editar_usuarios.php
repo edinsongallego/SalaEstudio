@@ -93,6 +93,8 @@ if (isset($con)) {
                     $("#enviar_correo").removeAttr("disabled");
                 }else{
                     $("#enviar_correo").attr("disabled","disabled");
+                    $("#enviar_correo").prop("checked", false);
+
                 }
             });
         });

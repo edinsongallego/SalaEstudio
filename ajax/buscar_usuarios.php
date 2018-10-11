@@ -59,7 +59,7 @@ if ($action == 'ajax') {
     // escaping, additionally removing everything that could be (html/javascript-) code
     $q = mysqli_real_escape_string($con, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
     $aColumns = array('DS_NOMBRES_USUARIO', 'DS_APELLIDOS_USUARIO', 'NM_DOCUMENTO_ID'); //Columnas de busqueda
-    $sTable = "us_usuario";
+    $sTable = "us_usuario AS t2";
     $sWhere = "WHERE NM_ELIMINADO = 0 ";
     if ($_GET['q'] != "") {
         $sWhere .= " AND (";
@@ -83,7 +83,7 @@ if ($action == 'ajax') {
     $total_pages = ceil($numrows / $per_page);
     $reload = './usuarios.php';
     //main query to fetch the data
-    $sql = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
+    $sql = "SELECT *, (SELECT GROUP_CONCAT(t.DS_DESCRIPCION_BANDA SEPARATOR ', ') FROM us_banda_usuario t INNER JOIN us_banda_detalle_usuario t1 ON t1.CS_BANDA_ID = t.CS_BANDA_ID WHERE t1.NM_DOCUMENTO_ID = t2.NM_DOCUMENTO_ID) BANDAS FROM  $sTable $sWhere LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
     //loop through fetched data
     if ($numrows > 0) {
@@ -97,6 +97,7 @@ if ($action == 'ajax') {
                     <th>Email</th>
                     <th>Estado</th>
                     <th>Fecha Creación</th>
+                    <th>Banda(s)</th>
                     <th><span class="pull-right">Acciones</span></th>
 
                 </tr>
@@ -140,7 +141,7 @@ if ($action == 'ajax') {
             }
             ?></td>
                         <td><?php echo $DT_FECHA_CREACION; ?></td>
-
+                        <td><?php echo $row["BANDAS"]; ?></td>    
                         <td ><span class="pull-right">
                                 <a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="#" class='btn btn-default' title='Cambiar contraseña' onclick="get_user_id('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-cog"></i></a>

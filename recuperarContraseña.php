@@ -23,8 +23,7 @@ $login = new Login();
 if ($login->isUserLoggedIn() == true) {
     // the user is logged in. you can do whatever you want here.
     // for demonstration purposes, we simply show the "you are logged in" view.
-    session_start();
-	if ($_SESSION['id_perfil'] == 1) {
+	if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
 		header("location: usuarios.php");
 	}else{
 		header("location: home_banda.php");
