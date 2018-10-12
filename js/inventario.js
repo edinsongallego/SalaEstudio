@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
     $("#id_producto").select2({
         allowClear: true,
         placeholder: "Seleccione un producto",
@@ -20,6 +21,14 @@ $(document).ready(function () {
                 return {results: data.results};
             }
         },
+    });
+
+    $("#id_producto").change(function(){
+        if((producto = $(this).select2("data")[0]) != undefined){
+            $("#precio_co").val(producto.modelo.NM_PRECIO_UNITARIO_COMPRA_UND);
+        }else{
+            $("#precio_co").val("");
+        }
     });
     
     $("#id_vendedor").select2({
