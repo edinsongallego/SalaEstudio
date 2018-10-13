@@ -51,10 +51,10 @@ class Factura
         return mysqli_fetch_all($result, MYSQLI_ASSOC);   
     }
 
-    public static function pagarFactura($id_factura, $cnn)
+    public static function pagarFactura($id_factura, $id_forma_pago, $notas, $cnn)
     {
         self::$cnn = $cnn;
-        $SQL = "UPDATE ft_factura SET ID_ESTADO = 1 WHERE CS_FACTURA_ID = $id_factura";
+        $SQL = "UPDATE ft_factura SET ID_ESTADO = 1, ID_FORMA_PAGO = '".$id_forma_pago."', DS_NOTAS_FACTURA = '".$notas."' WHERE CS_FACTURA_ID = $id_factura";
         return mysqli_query(self::$cnn,$SQL); 
     }    
 

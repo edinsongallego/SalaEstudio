@@ -1,6 +1,23 @@
 $(document).ready(function(){
 	load(1);
-	
+	$("#btn_realizar_pago").click(function(e){
+		e.preventDefault();
+		if ($("#frm_factura_venta")[0].checkValidity()) {
+			$('#loading').show();
+			$.get("ajax/realizar_pago_factura.php?"+$("#frm_factura_venta").serialize(),function(r){
+				if (r.result) {
+					//imprimir_factura(id_factura);
+					alertify.success(r.mensaje);
+					load(1);
+				}else{
+					alertify.error(r.mensaje);
+				}
+				$('#loading').hide();
+				$("#realizarpago").modal('hide');
+			},"JSON");
+		}
+	});
+
 });
 
 function load(page){
@@ -46,17 +63,10 @@ function imprimir_factura(id_factura){
 }
 
 function realizar_pago_factura(id_factura) {
-	if (confirm("¿Esta seguro de realizar el pago de esta factura?")) {
-		$('#loading').show();
-		$.get("ajax/realizar_pago_factura.php?id_factura="+id_factura,function(r){
-			if (r.result) {
-				//imprimir_factura(id_factura);
-				alertify.success(r.mensaje);
-				load(1);
-			}else{
-				alertify.error(r.mensaje);
-			}
-			$('#loading').hide();
-		},"JSON");
-	}
+	$("#frm_factura_venta")[0].reset();
+	$("#id_factura").val(id_factura);
+	$.post("ajax/buscar_factura.php",{id_factura},function(data){
+		$("#nota_venta").val(data.DS_NOTAS_FACTURA);
+		$("#realizarpago").modal('show');
+	},"JSON");
 }

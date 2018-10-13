@@ -1,0 +1,21 @@
+<?php
+include('is_logged.php'); //Archivo verifica que el usario que intenta acceder a la URL esta logueado
+/* Connect To Database */
+require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos
+if(isset($_POST["id_factura"])){
+	$SQL = "SELECT fac.*, IF(ISNULL(fac.NM_CLIENTE_ID),fac.DS_CLIENTE,CONCAT(CLIEN.DS_NOMBRES_USUARIO,' ',CLIEN.DS_APELLIDOS_USUARIO)) DESC_CLIENTE, CLIEN.NM_TELEFONO,CLIEN.NM_CELULAR,CLIEN.DS_CORREO,CLIEN.DS_DIRECCION, CONCAT(VENDEDOR.DS_NOMBRES_USUARIO,' ',VENDEDOR.DS_APELLIDOS_USUARIO) VENDEDOR, est.DES_ESTADO FROM ft_factura fac
+									LEFT JOIN us_usuario CLIEN ON CLIEN.NM_DOCUMENTO_ID = fac.NM_CLIENTE_ID
+									INNER JOIN us_usuario VENDEDOR ON VENDEDOR.NM_DOCUMENTO_ID = fac.NM_VENDEDOR_ID
+									INNER JOIN ft_estado est ON est.ID_ESTADO = fac.ID_ESTADO
+									WHERE fac.CS_FACTURA_ID = '".$_POST["id_factura"]."' ";
+	$query = mysqli_query($con, $SQL);
+	//
+	//print_r(mysql_error());
+	while ($row = mysqli_fetch_array($query)) {
+		echo json_encode($row);die;
+	}
+}else{
+	die("Faltan parametros.");
+}
+?>

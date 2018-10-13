@@ -14,6 +14,8 @@ include("../config/db.php");
 include("../config/conexion.php");
 
 $id_factura = intval($_GET['id_factura']);
+$notas = $_GET['Venta']["nota"];
+$id_forma_pago = $_GET['Venta']["id_forma_pago"];
 
 $productos = Factura::obtenerProductosFactura($id_factura,$con);
 
@@ -24,7 +26,7 @@ $productos = Factura::obtenerProductosFactura($id_factura,$con);
 	}
 } */
 
-if(Factura::pagarFactura($id_factura,$con)){
+if(Factura::pagarFactura($id_factura, $id_forma_pago, $notas,$con)){
 	//Inventario::descontarProductosInventario($productos, $con);
 	echo json_encode(array("result" => true, "mensaje" => "La factura fue pagada exitosamente."));
 }else{

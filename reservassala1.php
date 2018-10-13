@@ -103,7 +103,7 @@ if(!Login::inicioSession()){
 				asignarValorestexto(true, "#btneliminar");
 				asignarValorestexto(false, "#chkcondiciones");
 				asignarValorestexto(true, "#txtfechainicial");
-				limpiarFormulario();
+				limpiarFrm();
 				$("#txtfechainicial").val(date.format("YYYY-MM-DD"));
 				$("#txtfechafinal").val(date.format("YYYY-MM-DD"));
 				$("#Modalevento").modal();
@@ -119,6 +119,7 @@ if(!Login::inicioSession()){
 					asignarValorestexto(false, "#btneliminar");
 					asignarValorestexto(false, "#chkcondiciones");
 					asignarValorestexto(true, "#txtfechainicial");
+					limpiarFrm();
 					setearCampos(calEvent, jsEvent, view);
 				}else{
 					alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
@@ -130,7 +131,7 @@ if(!Login::inicioSession()){
 					$('#txtid').val(calEvent.id);
 					$('#txtdocumento').val(calEvent.documento);
 					$('#txtsala').val(calEvent.sala);
-					$('#txtdescripcion').val(calEvent.title);
+					$('#txtdescripcion').val(calEvent.descripcion);
 					FechaHoraini = calEvent.start.format().split("T");
 					$('#txtfechainicial').val(FechaHoraini[0]);
 					$('#txthoraini').val(FechaHoraini[1]);
@@ -154,8 +155,35 @@ if(!Login::inicioSession()){
 	    });
 
 		crearSelect2Documento();
+		crearSelect2Banda();
 	    
 	});
+
+	function crearSelect2Banda(data) {
+		$("#id_banda").select2({
+			allowClear: true,
+	        language: "es",
+	        placeholder: "Seleccione la banda",
+			data: processData(data).results,
+		  ajax: {
+		    url: 'ajax/autocomplete/bandas_usuario.php',
+		    dataType: 'json',
+		    data: function (params) {
+		      var query = {
+		      	id_usuario : $("#txtdocumento").val(),
+		        search: params.term,
+		        page: params.page || 1
+		      }
+
+		      // Query parameters will be ?search=[term]&page=[page]
+		      return query;
+		    },
+		     results: function (data, page) {
+                return { results: data.results };
+            }
+		  }
+		});
+	}
 
 	function crearSelect2Documento(data){
 		$("#txtdocumento").select2({
@@ -206,14 +234,15 @@ if(!Login::inicioSession()){
       	<input type="hidden" id="txtid" name="txtid">
       	<input type="hidden" id="txtfechafinal" name="txtfechainicial"/><br/>
 		<div class="row">
-      		<div class="form-group col-md-8">
-      			<label><b>Documento:</b></label>
-		      	<select id="txtdocumento" style="width: 99%">
+      		<div class="form-group col-md-6">
+      			<label><b>*Documento:</b></label>
+		      	<select id="txtdocumento" style="width: 99%" required="">
 		      	</select><br/>
 		    </div>
-		    <div class="form-group col-md-4">
-      			<label><b>Sala:</b></label>
-		      	<input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
+		    <div class="form-group col-md-6">
+      			<label><b>*Banda:</b></label>
+		      	<select id="id_banda" style="width: 99%" required="">
+		      	</select><br/>
 		    </div>  		
 	    </div>
 		<div class="row">
@@ -222,7 +251,7 @@ if(!Login::inicioSession()){
 		      	<input type="text" id="txtfechainicial" class="form-control" placeholder="Fecha reserva"><br/>
 		    </div>
 		    <div class="form-group col-md-4">
-      			<label><b>Hora Inicial:</b></label>
+      			<label><b>*Hora Inicial:</b></label>
       			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)"><br/>
 					<span class="input-group-addon">
@@ -232,7 +261,7 @@ if(!Login::inicioSession()){
 		    </div>
 
 		    <div class="form-group col-md-4">
-      			<label><b>Hora Final:</b></label>
+      			<label><b>*Hora Final:</b></label>
       			<div class="input-group" data-autoclose="true">
 		      		<input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)" maxlength="250"><br/>
 		      		<span class="input-group-addon">
@@ -243,8 +272,14 @@ if(!Login::inicioSession()){
 		    </div>  		
 	    </div>
 	    <div class="row">
+	    	<div class="form-group col-md-12">
+      			<label><b>Sala:</b></label>
+		      	<input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
+		    </div>
+	    </div>
+	    <div class="row">
       		<div class="form-group col-md-12">
-      			<label><b>Descripción:</b></label>
+      			<label><b>*Descripción:</b></label>
 		      	<textarea id="txtdescripcion" rows="3" class="form-control" onkeypress="return soloLetras(event)"></textarea>
 		    </div>		
 	    </div>
@@ -326,6 +361,14 @@ if(!Login::inicioSession()){
    </div>
 </div>
 
+<div id="loading">
+	<ul class="bokeh">
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	</ul>
+</div>
+
 <script>
 var NuevoEvento;
 var sw1 = true;
@@ -336,7 +379,12 @@ $('#btnagregar').click(function(){
 		EnviarInformacion('guardar',NuevoEvento);
 		
 	}		
-});	
+});
+
+$("#txtdocumento").change(function(e){
+	$("#id_banda").empty().trigger('change');
+});
+
 $('#btneliminar').click(function(){
 
 	RecolectarDatosGUI();
@@ -361,13 +409,15 @@ function RecolectarDatosGUI(){
 		start:$('#txtfechainicial').val()+" "+$('#txthoraini').val(),
 		end:$('#txtfechafinal').val()+" "+$('#txthorafin').val(),
 		documento:$('#txtdocumento').val(),
-		color:$('#txtcolor').val()
-		
+		id_banda:$("#id_banda").val(),
+		color:$('#txtcolor').val(),
+		descripcion:$('#txtdescripcion').val()
 	};
 }
 
 
 function EnviarInformacion(accion, objEvento, modal){
+	$("#loading").show();
 	$.ajax({
 		type:'POST',
 		url:'reservasala1.php?accion='+accion,
@@ -432,27 +482,25 @@ function EnviarInformacion(accion, objEvento, modal){
 					alertify.error("La reserva seleccionada ya tiene una multa asociada");
 				}
 			}
+			$("#loading").hide();
 		}
 	});
 }
 $('.clockpicker').clockpicker();
-function limpiarFormulario(){
-		$('#txtdescripcion').val('');
-		$('#txthoraini').val('');
-		$('#txthorafin').val('');
-		$('#txtdocumento').val('');
-}
+
 function asignarValorestexto(sw, boton){
 		$(boton).prop("disabled", sw);
 }
 function setearCampos(calEvent, jsEvent, view){
 		// Mostrar informacion  del evento en los inputs
-		$.get("reservasala1.php?accion=obtenerUsuario&NM_DOCUMENTO="+calEvent.documento,{},function(data){
-			crearSelect2Documento(data);
+		$.get("reservasala1.php?accion=obtenerUsuario&NM_DOCUMENTO="+calEvent.documento+"&ID_BANDA="+calEvent.id_banda,{},function(data){
+			crearSelect2Documento(data.usuario);
+			if (data.banda) 
+				crearSelect2Banda(data.banda);
 		},"JSON");
 		$('#txtid').val(calEvent.id);
 		//$('#txtdocumento').val(calEvent.documento);
-		$('#txtdescripcion').val(calEvent.title);
+		$('#txtdescripcion').val(calEvent.descripcion);
 		FechaHoraini = calEvent.start._i.split(" ");
 		$('#txtfechainicial').val(FechaHoraini[0]);
 		$('#txthoraini').val(FechaHoraini[1]);
@@ -473,10 +521,15 @@ function validarcampos()
 	horafinal = $('#txthorafin').val();
 	descripción = $('#txtdescripcion').val();
 	check = $('#chkcondiciones').val();
+	banda = $("#id_banda").val();
 	var string1 = CompararHoras(horaini, horafinal);
 	var sw = horadentro(horaini);
-	if(documento==""){
+	if(documento=="" || documento == null){
 		alertify.error("Campo Documento vacio");
+		return false;
+	}
+	if(banda=="" || banda == null){
+		alertify.error("Campo banda vacio");
 		return false;
 	}
 	if(fecha==""){
@@ -527,6 +580,14 @@ function valida(e){
     patron =/[0-9]/;
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
+}
+function limpiarFrm() {
+	$("#txtdescripcion").val("");
+	$("#txthoraini").val("");
+	$("#txthorafin").val("");
+	$("#chkcondiciones").prop("checked", false)
+	$("#txtdocumento").empty().trigger('change');
+	$("#id_banda").empty().trigger('change');
 }
 function soloLetras(e){
        key = e.keyCode || e.which;
