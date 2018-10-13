@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE tp_producto.NM_ELIMINADO = 0";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (DS_CODIGO_PRODUCTO like '%$q%' or DS_NOMBRE_PRODUCTO like '%$q%')";
+    $sWhere .= " and  (DS_CODIGO_PRODUCTO LIKE '%$q%' OR DS_NOMBRE_PRODUCTO LIKE '%$q%' OR DS_NOMBRE_VENDEDOR LIKE '%$q%')";
 }
 
 $sWhere .= " GROUP BY tp_producto.CS_PRODUCTO_ID ORDER BY DS_NOMBRE_PRODUCTO";
@@ -46,7 +46,7 @@ $numrows = count($row);
 $total_pages = ceil($numrows / $per_page);
 $reload = './facturas.php';
 //main query to fetch the data
- $sql = "SELECT
+  $sql = "SELECT
                                         SUM(tp_inventario_producto.NM_CANTIDAD_INVENTARIO) AS NM_CANTIDAD_INVENTARIO,
                                         tp_producto.CS_PRODUCTO_ID,
                                         tp_producto.DS_CODIGO_PRODUCTO,
@@ -76,7 +76,6 @@ $reload = './facturas.php';
     $query = mysqli_query($con, $sql);
     $numrows = mysqli_num_rows($query);
 }
-
 //loop through fetched data
 if ($numrows > 0) {
     ?>

@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE rs_reserva_sala.DS_ESTADO = 'Activo'";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (us_usuario.DS_NOMBRES_USUARIO like '%$q%' or us_usuario.DS_APELLIDOS_USUARIO like '%$q%' or rs_sala.DS_NOMBRE_SALA like '%$q%')";
+    $sWhere .= " and  (us_usuario.DS_NOMBRES_USUARIO like '%$q%' or us_usuario.DS_APELLIDOS_USUARIO like '%$q%' or rs_sala.DS_NOMBRE_SALA like '%$q%' OR rs_reserva_sala.title LIKE '%$q%' OR rs_reserva_sala.DT_FECHA_CREACION LIKE '%$q%')";
 }
 
 $sWhere .= " ORDER BY rs_reserva_sala.DT_FECHA_CREACION DESC";
@@ -52,7 +52,7 @@ if (!isset($_REQUEST["reporte"])) {
     $total_pages = ceil($numrows / $per_page);
     $reload = './reportes.php';
 //main query to fetch the data
-    $sql = "SELECT
+    echo $sql = "SELECT
                                     rs_reserva_sala.id,
                                     rs_reserva_sala.documento,
                                     rs_reserva_sala.sala,

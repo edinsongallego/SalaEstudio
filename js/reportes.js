@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $("form").submit(function(e){
+        e.preventDefault();
+        load(1);
+    }); 
     $("#exportar_excel").click(function (e) {
         e.preventDefault();
         switch ($(".tab-content > div.active").attr("id")) {
@@ -105,79 +109,85 @@ $(document).ready(function () {
 
 });
 
+function load(page){
+    p = $(".tab-content > div.active .pagination > li.active > a").html();
+    if (p == undefined)
+        p = page;
+    load1(p, $(".tab-content > div.active").find("form"));
+}
 
-function load(page) {
+function load1(page, frm) {
     var q = $("#q").val();
     $("#loading").toggle();
 
     switch ($(".tab-content > div.active").attr("id")) {
         case "r_inventario":
-            $('#tbl_inventario tbody').load("ajax/reporte_inventario.php?page=" + page, {}, function () {
+            $('#tbl_inventario tbody').load("ajax/reporte_inventario.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_reservas":
-            $('#tbl_reservas tbody').load("ajax/reporte_reservas.php?page=" + page, {}, function () {
+            $('#tbl_reservas tbody').load("ajax/reporte_reservas.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_reservas_diarias":
-            $('#tbl_reservas_diarias tbody').load("ajax/reporte_reservas.php?page=" + page, {}, function () {
+            $('#tbl_reservas_diarias tbody').load("ajax/reporte_reservas.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_reservas_mensuales":
-            $('#tbl_reservas_mensuales tbody').load("ajax/reporte_reservas_mensuales.php?page=" + page, {}, function () {
+            $('#tbl_reservas_mensuales tbody').load("ajax/reporte_reservas_mensuales.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_reservas_anuales":
-            $('#tbl_reservas_anueales tbody').load("ajax/reporte_reservas_anuales.php?page=" + page, {}, function () {
+            $('#tbl_reservas_anueales tbody').load("ajax/reporte_reservas_anuales.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_productos":
-            $('#tbl_productos tbody').load("ajax/reporte_productos_vendidos.php?page=" + page, {}, function () {
+            $('#tbl_productos tbody').load("ajax/reporte_productos_vendidos.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_productos_diarios":
-            $('#tbl_productos_diarias tbody').load("ajax/reporte_productos_vendidos_diarios.php?page=" + page, {}, function () {
+            $('#tbl_productos_diarias tbody').load("ajax/reporte_productos_vendidos_diarios.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_productos_mensuales":
-            $('#tbl_productos_mensuales tbody').load("ajax/reporte_productos_vendidos_mensuales.php?page=" + page, {}, function () {
+            $('#tbl_productos_mensuales tbody').load("ajax/reporte_productos_vendidos_mensuales.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_productos_anuales":
-            $('#tbl_productos_anuales tbody').load("ajax/reporte_productos_vendidos_anuales.php?page=" + page, {}, function () {
+            $('#tbl_productos_anuales tbody').load("ajax/reporte_productos_vendidos_anuales.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_deudores":
-            $('#tbl_deudores tbody').load("ajax/reporte_deudores.php?page=" + page, {}, function () {
+            $('#tbl_deudores tbody').load("ajax/reporte_deudores.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_facturacion":
-            $('#tbl_facturacion tbody').load("ajax/reporte_facturacion.php?page=" + page, {}, function () {
+            $('#tbl_facturacion tbody').load("ajax/reporte_facturacion.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_facturacion_diarios":
-            $('#tbl_facturacion_diarias tbody').load("ajax/reporte_facturacion_diaria.php?page=" + page, {}, function () {
+            $('#tbl_facturacion_diarias tbody').load("ajax/reporte_facturacion_diaria.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_facturacion_mensuales":
-            $('#r_facturacion_mensuales tbody').load("ajax/reporte_facturacion_mensual.php?page=" + page, {}, function () {
+            $('#r_facturacion_mensuales tbody').load("ajax/reporte_facturacion_mensual.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;
         case "r_facturacion_anuales":
-            $('#tbl_facturacion_anuales tbody').load("ajax/reporte_facturacion_anual.php?page=" + page, {}, function () {
+            $('#tbl_facturacion_anuales tbody').load("ajax/reporte_facturacion_anual.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;

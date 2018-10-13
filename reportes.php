@@ -90,6 +90,18 @@ $title = "Reportes | Sala Estudio";
             <div class="tab-content">
                 <div id="r_inventario" class="tab-pane fade in active">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Código o cliente">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_inventario" class="table table-bordered">
                                 <thead>
@@ -113,6 +125,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_reservas" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Sala, cliente, fecha o descripción">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_reservas" class="table table-bordered">
                                 <thead>
