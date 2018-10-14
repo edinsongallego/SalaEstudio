@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE 1 ";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (ft_factura.DS_CODIGO_FACTURA like '%$q%' or tp_producto.DS_NOMBRE_PRODUCTO like '%$q%' or tp_producto.DS_CODIGO_PRODUCTO like '%$q%')";
+    $sWhere .= " AND  (ft_factura.DS_CODIGO_FACTURA like '%$q%' or tp_producto.DS_NOMBRE_PRODUCTO like '%$q%' or tp_producto.DS_CODIGO_PRODUCTO like '%$q%' OR ft_factura.DT_FECHA_CREACION like '%$q%' )";
 }
 
 $sWhere .= " ORDER BY ft_factura.DT_FECHA_CREACION DESC";
@@ -41,7 +41,6 @@ if (!isset($_REQUEST["reporte"])) {
                                             INNER JOIN ft_factura ON ft_factura_detalle.CS_FACTURA_ID = ft_factura.CS_FACTURA_ID
                                         $sWhere
                                         ");
-print_r(mysqli_error($con));
     $row = mysqli_fetch_array($count_query);
 
     $numrows = count($row);

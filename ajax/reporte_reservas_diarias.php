@@ -13,12 +13,11 @@ $_REQUEST['q'] = isset($_REQUEST['q']) ? $_REQUEST['q'] : null;
 $q = mysqli_real_escape_string($con, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
 $sTable = "facturas, clientes, users";
 $sWhere = "";
-$sWhere .= " WHERE rs_reserva_sala.DS_ESTADO = 'Activo'";
+$sWhere .= " ";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (us_usuario.DS_NOMBRES_USUARIO like '%$q%' or us_usuario.DS_APELLIDOS_USUARIO like '%$q%' or rs_sala.DS_NOMBRE_SALA like '%$q%')";
+    $sWhere .= " WHERE (CANTIDAD LIKE '%$q%' OR DT_FECHA_CREACION LIKE '%$q%')";
 }
 
-$sWhere .= " GROUP BY DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m-%d') ORDER BY rs_reserva_sala.DT_FECHA_CREACION DESC";
 include 'pagination.php'; //include pagination file
 //pagination variables
 $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
@@ -27,11 +26,13 @@ $adjacents = 4; //gap between pages after number of adjacents
 $offset = ($page - 1) * $per_page;
 //Count the total number of row in your table*/
 if (!isset($_REQUEST["reporte"])) {
-    $count_query = mysqli_query($con, "SELECT													COUNT(*) CANTIDAD,
+    $count_query = mysqli_query($con, "SELECT * FROM (SELECT COUNT(*) CANTIDAD,rs_reserva_sala.DS_ESTADO,
                                     DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m-%d') DT_FECHA_CREACION
                                     FROM
                                     rs_reserva_sala
                                     INNER JOIN us_usuario ON rs_reserva_sala.documento = us_usuario.NM_DOCUMENTO_ID
+                                    WHERE rs_reserva_sala.DS_ESTADO = 'Activo'
+                                    GROUP BY DATE_FORMAT(DT_FECHA_CREACION, '%Y-%m-%d') ORDER BY DT_FECHA_CREACION DESC) tmpo    
                                         $sWhere
                                         ");
 //print_r(mysqli_error($con));
@@ -41,20 +42,25 @@ if (!isset($_REQUEST["reporte"])) {
     $total_pages = ceil($numrows / $per_page);
     $reload = './reportes.php';
 //main query to fetch the data
-    $sql = "SELECT													COUNT(*) CANTIDAD,
+    $sql = "SELECT * FROM (SELECT	rs_reserva_sala.DS_ESTADO, COUNT(*) CANTIDAD,
                                     DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m-%d') DT_FECHA_CREACION
                                     FROM
                                     rs_reserva_sala
                                     INNER JOIN us_usuario ON rs_reserva_sala.documento = us_usuario.NM_DOCUMENTO_ID
+                                    WHERE rs_reserva_sala.DS_ESTADO = 'Activo'
+                                    GROUP BY DATE_FORMAT(DT_FECHA_CREACION, '%Y-%m-%d') ORDER BY DT_FECHA_CREACION DESC
+                                    ) tmp
                                         $sWhere
 					LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
 } else {
-    $sql = "SELECT		COUNT(*) CANTIDAD,
-                                DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m-%d') DT_FECHA_CREACION
+    $sql = "SELECT * FROM (SELECT		COUNT(*) CANTIDAD,
+                                DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m-%d') DT_FECHA_CREACION, rs_reserva_sala.DS_ESTADO
                                 FROM
                                 rs_reserva_sala
                                 INNER JOIN us_usuario ON rs_reserva_sala.documento = us_usuario.NM_DOCUMENTO_ID
+                                WHERE rs_reserva_sala.DS_ESTADO = 'Activo'
+                                GROUP BY DATE_FORMAT(DT_FECHA_CREACION, '%Y-%m-%d') ORDER BY DT_FECHA_CREACION DESC) tmp
                                         $sWhere";
     $query = mysqli_query($con, $sql);
     $numrows = mysqli_num_rows($query);

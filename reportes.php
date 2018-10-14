@@ -159,7 +159,19 @@ $title = "Reportes | Sala Estudio";
                 <div id="r_reservas_diarias" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
                         <div class="table-responsive">
-                            <table id="tbl_reservas_diarias" class="table table-bordered">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha o cantidad">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
+                        <table id="tbl_reservas_diarias" class="table table-bordered">
                                 <thead>
                                     <tr class="">
                                         <th>Fecha</th>
@@ -175,6 +187,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_reservas_mensuales" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha o cantidad">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_reservas_mensuales" class="table table-bordered">
                                 <thead>
@@ -192,6 +216,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_reservas_anuales" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha o cantidad">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_reservas_anueales" class="table table-bordered">
                                 <thead>
@@ -208,16 +244,20 @@ $title = "Reportes | Sala Estudio";
                     </div>
                 </div>
 
-                <div id="r_reservas_mensuales" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
-                </div>
-                <div id="r_reservas_anualies" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
-                </div>
                 <div id="r_productos" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Código de producto, Nombre del producto, Factura o Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_productos" class="table table-bordered">
                                 <thead>
@@ -239,6 +279,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_productos_diarios" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Código de producto, Nombre del producto o Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_productos_diarias" class="table table-bordered">
                                 <thead>
@@ -258,6 +310,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_productos_mensuales" class="tab-pane ">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Código de producto, Nombre del producto o Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_productos_mensuales" class="table table-bordered">
                                 <thead>
@@ -277,6 +341,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_productos_anuales" class="tab-pane ">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Código de producto, Nombre del producto o Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_productos_anuales" class="table table-bordered">
                                 <thead>
@@ -296,6 +372,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_deudores" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Factura, Fecha, Cliente">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_deudores" class="table table-bordered">
                                 <thead>
@@ -318,11 +406,20 @@ $title = "Reportes | Sala Estudio";
                     </div>
                 </div>
 
-
-
-
                 <div id="r_facturacion" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Factura, Fecha, Cliente o las notas">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_facturacion" class="table table-bordered">
                                 <thead>
@@ -335,6 +432,7 @@ $title = "Reportes | Sala Estudio";
                                         <th>Descuento</th>
                                         <th>Sub total</th>
                                         <th>Total</th>
+                                        <th>Descargar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -346,6 +444,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_facturacion_diarios" class="tab-pane fade">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_facturacion_diarias" class="table table-bordered">
                                 <thead>
@@ -367,6 +477,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_facturacion_mensuales" class="tab-pane ">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_facturacion_mensuales" class="table table-bordered">
                                 <thead>
@@ -388,6 +510,18 @@ $title = "Reportes | Sala Estudio";
                 </div>
                 <div id="r_facturacion_anuales" class="tab-pane ">
                     <div style="min-height: 533px;padding: 30px">
+                        <form class="form-horizontal" role="form" id="busqueda" autocomplete="off">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="q" name="q" placeholder="Fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default" onclick="load(1);">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                    <span id="loader"></span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="tbl_facturacion_anuales" class="table table-bordered">
                                 <thead>
@@ -407,15 +541,13 @@ $title = "Reportes | Sala Estudio";
                         </div>
                     </div>
                 </div>                
-
-
-
-
             </div>
         </div>        
         <?php
         include("footer.php");
         ?>
+        <script type="text/javascript" src="js/VentanaCentrada.js"></script>
+        <script type="text/javascript" src="js/facturas.js"></script>
         <script type="text/javascript" src="js/reportes.js?v=<?php echo uniqid(); ?>"></script>
     </body> 
 </html>

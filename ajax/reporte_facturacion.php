@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE 1 ";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (DS_CODIGO_FACTURA like '%$q%' or DS_CLIENTE like '%$q%')";
+    $sWhere .= " and  (DS_CODIGO_FACTURA like '%$q%' or DS_CLIENTE like '%$q%' OR DT_FECHA like '%$q%' OR DS_NOTAS_FACTURA like '%$q%')";
 }
 
 $sWhere .= " ORDER BY DT_FECHA DESC";
@@ -27,7 +27,7 @@ $adjacents = 4; //gap between pages after number of adjacents
 $offset = ($page - 1) * $per_page;
 //Count the total number of row in your table*/
 if (!isset($_REQUEST["reporte"])) {
-    $count_query = mysqli_query($con, "SELECT * FROM (SELECT
+    $count_query = mysqli_query($con, "SELECT * FROM (SELECT ft_factura.CS_FACTURA_ID,
                                                 ft_factura.DS_CODIGO_FACTURA,
                                                 ft_factura.NM_PRECIO_TOTAL,
                                                 ft_factura.NM_PRECIO_SUBTOTAL,
@@ -50,7 +50,7 @@ print_r(mysqli_error($con));
     $total_pages = ceil($numrows / $per_page);
     $reload = './reportes.php';
 //main query to fetch the data
-    $sql = "SELECT * FROM (SELECT
+    $sql = "SELECT * FROM (SELECT               ft_factura.CS_FACTURA_ID,
                                                 ft_factura.DS_CODIGO_FACTURA,
                                                 ft_factura.NM_PRECIO_TOTAL,
                                                 ft_factura.NM_PRECIO_SUBTOTAL,
@@ -68,7 +68,7 @@ print_r(mysqli_error($con));
 					LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
 } else {
-    $sql = "SELECT * FROM (SELECT
+    $sql = "SELECT * FROM (SELECT               ft_factura.CS_FACTURA_ID,
                                                 ft_factura.DS_CODIGO_FACTURA,
                                                 ft_factura.NM_PRECIO_TOTAL,
                                                 ft_factura.NM_PRECIO_SUBTOTAL,
@@ -103,13 +103,14 @@ if ($numrows > 0) {
             <td><?php echo number_format($row["NM_PRECIO_DESCUENTO"], 2); ?></td>
             <td><?php echo number_format($row["NM_PRECIO_SUBTOTAL"], 2); ?></td>
             <td><?php echo number_format($row["NM_PRECIO_TOTAL"], 2); ?></td>
+            <td><a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $row["CS_FACTURA_ID"]; ?>');"><i class="glyphicon glyphicon-download"></i></a> </td>
         </tr>
         <?php
     }
     if (!isset($_REQUEST["reporte"])) {
         ?>
         <tr>
-            <td colspan=8 class="text-center"><?php
+            <td colspan=9 class="text-center"><?php
                 echo paginate($reload, $page, $total_pages, $adjacents);
                 ?></td>
         </tr>

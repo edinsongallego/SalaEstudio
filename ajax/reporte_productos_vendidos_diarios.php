@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE 1 ";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (ft_factura.DS_CODIGO_FACTURA like '%$q%' or tp_producto.DS_NOMBRE_PRODUCTO like '%$q%' or tp_producto.DS_CODIGO_PRODUCTO like '%$q%')";
+    $sWhere .= " and  (tp_producto.DS_NOMBRE_PRODUCTO like '%$q%' or tp_producto.DS_CODIGO_PRODUCTO like '%$q%' OR ft_factura.DT_FECHA_CREACION like '%$q%')";
 }
 
 $sWhere .= " GROUP BY tp_producto.CS_PRODUCTO_ID,DATE_FORMAT(ft_factura.DT_FECHA_CREACION, '%Y-%m-%d') ORDER BY ft_factura.DT_FECHA_CREACION DESC";

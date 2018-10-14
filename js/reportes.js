@@ -110,9 +110,13 @@ $(document).ready(function () {
 });
 
 function load(page){
-    p = $(".tab-content > div.active .pagination > li.active > a").html();
-    if (p == undefined)
+    if (page != undefined && page != null) {
         p = page;
+    }else{
+        p = $(".tab-content > div.active .pagination > li.active > a").html();
+        if (p == undefined)
+            p = page;
+    }
     load1(p, $(".tab-content > div.active").find("form"));
 }
 
@@ -132,7 +136,7 @@ function load1(page, frm) {
             });
             break;
         case "r_reservas_diarias":
-            $('#tbl_reservas_diarias tbody').load("ajax/reporte_reservas.php?page=" + page + "&" + frm.serialize(), {}, function () {
+            $('#tbl_reservas_diarias tbody').load("ajax/reporte_reservas_diarias.php?page=" + page + "&" + frm.serialize(), {}, function () {
                 $("#loading").toggle();
             });
             break;

@@ -15,7 +15,7 @@ $sTable = "facturas, clientes, users";
 $sWhere = "";
 $sWhere .= " WHERE ID_ESTADO = 2";
 if ($_REQUEST['q'] != "") {
-    $sWhere .= " and  (DS_CODIGO_FACTURA like '%$q%' or DS_CLIENTE like '%$q%')";
+    $sWhere .= " and  (DS_CODIGO_FACTURA like '%$q%' or DS_CLIENTE like '%$q%' or DT_FECHA like '%$q%')";
 }
 
 $sWhere .= " ORDER BY DT_FECHA DESC";
