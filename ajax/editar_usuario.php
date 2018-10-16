@@ -43,34 +43,43 @@ if (empty($_POST['firstname2'])) {
 
     $user_id = $_POST['mod_id'];
 
+    $sql = "SELECT * FROM us_usuario WHERE NM_DOCUMENTO_ID NOT IN('" . $user_id . "') AND  DS_CORREO = '" . $user_email . "' LIMIT 1;";
+    $query_check_user_name = mysqli_query($con, $sql);
 
-    // write new user's data into database
-    $sql = "UPDATE us_usuario SET DS_DIRECCION = '" . $direccion . "', DS_NOMBRES_USUARIO='" . $firstname . "', DS_APELLIDOS_USUARIO='" . $lastname . "', DS_CORREO='" . $user_email . "', CS_ESTADO_ID='" . $estado . "',NM_CELULAR='" . $cel . "',NM_TELEFONO='" . $tel . "', ENVIO_CORREO_ACTIVACION=1
-                            WHERE NM_DOCUMENTO_ID='" . $user_id . "';";
-    $query_update = mysqli_query($con, $sql);
-
-    if (isset($_POST["enviar_correo"]) && $_POST["enviar_correo"] == 1) {
-        $correo = "softban@gmail.com";
-        $headers = "From: $correo \r\n";
-        //$headers .= "Reply-To: $correo \r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-        $mensaje = "<html>"
-                . "<b>Hola ".$firstname."</b>, tu cuenta fue activada por <b>".$_SESSION["DS_NOMBRES_USUARIO"]."</b>, ya puede ingresar al aplicativo.<br/><br/>";
-        $mensaje .= "</html>";
-        if (mail($user_email, "Cuenta activa", $mensaje, $headers)) {
-            //echo "Mensaje enviado";
-            //header("Location:login.php");
-        }else{
-            die("Algo falló con el envió de correo");
-        }   
-    }
-
-    // if user has been added successfully
-    if ($query_update) {
-        $messages[] = "La cuenta ha sido modificada con éxito.";
+    $query_check_user = mysqli_num_rows($query_check_user_name);
+    if ($query_check_user == 1) {
+        $row = mysqli_fetch_assoc($query_check_user_name);
+        $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
     } else {
-        $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
+
+        // write new user's data into database
+        $sql = "UPDATE us_usuario SET DS_DIRECCION = '" . $direccion . "', DS_NOMBRES_USUARIO='" . $firstname . "', DS_APELLIDOS_USUARIO='" . $lastname . "', DS_CORREO='" . $user_email . "', CS_ESTADO_ID='" . $estado . "',NM_CELULAR='" . $cel . "',NM_TELEFONO='" . $tel . "', ENVIO_CORREO_ACTIVACION=1
+                                WHERE NM_DOCUMENTO_ID = '" . $user_id . "';";
+        $query_update = mysqli_query($con, $sql);
+
+        if (isset($_POST["enviar_correo"]) && $_POST["enviar_correo"] == 1) {
+            $correo = "softban@gmail.com";
+            $headers = "From: $correo \r\n";
+            //$headers .= "Reply-To: $correo \r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+            $mensaje = "<html>"
+                    . "<b>Hola ".$firstname."</b>, tu cuenta fue activada por <b>".$_SESSION["DS_NOMBRES_USUARIO"]."</b>, ya puede ingresar al aplicativo.<br/><br/>";
+            $mensaje .= "</html>";
+            if (mail($user_email, "Cuenta activa", $mensaje, $headers)) {
+                //echo "Mensaje enviado";
+                //header("Location:login.php");
+            }else{
+                die("Algo falló con el envió de correo");
+            }   
+        }
+
+        // if user has been added successfully
+        if ($query_update) {
+            $messages[] = "La cuenta ha sido modificada con éxito.";
+        } else {
+            $errors[] = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.";
+        }
     }
 } else {
     $errors[] = "Un error desconocido ocurrió.";

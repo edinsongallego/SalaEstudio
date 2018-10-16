@@ -24,7 +24,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "Correo de usuario vacío";
         }   elseif (strlen($_POST['DS_NOMBRES_USUARIO']) > 64 || strlen($_POST['DS_NOMBRES_USUARIO']) < 2) {
             $errors[] = "Nombre de usuario no puede ser inferior a 2 o más de 64 caracteres";
-        } elseif (!preg_match('/^[a-z\d]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO'])) {
+        } elseif (!preg_match('/^[a-z\d\s]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO'])) {
             $errors[] = "Nombre de usuario no encaja en el esquema de nombre: Sólo aZ y los números están permitidos , de 2 a 64 caracteres";
         }   elseif (!filter_var($_POST['DS_CORREO'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
@@ -34,7 +34,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && !empty($_POST['CS_TIPO_DOCUMENTO_ID'])
             && strlen($_POST['DS_NOMBRES_USUARIO']) <= 64
             && strlen($_POST['DS_NOMBRES_USUARIO']) >= 2
-            && preg_match('/^[a-z\d]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO'])
+            && preg_match('/^[a-z\d\s]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO'])
             && !empty($_POST['DS_CORREO'])
             && strlen($_POST['DS_CORREO']) <= 64
             && filter_var($_POST['DS_CORREO'], FILTER_VALIDATE_EMAIL)
@@ -68,11 +68,17 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
                     
                 // check if user or email address already exists
-                $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "';";
-                $query_check_user_name = mysqli_query($con,$sql);
-                $query_check_user=mysqli_num_rows($query_check_user_name);
+                $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "' OR NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
+                $query_check_user_name = mysqli_query($con, $sql);
+
+                $query_check_user = mysqli_num_rows($query_check_user_name);
                 if ($query_check_user == 1) {
-                    $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
+                    $row = mysqli_fetch_assoc($query_check_user_name);
+                    if ($row["DS_CORREO"] == $DS_CORREO) {
+                        $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
+                    } else if ($row["NM_DOCUMENTO_ID"] == $NM_DOCUMENTO_ID) {
+                        $errors[] = "Lo sentimos , este número de documento ya fue registrado.";
+                    }
                 } else {
                     // write new user's data into database
                     $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, ENVIO_CORREO_ACTIVACION)

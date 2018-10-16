@@ -81,126 +81,130 @@ $title = "Usuarios | Sala Estudio";
 
     </body>
 </html>
-<script>
-                                    $("#guardar_usuario").submit(function (event) {
-                                        event.preventDefault();
-                                        if ($('#guardar_usuario')[0].checkValidity()) {
-                                            if (validateMail(document.getElementById("DS_CORREO"))) {
+<script type="text/javascript">
+    $("#guardar_usuario").submit(function (event) {
+        event.preventDefault();
+        if ($('#guardar_usuario')[0].checkValidity()) {
+            if (validateMail(document.getElementById("DS_CORREO"))) {
 
-                                                $('#guardar_datos').attr("disabled", true);
+                $('#guardar_datos').attr("disabled", true);
 
-                                                var parametros = $(this).serialize();
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "ajax/nuevo_usuario.php",
-                                                    data: parametros,
-                                                    beforeSend: function (objeto) {
-                                                        $("#resultados_ajax").html("Mensaje: Cargando...");
-                                                    },
-                                                    success: function (datos) {
-                                                        $("#resultados_ajax").html(datos);
-                                                        $('#guardar_datos').attr("disabled", false);
-                                                        load(1);
-                                                        $("#guardar_usuario")[0].reset();
-                                                        setTimeout(function () {
-                                                            $("#myModal").modal('toggle');
-                                                        }, 800);
-                                                    }
-                                                });
-                                            } else {
-                                                $("#DS_CORREO").focus();
-                                                alertify.error("Verifique la estructura del correo.")
-                                            }
-                                        }
+                var parametros = $(this).serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/nuevo_usuario.php",
+                    data: parametros,
+                    beforeSend: function (objeto) {
+                        $("#resultados_ajax").html("Mensaje: Cargando...");
+                    },
+                    success: function (datos) {
+                        $("#resultados_ajax").html(datos);
+                        $('#guardar_datos').attr("disabled", false);
+                        if (datos.search("Error!") <= -1) {
+                            load(1);
+                            $("#guardar_usuario")[0].reset();
+                            setTimeout(function () {
+                                $("#myModal").modal('toggle');
+                            }, 800);
+                        }
+                    }
+                });
+            } else {
+                $("#DS_CORREO").focus();
+                alertify.error("Verifique la estructura del correo.")
+            }
+        }
 
-                                    })
+    })
 
-                                    $("#editar_usuario").submit(function (event) {
-                                        $('#actualizar_datos2').attr("disabled", true);
+    $("#editar_usuario").submit(function (event) {
+        $('#actualizar_datos2').attr("disabled", true);
 
-                                        var parametros = $(this).serialize();
-                                        if ($("#editar_usuario")[0].checkValidity()) {
-                                            $("#loading").toggle();
-                                            $.ajax({
-                                                type: "POST",
-                                                url: "ajax/editar_usuario.php",
-                                                data: parametros,
-                                                beforeSend: function (objeto) {
-                                                    $("#resultados_ajax2").html("Mensaje: Cargando...");
-                                                },
-                                                success: function (datos) {
-                                                    $("#loading").toggle();
-                                                    $("#resultados_ajax2").html(datos);
-                                                    $('#actualizar_datos2').attr("disabled", false);
-                                                    load(1);
-                                                    setTimeout(function(){
-                                                        $("#myModal2").modal("toggle");
-                                                    },1500);
-                                                }
-                                            });
-                                        }
-                                        event.preventDefault();
-                                    })
+        var parametros = $(this).serialize();
+        if ($("#editar_usuario")[0].checkValidity()) {
+            $("#loading").toggle();
+            $.ajax({
+                type: "POST",
+                url: "ajax/editar_usuario.php",
+                data: parametros,
+                beforeSend: function (objeto) {
+                    $("#resultados_ajax2").html("Mensaje: Cargando...");
+                },
+                success: function (datos) {
+                    $("#loading").toggle();
+                    $("#resultados_ajax2").html(datos);
+                    $('#actualizar_datos2').attr("disabled", false);
+                    if (datos.search("Error!") <= -1) {
+                        load(1);
+                        setTimeout(function () {
+                            $("#myModal2").modal("toggle");
+                        }, 1500);
+                    }
+                }
+            });
+        }
+        event.preventDefault();
+    })
 
-                                    $("#editar_password").submit(function (event) {
-                                        $('#actualizar_datos3').attr("disabled", true);
+    $("#editar_password").submit(function (event) {
+        $('#actualizar_datos3').attr("disabled", true);
 
-                                        var parametros = $(this).serialize();
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "ajax/editar_password.php",
-                                            data: parametros,
-                                            beforeSend: function (objeto) {
-                                                $("#resultados_ajax3").html("Mensaje: Cargando...");
-                                            },
-                                            success: function (datos) {
-                                                $("#resultados_ajax3").html(datos);
-                                                $('#actualizar_datos3').attr("disabled", false);
-                                                load(1);
-                                                $("#mensaje_restaurar_contrasena").hide();
-                                                $("#opt_menu_cambiar_clave").hide();
-                                            }
-                                        });
-                                        event.preventDefault();
-                                    })
-                                    function get_user_id(id) {
-                                        $("#user_id_mod").val(id);
-                                    }
-                                    
-                                    function limpiar_formulario_edt(){
-                                        $("#editar_usuario")[0].reset();
-                                        $("#resultados_ajax2").html("");
-                                    }
+        var parametros = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/editar_password.php",
+            data: parametros,
+            beforeSend: function (objeto) {
+                $("#resultados_ajax3").html("Mensaje: Cargando...");
+            },
+            success: function (datos) {
+                $("#resultados_ajax3").html(datos);
+                $('#actualizar_datos3').attr("disabled", false);
+                load(1);
+                $("#mensaje_restaurar_contrasena").hide();
+                $("#opt_menu_cambiar_clave").hide();
+            }
+        });
+        event.preventDefault();
+    })
+    function get_user_id(id) {
+        $("#user_id_mod").val(id);
+    }
 
-                                    function obtener_datos(id) {
-                                        limpiar_formulario_edt();
-                                        var nombres = $("#nombres" + id).val();
-                                        var apellidos = $("#apellidos" + id).val();
-                                        var usuario = $("#usuario" + id).val();
-                                        var email = $("#email" + id).val();
-                                        var estado = $("#estado" + id).val();
-                                        var telefono = $("#telefono" + id).val();
-                                        var celular = $("#celular" + id).val();
-                                        var direccion = $("#direccion" + id).val();
+    function limpiar_formulario_edt() {
+        $("#editar_usuario")[0].reset();
+        $("#resultados_ajax2").html("");
+    }
 
-                                        $("#mod_id").val(id);
-                                        $("#firstname2").val(nombres);
-                                        $("#lastname2").val(apellidos);
-                                        $("#user_email2").val(email);
-                                        $("#tel").val(telefono);
-                                        $("#cel").val(celular);
-                                        $("#DS_DIRECCION_EDIT").val(direccion);
+    function obtener_datos(id) {
+        limpiar_formulario_edt();
+        var nombres = $("#nombres" + id).val();
+        var apellidos = $("#apellidos" + id).val();
+        var usuario = $("#usuario" + id).val();
+        var email = $("#email" + id).val();
+        var estado = $("#estado" + id).val();
+        var telefono = $("#telefono" + id).val();
+        var celular = $("#celular" + id).val();
+        var direccion = $("#direccion" + id).val();
 
-
-                                        if (estado == 1) {
-                                            $('#estado').empty();
-                                            $('#estado').append('<option value="">Seleccione</option><option value="1" selected>Activo</option><option value="2">Inactivo</option>');
-                                        } else if (estado == 2) {
-                                            $('#estado').empty();
-                                            $('#estado').append('<option value="">Seleccione</option><option value="1">Activo</option><option value="2" selected>Inactivo</option>');
-                                        }
+        $("#mod_id").val(id);
+        $("#firstname2").val(nombres);
+        $("#lastname2").val(apellidos);
+        $("#user_email2").val(email);
+        $("#tel").val(telefono);
+        $("#cel").val(celular);
+        $("#DS_DIRECCION_EDIT").val(direccion);
 
 
+        if (estado == 1) {
+            $('#estado').empty();
+            $('#estado').append('<option value="">Seleccione</option><option value="1" selected>Activo</option><option value="2">Inactivo</option>');
+        } else if (estado == 2) {
+            $('#estado').empty();
+            $('#estado').append('<option value="">Seleccione</option><option value="1">Activo</option><option value="2" selected>Inactivo</option>');
+        }
 
-                                    }
+
+
+    }
 </script>
