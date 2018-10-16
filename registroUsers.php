@@ -234,7 +234,9 @@ if ($login->isUserLoggedIn() == true) {
                                                 $("#NM_DOCUMENTO_ID").focus();
                                                // $("#BANDA_ID").empty().trigger('change');
                                                 //load(1);
-                                                $("#guardar_usuario2")[0].reset();
+                                                if(datos.search("Error!")<=-1){
+                                                    $("#guardar_usuario2")[0].reset();
+                                                }
                                                 setTimeout(function(){$("#resultados_ajax2").html("");}, 8000);
                                             }
                                         });
