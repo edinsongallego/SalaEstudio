@@ -232,10 +232,10 @@ if ($login->isUserLoggedIn() == true) {
                                                // alertify.warning(datos);
                                                 $('#registrarse').attr("disabled", false);
                                                 $("#NM_DOCUMENTO_ID").focus();
-                                               // $("#BANDA_ID").empty().trigger('change');
                                                 //load(1);
                                                 if(datos.search("Error!")<=-1){
                                                     $("#guardar_usuario2")[0].reset();
+                                                    $("#BANDA_ID").empty().trigger('change');
                                                 }
                                                 setTimeout(function(){$("#resultados_ajax2").html("");}, 8000);
                                             }

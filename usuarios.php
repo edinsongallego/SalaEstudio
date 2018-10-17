@@ -29,7 +29,7 @@ $title = "Usuarios | Sala Estudio";
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="btn-group pull-right">
-                        <button type='button' class="btn btn-info" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" ></span> Nuevo Usuario</button>
+                        <button type='button' class="btn btn-info" id="btn_nuevo_usuario"><span class="glyphicon glyphicon-plus" ></span> Nuevo Usuario</button>
                     </div>
                     <h4><i class='glyphicon glyphicon-search'></i> Buscar Usuarios</h4>
                 </div>
@@ -82,6 +82,12 @@ $title = "Usuarios | Sala Estudio";
     </body>
 </html>
 <script type="text/javascript">
+    $("#btn_nuevo_usuario").click(function(e){
+        e.preventDefault();
+        $("#myModal").modal('toggle');
+        limpiar_formulario_nuevo();
+    })
+    
     $("#guardar_usuario").submit(function (event) {
         event.preventDefault();
         if ($('#guardar_usuario')[0].checkValidity()) {
@@ -102,9 +108,9 @@ $title = "Usuarios | Sala Estudio";
                         $('#guardar_datos').attr("disabled", false);
                         if (datos.search("Error!") <= -1) {
                             load(1);
-                            $("#guardar_usuario")[0].reset();
                             setTimeout(function () {
                                 $("#myModal").modal('toggle');
+                                limpiar_formulario_nuevo();
                             }, 800);
                         }
                     }
@@ -138,6 +144,7 @@ $title = "Usuarios | Sala Estudio";
                         load(1);
                         setTimeout(function () {
                             $("#myModal2").modal("toggle");
+                            limpiar_formulario_edt();
                         }, 1500);
                     }
                 }
@@ -174,6 +181,11 @@ $title = "Usuarios | Sala Estudio";
     function limpiar_formulario_edt() {
         $("#editar_usuario")[0].reset();
         $("#resultados_ajax2").html("");
+    }
+
+    function limpiar_formulario_nuevo(){
+        $("#resultados_ajax").html("");
+        $("#guardar_usuario")[0].reset();
     }
 
     function obtener_datos(id) {

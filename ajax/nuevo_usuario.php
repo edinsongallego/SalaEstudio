@@ -66,35 +66,40 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
                 // PHP 5.3/5.4, by the password hashing compatibility library
                 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
-                    
-                // check if user or email address already exists
-                $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "' OR NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
-                $query_check_user_name = mysqli_query($con, $sql);
+                
+                 $sql = "SELECT * FROM us_usuario WHERE NM_ELIMINADO = 1 AND NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
+                 $std =  mysqli_query($con, $sql);
+                if(mysqli_num_rows($std)>0){
+                    $errors[] = "Lo sentimos, este número de documento ya fue vinculado a una cuenta eliminada. Contactese con el administrador, para reactivar la cuenta o intente con un número de documento diferente.";
+                }else{
+                    // check if user or email address already exists
+                    $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "' OR NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
+                    $query_check_user_name = mysqli_query($con, $sql);
 
-                $query_check_user = mysqli_num_rows($query_check_user_name);
-                if ($query_check_user == 1) {
-                    $row = mysqli_fetch_assoc($query_check_user_name);
-                    if ($row["DS_CORREO"] == $DS_CORREO) {
-                        $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
-                    } else if ($row["NM_DOCUMENTO_ID"] == $NM_DOCUMENTO_ID) {
-                        $errors[] = "Lo sentimos , este número de documento ya fue registrado.";
-                    }
-                } else {
-                    // write new user's data into database
-                    $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, ENVIO_CORREO_ACTIVACION)
-                            VALUES('".$DS_DIRECCION."','".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2,1);";
-
-
-                    $query_new_user_insert = mysqli_query($con,$sql);
-
-                    // if user has been added successfully
-                    if ($query_new_user_insert) {
-                        $messages[] = "La cuenta ha sido creada con éxito.";
+                    $query_check_user = mysqli_num_rows($query_check_user_name);
+                    if ($query_check_user == 1) {
+                        $row = mysqli_fetch_assoc($query_check_user_name);
+                        if ($row["DS_CORREO"] == $DS_CORREO) {
+                            $errors[] = "Lo sentimos , la dirección de correo electrónico ya está en uso.";
+                        } else if ($row["NM_DOCUMENTO_ID"] == $NM_DOCUMENTO_ID) {
+                            $errors[] = "Lo sentimos , este número de documento ya fue registrado.";
+                        }
                     } else {
-                        $errors[] = "Lo sentimos , el registro falló. ". mysqli_error($con);
+                        // write new user's data into database
+                        $sql = "INSERT INTO us_usuario (DS_DIRECCION, NM_DOCUMENTO_ID, CS_TIPO_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, NM_TELEFONO, NM_CELULAR, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, ENVIO_CORREO_ACTIVACION)
+                                VALUES('".$DS_DIRECCION."','".$NM_DOCUMENTO_ID."',".$CS_TIPO_DOCUMENTO_ID.",'" . $DS_NOMBRES_USUARIO . "', '" . $DS_APELLIDOS_USUARIO . "', " . $NM_TELEFONO . ",".$NM_CELULAR.",'".$DS_CORREO."','".$user_password_hash."','".$CS_TIPO_USUARIO_ID."',2,1);";
+
+
+                        $query_new_user_insert = mysqli_query($con,$sql);
+
+                        // if user has been added successfully
+                        if ($query_new_user_insert) {
+                            $messages[] = "La cuenta ha sido creada con éxito.";
+                        } else {
+                            $errors[] = "Lo sentimos , el registro falló. ". mysqli_error($con);
+                        }
                     }
                 }
-            
         } else {
             $errors[] = "Un error desconocido ocurrió.";
         }
