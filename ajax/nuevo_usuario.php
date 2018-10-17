@@ -70,7 +70,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                  $sql = "SELECT * FROM us_usuario WHERE NM_ELIMINADO = 1 AND NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
                  $std =  mysqli_query($con, $sql);
                 if(mysqli_num_rows($std)>0){
-                    $errors[] = "Lo sentimos, este número de documento ya fue vinculado a una cuenta eliminada. Contactese con el administrador, para reactivar la cuenta o intente con un número de documento diferente.";
+                    $errors[] = "Lo sentimos, este número de documento ya fue vinculado a una cuenta eliminada. Contactese con el administrador, para reactivar la cuenta.";
                 }else{
                     // check if user or email address already exists
                     $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "' OR NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";
