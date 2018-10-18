@@ -87,7 +87,7 @@ if (isset($con)) {
                                 <select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" class="form-control" required="required">
                                     <option value style="display: none">Seleccione</option>
                                     <?php
-                                    foreach (Login::obtenerListadoPerfiles(array(1,2,4,5)) as $row) {
+                                    foreach (Login::obtenerListadoPerfiles(array(1,3,4,5)) as $row) {
                                         ?>
                                         <option value="<?php echo $row["CS_TIPO_USUARIO"]; ?>"><?php echo $row["DS_NOMBRE_TIPO_USUARIO"]; ?></option>
                                         <?php
