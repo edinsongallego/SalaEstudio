@@ -1,4 +1,13 @@
 <?php
+/**
+ * Este archivo permite consultar las banadas registradas, filtrandolas mediante su nombre.
+ * Se genera como salida, un json para ser consumido. 	
+ * @package    SalaEstudio
+ * @subpackage ajax\autocomplete
+ * @license    http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author     edinson javier gallego herrera <edigahe77@gmail.com>
+ */
+
 include("../../config/db.php");
 include("../../config/conexion.php");
 /* If connection to database, run sql statement. */

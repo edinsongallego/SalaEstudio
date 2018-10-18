@@ -84,7 +84,7 @@ if (isset($con)) {
                             <label for="tipo_usu" class="col-sm-3 control-label">*Tipo Usuario</label>
                             <div class="col-sm-8">
 
-                                <select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" class="form-control">
+                                <select name="CS_TIPO_USUARIO_ID" id="CS_TIPO_USUARIO_ID" class="form-control" required="required">
                                     <option value style="display: none">Seleccione</option>
                                     <?php
                                     foreach (Login::obtenerListadoPerfiles() as $row) {

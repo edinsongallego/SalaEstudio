@@ -1,0 +1,14 @@
+{
+    "name": "SalaEstudio",
+    "authors": [
+        {
+            "name": "edinson gallego",
+            "email": "edigahe77@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {},
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    }
+}
