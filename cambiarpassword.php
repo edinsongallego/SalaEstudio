@@ -1,5 +1,14 @@
 <?php 
 
+/**
+ * Este archivo permite realizar el cambio de la contraseña de un usuario.
+ * La contraseña es codificada con el algoritmo sha1. 	
+ * @package    SalaEstudio
+ * @subpackage ajax\autocomplete
+ * @license    http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author     edinson gallego <edigahe77@gmail.com>
+ */
+
 $password1 = $_POST['password1'];
 $password2 = $_POST['password2'];
 $idusuario = $_POST['idusuario'];

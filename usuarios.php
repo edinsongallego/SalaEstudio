@@ -1,4 +1,11 @@
 <?php
+/**
+ * Este archivo permite permite visualziar la administración de los usuarios. El usuario podrá crear, editar, buscar y eliminar a otros usuarios   
+ * @license    http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author     edinson gallego <edigahe77@gmail.com>
+ */
+
+
 include_once "classes/Login.php";
 
 //if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -8,7 +15,7 @@ if (!Login::inicioSession()) {
 }
 
 /* Connect To Database */
-require_once ("config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+require_once ("config/db.php"); //Conti ene las variables de configuracion para conectar a la base de datos
 require_once ("config/conexion.php"); //Contiene funcion que conecta a la base de datos
 $active_facturas = "";
 $active_productos = "";

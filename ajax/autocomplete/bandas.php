@@ -5,7 +5,7 @@
  * @package    SalaEstudio
  * @subpackage ajax\autocomplete
  * @license    http://opensource.org/licenses/gpl-license.php  GNU Public License
- * @author     edinson javier gallego herrera <edigahe77@gmail.com>
+ * @author     edinson gallego <edigahe77@gmail.com>
  */
 
 include("../../config/db.php");
