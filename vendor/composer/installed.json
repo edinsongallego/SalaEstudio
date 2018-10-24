@@ -1641,7 +1641,7 @@
                 "dev-master": "2.8-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Symfony\\Component\\Config\\": ""

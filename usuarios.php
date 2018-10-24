@@ -1,10 +1,13 @@
 <?php
 /**
- * Este archivo permite permite visualziar la administración de los usuarios. El usuario podrá crear, editar, buscar y eliminar a otros usuarios   
- * @license    http://opensource.org/licenses/gpl-license.php  GNU Public License
- * @author     edinson gallego <edigahe77@gmail.com>
- */
-
+* Short Desc
+*
+* Long Desc
+*
+* @package          SalaEstudio
+* @category         aja
+* @author           oscar<oscar@gmail.com>
+*/
 
 include_once "classes/Login.php";
 

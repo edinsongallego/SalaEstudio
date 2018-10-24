@@ -1,0 +1,31 @@
+<?php
+	$title = "Recuperar contraseña usuario";
+	session_start();
+	include_once "head.php";
+	include_once 'navbar_banda.php';
+
+	?>
+	<div class="container">
+		<form id="frmRestablecer" action="validaremail.php" method="post"autocomplete="off">
+			<div class="panel panel-default">
+				<div class="panel-heading"> Restaurar contraseña </div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label>Contraseña</label>
+						<input type="password" id="pass1" class="form-control" name="contrasena" placeholder="contrasena" value="" size='30' maxlength='100' class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Confirmar Contraseña</label>
+						<input type="password" id="pass2" class="form-control" name="contrasena1" placeholder="contrasena" value="" size='30' maxlength='100' class="form-control" required>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Enviar" >
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<?php
+
+	include("footer.php");
+?>
