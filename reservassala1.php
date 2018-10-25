@@ -156,8 +156,17 @@ if(!Login::inicioSession()){
 
 		crearSelect2Documento();
 		crearSelect2Banda();
+                crearMultiselect2Instrumentos();
 	    
 	});
+        
+        function adicionarDataSelect2Instrumentos(data){
+            $.each(data, function (i, instrumento) {
+                $("#instrumentos").select2("trigger", "select", {
+                    data: {id: instrumento.ID_INSTRUMENTO, text: instrumento.NOMBRE, modelo: instrumento}
+                });
+            });
+        }
 
 	function crearSelect2Banda(data) {
 		$("#id_banda").select2({
@@ -184,6 +193,36 @@ if(!Login::inicioSession()){
 		  }
 		});
 	}
+        
+        function crearMultiselect2Instrumentos(){
+            $('#instrumentos').select2({
+                allowClear: false,
+                language: "es",
+                placeholder: "Instrumentos",
+                multiple: true,
+                default: false,
+                ajax: {
+                    url: 'ajax/autocomplete/instrumentos.php',
+                    cache: "true",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: function (data, page) {
+                        return data;
+                    },
+                    results: function (data, page) {
+                        return {results: data.results};
+                    }
+                },
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: function (item) { 
+                    if(item.id != undefined){
+                        return "<b>Instrumento: </b>"+item.text+"<br/><b>Tipo: "+item.modelo.TIPO+"</b>"; 
+                    }else{
+                        return null;
+                    }
+                },
+            });
+        }
 
 	function crearSelect2Documento(data){
 		$("#txtdocumento").select2({
@@ -270,6 +309,12 @@ if(!Login::inicioSession()){
 		      	</div>
 		      	
 		    </div>  		
+	    </div>
+         <div class="row">
+	    	<div class="form-group col-md-12">
+                    <label><b>Instrumentos:</b></label><br/>
+                    <select name="instrumentos[]" id="instrumentos" style="width: 98%" class="form-control"></select>
+                </div>
 	    </div>
 	    <div class="row">
 	    	<div class="form-group col-md-12">
@@ -376,8 +421,7 @@ $('#btnagregar').click(function(){
 	sw1 = validarcampos();
 	if(sw1 == true){
 		RecolectarDatosGUI();
-		EnviarInformacion('guardar',NuevoEvento);
-		
+		EnviarInformacion('guardar',NuevoEvento);	
 	}		
 });
 
@@ -411,7 +455,8 @@ function RecolectarDatosGUI(){
 		documento:$('#txtdocumento').val(),
 		id_banda:$("#id_banda").val(),
 		color:$('#txtcolor').val(),
-		descripcion:$('#txtdescripcion').val()
+		descripcion:$('#txtdescripcion').val(),
+                instrumentos: $('#instrumentos').val()
 	};
 }
 
@@ -489,27 +534,29 @@ function EnviarInformacion(accion, objEvento, modal){
 $('.clockpicker').clockpicker();
 
 function asignarValorestexto(sw, boton){
-		$(boton).prop("disabled", sw);
+    $(boton).prop("disabled", sw);
 }
 function setearCampos(calEvent, jsEvent, view){
 		// Mostrar informacion  del evento en los inputs
-		$.get("reservasala1.php?accion=obtenerUsuario&NM_DOCUMENTO="+calEvent.documento+"&ID_BANDA="+calEvent.id_banda,{},function(data){
-			crearSelect2Documento(data.usuario);
-			if (data.banda) 
-				crearSelect2Banda(data.banda);
-		},"JSON");
-		$('#txtid').val(calEvent.id);
-		//$('#txtdocumento').val(calEvent.documento);
-		$('#txtdescripcion').val(calEvent.descripcion);
-		FechaHoraini = calEvent.start._i.split(" ");
-		$('#txtfechainicial').val(FechaHoraini[0]);
-		$('#txthoraini').val(FechaHoraini[1]);
-		FechaHorafin = calEvent.end._i.split(" ");
-		$('#txtfechafinal').val(FechaHorafin[0]);
-		$('#txthorafin').val(FechaHorafin[1]);
-		$("#Modalevento").modal();
-		//docu = calEvent.sala;
-		//alert(docu);
+		$.get("reservasala1.php?accion=obtenerUsuario&ID_RESERVA="+calEvent.id+"&NM_DOCUMENTO="+calEvent.documento+"&ID_BANDA="+calEvent.id_banda,{},function(data){
+                    crearSelect2Documento(data.usuario);
+                    if(data.banda) 
+                        crearSelect2Banda(data.banda);
+                    if(data.instrumentos)
+                        adicionarDataSelect2Instrumentos(data.instrumentos);
+                    $('#txtid').val(calEvent.id);
+                    //$('#txtdocumento').val(calEvent.documento);
+                    $('#txtdescripcion').val(calEvent.descripcion);
+                    FechaHoraini = calEvent.start._i.split(" ");
+                    $('#txtfechainicial').val(FechaHoraini[0]);
+                    $('#txthoraini').val(FechaHoraini[1]);
+                    FechaHorafin = calEvent.end._i.split(" ");
+                    $('#txtfechafinal').val(FechaHorafin[0]);
+                    $('#txthorafin').val(FechaHorafin[1]);
+                    $("#Modalevento").modal();
+                    //docu = calEvent.sala;
+                    //alert(docu);
+                },"JSON");
 		
 }
 function validarcampos()
@@ -581,14 +628,16 @@ function valida(e){
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
 }
-function limpiarFrm() {
+function limpiarFrm(){
 	$("#txtdescripcion").val("");
 	$("#txthoraini").val("");
 	$("#txthorafin").val("");
 	$("#chkcondiciones").prop("checked", false)
 	$("#txtdocumento").empty().trigger('change');
 	$("#id_banda").empty().trigger('change');
+        $('#instrumentos').empty().trigger('change');
 }
+
 function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
