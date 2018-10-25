@@ -27,7 +27,7 @@ $title = "Menu Banda | Sala Estudio";
         <?php
         if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
             include("navbar.php");
-        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 2) {
+        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 3) {
             include("navbar_banda.php");
         } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 4) {
             include("navbar_docente.php");
