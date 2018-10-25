@@ -1,0 +1,6 @@
+<?php
+//include_once 'libraries/password_compatibility_library.php';
+//echo password_hash("gato", PASSWORD_DEFAULT);
+//die;
+header("Location: home.php");
+?>

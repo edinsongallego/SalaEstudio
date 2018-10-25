@@ -69,7 +69,7 @@
                  }
 		 if ( $_GET['q'] != "" )
 		 {
-		 	$sWhere = " AND (";
+		 	$sWhere .= " AND (";
 		 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		 	{
 		 		$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
@@ -86,11 +86,12 @@
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
                 if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
-                    $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM us_banda_usuario t1  $sWhere");
+                    $count_query = mysqli_query($con, ($SQL = "SELECT count(*) AS numrows FROM us_banda_usuario t1  $sWhere"));
                 }else{
-                    $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t1.CS_BANDA_ID = t2.CS_BANDA_ID  $sWhere");
+                    $count_query = mysqli_query($con, $SQL = "SELECT count(*) AS numrows FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t1.CS_BANDA_ID = t2.CS_BANDA_ID  $sWhere");
                 }
                 
+                //echo $SQL;
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);
