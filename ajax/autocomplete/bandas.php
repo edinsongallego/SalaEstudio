@@ -14,7 +14,7 @@ include("../../config/conexion.php");
 if ($con)
 {
 	$term = (isset($_REQUEST['search'])) ? $_REQUEST['search'] : '';
-	$SQL = "SELECT * FROM us_banda_usuario WHERE DS_NOMBRE_BANDA LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' LIMIT 50";
+	$SQL = "SELECT * FROM us_banda_usuario WHERE ESTADO = 'activo' AND DS_NOMBRE_BANDA LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' LIMIT 50";
 	$fetch = mysqli_query($con,$SQL); 
 
     $resultado = array();

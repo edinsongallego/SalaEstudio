@@ -6,7 +6,7 @@ if ($con)
 {
 	if(!empty($_REQUEST["id_usuario"])){
 		$term = (isset($_REQUEST['search'])) ? $_REQUEST['search'] : '';
-		$SQL = "SELECT * FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t2.CS_BANDA_ID = t1.CS_BANDA_ID WHERE t2.NM_DOCUMENTO_ID = '".$_REQUEST["id_usuario"]."' AND t1.DS_NOMBRE_BANDA LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' LIMIT 50";
+		$SQL = "SELECT * FROM us_banda_usuario t1 INNER JOIN us_banda_detalle_usuario t2 ON t2.CS_BANDA_ID = t1.CS_BANDA_ID WHERE t1.ESTADO = 'activo' AND t2.NM_DOCUMENTO_ID = '".$_REQUEST["id_usuario"]."' AND t1.DS_NOMBRE_BANDA LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' LIMIT 50";
 		$fetch = mysqli_query($con,$SQL); 
 
 	    $resultado = array();

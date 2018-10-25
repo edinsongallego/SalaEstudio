@@ -8,13 +8,13 @@
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$user_id=intval($_GET['id']);
-		$query=mysqli_query($con, "select * from us_banda_usuario where CS_BANDA_ID='".$user_id."'");
+		$query=mysqli_query($con, "select * from us_banda_usuario where ESTADO = 'activo' AND CS_BANDA_ID='".$user_id."'");
 		//$rw_user=mysqli_fetch_array($query);
 		//$count=$rw_user['user_id'];
 		$count = mysqli_num_rows($query);
 		if ($count==1){
                     try {
-                        $delete1=mysqli_query($con,"delete from us_banda_usuario where CS_BANDA_ID='".$user_id."'");
+                        $delete1=mysqli_query($con,"UPDATE us_banda_usuario SET ESTADO = 'inactivo' where CS_BANDA_ID='".$user_id."'");
                     } catch (Exception $ex) {
                         var_dump(mysql_error());die;
                     }
@@ -63,9 +63,9 @@
 		 $aColumns = array('CS_BANDA_ID', 'DS_NOMBRE_BANDA','DS_DESCRIPCION_BANDA');//Columnas de busqueda
 		 $sTable = "us_banda_usuario";
                  if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ 
-                    $sWhere = "WHERE 1 ";
+                    $sWhere = "WHERE t1.ESTADO = 'activo' ";
                  }else{
-                     $sWhere = "WHERE t2.NM_DOCUMENTO_ID = '".$_SESSION["NM_DOCUMENTO_ID"]."' AND t2.ES_LIDER = 1 ";
+                     $sWhere = "WHERE t1.ESTADO = 'activo' AND t2.NM_DOCUMENTO_ID = '".$_SESSION["NM_DOCUMENTO_ID"]."' AND t2.ES_LIDER = 1 ";
                  }
 		 if ( $_GET['q'] != "" )
 		 {
