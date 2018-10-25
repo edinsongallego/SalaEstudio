@@ -7,7 +7,9 @@
         }
     ],
     "minimum-stability": "alpha",
-    "require": {},
+    "require": {
+        "mikehaertl/phpwkhtmltopdf": "^2.3"
+    },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "2.*"
     }
