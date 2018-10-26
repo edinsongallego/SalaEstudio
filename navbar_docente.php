@@ -27,9 +27,6 @@
             <li class="<?php echo @$active_reservas;?>"><a href="" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Clave</a></li>
           <?php endif ?>  
          
-
-
-
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" target='_blank'><i class='glyphicon glyphicon-envelope'></i> Soporte</a></li>

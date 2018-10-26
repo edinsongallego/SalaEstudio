@@ -44,9 +44,10 @@ switch ($accion) {
                 break;
             } else {
 
-                $sentenciaSQL = $pdo->prepare("INSERT INTO rs_reserva_sala(documento, sala, start, end, title, DS_ESTADO, color,id_banda,descripcion) VALUES(:documento, 1,:start,:end,:title,:estado,:color,:banda,:descripcion)");
+                $sentenciaSQL = $pdo->prepare("INSERT INTO rs_reserva_sala(documento, sala, start, end, title, DS_ESTADO, color,id_banda,descripcion) VALUES(:documento, :sala,:start,:end,:title,:estado,:color,:banda,:descripcion)");
                 $respuesta = $sentenciaSQL->execute(array(
                     "documento" => $_POST['documento'],
+                    "sala" => $_POST['id_sala'],
                     "start" => $_POST['start'],
                     "end" => $_POST['end'],
                     "title" => $_POST['title'],
@@ -248,7 +249,7 @@ switch ($accion) {
         //print_r($resultado1);
         if ($resultado1["CS_TIPO_USUARIO_ID"] == 1) {
 
-            $query = $pdo->prepare("SELECT *, true AS editable FROM rs_reserva_sala where sala = 1");
+            $query = $pdo->prepare("SELECT *, true AS editable FROM rs_reserva_sala where sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -256,7 +257,7 @@ switch ($accion) {
             break;
         } else {
 
-            $query = $pdo->prepare("SELECT *,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala where sala = 1");
+            $query = $pdo->prepare("SELECT *,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala where sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);

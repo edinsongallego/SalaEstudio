@@ -73,7 +73,7 @@ if ($login->isUserLoggedIn() == true) {
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse head_primary" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.php"><i class='glyphicon glyphicon-home'></i> Inicio <span class="sr-only">(current)</span></a></li>
 
@@ -81,7 +81,7 @@ if ($login->isUserLoggedIn() == true) {
 
                             <li><a href="servicios.php"> Servicios</a></li>
 
-                            <li><a href="contactenos.php"> Contactenos</a></li>
+                            <li class="contactenos_nav"><a href="contactenos.php"> Contactenos</a></li>
                             <li><a target="_blank" href="https://es-la.facebook.com/Sala.Estudio/"><img src='img/facebook.png'></img></a> </li>
                             <li><a target="_blank" href="http://www.thepicta.com/user/lasalaestudio/4339125963"><img src='img/instagram.png'></img></a> </li>
                             <li><a target="_blank" href="https://twitter.com/lasalaestudio"><img src='img/twitter.png'></img></a> </li>

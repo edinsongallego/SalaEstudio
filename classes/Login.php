@@ -57,6 +57,25 @@ class Login
         return $r;    
 
     }
+    
+    public static function obtenerSalas($id = array()){
+        $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if (count($id) > 0) {
+            $sql = "SELECT * FROM rs_sala WHERE CS_SALA_ID IN (".implode(",", $id).")";
+        }else{
+            $sql = "SELECT * FROM rs_sala";
+        }
+
+        $db_connection->query($sql);
+        
+        $result = $db_connection->query($sql);
+        $r = array();
+         while($row = $result->fetch_assoc())
+            $r[] = $row;
+        $db_connection->close();
+        return $r;    
+
+    }
 
     /**
      * log in with post data
