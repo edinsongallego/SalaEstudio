@@ -75,7 +75,7 @@ if (!Login::inicioSession()) {
                         $i = 0;
                         foreach (Login::obtenerSalas() as $sala) {
                             ?>
-                            <option value="<?php echo $sala["CS_SALA_ID"]; ?>"><?php echo $sala["DS_NOMBRE_SALA"]." | ".$sala["DS_DESCRIPCION_SALA"]." | hora: $".$sala["NM_VALOR_HORA_SALA"]; ?></option>
+                        <option <?php echo (isset($_GET["sala"])?($_GET["sala"]==$sala["CS_SALA_ID"]?"selected":""):"")?> value="<?php echo $sala["CS_SALA_ID"]; ?>"><?php echo $sala["DS_NOMBRE_SALA"]." | ".$sala["DS_DESCRIPCION_SALA"]." | hora: $".$sala["NM_VALOR_HORA_SALA"]; ?></option>
                         <?php }
                         ?>
                     </select><br/>
