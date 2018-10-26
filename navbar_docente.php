@@ -21,7 +21,7 @@
         <ul class="nav navbar-nav">
           <li class="<?php echo @$active_perfil;?>"><a href="perfil.php"><i class='glyphicon glyphicon-user'></i> Perfil <span class="sr-only">(current)</span></a></li>
           
-          <li class="<?php echo @$active_reservas;?>"><a href="salas.php"><i class='glyphicon glyphicon-calendar'></i> Reservas <span class="sr-only">(current)</span></a></li>
+          <li class="<?php echo @$active_reservas;?>"><a href="reservassala1.php"><i class='glyphicon glyphicon-calendar'></i> Reservas <span class="sr-only">(current)</span></a></li>
 
           <?php if ($_SESSION['RESTAURAR_CONTRASENA'] == 1): ?>
             <li class="<?php echo @$active_reservas;?>"><a href="" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Clave</a></li>
