@@ -46,7 +46,7 @@ if(!Login::inicioSession()){
 							<h3 class="card-title"><?php echo $sala["DS_NOMBRE_SALA"]; ?>:</h3>
 							<p class="card-text"><?php echo $sala["DS_DESCRIPCION_SALA"]; ?></p>
 							<h3 class="card-title">PRECIO:</h3>
-							<p class="card-text">1 hora • $<?php @number_format($sala["NM_VALOR_HORA_SALA"], 2, ",", "."); ?></p>
+							<p class="card-text">1 hora • $ <?php echo @number_format($sala["NM_VALOR_HORA_SALA"], 2, ",", "."); ?></p>
                                                         <a id="btnagregar" class="btn btn-success" href="reservassala1.php?sala=<?php echo $sala["CS_SALA_ID"]; ?>"><b>Reservar</b></a>
 						</div>
 					</div>
