@@ -43,7 +43,7 @@ $title = "Usuarios | Sala Estudio";
                     </div>
                     <h4><i class='glyphicon glyphicon-search'></i> Buscar Usuarios</h4>
                 </div>
-                    <div class="panel-body" style="min-height:550px;min-width:1157px;">
+                    <div class="panel-body" style="min-height:400px;height: auto;">
                     <?php
                     include("modal/registro_usuarios.php");
                     include("modal/editar_usuarios.php");
