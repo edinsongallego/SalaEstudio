@@ -404,8 +404,8 @@ CREATE TABLE `rs_sala` (
 -- ----------------------------
 -- Records of rs_sala
 -- ----------------------------
-INSERT INTO `rs_sala` VALUES ('1', 'Sala 1', 'sala con guitarra', '42000', '8');
-INSERT INTO `rs_sala` VALUES ('2', 'Sala 2', 'Sala 2', '45000', '12');
+INSERT INTO `rs_sala` VALUES ('1', 'Sala 1', 'sala con guitarra', '24000', '8');
+INSERT INTO `rs_sala` VALUES ('2', 'Sala 2', 'Sala 2', '26000', '12');
 
 -- ----------------------------
 -- Table structure for tmp
