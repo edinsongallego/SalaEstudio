@@ -21,9 +21,9 @@ if (isset($con)) {
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="lastname" class="col-sm-3 control-label">*Descripción</label>
+                            <label for="lastname" class="col-sm-3 control-label">*Género</label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" id="descripcionbanda" name="descripcionbanda" placeholder="*Descripción Banda" class="form-control" >
+                                <input type="text" required="" class="form-control" id="descripcionbanda" name="descripcionbanda" placeholder="*Género Banda" class="form-control" >
                             </div>
                         </div>
 

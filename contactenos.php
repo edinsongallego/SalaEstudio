@@ -27,41 +27,7 @@ $title="Sala Estudio";
 	</head>
 	<body>
 	
-		<div class="container">
-			<div class="card card-container">
-				<img id="profile-img" class="profile-img-card" src="img/logo.png" />
-				<p id="profile-name" class="profile-name-card"></p>
-				<form method="post" accept-charset="utf-8" action="login.php" name="loginform" autocomplete="off" role="form" class="form-signin">
-			<div class="row">
-				
-				
-			<div id="resultados_ajax2"></div>
-					<form>
-						<div class="form-group">
-							<input type="text" name="nombres" class="form-control" placeholder="*Ingrese Nombres*"title="Nombre de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
-
-							
-						</div>
-						<div class="form-group">
-							<input type="text" name="apellidos" class="form-control" placeholder="*Ingrese Apellidos"title="Apellidos de usuario ( sólo letras )" onkeypress="return soloLetras(event)" onblur="limpia()" id="miInput" class="form-control"  required>
-						</div>
-
-						<div class="form-group">
-							<input type="text" name="email" class="form-control" placeholder="*Ingrese Email"value="" size='30' maxlength='100' title='direccion de correo' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<input type="text" name="msj" class="form-control" placeholder="Ingrese Mensaje*">
-						</div>
-
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Enviar</button>
-						</div>
-
-					</form>
-				</div>
-				
-			</div>
-		</div>
+		
 	</div>
 <?php
 include("footer.php");

@@ -22,9 +22,9 @@ if (isset($con)) {
                         </div>
 
                         <div class="form-group row">
-                            <label for="lastname" class="col-sm-3 control-label">*Descripción</label>
+                            <label for="lastname" class="col-sm-3 control-label">*Género</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="DS_DESCRIPCION_BANDA" name="DS_DESCRIPCION_BANDA" placeholder="*Descripción Banda" class="form-control" required>
+                                <input type="text" class="form-control" id="DS_DESCRIPCION_BANDA" name="DS_DESCRIPCION_BANDA" placeholder="*Género Banda" class="form-control" required>
                             </div>
                         </div>
 

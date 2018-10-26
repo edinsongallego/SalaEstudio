@@ -25,6 +25,8 @@
           <li><a href="servicios.php"> Servicios</a></li>
 
           <li class="contactenos_nav"><a href="contactenos.php"> Contactenos</a></li>
+		  
+		  
 		  <li><a target="_blank" href="https://es-la.facebook.com/Sala.Estudio/"><img src='img/facebook.png'></img></a> </li>
                             <li><a target="_blank" href="http://www.thepicta.com/user/lasalaestudio/4339125963"><img src='img/instagram.png'></img></a> </li>
                             <li><a target="_blank" href="https://twitter.com/lasalaestudio"><img src='img/twitter.png'></img></a> </li>
@@ -35,6 +37,7 @@
       </div><!-- /.navbar-collapse class="nosotros_nav"    -->
     </div><!-- /.container-fluid -->
   </nav>
+  
   <?php
 }
 ?>

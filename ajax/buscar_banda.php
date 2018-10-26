@@ -113,7 +113,7 @@
 					<tr  class="info">
 						<th>Cod. Banda</th>
 						<th>Nombre Banda</th>
-						<th>Descripciòn Banda</th>
+						<th>Género Banda</th>
 						<th><span class="pull-right">Acciones</span></th>
 
 					</tr>
