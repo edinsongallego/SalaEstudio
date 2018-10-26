@@ -364,7 +364,7 @@ if (!Login::inicioSession()) {
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label><b>Seleccione color:</b></label>
-                                <input type="color" id = "txtcolor">
+                                <input type="color" value="#ff8000" id = "txtcolor">
                             </div>
                         </div>
                         <div class="row">
