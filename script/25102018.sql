@@ -404,7 +404,7 @@ CREATE TABLE `rs_sala` (
 -- ----------------------------
 -- Records of rs_sala
 -- ----------------------------
-INSERT INTO `rs_sala` VALUES ('1', 'Sala 1', 'sala con guitarra', '24000', '8');
+INSERT INTO `rs_sala` VALUES ('1', 'Sala 1', 'sala 1', '24000', '8');
 INSERT INTO `rs_sala` VALUES ('2', 'Sala 2', 'Sala 2', '26000', '12');
 
 -- ----------------------------
