@@ -35,7 +35,7 @@
         
        </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" target='_blank'><i class='glyphicon glyphicon-envelope'></i> Soporte</a></li>
+        <li><a href="soporte.php"><i class='glyphicon glyphicon-envelope'></i> Soporte</a></li>
     <li><a href="login.php?logout"><i class='glyphicon glyphicon-off'></i> <?php $_SESSION['user_login_status'] ?> Salir</a></li>
 
    
