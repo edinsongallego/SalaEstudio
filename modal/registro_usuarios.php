@@ -68,8 +68,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="user_Email" class="col-sm-3 control-label">*Email</label>
                             <div class="col-sm-8">
-                                <input type="Email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='direccion de correo' onKeyUp="javascript:validateMail(this)" class="form-control" required>
-
+                                <input type="email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='direccion de correo' class="form-control" required>
                             </div>
                         </div>
                         

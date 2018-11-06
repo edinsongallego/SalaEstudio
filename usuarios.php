@@ -100,7 +100,7 @@ $title = "Usuarios | Sala Estudio";
 
                                     $("#guardar_usuario").submit(function (event) {
                                         event.preventDefault();
-                                        if ($('#guardar_usuario')[0].checkValidity()) {
+                                        if ($('#guardar_usuario').valid()) {
                                             if (validateMail(document.getElementById("DS_CORREO"))) {
 
                                                 $('#guardar_datos').attr("disabled", true);
@@ -233,6 +233,10 @@ $title = "Usuarios | Sala Estudio";
 
                                     $(function ()
                                     {
+                                        $('#guardar_usuario').validate({
+                                            ignoreTitle: true,
+                                        });
+                                        
                                         $("#editar_usuario").validate({
                                             ignoreTitle: true,
                                         });

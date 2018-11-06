@@ -92,7 +92,7 @@ if ($action == 'ajax') {
             <table class="table">
 
                 <tr  class="info">
-                    <th>Identificacion</th>
+                    <th>Identificación</th>
                     <th>Nombres y Apellidos</th>
                     <th>Email</th>
                     <th>Estado</th>
