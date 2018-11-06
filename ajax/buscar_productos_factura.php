@@ -23,8 +23,8 @@ while ($row=mysqli_fetch_array($query)){ ?>
 		<td><?php echo $row['DS_NOMBRE_PRODUCTO']; ?></td>
 		<td><?php echo $row['DS_DESCRIPCION_PRODUCTO']; ?></td>
 		<td><?php echo $row["CANTIDAD_INVENTARIO"]; ?></td>
-		<td><input type="number" class="form-control" id="cantidad_<?php echo $row['CS_PRODUCTO_ID']; ?>"/></td>
-		<td><input type="number" class="form-control" id="precio_<?php echo $row['CS_PRODUCTO_ID']; ?>" value="<?php echo $row['DB_PRECIO_VENTA_UND']; ?>"/></td>
+                <td><input type="number" id_prodcuto="<?php echo $row['CS_PRODUCTO_ID']; ?>" class="form-control ignoreClass" required data-rule-cantidadExistenteProductos="true" id="cantidad_<?php echo $row['CS_PRODUCTO_ID']; ?>" name="cantidad_<?php echo $row['CS_PRODUCTO_ID']; ?>"/></td>
+		<td><input type="number" id_prodcuto="<?php echo $row['CS_PRODUCTO_ID']; ?>" class="form-control ignoreClass" required id="precio_<?php echo $row['CS_PRODUCTO_ID']; ?>" value="<?php echo $row['DB_PRECIO_VENTA_UND']; ?>"/></td>
 		<td><a title="Agregar producto" class="btn btn-primary btn_agregar_producto" id_prodcuto="<?php echo $row['CS_PRODUCTO_ID']; ?>" name=""><span class="glyphicon glyphicon-plus"></span></a>
 			<input type="hidden" id="cantidad_inventario_<?php echo $row['CS_PRODUCTO_ID']; ?>" value="<?php echo $row["CANTIDAD_INVENTARIO"]; ?>">
 			<input type="hidden" id="producto_id_<?php echo $row['CS_PRODUCTO_ID']; ?>" value="<?php echo $row["CS_PRODUCTO_ID"]; ?>">

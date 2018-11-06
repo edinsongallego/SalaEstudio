@@ -41,9 +41,8 @@
 														<!-- the loop -->
 															<!-- ********** -->
 								<div class="itemRecient">
-									<div class="imgResient">
-										<div class="absolute cover" style="background: url(http://lasalaestudio.com/wp-content/uploads/2018/06/objecitovs_foto.jpg)"></div>
-										<img src="http://lasalaestudio.com/wp-content/themes/lasalaestudio/img/dumy.png">
+                                                                    <div class="imgResient" style="height: 68px;">
+										<div class="absolute cover" style="background: url(img/instrumentos1.png)"></div>
 									</div>
 									<div class="label_resient">
 										<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
@@ -53,9 +52,8 @@
 								<!-- ********** -->
 															<!-- ********** -->
 								<div class="itemRecient">
-									<div class="imgResient">
-										<div class="absolute cover" style="background: url(http://lasalaestudio.com/wp-content/uploads/2018/06/galery_4.jpg)"></div>
-										<img src="http://lasalaestudio.com/wp-content/themes/lasalaestudio/img/dumy.png">
+									<div class="imgResient" style="height: 101px;"> 
+										<div class="absolute cover" style="background: url(img/instrumentos2.png)"></div>
 									</div>
 									<div class="label_resient">
 										<h4>Nombre del evento, actividad o proyecto</h4>
@@ -116,6 +114,8 @@
 <script src="js/es.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/jquery-validation/src/localization/messages_es.js"></script>
 <script type="text/javascript">
 	$(".itemHServices .h3service, .h3_labelin_twocol").mCustomScrollbar();
 

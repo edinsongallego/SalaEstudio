@@ -95,7 +95,7 @@ $title = "Ventas | Sala Estudio";
 					</div>
 					<div class="form-group col-lg-6">
 	                	<label class="label-result-content" for="ultima_compra">Forma de pago: </label>
-	                	<select name="Venta[id_forma_pago]" class="form-control" id="id_forma_pago" style="width:100%">
+                                <select name="Venta[id_forma_pago]" required class="form-control" id="id_forma_pago" style="width:100%">
 	                		<option value style="display: none" selected></option>
                                     <?php
                                     foreach (Factura::obtenerMediosDePago($con) as $row) {
@@ -202,9 +202,6 @@ $title = "Ventas | Sala Estudio";
                                 <h3 class="panel-title">DETALLE DE LA FACTURA</h3>
                             </div>
                             <div class="panel-body">
-
-
-
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <table style="width: 100%;">
@@ -248,6 +245,7 @@ $title = "Ventas | Sala Estudio";
                                                 </td>
                                             </tr>
                                         </table>
+                                        <input type="text" class="hidden" id="valid_cantidad_productos_venta" data-rule-cantidadProductosVenta="true"/> 
                                     </div>
 
 
@@ -264,7 +262,7 @@ $title = "Ventas | Sala Estudio";
                         </div>
                     </div>
                     <div class="panel-footer text-center">
-                        <input type="submit" class="btn btn-primary" value="Enviar">
+                        <input type="submit" class="btn btn-primary" value="Guardar">
                         <button class="btn btn-danger" value="">Cancelar</button>
                     </div>
                 </div>

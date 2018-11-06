@@ -9,7 +9,7 @@ if (isset($con)) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Editar usuario</h4>
                 </div>
-                <form class="form-horizontal" method="post" id="editar_usuario" name="editar_usuario"autocomplete="off">
+                <form class="form-horizontal" method="post" id="editar_usuario" name="editar_usuario" autocomplete="off">
                 <div class="modal-body">
                         <div id="resultados_ajax2"></div>
                         <div class="form-group">
@@ -31,7 +31,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Teléfono" class="col-sm-3 control-label">*Teléfono</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="tel" name="tel" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="7" maxlength="7"  required>
+                                <input type="tel" class="form-control" id="tel" name="tel" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="7" maxlength="7"  required>
 
                             </div>
                         </div>
@@ -39,8 +39,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Celular" class="col-sm-3 control-label">*Celular</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="cel" name="cel" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="10" maxlength="10"  required>
-
+                                <input type="tel" class="form-control" id="cel" name="cel" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="10" maxlength="10"  required>
                             </div>
                         </div>
                         <div class="form-group">

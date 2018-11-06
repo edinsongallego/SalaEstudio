@@ -1,4 +1,4 @@
-<form role="form" id="frm_nuevo_inventario"> 
+<form role="form" id="frm_nuevo_inventario" autocomplete="off"> 
 <div class="modal fade" id="registroEntradaInventario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -23,11 +23,11 @@
 	                <div class="row">
 		                <div class="form-group col-lg-6">
 		                    <label class="label-result-content" for="factura">*Cantidad: </label><br>
-		                    <input type="text" required name="Inventario[cantidad]" id="cantidad" class="form-control" required value=""/>
+                                    <input type="number" required name="Inventario[cantidad]" id="cantidad" class="form-control" required value=""/>
 		                </div>
 		                <div class="form-group col-lg-6">
 		                    <label class="label-result-content" for="factura">*Precio de compra unitario: </label><br>
-		                    <input type="text" required name="Inventario[precio_co]" id="precio_co" class="form-control" value=""/>
+		                    <input type="number" step="any" required name="Inventario[precio_co]" id="precio_co" class="form-control" value=""/>
 		                </div>
 			        </div>
                 <div class="row">
@@ -39,7 +39,7 @@
 		        </div>
                 
 		        <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary" id="btn_enviar" value="Enviar">
+                            <input type="submit" class="btn btn-primary" id="btn_enviar" value="Guardar">
 					<button class="btn btn-danger" value="" id="btn_cancelar">Cancelar</button>
 			</div>
             </div>

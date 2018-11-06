@@ -13,6 +13,10 @@ http://work.smarchal.com/twbscolor/
   margin-top: -2rem;
 }
 
+.error{
+    color: red;
+}
+
 .panel-info{
   border: 1px solid red;
 }
@@ -394,7 +398,7 @@ http://work.smarchal.com/twbscolor/
   position: relative; padding: 10px 0; margin: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.imgResient{position: absolute; width: 80px; left: 0px; top: 0px; background: #6A6A6A;}
+.imgResient{position: absolute; width: 80px; left: 0px; top: 0px}
 .label_resient{position: relative; padding-left: 95px;}
 
 .absolute {position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px; z-index: 1}

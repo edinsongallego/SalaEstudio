@@ -11,7 +11,7 @@ if (isset($email)) {
 
 	$count = mysqli_num_rows($query);
 
-	if ($count==1){
+	if ($count>0){
 
 		while ($row=mysqli_fetch_array($query)){
 				$correo=$row['DS_CORREO'];
@@ -27,12 +27,14 @@ if (isset($email)) {
     	$headers .= "Reply-To: $correo \r\n";
 
 		if ($query = mysqli_query($con,$sql)){
+                        session_start();
 			if (mail($email, "Recuperar contraseña", "Su nueva contraseña es ".$nombre.$identificacion, $headers)) {
-				echo "Mensaje enviado";
-				header("Location:login.php");
+				$_SESSION["respuesta"] = array("mensaje" => "Las credenciales fueron enviadas al correo electrónico.", "rpt" => true);
+				
 			}else{
-				echo "Mensaje no enviado";
+				$_SESSION["respuesta"] = array("mensaje" => "Mensaje enviado", "rpt" => false);
 			}
+                        header("Location:login.php");
 		}
 	}else{
 

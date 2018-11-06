@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	load(1);
+        $("#frm_factura_venta").validate();
 	$("#btn_realizar_pago").click(function(e){
 		e.preventDefault();
-		if ($("#frm_factura_venta")[0].checkValidity()) {
+		if ($("#frm_factura_venta").valid()) {
 			$('#loading').show();
 			$.get("ajax/realizar_pago_factura.php?"+$("#frm_factura_venta").serialize(),function(r){
 				if (r.result) {

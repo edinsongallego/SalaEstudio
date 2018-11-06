@@ -15,6 +15,7 @@ require_once("classes/Login.php");
 // create a login object. when this object is created, it will do all login/logout stuff automatically
 // so this single line handles the entire login process. in consequence, you can simply ...
 $login = new Login();
+$title = "Iniciar sesión";
 
 
 
@@ -55,7 +56,7 @@ if ($login->isUserLoggedIn() == true) {
             <!-- CSS  -->
             <link href="css/login.css" type="text/css" rel="stylesheet" media="screen,projection"/>
             <link rel=icon href=img/logo.png  type="image/png">
-    <?php include("head.php"); ?>
+            <?php include("head.php"); ?>
         </head>
         <body>
 
@@ -99,37 +100,50 @@ if ($login->isUserLoggedIn() == true) {
                     <img id="profile-img" class="profile-img-card" src="img/logo.png" />
                     <p id="profile-name" class="profile-name-card"></p>
                     <form method="post" accept-charset="utf-8" action="login.php" name="loginform" autocomplete="off" role="form" class="form-signin">
-    <?php
-    if (isset($login)) {
-        if ($login->errors) {
-            ?>
+                        <?php
+                        if (isset($login)) {
+                            if ($login->errors) {
+                                ?>
                                 <div class="alert alert-danger" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <strong>Error!</strong>
 
-            <?php
-            foreach ($login->errors as $error) {
-                echo $error;
-            }
-            ?>
-                                </div>
                                     <?php
-                                }
-                                if ($login->messages) {
+                                    foreach ($login->errors as $error) {
+                                        echo $error;
+                                    }
                                     ?>
+                                </div>
+                                <?php
+                            }
+                            if ($login->messages) {
+                                ?>
                                 <div class="alert alert-success" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <strong>Aviso!</strong>
-                                <?php
-                                foreach ($login->messages as $message) {
-                                    echo $message;
-                                }
-                                ?>
-                                </div>
                                     <?php
-                                }
+                                    foreach ($login->messages as $message) {
+                                        echo $message;
+                                    }
+                                    ?>
+                                </div>
+                                <?php
                             }
-                            ?>
+                            
+                            if(isset($_SESSION["respuesta"])){
+                                ?>
+                                <div class="alert alert-success" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <strong>Aviso!</strong>
+                                    <?php
+                                    echo $_SESSION["respuesta"]["mensaje"]; 
+                                    unset($_SESSION["respuesta"]);
+                                    ?>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
                         <span id="reauth-email" class="reauth-email"></span>
                         <input class="form-control" placeholder="Usuario" name="DS_CORREO" type="email" value="" autofocus="">
 
@@ -147,28 +161,23 @@ if ($login->isUserLoggedIn() == true) {
 
             <div id="myModal" class="modal fade">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-
-
-
-                        <form id="frmRestablecer" action="validaremail.php" method="post"autocomplete="off">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"> Restaurar contraseña </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Enviar" >
-                                    </div>
-                                </div>
+                    <form id="frmRestablecer" action="validaremail.php" method="post"autocomplete="off">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Restaurar contraseña</h5>
                             </div>
-                        </form>
+                            <div class="modal-body">
 
+                                <div class="form-group">
+                                    <input type="email" id="email" data-rule-validar_existencia_correo="true" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" size='30' maxlength='30' class="form-control" required>
+                                </div>
 
-
-                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Enviar" >
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -178,17 +187,41 @@ if ($login->isUserLoggedIn() == true) {
             <!-- Latest compiled and minified JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-</div>
-</div>
+        </div>
+    </div>
 
-</div>
-<hr>
-        <?php
-        include("footer.php");
-        ?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-        </body>
+    </div>
+    <hr>
+    <?php
+    include("footer.php");
+    ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $.validator.addMethod("validar_existencia_correo", function (value, element) {
+                var isSuccess = false;
+                $.ajax({url: "ajax/validar_correo_existente.php",
+                    data: {'correo': value},
+                    async: false,
+                    dataType: 'JSON',
+                    success:
+                            function (msg) {
+                                isSuccess = msg.rpt;
+                            }
+                });
+                return isSuccess;
+            }, "Este correo no existe, por favor veriquelo.");
+            $("#frmRestablecer").validate({
+                ignoreTitle: true
+            });
+        });
+        $("#frmRestablecer").submit(function () {
+            if ($("#frmRestablecer").valid()) {
+                $(this).unbind('submit').submit();
+            }
+        });
+    </script>
+    </body>
     </html>
 
     <?php
