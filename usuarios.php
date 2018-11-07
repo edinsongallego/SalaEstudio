@@ -164,28 +164,35 @@ $title = "Usuarios | Sala Estudio";
                                     })
 
                                     $("#editar_password").submit(function (event) {
-                                        $('#actualizar_datos3').attr("disabled", true);
+                                        if ($(this).valid()) {
+                                            $('#actualizar_datos3').attr("disabled", true);
 
-                                        var parametros = $(this).serialize();
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "ajax/editar_password.php",
-                                            data: parametros,
-                                            beforeSend: function (objeto) {
-                                                $("#resultados_ajax3").html("Mensaje: Cargando...");
-                                            },
-                                            success: function (datos) {
-                                                $("#resultados_ajax3").html(datos);
-                                                $('#actualizar_datos3').attr("disabled", false);
-                                                load(1);
-                                                $("#mensaje_restaurar_contrasena").hide();
-                                                $("#opt_menu_cambiar_clave").hide();
-                                            }
-                                        });
+                                            var parametros = $(this).serialize();
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "ajax/editar_password.php",
+                                                data: parametros,
+                                                beforeSend: function (objeto) {
+                                                    $("#resultados_ajax3").html("Mensaje: Cargando...");
+                                                },
+                                                success: function (datos) {
+                                                    $("#resultados_ajax3").html(datos);
+                                                    $('#actualizar_datos3').attr("disabled", false);
+                                                    load(1);
+                                                    $("#mensaje_restaurar_contrasena").hide();
+                                                    $("#opt_menu_cambiar_clave").hide();
+                                                    setTimeout(function(){
+                                                        $("#myModal3").modal("toggle");
+                                                    },1500);
+                                                }
+                                            });
+                                        }
                                         event.preventDefault();
                                     })
                                     function get_user_id(id) {
                                         $("#user_id_mod").val(id);
+                                        $("#editar_password")[0].reset();
+                                        $("#resultados_ajax3").html("");
                                     }
 
                                     function limpiar_formulario_edt() {
@@ -236,9 +243,20 @@ $title = "Usuarios | Sala Estudio";
                                         $('#guardar_usuario').validate({
                                             ignoreTitle: true,
                                         });
-                                        
+
                                         $("#editar_usuario").validate({
                                             ignoreTitle: true,
                                         });
+
+                                        $("#editar_password").validate({
+                                            ignoreTitle: true,
+                                            rules: {
+                                                user_password_new3: "required",
+                                                user_password_repeat3: {
+                                                    equalTo: "#user_password_new3"
+                                                }
+                                            }
+                                        });
+
                                     });
 </script>

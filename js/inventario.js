@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    $("#frm_nuevo_inventario").validate();
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
     $("#id_producto").select2({
         allowClear: true,
         placeholder: "Seleccione un producto",
@@ -23,14 +24,14 @@ $(document).ready(function () {
         },
     });
 
-    $("#id_producto").change(function(){
-        if((producto = $(this).select2("data")[0]) != undefined){
+    $("#id_producto").change(function () {
+        if ((producto = $(this).select2("data")[0]) != undefined) {
             $("#precio_co").val(producto.modelo.NM_PRECIO_UNITARIO_COMPRA_UND);
-        }else{
+        } else {
             $("#precio_co").val("");
         }
     });
-    
+
     $("#id_vendedor").select2({
         allowClear: true,
         placeholder: "Seleccione un vendedor",
@@ -68,15 +69,15 @@ $(document).ready(function () {
 
     $("#frm_nuevo_inventario").submit(function (e) {
         e.preventDefault();
-        $("#loading").toggle();
-        if ($('#frm_nuevo_inventario')[0].checkValidity()) {
+        if ($('#frm_nuevo_inventario').valid()) {
+            $("#loading").toggle();
             $.post("ajax/agregar_entrada_inventario.php", $("#frm_nuevo_inventario").serialize(), function (r) {
-               $("#loading").toggle();
+                $("#loading").toggle();
                 if (r.result) {
                     load(1);
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#registroEntradaInventario").modal("toggle");
-                    },1500);
+                    }, 1500);
                 }
                 $("#respuestaInv").html(r.htmlResult);
             }, "JSON");
@@ -110,20 +111,20 @@ function load(page) {
     })
 }
 
-var createAllErrors = function() {
-    var form = $( this ),
-        errorList = $( "ul.errorMessages", form );
+var createAllErrors = function () {
+    var form = $(this),
+            errorList = $("ul.errorMessages", form);
 
-    var showAllErrorMessages = function() {
+    var showAllErrorMessages = function () {
         errorList.empty();
 
         // Find all invalid fields within the form.
-        var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
+        var invalidFields = form.find(":invalid").each(function (index, node) {
 
             // Find the field's corresponding label
-            var label = $( "label[for=" + node.id + "] "),
-                // Opera incorrectly does not fill the validationMessage property.
-                message = node.validationMessage || 'Invalid value.';
+            var label = $("label[for=" + node.id + "] "),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || 'Invalid value.';
 
             //errorList
             //    .show()
@@ -132,23 +133,23 @@ var createAllErrors = function() {
     };
 
     // Support Safari
-    form.on( "submit", function( event ) {
-        if ( this.checkValidity && !this.checkValidity() ) {
-            $( this ).find( ":invalid" ).first().focus();
+    form.on("submit", function (event) {
+        if (this.checkValidity && !this.checkValidity()) {
+            $(this).find(":invalid").first().focus();
             event.preventDefault();
         }
     });
 
-    $( "input[type=submit], button:not([type=button])", form )
-        .on( "click", showAllErrorMessages);
+    $("input[type=submit], button:not([type=button])", form)
+            .on("click", showAllErrorMessages);
 
-    $( "input", form ).on( "keypress", function( event ) {
-        var type = $( this ).attr( "type" );
-        if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
-          && event.keyCode == 13 ) {
+    $("input", form).on("keypress", function (event) {
+        var type = $(this).attr("type");
+        if (/date|email|month|number|search|tel|text|time|url|week/.test(type)
+                && event.keyCode == 13) {
             showAllErrorMessages();
         }
     });
 };
 
-$( "form" ).each( createAllErrors );
+$("form").each(createAllErrors);

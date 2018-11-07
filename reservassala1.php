@@ -10,6 +10,8 @@ if (!Login::inicioSession()) {
     header("location: login.php");
     exit;
 }
+$active_reservas = "active";
+$title = "Reservas | Sala Estudio";
 ?>
 <!DOCTYPE html>
 <html lagn="en">
@@ -30,7 +32,6 @@ if (!Login::inicioSession()) {
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <script src="js/jquery.min.js"></script>
         <script src="js/moment.min.js"></script>
-        <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script src="js/alertify.js"></script>
         <!-- FULL CALENDAR -->
@@ -75,7 +76,7 @@ if (!Login::inicioSession()) {
                         $i = 0;
                         foreach (Login::obtenerSalas() as $sala) {
                             ?>
-                        <option <?php echo (isset($_GET["sala"])?($_GET["sala"]==$sala["CS_SALA_ID"]?"selected":""):"")?> value="<?php echo $sala["CS_SALA_ID"]; ?>"><?php echo $sala["DS_NOMBRE_SALA"]." | ".$sala["DS_DESCRIPCION_SALA"]." | hora: $".$sala["NM_VALOR_HORA_SALA"]; ?></option>
+                            <option <?php echo (isset($_GET["sala"]) ? ($_GET["sala"] == $sala["CS_SALA_ID"] ? "selected" : "") : "") ?> value="<?php echo $sala["CS_SALA_ID"]; ?>"><?php echo $sala["DS_NOMBRE_SALA"] . " | " . $sala["DS_DESCRIPCION_SALA"] . " | hora: $" . $sala["NM_VALOR_HORA_SALA"]; ?></option>
                         <?php }
                         ?>
                     </select><br/>
@@ -83,14 +84,173 @@ if (!Login::inicioSession()) {
                 <div class="col-md-2"></div>
             </div>
             <div class="row">
-                <div id="CalendarioWeb"></div>
+                <div id="CalendarioWeb"></div><br/><br/><br/>
             </div>
         </div>	
 
+        <!-- Modal (Agregar, Modificar, Eliminar) -->
+        <div id="Modalevento" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Reservar</h4>  
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="txtid" name="txtid">
+                        <input type="hidden" id="txtfechafinal" name="txtfechainicial"/><br/>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label><b>*Documento:</b></label>
+                                <select id="txtdocumento" style="width: 99%" required>
+                                </select><br/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><b>*Banda:</b></label>
+                                <select id="id_banda" style="width: 99%" required>
+                                </select><br/>
+                            </div>  		
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label><b>Fecha:</b></label>
+                                <input type="text" id="txtfechainicial" class="form-control" placeholder="Fecha reserva"><br/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><b>*Hora Inicial:</b></label>
+                                <div class="input-group" data-autoclose="true">
+                                    <input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" required onkeypress="return valida(event)"><br/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+                            </div>
 
-        <script>
+                            <div class="form-group col-md-4">
+                                <label><b>*Hora Final:</b></label>
+                                <div class="input-group" data-autoclose="true">
+                                    <input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" required onkeypress="return valida(event)"><br/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+
+                            </div>  		
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label><b>Instrumentos:</b></label><br/>
+                                <select name="instrumentos[]" id="instrumentos" style="width: 98%" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label><b>Sala:</b></label>
+                                <input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label><b>Descripción:</b></label>
+                                <textarea id="txtdescripcion" rows="3" class="form-control"></textarea>
+                            </div>		
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label><b>Seleccione color:</b></label>
+                                <input type="color" value="#ff8000" id = "txtcolor">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi">terminos y condiciones</a></label>	
+                            </div>		
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+
+                            </div>
+                        </div>  	
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
+                        <button type="button" data-dismiss="modal" class="btn btn-default"><b>Cerrar</b></button>
+                        <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
+                        <button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
+                        <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="terminoscondi" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Términos y condiciones</h4> 
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            <p>•	Se debe cancelar con 8 horas mínimas de anticipación o multa del 50%
+                            <p>•	Solo se pueden ingresar productos de la tienda SALA ESTUDIO
+                            <p>•	Prohibido fumar dentro de la sala y espacios comunes
+                            <p>•	Siempre hay personal disponible para atender cualquier problema dentro de la sala, en lo que respecta a equipos
+                            <p>•	Informar ante una anomalía o un daño de los equipos a la hora de ingresar a la sala
+                            <p>•	Antes de ingresar a la sala, se debe verificar el buen estado de los equipos. Cualquier daño en uno de los equipos, es responsabilidad del usuario.
+                            <p>•	No esta permitido exceder el número máximo de integrantes por sala. Sala 1=8 Sala 2=12
+                            <p>•	La sala estudio no se hace responsable de objetos dejados en los lugares comunes. Verificar siempre al abandonar el lugar
+                            <p>•	Se recomienda llegar 10 minutos antes para garantizar el uso correcto de los horarios por sala.
+                            <p>•	Luego de 15 minutos, la sala estudio no responde por una reserva perdida
+                            <p>•	Siempre informar al encargado de la sala cuando se hace un consumo de la tienda
+                        </h5>
+                        <h4>POLITICAS DE USO</h4>
+                        <h5>
+                            <p>•	El uso de las salas y equipos musicales por parte de personas, será analizado y autorizado en la modalidad de alquiler.  
+                            <p>•	Recuerde cancelar con un día de anticipación la reserva de la sala y los equipos musicales. Este procedimiento lo debe realizar al correo electrónico de la “SALA ESTUDIO”. 
+                            <p>•	Hacer buen uso de la  sala o del equipo musical asignado. 
+                            <p>•	Responder económicamente ante cualquier daño ocasionado a la sala o al equipo musical. Se tendrá en cuenta las políticas establecidas por la Dirección Administrativa y Financiera. 
+                            <p>•	Diligencie los formatos para la reserva y el control de las salas  y los equipos musicales.  
+                            <p>•	Borrar el tablero acrílico una vez finalice la sesión de clase u entrenamiento.   
+                            <p>•	Evite fumar y  consumir alimentos y bebidas dentro de las salas de música. 
+                            <p>•	Cumplir con los horarios asignados en su reserva para no perjudicar al usuario siguiente. 
+                            <p>•	Contribuir con el aseo, el cuidado del mobiliario y el buen uso de la infraestructura (planta física e instalaciones) de la “SALA ESTUDIO”. 
+                            <p>•	Para los tableros de las salas, utilice solo los marcadores sugeridos por la “SALA ESTUDIO”. 
+                            <p>•	Evite utilizar salas  que no ha reservado, esto puede perjudicar al usuario que si la tiene. 
+                            <p>•	Evite colocar láminas adhesivas y cintas en los tableros. Esto  daña el acrílico del tablero. 
+                            <p>•	No exceda la capacidad establecida en las salas. 
+                            <p>•	Cuando tenga dudas sobre el funcionamiento de los equipos de la sala, solicite ayuda al personal de logística de “SALA ESTUDIO” 
+                        </h5>
+                        <h4>RECOMENDACIONES</h4>
+                        <h5>
+                            <p>• Recordar con 24 horas de anticipación por medio de un correo 
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="btn btn-danger">Cerrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading">
+            <ul class="bokeh">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <?php
+        include("footer.php");
+        ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <script type="text/javascript">
+            var NuevoEvento;
+            var sw1 = true;
+            
             $(document).ready(function () {
-                $("#selectSala").change(function(e){
+                $("#selectSala").change(function (e) {
                     $('#CalendarioWeb').fullCalendar('refetchEvents');
                 });
                 $('#CalendarioWeb').fullCalendar({
@@ -129,19 +289,19 @@ if (!Login::inicioSession()) {
                     showNonCurrentDates: false,
                     hiddenDays: [0],
                     events: {
-                            url: 'http://localhost/SalaEstudio/reservasala1.php',
-                            type: 'POST',
-                            data: function () { // a function that returns an object
-                                return {
-                                    ID_SALA: $("#selectSala").val(),
-                                };
+                        url: 'http://localhost/SalaEstudio/reservasala1.php',
+                        type: 'POST',
+                        data: function () { // a function that returns an object
+                            return {
+                                ID_SALA: $("#selectSala").val(),
+                            };
 
-                            },
-                            error: function() {
-                              alert('there was an error while fetching events!');
-                            },
-                            color: 'yellow',   // a non-ajax option
-                            textColor: 'black' // a non-ajax option
+                        },
+                        error: function () {
+                            alert('there was an error while fetching events!');
+                        },
+                        color: 'yellow', // a non-ajax option
+                        textColor: 'black' // a non-ajax option
                     },
                     eventClick: function (calEvent, jsEvent, view) {
                         if (calEvent.editable == "1") {
@@ -288,169 +448,7 @@ if (!Login::inicioSession()) {
                 });
                 return {results: mapdata};
             }
-        </script>
-
-
-
-
-
-        <!-- Modal (Agregar, Modificar, Eliminar) -->
-        <div id="Modalevento" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Reservar</h4>  
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="txtid" name="txtid">
-                        <input type="hidden" id="txtfechafinal" name="txtfechainicial"/><br/>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label><b>*Documento:</b></label>
-                                <select id="txtdocumento" style="width: 99%" required="">
-                                </select><br/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label><b>*Banda:</b></label>
-                                <select id="id_banda" style="width: 99%" required="">
-                                </select><br/>
-                            </div>  		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label><b>Fecha:</b></label>
-                                <input type="text" id="txtfechainicial" class="form-control" placeholder="Fecha reserva"><br/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label><b>*Hora Inicial:</b></label>
-                                <div class="input-group" data-autoclose="true">
-                                    <input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)"><br/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label><b>*Hora Final:</b></label>
-                                <div class="input-group" data-autoclose="true">
-                                    <input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" onkeypress="return valida(event)" maxlength="250"><br/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </span>
-                                </div>
-
-                            </div>  		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Instrumentos:</b></label><br/>
-                                <select name="instrumentos[]" id="instrumentos" style="width: 98%" class="form-control"></select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Sala:</b></label>
-                                <input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Descripción:</b></label>
-                                <textarea id="txtdescripcion" rows="3" class="form-control"></textarea>
-                            </div>		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Seleccione color:</b></label>
-                                <input type="color" value="#ff8000" id = "txtcolor">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi"">terminos y condiciones</a></label>	
-                            </div>		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-
-                            </div>
-                        </div>  	
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
-                        <button type="button" data-dismiss="modal" class="btn btn-default"><b>Cerrar</b></button>
-                        <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
-                        <button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
-                        <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="terminoscondi" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Términos y condiciones</h4> 
-                    </div>
-                    <div class="modal-body">
-                        <h5>
-                            <p>•	Se debe cancelar con 8 horas mínimas de anticipación o multa del 50%
-                            <p>•	Solo se pueden ingresar productos de la tienda SALA ESTUDIO
-                            <p>•	Prohibido fumar dentro de la sala y espacios comunes
-                            <p>•	Siempre hay personal disponible para atender cualquier problema dentro de la sala, en lo que respecta a equipos
-                            <p>•	Informar ante una anomalía o un daño de los equipos a la hora de ingresar a la sala
-                            <p>•	Antes de ingresar a la sala, se debe verificar el buen estado de los equipos. Cualquier daño en uno de los equipos, es responsabilidad del usuario.
-                            <p>•	No esta permitido exceder el número máximo de integrantes por sala. Sala 1=8 Sala 2=12
-                            <p>•	La sala estudio no se hace responsable de objetos dejados en los lugares comunes. Verificar siempre al abandonar el lugar
-                            <p>•	Se recomienda llegar 10 minutos antes para garantizar el uso correcto de los horarios por sala.
-                            <p>•	Luego de 15 minutos, la sala estudio no responde por una reserva perdida
-                            <p>•	Siempre informar al encargado de la sala cuando se hace un consumo de la tienda
-                        </h5>
-                        <h4>POLITICAS DE USO</h4>
-                        <h5>
-                            <p>•	El uso de las salas y equipos musicales por parte de personas, será analizado y autorizado en la modalidad de alquiler.  
-                            <p>•	Recuerde cancelar con un día de anticipación la reserva de la sala y los equipos musicales. Este procedimiento lo debe realizar al correo electrónico de la “SALA ESTUDIO”. 
-                            <p>•	Hacer buen uso de la  sala o del equipo musical asignado. 
-                            <p>•	Responder económicamente ante cualquier daño ocasionado a la sala o al equipo musical. Se tendrá en cuenta las políticas establecidas por la Dirección Administrativa y Financiera. 
-                            <p>•	Diligencie los formatos para la reserva y el control de las salas  y los equipos musicales.  
-                            <p>•	Borrar el tablero acrílico una vez finalice la sesión de clase u entrenamiento.   
-                            <p>•	Evite fumar y  consumir alimentos y bebidas dentro de las salas de música. 
-                            <p>•	Cumplir con los horarios asignados en su reserva para no perjudicar al usuario siguiente. 
-                            <p>•	Contribuir con el aseo, el cuidado del mobiliario y el buen uso de la infraestructura (planta física e instalaciones) de la “SALA ESTUDIO”. 
-                            <p>•	Para los tableros de las salas, utilice solo los marcadores sugeridos por la “SALA ESTUDIO”. 
-                            <p>•	Evite utilizar salas  que no ha reservado, esto puede perjudicar al usuario que si la tiene. 
-                            <p>•	Evite colocar láminas adhesivas y cintas en los tableros. Esto  daña el acrílico del tablero. 
-                            <p>•	No exceda la capacidad establecida en las salas. 
-                            <p>•	Cuando tenga dudas sobre el funcionamiento de los equipos de la sala, solicite ayuda al personal de logística de “SALA ESTUDIO” 
-                        </h5>
-                        <h4>RECOMENDACIONES</h4>
-                        <h5>
-                            <p>• Recordar con 24 horas de anticipación por medio de un correo 
-                        </h5>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn btn-danger">Cerrar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="loading">
-            <ul class="bokeh">
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-
-        <script>
-            var NuevoEvento;
-            var sw1 = true;
+    
             $('#btnagregar').click(function () {
                 sw1 = validarcampos();
                 if (sw1 == true) {
@@ -642,9 +640,9 @@ if (!Login::inicioSession()) {
                     return false;
                 }
                 /*if (descripción == "") {
-                    alertify.error("Campo Descripción vacio");
-                    return false;
-                }*/
+                 alertify.error("Campo Descripción vacio");
+                 return false;
+                 }*/
                 if ($('#chkcondiciones').prop('checked') == false) {
                     alertify.error("Debe aceptar los terminos y condiciones de la sala");
                     return false;
@@ -674,7 +672,7 @@ if (!Login::inicioSession()) {
                 $("#id_banda").empty().trigger('change');
                 $('#instrumentos').empty().trigger('change');
                 $('#txtsala').val($("#selectSala > option:selected").html());
-                
+
             }
 
             function soloLetras(e) {

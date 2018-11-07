@@ -1,5 +1,6 @@
 $(document).ready(function () {
-
+    $("#guardar_banda2").validate();
+    $("#editar_banda").validate();
     $('#id_integrantes').select2({
         allowClear: false,
         language: "es",
@@ -52,6 +53,7 @@ $(document).ready(function () {
     $("#btn_nueva_banda").click(function (e) {
         e.preventDefault();
         $.fn.modal.Constructor.prototype.enforceFocus = $.noop;
+        $("#resultados_ajax_banda2").html("");
         $("#newBanda").modal("toggle");
     });
 
@@ -66,8 +68,8 @@ $(document).ready(function () {
 
 
     $("#editar_banda").submit(function (event) {
-
-        if ($("#editar_banda")[0].checkValidity()) {
+ 
+        if ($("#editar_banda").valid()) {
             $('#actualizar_datos2').attr("disabled", true);
             $("#loading").toggle();
             var parametros = $(this).serialize();
@@ -94,7 +96,7 @@ $(document).ready(function () {
 
     $("#guardar_banda2").submit(function (event) {
 
-        if ($("#guardar_banda2")[0].checkValidity()) {
+        if ($("#guardar_banda2").valid()) {
             $('#guardar_datos_banda').attr("disabled", true);
             $("#loading").toggle();
             var parametros = $(this).serialize();

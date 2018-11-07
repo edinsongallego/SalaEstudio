@@ -76,68 +76,12 @@
 	<?php
 	include("footer.php");
 	?>
-	<script type="text/javascript" src="js/productos.js"></script>
+        <script type="text/javascript" src="js/productos.js?v=<?php echo uniqid(); ?>"></script>
   </body>
 </html>
 <script>
-$( "#guardar_producto" ).submit(function( event ) {
-  $('#guardar_datos').attr("disabled", true);
-  
- var parametros = $(this).serialize();
-	 $.ajax({
-			type: "POST",
-			url: "ajax/nuevo_producto.php",
-			data: parametros,
-			 beforeSend: function(objeto){
-				$("#resultados_ajax_productos").html("Mensaje: Cargando...");
-			  },
-			success: function(datos){
-			$("#resultados_ajax_productos").html(datos);
-			$('#guardar_datos').attr("disabled", false);
-			load(1);
-			$("#guardar_producto")[0].reset();
-		  }
-	});
-  event.preventDefault();
-});
 
-$( "#editar_producto" ).submit(function( event ) {
-  $('#actualizar_datos').attr("disabled", true);
-  
- var parametros = $(this).serialize();
-	 $.ajax({
-			type: "POST",
-			url: "ajax/editar_producto.php",
-			data: parametros,
-			 beforeSend: function(objeto){
-				$("#resultados_ajax2").html("Mensaje: Cargando...");
-			  },
-			success: function(datos){
-			$("#resultados_ajax2").html(datos);
-			$('#actualizar_datos').attr("disabled", false);
-			load(1);
-			setTimeout(function(){
-				$("#myModal2").modal('toggle');
-			},1000);
-		  }
-	});
-  event.preventDefault();
-})
 
-	function obtener_datos(id){
-			var codigo_producto = $("#codigo_producto"+id).val();
-			var nombre_producto = $("#nombre_producto"+id).val();
-			var estado = $("#estado"+id).val();
-			var precio_producto = $("#precio_producto"+id).val();
-			var precio_compra_producto = $("#precio_compra_producto"+id).val();
-			var unidad_producto = $("#unidad_producto"+id).val();
-			var descripcion_producto  = $("#descripcion_producto"+id).val();
-			$("#mod_id").val(id);
-			$("#mod_codigo").val(codigo_producto);
-			$("#mod_nombre").val(nombre_producto);
-			$("#mod_unidad").val(unidad_producto);
-			$("#mod_precio").val(precio_producto);
-			$("#mod_descripcion").val(descripcion_producto);
-			$("#mod_precio_compra").val(precio_compra_producto);
-		}
+
+	
 </script>

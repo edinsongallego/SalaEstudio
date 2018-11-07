@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
     //$count=$rw_user['user_id'];
     $count = mysqli_num_rows($query);
     if ($count == 1) {
-         $SQL = "SELECT
+        $SQL = "SELECT
                                     Count(ft_factura.NM_CLIENTE_ID) AS NUM_FACTURAS_PENDIENTES
                                     FROM
                                     ft_factura
@@ -20,31 +20,55 @@ if (isset($_GET['id'])) {
                                     ft_factura.NM_CLIENTE_ID = '$user_id' AND
                                     ft_factura.ID_ESTADO = 2";
         $count_query = mysqli_query($con, $SQL);
-        $row = mysqli_fetch_array($count_query,MYSQLI_ASSOC);
+        $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
         //print_r($row);die;
         if ($row["NUM_FACTURAS_PENDIENTES"] == 0) {
-            if ($delete1 = mysqli_query($con, "UPDATE us_usuario SET NM_ELIMINADO = 1 WHERE NM_DOCUMENTO_ID = '" . $user_id . "'")) {
-                ?>
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Aviso!</strong> Datos eliminados exitosamente.
-                </div>
-                <?php
+            $SQL = "SELECT COUNT(documento) NUM_RESERVAS FROM rs_reserva_sala WHERE documento = '$user_id' AND `end` >= NOW() AND DS_ESTADO = 'Activo'";
+            $count_query = mysqli_query($con, $SQL);
+            $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+            if ($row["NUM_RESERVAS"] == 0) {
+                $SQL = "SELECT Count(t1.NM_DOCUMENTO_ID) AS NUM_BANDAS FROM us_banda_detalle_usuario AS t1 INNER JOIN us_banda_usuario AS t2 ON t1.CS_BANDA_ID = t2.CS_BANDA_ID WHERE t1.NM_DOCUMENTO_ID = '$user_id' AND t2.ESTADO = 'activo'";
+                $count_query = mysqli_query($con, $SQL);
+                $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+                 if ($row["NUM_BANDAS"] == 0) {
+                if ($delete1 = mysqli_query($con, "UPDATE us_usuario SET NM_ELIMINADO = 1 WHERE NM_DOCUMENTO_ID = '" . $user_id . "'")) {
+                    ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Aviso!</strong> Datos eliminados exitosamente.
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Error!</strong> Lo siento algo ha salido mal intenta nuevamente.
+                    </div>
+                    <?php
+                }
+                 }else{
+                    ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Error!</strong> Lo siento, pero este usuario esta asociado con una o varias bandas activas.
+                        </div>
+                    <?php
+                 }
             } else {
                 ?>
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong> Lo siento algo ha salido mal intenta nuevamente.
+                    <strong>Error!</strong> Lo siento, pero este usuario tiene reservas vigentes y activas.
                 </div>
-                <?php
+            <?php
             }
         } else {
             ?>
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong> Lo siento, pero este usuario tiene facturas pendientes por pagar.
-                </div>
-                <?php
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Error!</strong> Lo siento, pero este usuario tiene facturas pendientes por pagar.
+            </div>
+            <?php
         }
     } else {
         ?>
@@ -103,17 +127,17 @@ if ($action == 'ajax') {
                 </tr>
 
 
-        <?php
-        while ($row = mysqli_fetch_array($query)) {
-            $NM_DOCUMENTO_ID = $row['NM_DOCUMENTO_ID'];
-            $DS_NOMBRES_USUARIO = $row['DS_NOMBRES_USUARIO'] . " " . $row["DS_APELLIDOS_USUARIO"];
-            $DS_CORREO = $row['DS_CORREO'];
-            $CS_ESTADO_ID = $row['CS_ESTADO_ID'];
-            $NM_TELEFONO = $row['NM_TELEFONO'];
-            $NM_CELULAR = $row['NM_CELULAR'];
-            $DT_FECHA_CREACION = date('d/m/Y', strtotime($row['DT_FECHA_CREACION']));
-            $DS_DIRECCION = $row['DS_DIRECCION'];
-            ?>
+                <?php
+                while ($row = mysqli_fetch_array($query)) {
+                    $NM_DOCUMENTO_ID = $row['NM_DOCUMENTO_ID'];
+                    $DS_NOMBRES_USUARIO = $row['DS_NOMBRES_USUARIO'] . " " . $row["DS_APELLIDOS_USUARIO"];
+                    $DS_CORREO = $row['DS_CORREO'];
+                    $CS_ESTADO_ID = $row['CS_ESTADO_ID'];
+                    $NM_TELEFONO = $row['NM_TELEFONO'];
+                    $NM_CELULAR = $row['NM_CELULAR'];
+                    $DT_FECHA_CREACION = date('d/m/Y', strtotime($row['DT_FECHA_CREACION']));
+                    $DS_DIRECCION = $row['DS_DIRECCION'];
+                    ?>
 
                     <input type="hidden" value="<?php echo $row['DS_NOMBRES_USUARIO']; ?>" id="nombres<?php echo $NM_DOCUMENTO_ID; ?>">
                     <input type="hidden" value="<?php echo $row['DS_APELLIDOS_USUARIO']; ?>" id="apellidos<?php echo $NM_DOCUMENTO_ID; ?>">
@@ -126,20 +150,20 @@ if ($action == 'ajax') {
 
                     <input type="hidden" value="<?php echo $NM_CELULAR; ?>" id="celular<?php echo $NM_DOCUMENTO_ID; ?>">
 
-                   <input type="hidden" value="<?php echo $DS_DIRECCION; ?>" id="direccion<?php echo $NM_DOCUMENTO_ID; ?>">
-     
+                    <input type="hidden" value="<?php echo $DS_DIRECCION; ?>" id="direccion<?php echo $NM_DOCUMENTO_ID; ?>">
+
 
                     <tr>
                         <td><?php echo $NM_DOCUMENTO_ID; ?></td>
                         <td><?php echo $DS_NOMBRES_USUARIO; ?></td>
                         <td><?php echo $DS_CORREO; ?></td>
                         <td ><?php
-            if ($CS_ESTADO_ID == 1) {
-                echo "Activo";
-            } else {
-                echo "Inactivo";
-            }
-            ?></td>
+                            if ($CS_ESTADO_ID == 1) {
+                                echo "Activo";
+                            } else {
+                                echo "Inactivo";
+                            }
+                            ?></td>
                         <td><?php echo $DT_FECHA_CREACION; ?></td>
                         <td><?php echo $row["BANDAS"]; ?></td>    
                         <td ><span class="pull-right">
@@ -148,14 +172,14 @@ if ($action == 'ajax') {
                                 <a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminar('<?php echo $NM_DOCUMENTO_ID; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
 
                     </tr>
-                            <?php
-                        }
-                        ?>
+                    <?php
+                }
+                ?>
                 <tr>
                     <td colspan=9><span class="pull-right">
-        <?php
-        echo paginate($reload, $page, $total_pages, $adjacents);
-        ?>
+                            <?php
+                            echo paginate($reload, $page, $total_pages, $adjacents);
+                            ?>
 
                         </span>
                     </td>
@@ -165,7 +189,7 @@ if ($action == 'ajax') {
 
             </table>
         </div>
-                            <?php
-                        }
-                    }
-                    ?>
+        <?php
+    }
+}
+?>

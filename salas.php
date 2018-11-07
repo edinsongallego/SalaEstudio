@@ -7,18 +7,18 @@ if(!Login::inicioSession()){
 	header("location: login.php");
 	exit;
 }
-
+$active_reservas = "active";
+$title = "Reservas | Sala Estudio";
 ?>
 
 <html lang="en">
 <head>
 	<?php include("head.php");?>
 	<link rel="stylesheet" href="css/salas.css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 </head>
 <body>
-	<?php 
+	<?php
   if ($_SESSION['CS_TIPO_USUARIO_ID']==1) {
     include("navbar.php");
    
