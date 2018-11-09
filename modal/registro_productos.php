@@ -45,9 +45,9 @@
 				</div>
 			  </div> 
 			  <div class="form-group">
-				<label for="precio" class="col-sm-3 control-label">*Precio de compra</label>
+				<label for="precio_compra" class="col-sm-3 control-label">*Precio de compra</label>
 				<div class="col-sm-8">
-				  <input type="text" class="form-control" id="precio_compra" name="precio_compra" placeholder="Precio al que se compra el producto" required pattern="^[0-9]{1,6}?$" title="Ingresa sólo números" maxlength="8">
+				  <input type="number" class="form-control" id="precio_compra" name="precio_compra" placeholder="Precio al que se compra el producto" required pattern="^[0-9]{1,6}?$" title="Ingresa sólo números" maxlength="8">
 				</div>
 			  </div> 
 			  <div class="form-group">

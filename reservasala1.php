@@ -24,6 +24,16 @@ switch ($accion) {
 
         echo json_encode(array("usuario" => $resultado1, "banda" => $resultado2, 'instrumentos' => $resultado3));
         break;
+    case 'validarFechaServidor':
+        $fecha1 = new DateTime(); //fecha servidor
+        $fecha2 = DateTime::createFromFormat('Y-m-d H:i', $_GET['start']);
+        $intervalo = $fecha1->diff($fecha2);
+
+        if ($intervalo->invert == 1) {
+            echo "true";
+        }
+        die();
+        break;
     case 'guardar':
 
         $fecha1 = new DateTime(); //fecha servidor
@@ -34,7 +44,7 @@ switch ($accion) {
             echo json_encode(array("respuesta" => "hora"));
             break;
         } else {
-            $consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=1 and start BETWEEN :start and :end");
+            $consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=".$_POST["id_sala"]." AND start BETWEEN :start and :end");
             $res = $consulta->execute(array(
                 "start" => $_POST['start'],
                 "end" => $_POST['end']
@@ -53,7 +63,7 @@ switch ($accion) {
                     "title" => $_POST['title'],
                     "estado" => "Activo",
                     "color" => $_POST['color'],
-                    "banda" => $_POST['id_banda'],
+                    "banda" => (empty($_POST['id_banda'])?NULL:$_POST['id_banda']),
                     "descripcion" => $_POST['descripcion'],
                 ));
 
@@ -112,7 +122,7 @@ switch ($accion) {
                     }
                     echo json_encode(array("respuesta" => "exitoso"));
                 } else {
-                    echo json_encode(array("respuesta" => "error"));
+                    echo json_encode(array("respuesta" => "error", "mesaja" =>$sentenciaSQL->errorInfo()));
                 }
                 break;
             }

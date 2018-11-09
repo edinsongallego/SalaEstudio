@@ -177,6 +177,8 @@ if ($login->isUserLoggedIn() == true) {
 
     </body>
 </html>
+<script type="text/javascript" src="js/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/jquery-validation/src/localization/messages_es.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
 
@@ -203,6 +205,7 @@ if ($login->isUserLoggedIn() == true) {
 
 
                         $(document).ready(function () {
+                            $("#guardar_usuario2").validate();
                             $("#NM_CELULAR, #NM_TELEFONO").keyup(function (e) {
                                 var valorInicial = $(this).val();
                                 var valor = $(this).val().replace(/^0*/, '');
@@ -213,7 +216,7 @@ if ($login->isUserLoggedIn() == true) {
                             $("#guardar_usuario2").submit(function (event) {
 
                                 event.preventDefault();
-                                if ($('#guardar_usuario2')[0].checkValidity()) {
+                                if ($('#guardar_usuario2').valid()){
                                     if (validateMail(document.getElementById("DS_CORREO"))) {
                                         $("#loading").show();
                                         $('#registrarse').attr("disabled", true);

@@ -90,97 +90,98 @@ $title = "Reservas | Sala Estudio";
 
         <!-- Modal (Agregar, Modificar, Eliminar) -->
         <div id="Modalevento" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Reservar</h4>  
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="txtid" name="txtid">
-                        <input type="hidden" id="txtfechafinal" name="txtfechainicial"/><br/>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label><b>*Documento:</b></label>
-                                <select id="txtdocumento" style="width: 99%" required>
-                                </select><br/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label><b>*Banda:</b></label>
-                                <select id="id_banda" style="width: 99%" required>
-                                </select><br/>
-                            </div>  		
+            <form id="frm_reserva" role="form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Reservar</h4>  
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label><b>Fecha:</b></label>
-                                <input type="text" id="txtfechainicial" class="form-control" placeholder="Fecha reserva"><br/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label><b>*Hora Inicial:</b></label>
-                                <div class="input-group" data-autoclose="true">
-                                    <input type="text" id="txthoraini" class="form-control" placeholder="Hora inicial" required onkeypress="return valida(event)"><br/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </span>
+                        <div class="modal-body">
+                            <input type="hidden" id="txtid" name="txtid">
+                            <input type="hidden" id="txtfechafinal" name="txtfechainicial"/><br/>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label><b>*Documento:</b></label>
+                                    <select id="txtdocumento" style="width: 99%" required>
+                                    </select><br/>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label><b>Banda:</b></label>
+                                    <select id="id_banda" style="width: 99%"></select><br/>
+                                </div>  		
                             </div>
-
-                            <div class="form-group col-md-4">
-                                <label><b>*Hora Final:</b></label>
-                                <div class="input-group" data-autoclose="true">
-                                    <input type="text" id="txthorafin" class="form-control" placeholder="Hora inicial" required onkeypress="return valida(event)"><br/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </span>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label><b>Fecha:</b></label>
+                                    <input type="text" id="txtfechainicial" class="form-control" placeholder="Fecha reserva"><br/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><b>*Hora Inicial:</b></label>
+                                    <div class="input-group" data-autoclose="true">
+                                        <input type="text" id="txthoraini" name="txthoraini" class="form-control" placeholder="Hora inicial" required data-rule-validarHoraInicial="true" data-rule-validarHorasIgaules="true" data-rule-validarHorarioValido="true" data-rule-validarFechaServidor="true"><br/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
                                 </div>
 
-                            </div>  		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Instrumentos:</b></label><br/>
-                                <select name="instrumentos[]" id="instrumentos" style="width: 98%" class="form-control"></select>
+                                <div class="form-group col-md-4">
+                                    <label><b>*Hora Final:</b></label>
+                                    <div class="input-group" data-autoclose="true">
+                                        <input type="text" id="txthorafin" name="txthorafin" class="form-control" placeholder="Hora inicial" required><br/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                    </div>
+                     
+                                </div>  		
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Sala:</b></label>
-                                <input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label><b>Instrumentos:</b></label><br/>
+                                    <select name="instrumentos[]" id="instrumentos" style="width: 98%" class="form-control"></select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Descripción:</b></label>
-                                <textarea id="txtdescripcion" rows="3" class="form-control"></textarea>
-                            </div>		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label><b>Seleccione color:</b></label>
-                                <input type="color" value="#ff8000" id = "txtcolor">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label><b>Sala:</b></label>
+                                    <input type="text" id="txtsala" class="form-control" value="Sala 1 | hora: 24000" disabled="disabled"><br/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi">terminos y condiciones</a></label>	
-                            </div>		
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label><b>Descripción:</b></label>
+                                    <textarea id="txtdescripcion" rows="3" class="form-control"></textarea>
+                                </div>		
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label><b>Seleccione color:</b></label>
+                                    <input type="color" value="#ff8000" id = "txtcolor" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <input type="checkbox" id="acepto" name="acepto" data-rule-validaTerminosYCondiciones="true" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi" data-toggle="modal" data-target="#terminoscondi">terminos y condiciones</a></label>	
+                                </div>		
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
 
-                            </div>
-                        </div>  	
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
-                        <button type="button" data-dismiss="modal" class="btn btn-default"><b>Cerrar</b></button>
-                        <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
-                        <button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
-                        <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
+                                </div>
+                            </div>  	
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default"><b>Cerrar</b></button>
+                            <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
+                            <button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
+                            <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>    
         </div>
 
 
@@ -246,487 +247,541 @@ $title = "Reservas | Sala Estudio";
         ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <script type="text/javascript">
-            var NuevoEvento;
-            var sw1 = true;
-            
-            $(document).ready(function () {
-                $("#selectSala").change(function (e) {
-                    $('#CalendarioWeb').fullCalendar('refetchEvents');
-                });
-                $('#CalendarioWeb').fullCalendar({
-                    /*validRange: function(nowDate){
-                     //(console.log( nowDate.subtract(1, 'day'))
-                     return {start: nowDate.subtract(1, 'day')} //to prevent anterior dates
-                     },*/
+                                            var NuevoEvento;
+                                            var sw1 = true;
 
-                    defaultView: "agendaWeek",
-                    header: {
-                        left: 'today,prev,next',
-                        center: 'title',
-                        right: 'month, agendaWeek'
-                    },
-                    businessHours: {
-                        start: '08:00',
-                        end: '24:00',
-                        dow: [1, 2, 3, 4, 5]
+                                            $(document).ready(function () {
+                                                $("#frm_reserva").validate({
+                                                   //errorLabelContainer: '.errorTxt'
+                                                    errorPlacement: function(error, element) {
+                                                        var placement = $(element).data('error');
+                                                        if (placement) {
+                                                          $(placement).append(error)
+                                                        } else {
+                                                          error.insertAfter(element);
+                                                          if($(element).attr("id") == "txtdocumento" || $(element).attr("id") == "acepto"){
+                                                            error.detach();
+                                                            $(element).parent().append(error);
+                                                          }else if($(element).attr("id") == "txthoraini" || $(element).attr("id") == "txthorafin"){
+                                                            error.detach();
+                                                            $(element).parent().parent().append(error);
+                                                          }
+                                                        }
+                                                      }
+                                                });
+                                                $.validator.addMethod("validarHoraInicial", function (value, element) {
+                                                    horaini = $('#txthoraini').val();
+                                                    horafinal = $('#txthorafin').val();
+                                                    var string1 = CompararHoras(horaini, horafinal);
 
-                    },
-                    dayClick: function (date, jsEvent, view) {
-                        if (moment().diff(date, 'days') > 0) {
-                            alertify.error("Este dia no esta habilitado para reservas");
-                        } else {
-                            asignarValorestexto(false, "#btnagregar");
-                            asignarValorestexto(true, "#btnfactura");
-                            asignarValorestexto(true, "#btneliminar");
-                            asignarValorestexto(false, "#chkcondiciones");
-                            asignarValorestexto(true, "#txtfechainicial");
-                            limpiarFrm();
-                            $("#txtfechainicial").val(date.format("YYYY-MM-DD"));
-                            $("#txtfechafinal").val(date.format("YYYY-MM-DD"));
-                            $("#Modalevento").modal();
-                        }
-                    },
-                    showNonCurrentDates: false,
-                    hiddenDays: [0],
-                    events: {
-                        url: 'http://localhost/SalaEstudio/reservasala1.php',
-                        type: 'POST',
-                        data: function () { // a function that returns an object
-                            return {
-                                ID_SALA: $("#selectSala").val(),
-                            };
+                                                    return !(string1 == "sHora1 MAYOR sHora2");
+                                                }, "La hora inicial no puede ser mayor que la hora final.");
 
-                        },
-                        error: function () {
-                            alert('there was an error while fetching events!');
-                        },
-                        color: 'yellow', // a non-ajax option
-                        textColor: 'black' // a non-ajax option
-                    },
-                    eventClick: function (calEvent, jsEvent, view) {
-                        if (calEvent.editable == "1") {
-                            asignarValorestexto(true, "#btnagregar");
-                            asignarValorestexto(false, "#btnfactura");
-                            asignarValorestexto(false, "#btneliminar");
-                            asignarValorestexto(false, "#chkcondiciones");
-                            asignarValorestexto(true, "#txtfechainicial");
-                            limpiarFrm();
-                            setearCampos(calEvent, jsEvent, view);
-                        } else {
-                            alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
-                        }
-                    },
-                    editable: true,
-                    eventDrop: function (calEvent) {
-                        if (calEvent.editable == "1") {
-                            $('#txtid').val(calEvent.id);
-                            $('#txtdocumento').val(calEvent.documento);
-                            $('#txtsala').val(calEvent.sala);
-                            $('#txtdescripcion').val(calEvent.descripcion);
-                            FechaHoraini = calEvent.start.format().split("T");
-                            $('#txtfechainicial').val(FechaHoraini[0]);
-                            $('#txthoraini').val(FechaHoraini[1]);
-                            FechaHorafin = calEvent.end.format().split("T");
-                            $('#txtfechafinal').val(FechaHorafin[0]);
-                            $('#txthorafin').val(FechaHorafin[1]);
-                            RecolectarDatosGUI();
-                            EnviarInformacion('modificar', NuevoEvento, true);
-                        } else {
-                            alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto..");
-                        }
+                                                $.validator.addMethod("validarHorasIgaules", function (value, element) {
+                                                    horaini = $('#txthoraini').val();
+                                                    horafinal = $('#txthorafin').val();
+                                                    var string1 = CompararHoras(horaini, horafinal);
+                                                    //console.log(string1 == "sHora1 IGUAL sHora2");
+                                                    return !(string1 == "sHora1 IGUAL sHora2");
+                                                }, "La hora inicial y la hora final no pueden ser iguales.");
 
+                                                $.validator.addMethod("validarHorarioValido", function (value, element) {
+                                                    horaini = $('#txthoraini').val();
+                                                    var sw = horadentro(horaini);
+                                                    return !(sw == 1);
+                                                }, "Las horas de atención son desde las 8 am a 11 pm.");
 
-                    }
+                                                $.validator.addMethod("validaTerminosYCondiciones", function (value, element) {
+                                                    return $('#acepto').prop('checked');
+                                                }, "Debe aceptar los terminos y condiciones de la sala.");
+                                                
+                                                $.validator.addMethod("validarFechaServidor", function(value, element) {
+                                                    var isSuccess = true;
+                                                    $.ajax({ url: "reservasala1.php", 
+                                                        method: "GET",
+                                                        data: {'accion':'validarFechaServidor', start:$('#txtfechainicial').val() + " " + $('#txthoraini').val()}, 
+                                                        async: false, 
+                                                        success: 
+                                                            function(msg) { isSuccess = msg === "true" ? true : false }
+                                                      } );
+                                                    return isSuccess;
+                                                }, "La hora inicio seleccionada es menor a la hora actual.");
+        
+                                                $("#selectSala").change(function (e) {
+                                                    $('#CalendarioWeb').fullCalendar('refetchEvents');
+                                                });
+                                                $('#CalendarioWeb').fullCalendar({
+                                                    /*validRange: function(nowDate){
+                                                     //(console.log( nowDate.subtract(1, 'day'))
+                                                     return {start: nowDate.subtract(1, 'day')} //to prevent anterior dates
+                                                     },*/
 
-                });
+                                                    defaultView: "agendaWeek",
+                                                    header: {
+                                                        left: 'today,prev,next',
+                                                        center: 'title',
+                                                        right: 'month, agendaWeek'
+                                                    },
+                                                    businessHours: {
+                                                        start: '08:00',
+                                                        end: '24:00',
+                                                        dow: [1, 2, 3, 4, 5]
 
-                $('#txthoraini, #txthorafin').clockpicker({
-                    donetext: "Seleccionar"
+                                                    },
+                                                    dayClick: function (date, jsEvent, view) {
+                                                        if (moment(date.format("YYYY-MM-DD HH:mm:ss")) <  moment()) {
+                                                            alertify.error("Este sección no se encuetra disponible para reservar.");
+                                                        } else {
+                                                            asignarValorestexto(false, "#btnagregar");
+                                                            asignarValorestexto(true, "#btnfactura");
+                                                            asignarValorestexto(true, "#btneliminar");
+                                                            asignarValorestexto(false, "#chkcondiciones");
+                                                            asignarValorestexto(true, "#txtfechainicial");
+                                                            limpiarFrm();
+                                                            $("#txtfechainicial").val(date.format("YYYY-MM-DD"));
+                                                            $("#txtfechafinal").val(date.format("YYYY-MM-DD"));
+                                                            $("#txthoraini").val(date.format("HH:mm"));
+                                                            $("#Modalevento").modal();
+                                                        }
+                                                    },
+                                                    showNonCurrentDates: false,
+                                                    hiddenDays: [0],
+                                                    events: {
+                                                        url: 'http://localhost/SalaEstudio/reservasala1.php',
+                                                        type: 'POST',
+                                                        data: function () { // a function that returns an object
+                                                            return {
+                                                                ID_SALA: $("#selectSala").val(),
+                                                            };
 
-                });
-
-                crearSelect2Documento();
-                crearSelect2Banda();
-                crearMultiselect2Instrumentos();
-
-            });
-
-            function adicionarDataSelect2Instrumentos(data) {
-                $.each(data, function (i, instrumento) {
-                    $("#instrumentos").select2("trigger", "select", {
-                        data: {id: instrumento.ID_INSTRUMENTO, text: instrumento.NOMBRE, modelo: instrumento}
-                    });
-                });
-            }
-
-            function crearSelect2Banda(data) {
-                $("#id_banda").select2({
-                    allowClear: true,
-                    language: "es",
-                    placeholder: "Seleccione la banda",
-                    data: processData(data).results,
-                    ajax: {
-                        url: 'ajax/autocomplete/bandas_usuario.php',
-                        dataType: 'json',
-                        data: function (params) {
-                            var query = {
-                                id_usuario: $("#txtdocumento").val(),
-                                search: params.term,
-                                page: params.page || 1
-                            }
-
-                            // Query parameters will be ?search=[term]&page=[page]
-                            return query;
-                        },
-                        results: function (data, page) {
-                            return {results: data.results};
-                        }
-                    }
-                });
-            }
-
-            function crearMultiselect2Instrumentos() {
-                $('#instrumentos').select2({
-                    allowClear: false,
-                    language: "es",
-                    placeholder: "Instrumentos",
-                    multiple: true,
-                    default: false,
-                    ajax: {
-                        url: 'ajax/autocomplete/instrumentos.php',
-                        cache: "true",
-                        type: 'POST',
-                        dataType: 'json',
-                        data: function (data, page) {
-                            return data;
-                        },
-                        results: function (data, page) {
-                            return {results: data.results};
-                        }
-                    },
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    },
-                    templateResult: function (item) {
-                        if (item.id != undefined) {
-                            return "<b>Instrumento: </b>" + item.text + "<br/><b>Tipo: " + item.modelo.TIPO + "</b>";
-                        } else {
-                            return null;
-                        }
-                    },
-                });
-            }
-
-            function crearSelect2Documento(data) {
-                $("#txtdocumento").select2({
-                    allowClear: true,
-                    language: "es",
-                    placeholder: "Seleccione al usuario",
-                    data: processData(data).results,
-                    ajax: {
-                        url: 'consulta.php',
-                        dataType: 'json',
-                        data: function (params) {
-                            var query = {
-                                search: params.term,
-                                page: params.page || 1
-                            }
-
-                            // Query parameters will be ?search=[term]&page=[page]
-                            return query;
-                        },
-                        results: function (data, page) {
-                            return {results: data.results};
-                        }
-                    }
-                });
-            }
-
-            function processData(data) {
-                var mapdata = $.map([data], function (obj) {
-                    return obj;
-                });
-                return {results: mapdata};
-            }
-    
-            $('#btnagregar').click(function () {
-                sw1 = validarcampos();
-                if (sw1 == true) {
-                    RecolectarDatosGUI();
-                    EnviarInformacion('guardar', NuevoEvento);
-                }
-            });
-
-            $("#txtdocumento").change(function (e) {
-                $("#id_banda").empty().trigger('change');
-            });
-
-            $('#btneliminar').click(function () {
-
-                RecolectarDatosGUI();
-                EnviarInformacion('eliminar', NuevoEvento);
+                                                        },
+                                                        error: function () {
+                                                            alert('there was an error while fetching events!');
+                                                        },
+                                                        color: 'yellow', // a non-ajax option
+                                                        textColor: 'black' // a non-ajax option
+                                                    },
+                                                    eventClick: function (calEvent, jsEvent, view) {
+                                                        if (calEvent.editable == "1") {
+                                                            asignarValorestexto(true, "#btnagregar");
+                                                            asignarValorestexto(false, "#btnfactura");
+                                                            asignarValorestexto(false, "#btneliminar");
+                                                            asignarValorestexto(false, "#chkcondiciones");
+                                                            asignarValorestexto(true, "#txtfechainicial");
+                                                            limpiarFrm();
+                                                            setearCampos(calEvent, jsEvent, view);
+                                                        } else {
+                                                            alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto.");
+                                                        }
+                                                    },
+                                                    editable: true,
+                                                    eventDrop: function (calEvent) {
+                                                        if (calEvent.editable == "1") {
+                                                            $('#txtid').val(calEvent.id);
+                                                            $('#txtdocumento').val(calEvent.documento);
+                                                            $('#txtsala').val(calEvent.sala);
+                                                            $('#txtdescripcion').val(calEvent.descripcion);
+                                                            FechaHoraini = calEvent.start.format().split("T");
+                                                            $('#txtfechainicial').val(FechaHoraini[0]);
+                                                            $('#txthoraini').val(FechaHoraini[1]);
+                                                            FechaHorafin = calEvent.end.format().split("T");
+                                                            $('#txtfechafinal').val(FechaHorafin[0]);
+                                                            $('#txthorafin').val(FechaHorafin[1]);
+                                                            RecolectarDatosGUI();
+                                                            EnviarInformacion('modificar', NuevoEvento, true);
+                                                        } else {
+                                                            alertify.error("Usted no puede editar este evento, pertenece a un usuario distinto..");
+                                                        }
 
 
-            });
-            $('#btnfactura').click(function () {
-                RecolectarDatosGUI();
-                EnviarInformacion('factura', NuevoEvento);
+                                                    }
 
-            });
-            $('#btnmulta').click(function () {
-                RecolectarDatosGUI();
-                EnviarInformacion('multa', NuevoEvento);
+                                                });
 
-            });
-            function RecolectarDatosGUI() {
-                NuevoEvento = {
-                    id: $('#txtid').val(),
-                    title: $('#txtdocumento').select2("data")[0].text + " - " + $('#txtdescripcion').val(),
-                    start: $('#txtfechainicial').val() + " " + $('#txthoraini').val(),
-                    end: $('#txtfechafinal').val() + " " + $('#txthorafin').val(),
-                    documento: $('#txtdocumento').val(),
-                    id_banda: $("#id_banda").val(),
-                    id_sala: $("#selectSala").val(),
-                    color: $('#txtcolor').val(),
-                    descripcion: $('#txtdescripcion').val(),
-                    instrumentos: $('#instrumentos').val()
-                };
-            }
+                                                $('#txthoraini, #txthorafin').clockpicker({
+                                                    donetext: "Seleccionar"
+
+                                                });
+
+                                                crearSelect2Documento();
+                                                crearSelect2Banda();
+                                                crearMultiselect2Instrumentos();
+
+                                            });
+
+                                            function adicionarDataSelect2Instrumentos(data) {
+                                                $.each(data, function (i, instrumento) {
+                                                    $("#instrumentos").select2("trigger", "select", {
+                                                        data: {id: instrumento.ID_INSTRUMENTO, text: instrumento.NOMBRE, modelo: instrumento}
+                                                    });
+                                                });
+                                            }
+
+                                            function crearSelect2Banda(data) {
+                                                $("#id_banda").select2({
+                                                    allowClear: true,
+                                                    language: "es",
+                                                    placeholder: "Seleccione la banda",
+                                                    data: processData(data).results,
+                                                    ajax: {
+                                                        url: 'ajax/autocomplete/bandas_usuario.php',
+                                                        dataType: 'json',
+                                                        data: function (params) {
+                                                            var query = {
+                                                                id_usuario: $("#txtdocumento").val(),
+                                                                search: params.term,
+                                                                page: params.page || 1
+                                                            }
+
+                                                            // Query parameters will be ?search=[term]&page=[page]
+                                                            return query;
+                                                        },
+                                                        results: function (data, page) {
+                                                            return {results: data.results};
+                                                        }
+                                                    }
+                                                });
+                                            }
+
+                                            function crearMultiselect2Instrumentos() {
+                                                $('#instrumentos').select2({
+                                                    allowClear: false,
+                                                    language: "es",
+                                                    placeholder: "Instrumentos",
+                                                    multiple: true,
+                                                    default: false,
+                                                    ajax: {
+                                                        url: 'ajax/autocomplete/instrumentos.php',
+                                                        cache: "true",
+                                                        type: 'POST',
+                                                        dataType: 'json',
+                                                        data: function (data, page) {
+                                                            return data;
+                                                        },
+                                                        results: function (data, page) {
+                                                            return {results: data.results};
+                                                        }
+                                                    },
+                                                    escapeMarkup: function (markup) {
+                                                        return markup;
+                                                    },
+                                                    templateResult: function (item) {
+                                                        if (item.id != undefined) {
+                                                            return "<b>Instrumento: </b>" + item.text + "<br/><b>Tipo: " + item.modelo.TIPO + "</b>";
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    },
+                                                });
+                                            }
+
+                                            function crearSelect2Documento(data) {
+                                                $("#txtdocumento").select2({
+                                                    allowClear: true,
+                                                    language: "es",
+                                                    placeholder: "Seleccione al usuario",
+                                                    data: processData(data).results,
+                                                    ajax: {
+                                                        url: 'consulta.php',
+                                                        dataType: 'json',
+                                                        data: function (params) {
+                                                            var query = {
+                                                                search: params.term,
+                                                                page: params.page || 1
+                                                            }
+
+                                                            // Query parameters will be ?search=[term]&page=[page]
+                                                            return query;
+                                                        },
+                                                        results: function (data, page) {
+                                                            return {results: data.results};
+                                                        }
+                                                    }
+                                                });
+                                            }
+
+                                            function processData(data) {
+                                                var mapdata = $.map([data], function (obj) {
+                                                    return obj;
+                                                });
+                                                return {results: mapdata};
+                                            }
+
+                                            $('#btnagregar').click(function () {
+                                                if ($("#frm_reserva").valid() && $("#txthoraini").valid() && $("#txthorafin").valid() && $("#acepto").valid()) {
+                                                    RecolectarDatosGUI();
+                                                    EnviarInformacion('guardar', NuevoEvento);
+                                                }
+                                            });
+
+                                            $("#txtdocumento").change(function (e) {
+                                                $("#id_banda").empty().trigger('change');
+                                            });
+
+                                            $('#btneliminar').click(function () {
+                                                RecolectarDatosGUI();
+                                                EnviarInformacion('eliminar', NuevoEvento);
+
+                                            });
+                                            $('#btnfactura').click(function () {
+                                                RecolectarDatosGUI();
+                                                EnviarInformacion('factura', NuevoEvento);
+
+                                            });
+                                            $('#btnmulta').click(function () {
+                                                RecolectarDatosGUI();
+                                                EnviarInformacion('multa', NuevoEvento);
+
+                                            });
+                                            function RecolectarDatosGUI() {
+                                                NuevoEvento = {
+                                                    id: $('#txtid').val(),
+                                                    title: $('#txtdocumento').select2("data")[0].text + " - " + $('#txtdescripcion').val(),
+                                                    start: $('#txtfechainicial').val() + " " + $('#txthoraini').val(),
+                                                    end: $('#txtfechafinal').val() + " " + $('#txthorafin').val(),
+                                                    documento: $('#txtdocumento').val(),
+                                                    id_banda: $("#id_banda").val(),
+                                                    id_sala: $("#selectSala").val(),
+                                                    color: $('#txtcolor').val(),
+                                                    descripcion: $('#txtdescripcion').val(),
+                                                    instrumentos: $('#instrumentos').val()
+                                                };
+                                            }
 
 
-            function EnviarInformacion(accion, objEvento, modal) {
-                $("#loading").show();
-                $.ajax({
-                    type: 'POST',
-                    url: 'reservasala1.php?accion=' + accion,
-                    dataType: "JSON",
-                    data: objEvento,
-                    success: function (msg) {
-                        if (accion == 'guardar')
-                        {
-                            if (msg.respuesta == "hora") {
-                                alertify.error("La hora inicio seleccionada es menor a la hora actual");
-                            } else {
-                                if (msg.respuesta == "exitoso") {
-                                    $('#CalendarioWeb').fullCalendar('refetchEvents');
-                                    if (!modal) {
-                                        $("#Modalevento").modal('toggle');
-                                        alertify.success("Guardada con éxito");
-                                    }
-                                } else {
-                                    alertify.error("Ya existe una reserva en ese horarios");
-                                }
-                            }
+                                            function EnviarInformacion(accion, objEvento, modal) {
+                                                $("#loading").show();
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: 'reservasala1.php?accion=' + accion,
+                                                    dataType: "JSON",
+                                                    data: objEvento,
+                                                    success: function (msg) {
+                                                        if (accion == 'guardar')
+                                                        {
+                                                            if (msg.respuesta == "hora") {
+                                                                alertify.error("La hora inicio seleccionada es menor a la hora actual");
+                                                            } else {
+                                                                if (msg.respuesta == "exitoso") {
+                                                                    $('#CalendarioWeb').fullCalendar('refetchEvents');
+                                                                    if (!modal) {
+                                                                        $("#Modalevento").modal('toggle');
+                                                                        alertify.success("Guardada con éxito");
+                                                                    }
+                                                                } else {
+                                                                    alertify.error("Ya existe una reserva en ese horarios");
+                                                                }
+                                                            }
 
-                        }
-                        if (accion == 'eliminar')
-                        {
-                            if (msg.respuesta == "exitoso") {
-                                $('#CalendarioWeb').fullCalendar('refetchEvents');
-                                if (!modal) {
-                                    $("#Modalevento").modal('toggle');
-                                    alertify.success("Reserva cancelada con exito");
-                                }
-                            } else {
-                                alertify.error("Las reservas se cancelan con 8 horas de anticipación");
-                            }
-                        }
-                        if (accion == 'factura')
-                        {
+                                                        }
+                                                        if (accion == 'eliminar')
+                                                        {
+                                                            if (msg.respuesta == "exitoso") {
+                                                                $('#CalendarioWeb').fullCalendar('refetchEvents');
+                                                                if (!modal) {
+                                                                    $("#Modalevento").modal('toggle');
+                                                                    alertify.success("Reserva cancelada con exito");
+                                                                }
+                                                            } else {
+                                                                alertify.error("Las reservas se cancelan con 8 horas de anticipación");
+                                                            }
+                                                        }
+                                                        if (accion == 'factura')
+                                                        {
 
-                            if (msg.respuesta == "exitoso") {
-                                $('#CalendarioWeb').fullCalendar('refetchEvents');
-                                if (!modal) {
-                                    $("#Modalevento").modal('toggle');
-                                    alertify.success("Factura creada con éxito");
-                                    setTimeout(function () {
-                                        imprimir_factura(msg.id_factura);
-                                    }, 1500);
-                                }
-                            } else {
-                                alertify.error("La reserva seleccionada ya tiene una factura asociada");
-                            }
-                        }
-                        if (accion == 'multa')
-                        {
+                                                            if (msg.respuesta == "exitoso") {
+                                                                $('#CalendarioWeb').fullCalendar('refetchEvents');
+                                                                if (!modal) {
+                                                                    $("#Modalevento").modal('toggle');
+                                                                    alertify.success("Factura creada con éxito");
+                                                                    setTimeout(function () {
+                                                                        imprimir_factura(msg.id_factura);
+                                                                    }, 1500);
+                                                                }
+                                                            } else {
+                                                                alertify.error("La reserva seleccionada ya tiene una factura asociada");
+                                                            }
+                                                        }
+                                                        if (accion == 'multa')
+                                                        {
 
-                            if (msg.respuesta == "exitoso") {
-                                $('#CalendarioWeb').fullCalendar('refetchEvents');
-                                if (!modal) {
-                                    $("#Modalevento").modal('toggle');
-                                    alertify.success("Multa creada con éxito");
-                                    setTimeout(function () {
-                                        imprimir_factura(msg.id_factura);
-                                    }, 1500);
-                                }
-                            } else {
-                                alertify.error("La reserva seleccionada ya tiene una multa asociada");
-                            }
-                        }
-                        $("#loading").hide();
-                    }
-                });
-            }
-            $('.clockpicker').clockpicker();
+                                                            if (msg.respuesta == "exitoso") {
+                                                                $('#CalendarioWeb').fullCalendar('refetchEvents');
+                                                                if (!modal) {
+                                                                    $("#Modalevento").modal('toggle');
+                                                                    alertify.success("Multa creada con éxito");
+                                                                    setTimeout(function () {
+                                                                        imprimir_factura(msg.id_factura);
+                                                                    }, 1500);
+                                                                }
+                                                            } else {
+                                                                alertify.error("La reserva seleccionada ya tiene una multa asociada");
+                                                            }
+                                                        }
+                                                        $("#loading").hide();
+                                                    }
+                                                });
+                                            }
+                                            $('.clockpicker').clockpicker();
 
-            function asignarValorestexto(sw, boton) {
-                $(boton).prop("disabled", sw);
-            }
-            function setearCampos(calEvent, jsEvent, view) {
-                // Mostrar informacion  del evento en los inputs
-                $.get("reservasala1.php?accion=obtenerUsuario&ID_RESERVA=" + calEvent.id + "&NM_DOCUMENTO=" + calEvent.documento + "&ID_BANDA=" + calEvent.id_banda, {}, function (data) {
-                    crearSelect2Documento(data.usuario);
-                    if (data.banda)
-                        crearSelect2Banda(data.banda);
-                    if (data.instrumentos)
-                        adicionarDataSelect2Instrumentos(data.instrumentos);
-                    $('#txtid').val(calEvent.id);
-                    //$('#txtdocumento').val(calEvent.documento);
-                    $('#txtdescripcion').val(calEvent.descripcion);
-                    FechaHoraini = calEvent.start._i.split(" ");
-                    $('#txtfechainicial').val(FechaHoraini[0]);
-                    $('#txthoraini').val(FechaHoraini[1]);
-                    FechaHorafin = calEvent.end._i.split(" ");
-                    $('#txtfechafinal').val(FechaHorafin[0]);
-                    $('#txthorafin').val(FechaHorafin[1]);
-                    $("#Modalevento").modal();
-                    //docu = calEvent.sala;
-                    //alert(docu);
-                }, "JSON");
+                                            function asignarValorestexto(sw, boton) {
+                                                $(boton).prop("disabled", sw);
+                                            }
+                                            function setearCampos(calEvent, jsEvent, view) {
+                                                // Mostrar informacion  del evento en los inputs
+                                                $.get("reservasala1.php?accion=obtenerUsuario&ID_RESERVA=" + calEvent.id + "&NM_DOCUMENTO=" + calEvent.documento + "&ID_BANDA=" + calEvent.id_banda, {}, function (data) {
+                                                    crearSelect2Documento(data.usuario);
+                                                    if (data.banda)
+                                                        crearSelect2Banda(data.banda);
+                                                    if (data.instrumentos)
+                                                        adicionarDataSelect2Instrumentos(data.instrumentos);
+                                                    $('#txtid').val(calEvent.id);
+                                                    //$('#txtdocumento').val(calEvent.documento);
+                                                    $('#txtdescripcion').val(calEvent.descripcion);
+                                                    FechaHoraini = calEvent.start._i.split(" ");
+                                                    $('#txtfechainicial').val(FechaHoraini[0]);
+                                                    $('#txthoraini').val(FechaHoraini[1]);
+                                                    FechaHorafin = calEvent.end._i.split(" ");
+                                                    $('#txtfechafinal').val(FechaHorafin[0]);
+                                                    $('#txthorafin').val(FechaHorafin[1]);
+                                                    $("#Modalevento").modal();
+                                                    //docu = calEvent.sala;
+                                                    //alert(docu);
+                                                }, "JSON");
 
-            }
-            function validarcampos()
-            {
-                var documento, sala, fecha, horaini, horafinal, descripción;
-                documento = $('#txtdocumento').val();
-                fecha = $('#txtfechainicial').val();
-                horaini = $('#txthoraini').val();
-                horafinal = $('#txthorafin').val();
-                descripción = $('#txtdescripcion').val();
-                check = $('#chkcondiciones').val();
-                banda = $("#id_banda").val();
-                var string1 = CompararHoras(horaini, horafinal);
-                var sw = horadentro(horaini);
-                if (documento == "" || documento == null) {
-                    alertify.error("Campo Documento vacio");
-                    return false;
-                }
-                if (banda == "" || banda == null) {
-                    alertify.error("Campo banda vacio");
-                    return false;
-                }
-                if (fecha == "") {
-                    alertify.error("Campo Fecha vacio");
-                    return false;
-                }
-                if (horaini == "") {
-                    alertify.error("Campo Hora Inicial vacio")
-                    return false;
-                }
-                if (string1 == "sHora1 MAYOR sHora2") {
-                    alertify.error("Hora inicial es mayor a la final");
-                    return false;
-                }
-                if (string1 == "sHora1 IGUAL sHora2") {
-                    alertify.error("Hora inicial y hora final son iguales");
-                    return false;
-                }
-                if (sw == 1) {
-                    alertify.error("Las horas de atención son desde las 8 am a 11 pm");
-                    return false;
-                }
-                if (horafinal == "") {
-                    alertify.error("Campo Hora final vacio");
-                    return false;
-                }
-                /*if (descripción == "") {
-                 alertify.error("Campo Descripción vacio");
-                 return false;
-                 }*/
-                if ($('#chkcondiciones').prop('checked') == false) {
-                    alertify.error("Debe aceptar los terminos y condiciones de la sala");
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-            function valida(e) {
-                tecla = (document.all) ? e.keyCode : e.which;
+                                            }
+                                            function validarcampos()
+                                            {
+                                                var documento, sala, fecha, horaini, horafinal, descripción;
+                                                documento = $('#txtdocumento').val();
+                                                fecha = $('#txtfechainicial').val();
+                                                horaini = $('#txthoraini').val();
+                                                horafinal = $('#txthorafin').val();
+                                                descripción = $('#txtdescripcion').val();
+                                                check = $('#chkcondiciones').val();
+                                                banda = $("#id_banda").val();
+                                                var string1 = CompararHoras(horaini, horafinal);
+                                                var sw = horadentro(horaini);
+                                                if (documento == "" || documento == null) {
+                                                    alertify.error("Campo Documento vacio");
+                                                    return false;
+                                                }
+                                                if (banda == "" || banda == null) {
+                                                    alertify.error("Campo banda vacio");
+                                                    return false;
+                                                }
+                                                if (fecha == "") {
+                                                    alertify.error("Campo Fecha vacio");
+                                                    return false;
+                                                }
+                                                if (horaini == "") {
+                                                    alertify.error("Campo Hora Inicial vacio")
+                                                    return false;
+                                                }
+                                                if (string1 == "sHora1 MAYOR sHora2") {
+                                                    alertify.error("Hora inicial es mayor a la final");
+                                                    return false;
+                                                }
+                                                if (string1 == "sHora1 IGUAL sHora2") {
+                                                    alertify.error("Hora inicial y hora final son iguales");
+                                                    return false;
+                                                }
+                                                if (sw == 1) {
+                                                    alertify.error("Las horas de atención son desde las 8 am a 11 pm");
+                                                    return false;
+                                                }
+                                                if (horafinal == "") {
+                                                    alertify.error("Campo Hora final vacio");
+                                                    return false;
+                                                }
+                                                /*if (descripción == "") {
+                                                 alertify.error("Campo Descripción vacio");
+                                                 return false;
+                                                 }*/
+                                                if ($('#chkcondiciones').prop('checked') == false) {
+                                                    alertify.error("Debe aceptar los terminos y condiciones de la sala");
+                                                    return false;
+                                                } else {
+                                                    return true;
+                                                }
+                                            }
+                                            function valida(e) {
+                                                tecla = (document.all) ? e.keyCode : e.which;
 
-                //Tecla de retroceso para borrar, siempre la permite
-                if (tecla == 8) {
-                    return true;
-                }
+                                                //Tecla de retroceso para borrar, siempre la permite
+                                                if (tecla == 8) {
+                                                    return true;
+                                                }
 
-                // Patron de entrada, en este caso solo acepta numeros
-                patron = /[0-9]/;
-                tecla_final = String.fromCharCode(tecla);
-                return patron.test(tecla_final);
-            }
-            function limpiarFrm() {
-                $("#txtdescripcion").val("");
-                $("#txthoraini").val("");
-                $("#txthorafin").val("");
-                $("#chkcondiciones").prop("checked", false)
-                $("#txtdocumento").empty().trigger('change');
-                $("#id_banda").empty().trigger('change');
-                $('#instrumentos').empty().trigger('change');
-                $('#txtsala').val($("#selectSala > option:selected").html());
+                                                // Patron de entrada, en este caso solo acepta numeros
+                                                patron = /[0-9]/;
+                                                tecla_final = String.fromCharCode(tecla);
+                                                return patron.test(tecla_final);
+                                            }
+                                            function limpiarFrm() {
+                                                $("#txtdescripcion").val("");
+                                                $("#txthoraini").val("");
+                                                $("#txthorafin").val("");
+                                                $("#chkcondiciones").prop("checked", false)
+                                                $("#txtdocumento").empty().trigger('change');
+                                                $("#id_banda").empty().trigger('change');
+                                                $('#instrumentos').empty().trigger('change');
+                                                $('#txtsala').val($("#selectSala > option:selected").html());
 
-            }
+                                            }
 
-            function soloLetras(e) {
-                key = e.keyCode || e.which;
-                tecla = String.fromCharCode(key).toLowerCase();
-                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                especiales = "8-37-39-46";
+                                            function soloLetras(e) {
+                                                key = e.keyCode || e.which;
+                                                tecla = String.fromCharCode(key).toLowerCase();
+                                                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+                                                especiales = "8-37-39-46";
 
-                tecla_especial = false
-                for (var i in especiales) {
-                    if (key == especiales[i]) {
-                        tecla_especial = true;
-                        break;
-                    }
-                }
+                                                tecla_especial = false
+                                                for (var i in especiales) {
+                                                    if (key == especiales[i]) {
+                                                        tecla_especial = true;
+                                                        break;
+                                                    }
+                                                }
 
-                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                    return false;
-                }
-            }
-            function CompararHoras(sHora1, sHora2) {
+                                                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                                                    return false;
+                                                }
+                                            }
+                                            function CompararHoras(sHora1, sHora2) {
 
-                var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
-                var arHora2 = moment(sHora2, "h:mm:ss A").format("HH:mm:ss").split(":");
+                                                var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
+                                                var arHora2 = moment(sHora2, "h:mm:ss A").format("HH:mm:ss").split(":");
 
-                // Obtener horas y minutos (hora 1)
-                var hh1 = parseInt(arHora1[0], 10);
-                var mm1 = parseInt(arHora1[1], 10);
+                                                // Obtener horas y minutos (hora 1)
+                                                var hh1 = parseInt(arHora1[0], 10);
+                                                var mm1 = parseInt(arHora1[1], 10);
 
-                // Obtener horas y minutos (hora 2)
-                var hh2 = parseInt(arHora2[0], 10);
-                var mm2 = parseInt(arHora2[1], 10);
+                                                // Obtener horas y minutos (hora 2)
+                                                var hh2 = parseInt(arHora2[0], 10);
+                                                var mm2 = parseInt(arHora2[1], 10);
 
-                // Comparar
-                if (hh1 < hh2 || (hh1 == hh2 && mm1 < mm2))
-                    return "sHora1 MENOR sHora2";
-                else if (hh1 > hh2 || (hh1 == hh2 && mm1 > mm2))
-                    return "sHora1 MAYOR sHora2";
-                else
-                    return "sHora1 IGUAL sHora2";
-            }
-            function horadentro(sHora1) {
-                var sw = 0;
-                var horas = ['00', '01', '02', '03', '04', '05', '06', '07'];
-                var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
-                var hh1 = parseInt(arHora1[0], 10);
-                for (var i in horas) {
-                    if (hh1 == horas[i]) {
-                        sw = 1;
-                        break;
-                    }
-                }
-                return sw;
-            }
+                                                // Comparar
+                                                if (hh1 < hh2 || (hh1 == hh2 && mm1 < mm2))
+                                                    return "sHora1 MENOR sHora2";
+                                                else if (hh1 > hh2 || (hh1 == hh2 && mm1 > mm2))
+                                                    return "sHora1 MAYOR sHora2";
+                                                else
+                                                    return "sHora1 IGUAL sHora2";
+                                            }
+                                            function horadentro(sHora1) {
+                                                var sw = 0;
+                                                var horas = ['00', '01', '02', '03', '04', '05', '06', '07'];
+                                                var arHora1 = moment(sHora1, "h:mm:ss A").format("HH:mm:ss").split(":");
+                                                var hh1 = parseInt(arHora1[0], 10);
+                                                for (var i in horas) {
+                                                    if (hh1 == horas[i]) {
+                                                        sw = 1;
+                                                        break;
+                                                    }
+                                                }
+                                                return sw;
+                                            }
 
         </script>
         <script type="text/javascript" src="js/VentanaCentrada.js"></script>
