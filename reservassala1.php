@@ -329,7 +329,7 @@ $title = "Reservas | Sala Estudio";
 
                                                     },
                                                     dayClick: function (date, jsEvent, view) {
-                                                        if (moment(date.format("YYYY-MM-DD HH:mm:ss")) <  moment()) {
+                                                        if (moment(date.format("YYYY-MM-DD")) <  moment(moment().format("YYYY-MM-DD"))) {
                                                             alertify.error("Este sección no se encuetra disponible para reservar.");
                                                         } else {
                                                             asignarValorestexto(false, "#btnagregar");
