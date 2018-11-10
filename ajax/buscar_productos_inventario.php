@@ -12,7 +12,7 @@ if ($_GET['q'] != "") {
     $sWhere .= " and  (DS_CODIGO_PRODUCTO like '%$q%' or DS_NOMBRE_PRODUCTO like '%$q%')";
 }
 
-$sWhere .= " GROUP BY tp_producto.CS_PRODUCTO_ID ORDER BY DS_NOMBRE_PRODUCTO";
+$sWhere .= " GROUP BY tp_producto.CS_PRODUCTO_ID, tp_vendedor_producto.CS_VENDEDOR_ID  ORDER BY DS_NOMBRE_PRODUCTO";
 include 'pagination.php'; //include pagination file
 //pagination variables
 $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
