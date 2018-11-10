@@ -26,7 +26,8 @@ $count_query = mysqli_query($con, "SELECT
                                         tp_producto.CS_PRODUCTO_ID,
                                         tp_producto.DS_CODIGO_PRODUCTO,
                                         tp_producto.DS_NOMBRE_PRODUCTO,
-                                        tp_vendedor_producto.DS_NOMBRE_VENDEDOR
+                                        tp_vendedor_producto.DS_NOMBRE_VENDEDOR,
+                                        tp_producto.NM_PRECIO_UNITARIO_COMPRA_UND
                                         FROM
                                         tp_inventario_producto
                                         INNER JOIN tp_producto ON tp_inventario_producto.CS_PRODUCTO_ID = tp_producto.CS_PRODUCTO_ID
@@ -46,7 +47,8 @@ $sql = "SELECT
                                         tp_producto.DS_CODIGO_PRODUCTO,
                                         tp_producto.DS_NOMBRE_PRODUCTO,
                                         tp_producto.DB_PRECIO_VENTA_UND,
-                                        tp_vendedor_producto.DS_NOMBRE_VENDEDOR
+                                        tp_vendedor_producto.DS_NOMBRE_VENDEDOR,
+                                        tp_producto.NM_PRECIO_UNITARIO_COMPRA_UND
                                         FROM
                                         tp_inventario_producto
                                         INNER JOIN tp_producto ON tp_inventario_producto.CS_PRODUCTO_ID = tp_producto.CS_PRODUCTO_ID
@@ -65,6 +67,7 @@ if ($numrows > 0) {
                 <th>Código</th>
                 <th>Producto</th>
                 <th>Precio unitario</th>
+                <th>Precio compra</th>
                 <th>Proveedor</th>
                 <th>Stock Actual</th>
             </tr>
@@ -76,6 +79,7 @@ if ($numrows > 0) {
                     <td><?php echo $row["DS_CODIGO_PRODUCTO"]; ?></td>
                     <td><?php echo $row["DS_NOMBRE_PRODUCTO"];; ?></td>
                     <td><?php echo $row["DB_PRECIO_VENTA_UND"];?></td>
+                    <td><?php echo $row["NM_PRECIO_UNITARIO_COMPRA_UND"];?></td>
                     <td><?php echo $row["DS_NOMBRE_VENDEDOR"];?></td>
                     <td><?php echo $row["NM_CANTIDAD_INVENTARIO"]; ?></td>
                 </tr>

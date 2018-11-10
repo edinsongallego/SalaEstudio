@@ -5,7 +5,7 @@ include("../../config/conexion.php");
 if ($con)
 {
 	$term = (isset($_REQUEST['search'])) ? $_REQUEST['search'] : '';
-	$fetch = mysqli_query($con,"SELECT * FROM tp_producto WHERE NM_ELIMINADO = 0 AND CS_PRODUCTO_ID NOT IN(4) AND (DS_CODIGO_PRODUCTO LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR DS_NOMBRE_PRODUCTO LIKE '%" . mysqli_real_escape_string($con,($term)) . "%') LIMIT 50"); 
+	$fetch = mysqli_query($con,"SELECT * FROM tp_producto WHERE NM_ELIMINADO = 0 AND CS_PRODUCTO_ID NOT IN(4,5) AND (DS_CODIGO_PRODUCTO LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR DS_NOMBRE_PRODUCTO LIKE '%" . mysqli_real_escape_string($con,($term)) . "%') LIMIT 50"); 
 
     $resultado = array();
 
