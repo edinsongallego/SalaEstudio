@@ -60,6 +60,7 @@ $title = "Reservas | Sala Estudio";
                                                             <a style="color: white !important" id="btnagregar" class="btn btn-success" href="reservassala1.php?sala=<?php echo $sala["CS_SALA_ID"]; ?>"><b>Reservar</b></a>
                                                             <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
                                                                 <a style="color: white !important" class="btn btn-primary editar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>">Editar</a>
+                                                                <a style="color: white !important" class="btn btn-danger eliminar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>">Eliminar</a>
                                                             <?php } ?>
                                                         </div>
 						</div>
@@ -121,6 +122,23 @@ include("footer.php");
                $("#loading").hide();
             },"JSON")
        }); 
+       
+       $(document).on("click", ".eliminar_sala", function(){
+           if(confirm("¿Desea eliminar esta sala?")){
+               $("#loading").show();
+               $.post('ajax/eliminar_sala.php',{id_sala:$(this).attr("id_sala")},function(data){
+                   $("#loading").hide();
+                   if(data.result){
+                       recargar_salas();
+                       alertify.success(data.mensaje);
+                   }else{
+                        alertify.error(data.mensaje);
+                   }
+               }, "JSON");
+           }
+            
+        });
+       
     });
 </script>
 </html>

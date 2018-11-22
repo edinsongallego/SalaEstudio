@@ -61,9 +61,9 @@ class Login
     public static function obtenerSalas($id = array()){
         $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if (count($id) > 0) {
-            $sql = "SELECT * FROM rs_sala WHERE CS_SALA_ID IN (".implode(",", $id).")";
+            $sql = "SELECT * FROM rs_sala WHERE CS_SALA_ID IN (".implode(",", $id).") AND NM_ELIMINADO = 0";
         }else{
-            $sql = "SELECT * FROM rs_sala";
+            $sql = "SELECT * FROM rs_sala WHERE NM_ELIMINADO = 0";
         }
 
         $db_connection->query($sql);
