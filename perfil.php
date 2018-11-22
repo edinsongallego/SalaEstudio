@@ -151,6 +151,7 @@ include("footer.php");
                 load(1);
                 $("#mensaje_restaurar_contrasena").hide();
                 $("#opt_menu_cambiar_clave").hide();
+                setTimeout(function(){ $("#myModal3").modal("toggle"); },1000)
             }
         });
         event.preventDefault();

@@ -53,10 +53,10 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
 
     $user_password = $_POST['NM_DOCUMENTO_ID'];
     $date_added = date("Y-m-d H:i:s");
-    // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
+    // crypt the user's password with PHP 5.5's sha1() function, results in a 60 character
     // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
     // PHP 5.3/5.4, by the password hashing compatibility library
-    $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
+    $user_password_hash = sha1($user_password);
 
     // check if user or email address already exists
     $sql = "SELECT * FROM us_usuario WHERE  DS_CORREO = '" . $DS_CORREO . "' OR NM_DOCUMENTO_ID = '" . $NM_DOCUMENTO_ID . "' LIMIT 1;";

@@ -118,10 +118,8 @@ class Login
 
                     // using PHP 5.5's password_verify() function to check if the provided password fits
                     // the hash of that user's password
-
                     
-                    if (password_verify($_POST['DS_CONTRASENA'], $result_row->DS_CONTRASENA)) {
-
+                    if (sha1($_POST['DS_CONTRASENA']) == $result_row->DS_CONTRASENA) {
                         // write user data into PHP SESSION (a file on your server)
                         $_SESSION['NM_DOCUMENTO_ID'] = $result_row->NM_DOCUMENTO_ID;
                         $_SESSION['DS_NOMBRES_USUARIO'] = $result_row->DS_NOMBRES_USUARIO;

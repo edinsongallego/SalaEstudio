@@ -22,6 +22,7 @@ require_once ("config/conexion.php"); //Contiene funcion que conecta a la base d
 $active_facturas = "";
 $active_productos = "";
 $active_clientes = "";
+$active_reservas = "";
 $active_usuarios = "active";
 $title = "Usuarios | Sala Estudio";
 ?>
