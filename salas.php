@@ -41,7 +41,7 @@ $title = "Reservas | Sala Estudio";
                             <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6"></div>
                             <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
                             <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 text-right">
-                                <a id="btn_adicionar_sala" class="btn btn-primary"><i class="glyphicon glyphicon-plus" style="margin-right: 25px;margin-left: 25px;margin-top: 5px;margin-bottom: 5px;"></i></a>
+                                <a id="btn_adicionar_sala" class="btn btn-primary"><i class="glyphicon glyphicon-plus" style="margin-right: 25px;margin-left: 25px;margin-top: 5px;margin-bottom: 5px;"  title="Adicionar nueva sala"></i></a>
                             </div>
                             <?php } ?>
                             <div id="ctn_salas_add">
@@ -59,8 +59,8 @@ $title = "Reservas | Sala Estudio";
                                                         <div>
                                                             <a style="color: white !important" id="btnagregar" class="btn btn-success" href="reservassala1.php?sala=<?php echo $sala["CS_SALA_ID"]; ?>"><b>Reservar</b></a>
                                                             <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
-                                                                <a style="color: white !important" class="btn btn-primary editar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>">Editar</a>
-                                                                <a style="color: white !important" class="btn btn-danger eliminar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>">Eliminar</a>
+                                                            <a style="color: white !important" class="btn btn-primary editar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>" title="Editar sala">Editar</a>
+                                                            <a style="color: white !important" class="btn btn-danger eliminar_sala" id_sala="<?php echo $sala["CS_SALA_ID"]; ?>" title="Eliminar sala">Eliminar</a>
                                                             <?php } ?>
                                                         </div>
 						</div>
