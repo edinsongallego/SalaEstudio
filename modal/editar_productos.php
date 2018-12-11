@@ -65,7 +65,7 @@
 			  </div>
 			 
 			  <div class="form-group">
-				<label for="descripcion" class="col-sm-3 control-label">Descipción</label>
+				<label for="descripcion" class="col-sm-3 control-label">Descripción</label>
 				<div class="col-sm-8">
 				  <textarea class="form-control" id="mod_descripcion" name="mod_descripcion" placeholder="Descripción del producto"></textarea>
 				</div>

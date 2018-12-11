@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     $("#id_lider").select2({
         allowClear: true,
-        placeholder: "Seleccione el lider de la banda",
+        placeholder: "Seleccione el líder de la banda",
         ajax: {
             cache: true,
             url: 'ajax/autocomplete/usuarios_banda.php',

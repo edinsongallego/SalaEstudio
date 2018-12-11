@@ -82,13 +82,15 @@ if ($login->isUserLoggedIn() == true) {
 
                             <li><a href="servicios.php"> Servicios</a></li>
 
-                            <li class="contactenos_nav"><a href="contactenos.php"> Contactenos</a></li>
+                            <li class="contactenos_nav"><a href="contactenos.php"> Contáctenos</a></li>
                             <li><a target="_blank" href="https://es-la.facebook.com/Sala.Estudio/"><img src='img/facebook.png'></img></a> </li>
                             <li><a target="_blank" href="http://www.thepicta.com/user/lasalaestudio/4339125963"><img src='img/instagram.png'></img></a> </li>
                             <li><a target="_blank" href="https://twitter.com/lasalaestudio"><img src='img/twitter.png'></img></a> </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="login.php"><i class='glyphicon glyphicon-log-in'></i> Iniciar Sesiòn</a></li>
+                            <li><a href="login.php"><i class='glyphicon glyphicon-log-in'></i> 
+Iniciar Sesión
+</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -149,7 +151,7 @@ if ($login->isUserLoggedIn() == true) {
 
                         <input class="form-control" placeholder="Contraseña" name="DS_CONTRASENA" type="password" value="" autocomplete="off">
 
-                        <a href="registroUsers.php">No estas registrado? registrate</a>
+                        <a href="registroUsers.php">No estas registrado? regístrate</a>
                         <button type="submit" class="btn btn-lg btn-success btn-block btn-signin" name="login" id="submit">Iniciar Sesión</button>
                         <a href="#myModal" role="button" data-toggle="modal">Recuperar Contraseña</a>
 

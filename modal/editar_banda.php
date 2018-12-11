@@ -28,7 +28,7 @@ if (isset($con)) {
                         </div>
 
                         <div class="form-group">
-                            <label for="firstname" class="col-sm-3 control-label">*Lider banda</label>
+                            <label for="firstname" class="col-sm-3 control-label">*Líder banda</label>
                             <div class="col-sm-8">
                                 <select name="id_lider_banda" required="required" id="id_lider_ed" style="width:100%"></select>
                             </div>
