@@ -19,7 +19,7 @@ $title="Sala Estudio";
 				<h1 class="titles_all_page margin_bottom_section" style="text-align: center;" >NOSOTROS</h1>
 
 					<p <div class="well" style="text-align: justify ;background-color: white;  border: 3px black solid;box-shadow: 6px 6px 0px black;
- ">La sala Estudio es un lugar muy acogedor donde podrás ensayar con tu banda como todo un profesional. Contamos con dos salas de ensayo insonorizadas, dotadas con equipos e instrumentos de excelente calidad&nbsp; y personal calificado, en su mayoría músicos, que entienden tus necesidades brindándote un excelente servicio y que te hacen sentir como en casa . Es un sitio con más de 10 años en el mercado. En diciembre del 2016 La sala estudio pasa a hacer parte de BYPASS, un estudio de grabación y producción&nbsp; para artistas, composición musical, produccion y post producción de audio, foley y locuciones. Desde entonces contamos con el espacio adecuado para que puedes grabar a tu banda de una manera profesional.</p>
+ ">La sala Estudio es un lugar muy acogedor donde podrás ensayar con tu banda como todo un profesional. Contamos con dos salas de ensayo insonorizadas, dotadas con equipos e instrumentos de excelente calidad&nbsp; y personal calificado, en su mayoría músicos, que entienden tus necesidades brindándote un excelente servicio y que te hacen sentir como en casa. Es un sitio con más de 10 años en el mercado. En diciembre del 2016 La sala estudio pasa a hacer parte de BYPASS, un estudio de grabación y producción&nbsp; para artistas, composición musical, producción y post producción de audio, foley y locuciones. Desde entonces contamos con el espacio adecuado para que puedas grabar a tu banda de una manera profesional.</p>
 					<p style="text-align: justify;">
 					</p>
 					</div>
@@ -42,7 +42,7 @@ $title="Sala Estudio";
 														<img src="img/dumy.png">
 													</div>
 													<h2 class="h2service" style="color: white">Misión</h2>
-													<div class="h3service" style="color: white"><p>La Sala Estudio es una empresa de músicos para músicos. Nos dedicamos a brindarte la mejor experiencia en tu ensayo y a que te sientas como en casa, para que con tu banda o si lo deseas tu solo, practiques y desarrolles tus habilidades musicales de una manera profesional.&nbsp; Prestamos el servicio de renta salas de ensayo por horas para todo tipo de bandas de diferentes géneros musicales.&nbsp;La Sala Estudio hace parte de Bypass Estudio, por lo que contamos con un estudio de grabación profesional en donde podrás hacer realidad la produccion y grabación de tus canciones.</p>
+													<div class="h3service" style="color: white"><p>La Sala Estudio es una empresa de músicos para músicos. Nos dedicamos a brindarte la mejor experiencia en tu ensayo y a que te sientas como en casa, para que con tu banda o si lo deseas tu solo, practiques y desarrolles tus habilidades musicales de una manera profesional.&nbsp; Prestamos el servicio de renta salas de ensayo por horas para todo tipo de bandas de diferentes géneros musicales.&nbsp;La Sala Estudio hace parte de Bypass Estudio, por lo que contamos con un estudio de grabación profesional en donde podrás hacer realidad la producción y grabación de tus canciones.</p>
 </div>
 												</div>
 											</div>

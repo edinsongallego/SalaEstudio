@@ -31,7 +31,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Teléfono" class="col-sm-3 control-label">*Teléfono</label>
                             <div class="col-sm-8">
-                                <input type="tel" class="form-control" id="tel" name="tel" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="7" maxlength="7"  required>
+                                <input type="tel" class="form-control" id="tel" name="tel" placeholder="*Teléfono" title="Teléfono( sólo Números)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="7" maxlength="7"  required>
 
                             </div>
                         </div>
@@ -39,20 +39,20 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Celular" class="col-sm-3 control-label">*Celular</label>
                             <div class="col-sm-8">
-                                <input type="tel" class="form-control" id="cel" name="cel" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="10" maxlength="10"  required>
+                                <input type="tel" class="form-control" id="cel" name="cel" placeholder="*Celular" title="Celular( sólo Números)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" class="form-control" minlength="10" maxlength="10"  required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="user_email2" class="col-sm-3 control-label">*Email</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="user_email2" name="user_email2" placeholder="Correo electrónico" required>
+                                <input type="email" class="form-control" id="user_email2" name="user_email2" placeholder="Correo electrónico" value="" title='Dirección de correo'required>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="user_Email" class="col-sm-3 control-label">Dirección</label>
                             <div class="col-sm-8">
-                                <input type="text" name="DS_DIRECCION" id="DS_DIRECCION_EDIT" placeholder="Dirección" value="" title='direccion de correo' class="form-control">
+                                <input type="text" name="DS_DIRECCION" id="DS_DIRECCION_EDIT" placeholder="Dirección" value="" title='Dirección de la vivienda' class="form-control">
                             </div>
                         </div>
 

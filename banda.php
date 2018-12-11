@@ -52,7 +52,7 @@ $scriptID = uniqid();
                         <div class="form-group row">
                             <label for="q" class="col-md-2 control-label">Banda</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" id="q" placeholder="Buscar por Nombre, Codigo y Género" onkeyup='load(1);'>
+                                <input type="text" class="form-control" id="q" placeholder="Buscar por Nombre, Código y Género" onkeyup='load(1);'>
                             </div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-default" onclick='load(1);'>

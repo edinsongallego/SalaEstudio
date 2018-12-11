@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     $.validator.addMethod("cantidadProductosVenta", function (value, element) {
         return ($("#table_productos tbody tr").length > 0 ? true : false);
-    }, "Asegurece que la factura se le han agregado productos.");
+    }, "Asegúrese que la factura se le han agregado productos.");
 
     $.validator.setDefaults({
         ignore: "",

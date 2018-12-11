@@ -95,7 +95,7 @@ if(!Login::inicioSession()){
 			},
 			dayClick:function(date, jsEvent, view){
                 if (moment().diff(date, 'days') > 0) {
-                     alertify.error("Este dia no esta habilitado para reservas");
+                     alertify.error("Este día no está habilitado para reservas");
                 }else{
 				asignarValorestexto(false, "#btnagregar");
 				asignarValorestexto(true, "#btnmodificar");
@@ -249,7 +249,7 @@ if(!Login::inicioSession()){
 	    </div>
 	    <div class="row">
       		<div class="form-group col-md-12">
-      			<input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi"">terminos y condiciones</a></label>	
+      			<input type="checkbox" id="chkcondiciones" name="acepto" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi"	data-toggle="modal" data-target="#terminoscondi"">términos y condiciones</a></label>	
 		    </div>		
 	    </div>
 	    <div class="row">
@@ -379,7 +379,7 @@ function EnviarInformacion(accion, objEvento, modal){
 						alertify.success("Guardada con éxito");
 					}	
 					}else{
-						alertify.error("Ya existe una reserva en ese horarios");
+						alertify.error("Ya existe una reserva en ese horario");
 					}
 				}
 				
@@ -390,7 +390,7 @@ function EnviarInformacion(accion, objEvento, modal){
 					$('#CalendarioWeb').fullCalendar('refetchEvents');
 					if(!modal){
 						$("#Modalevento").modal('toggle');
-						alertify.success("Reserva cancelada con exito");
+						alertify.success("Reserva cancelada con éxito");
 					}	
 				}else{
 					alertify.error("Las reservas se cancelan con 8 horas de anticipación");
@@ -495,7 +495,7 @@ function validarcampos()
 		return false;
 	}
 	if ($('#chkcondiciones').prop('checked')==false) {
-		alertify.error("Debe aceptar los terminos y condiciones de la sala");
+		alertify.error("Debe aceptar los términos y condiciones de la sala");
 		return false;
 	}
 	else{

@@ -26,7 +26,7 @@
 				<div class="col-sm-8">
 				  
 				  
-			 <input type="text" class="form-control" id="telefono" name="telefono" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
+			 <input type="text" class="form-control" id="telefono" name="telefono" placeholder="*Celular" title="Celular( sólo Números)" onkeypress="return numeros(event)" onKeyUp="pierdeFoco(this)" onblur="limpia()" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
 			 
 				</div>
 			  </div>

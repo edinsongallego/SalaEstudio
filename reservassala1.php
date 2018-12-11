@@ -163,7 +163,7 @@ $title = "Reservas | Sala Estudio";
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <input type="checkbox" id="acepto" name="acepto" data-rule-validaTerminosYCondiciones="true" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi" data-toggle="modal" data-target="#terminoscondi">terminos y condiciones</a></label>	
+                                    <input type="checkbox" id="acepto" name="acepto" data-rule-validaTerminosYCondiciones="true" value="acepta"/><label for="condiciones">Acepta los <a href="#terminoscondi" data-toggle="modal" data-target="#terminoscondi">términos y condiciones</a></label>	
                                 </div>		
                             </div>
                             <div class="row">
@@ -293,7 +293,7 @@ $title = "Reservas | Sala Estudio";
 
                                                 $.validator.addMethod("validaTerminosYCondiciones", function (value, element) {
                                                     return $('#acepto').prop('checked');
-                                                }, "Debe aceptar los terminos y condiciones de la sala.");
+                                                }, "Debe aceptar los términos y condiciones de la sala.");
                                                 
                                                 $.validator.addMethod("validarFechaServidor", function(value, element) {
                                                     var isSuccess = true;
@@ -330,7 +330,7 @@ $title = "Reservas | Sala Estudio";
                                                     },
                                                     dayClick: function (date, jsEvent, view) {
                                                         if (moment(date.format("YYYY-MM-DD")) <  moment(moment().format("YYYY-MM-DD"))) {
-                                                            alertify.error("Este sección no se encuetra disponible para reservar.");
+                                                            alertify.error("Este día no está habilitado para reservas.");
                                                         } else {
                                                             asignarValorestexto(false, "#btnagregar");
                                                             asignarValorestexto(true, "#btnfactura");
@@ -569,7 +569,7 @@ $title = "Reservas | Sala Estudio";
                                                                         alertify.success("Guardada con éxito");
                                                                     }
                                                                 } else {
-                                                                    alertify.error("Ya existe una reserva en ese horarios");
+                                                                    alertify.error("Ya existe una reserva en ese horario");
                                                                 }
                                                             }
 
@@ -580,7 +580,7 @@ $title = "Reservas | Sala Estudio";
                                                                 $('#CalendarioWeb').fullCalendar('refetchEvents');
                                                                 if (!modal) {
                                                                     $("#Modalevento").modal('toggle');
-                                                                    alertify.success("Reserva cancelada con exito");
+                                                                    alertify.success("Reserva cancelada con éxito");
                                                                 }
                                                             } else {
                                                                 alertify.error("Las reservas se cancelan con 8 horas de anticipación");
@@ -699,7 +699,7 @@ $title = "Reservas | Sala Estudio";
                                                  return false;
                                                  }*/
                                                 if ($('#chkcondiciones').prop('checked') == false) {
-                                                    alertify.error("Debe aceptar los terminos y condiciones de la sala");
+                                                    alertify.error("Debe aceptar los términos y condiciones de la sala");
                                                     return false;
                                                 } else {
                                                     return true;

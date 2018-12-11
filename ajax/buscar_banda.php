@@ -111,7 +111,7 @@
 				<table class="table">
 
 					<tr  class="info">
-						<th>Cod. Banda</th>
+						<th>Código Banda</th>
 						<th>Nombre Banda</th>
 						<th>Género Banda</th>
 						<th><span class="pull-right">Acciones</span></th>

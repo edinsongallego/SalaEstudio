@@ -24,7 +24,7 @@
 
           <li><a href="servicios.php"> Servicios</a></li>
 
-          <li class="contactenos_nav"><a href="contactenos.php"> Contactenos</a></li>
+          <li class="contactenos_nav"><a href="contactenos.php"> Contáctenos</a></li>
 		  
 		  
 		  <li><a target="_blank" href="https://es-la.facebook.com/Sala.Estudio/"><img src='img/facebook.png'></img></a> </li>
@@ -32,7 +32,7 @@
                             <li><a target="_blank" href="https://twitter.com/lasalaestudio"><img src='img/twitter.png'></img></a> </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="login.php"><i class='glyphicon glyphicon-log-in'></i> Iniciar Sesiòn</a></li>
+          <li><a href="login.php"><i class='glyphicon glyphicon-log-in'></i> Iniciar Sesión</a></li>
         </ul>
       </div><!-- /.navbar-collapse class="nosotros_nav"    -->
     </div><!-- /.container-fluid -->

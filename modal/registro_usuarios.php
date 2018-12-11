@@ -28,7 +28,7 @@ if (isset($con)) {
 
                                 <select name="CS_TIPO_DOCUMENTO_ID" id="CS_TIPO_DOCUMENTO_ID" class="form-control" required>
                                     <option value style="display: none">Seleccione</option>
-                                    <option value="1">Cedula Ciudadania</option>
+                                    <option value="1">Cedula Ciudadanía</option>
                                     <option value="2">Tarjeta Identidad</option>
                                     <option value="3">Pasaporte</option>
                                     <option value="4">Cedula Extranjera</option>
@@ -52,7 +52,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Teléfono" class="col-sm-3 control-label">*Teléfono</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo numeros)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
+                                <input type="text" class="form-control" id="NM_TELEFONO" name="NM_TELEFONO" placeholder="*Teléfono" title="Teléfono( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="7" maxlength="7"  required>
 
 
                             </div>
@@ -61,21 +61,21 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="Celular" class="col-sm-3 control-label">*Celular</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo numeros)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
+                                <input type="text" class="form-control" id="NM_CELULAR" name="NM_CELULAR" placeholder="*Celular" title="Celular( sólo Números)" onkeypress="return numeros(event)" onblur="limpia(this)" id="miInput" class="form-control" minlength="10" maxlength="10"  required>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="user_Email" class="col-sm-3 control-label">*Email</label>
                             <div class="col-sm-8">
-                                <input type="email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='direccion de correo' class="form-control" required>
+                                <input type="email" name="DS_CORREO" id="DS_CORREO" placeholder="*Email" value="" size='30' maxlength='100' title='Dirección de correo' class="form-control" required>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="user_Email" class="col-sm-3 control-label">Dirección</label>
                             <div class="col-sm-8">
-                                <input type="text" name="DS_DIRECCION" id="DS_DIRECCION" placeholder="Dirección" value="" title='direccion de correo' class="form-control">
+                                <input type="text" name="DS_DIRECCION" id="DS_DIRECCION" placeholder="Dirección" value="" title='Dirección de la vivienda' class="form-control">
                             </div>
                         </div>
 
