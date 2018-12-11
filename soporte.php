@@ -17,6 +17,7 @@ $active_clientes = "";
 $active_usuarios = "";
 $active_ventas = "";
 $active_inventario = "";
+$active_reservas = "";
 $sopoerte = "active";
 $title = "Soporte | Sala Estudio";
 ?>

@@ -16,6 +16,7 @@ $active_facturas = "";
 $active_productos = "";
 $active_clientes = "";
 $active_usuarios = "";
+$active_reservas = "";
 $active_ventas = "active";
 $title = "Ventas | Sala Estudio";
 ?>
