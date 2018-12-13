@@ -54,7 +54,7 @@ if (!isset($_REQUEST["reporte"])) {
                     LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
 } else {
-    $sql = "SELECT * (SELECT COUNT(*) CANTIDAD, rs_reserva_sala.DS_ESTADO,
+    $sql = "SELECT * FROM (SELECT COUNT(*) CANTIDAD, rs_reserva_sala.DS_ESTADO,
                                 DATE_FORMAT(rs_reserva_sala.DT_FECHA_CREACION, '%Y-%m') DT_FECHA_CREACION
                                 FROM
                                 rs_reserva_sala
