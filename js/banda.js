@@ -1,6 +1,40 @@
 $(document).ready(function () {
     $("#guardar_banda2").validate();
     $("#editar_banda").validate();
+    
+    $.validator.addMethod("generoSoloLetras", function (value, element) {
+         var reg = /[0-9]/;
+        if(reg.test(value)){
+              return false;
+        }else{
+                return true;
+        }
+    }, "Solo se permiten letras.");
+    
+    
+        $.validator.addMethod("validarExistenciaNombreBanda", function (value, element) {
+        var isSuccess = false;
+   		$.ajax({ url: "ajax/buscar_banda.php", 
+            data: {'action':'validarExistenciaNombreBanda','DS_NOMBRE_BANDA':value}, 
+            async: false, 
+            success: 
+                function(msg) { isSuccess = msg === "true" ? true : false }
+          });
+    return isSuccess;
+    }, "El nombre de la banda ingresada ya fue registrada.");
+    
+    
+    $.validator.addMethod("validarExistenciaNombreBandaEdt", function (value, element) {
+        var isSuccess = false;
+   		$.ajax({ url: "ajax/buscar_banda.php", 
+            data: {'action':'validarExistenciaNombreBanda','DS_NOMBRE_BANDA':value, 'NM_ID':$("#mod_id_banda").val()}, 
+            async: false, 
+            success: 
+                function(msg) { isSuccess = msg === "true" ? true : false }
+          });
+    return isSuccess;
+    }, "El nombre de la banda ingresada ya fue registrada.");
+    
     $('#id_integrantes').select2({
         allowClear: false,
         language: "es",

@@ -2,6 +2,29 @@ $(document).ready(function () {
     load(1);
     $("#editar_producto").validate();
     $("#guardar_producto").validate();
+    
+    $.validator.addMethod("validarExistenciaCodigoProduco", function (value, element) {
+        var isSuccess = false;
+   		$.ajax({ url: "ajax/buscar_productos.php", 
+            data: {'action':'validarExistenciaCodigoProduco','CODIGO_DS':value}, 
+            async: false, 
+            success: 
+                function(msg) { isSuccess = msg === "true" ? true : false }
+          });
+    return isSuccess;
+    }, "El código ingresado ya fue registrado.");
+    
+    
+    $.validator.addMethod("validarExistenciaCodigoProducoEdt", function (value, element) {
+        var isSuccess = false;
+   		$.ajax({ url: "ajax/buscar_productos.php", 
+            data: {'action':'validarExistenciaCodigoProduco','CODIGO_DS':value, 'NM_ID':$("#mod_id").val()}, 
+            async: false, 
+            success: 
+                function(msg) { isSuccess = msg === "true" ? true : false }
+          });
+    return isSuccess;
+    }, "El código ingresado ya fue registrado.");
 
     $("#guardar_producto").submit(function (event) {
         if ($("#guardar_producto").valid()) {

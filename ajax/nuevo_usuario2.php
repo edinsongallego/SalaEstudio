@@ -23,12 +23,10 @@ if (empty($_POST['NM_DOCUMENTO_ID'])) {
     $errors[] = "Correo de usuario vacío";
 } elseif (strlen($_POST['DS_NOMBRES_USUARIO']) > 64 || strlen($_POST['DS_NOMBRES_USUARIO']) < 2) {
     $errors[] = "Nombre de usuario no puede ser inferior a 2 o más de 64 caracteres";
-} elseif (!preg_match('/^[a-z\d\s]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO'])) {
-    $errors[] = "Nombre de usuario no encaja en el esquema de nombre: Sólo aZ y los números están permitidos , de 2 a 64 caracteres";
 } elseif (!filter_var($_POST['DS_CORREO'], FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
 } elseif (
-        !empty($_POST['DS_NOMBRES_USUARIO']) && !empty($_POST['NM_DOCUMENTO_ID']) && !empty($_POST['CS_TIPO_DOCUMENTO_ID']) && strlen($_POST['DS_NOMBRES_USUARIO']) <= 64 && strlen($_POST['DS_NOMBRES_USUARIO']) >= 2 && preg_match('/^[a-z\d\s]{2,64}$/i', $_POST['DS_NOMBRES_USUARIO']) && !empty($_POST['DS_CORREO']) && strlen($_POST['DS_CORREO']) <= 64 && filter_var($_POST['DS_CORREO'], FILTER_VALIDATE_EMAIL)
+        !empty($_POST['DS_NOMBRES_USUARIO']) && !empty($_POST['NM_DOCUMENTO_ID']) && !empty($_POST['CS_TIPO_DOCUMENTO_ID']) && strlen($_POST['DS_NOMBRES_USUARIO']) <= 64 && strlen($_POST['DS_NOMBRES_USUARIO']) >= 2 && !empty($_POST['DS_CORREO']) && strlen($_POST['DS_CORREO']) <= 64 && filter_var($_POST['DS_CORREO'], FILTER_VALIDATE_EMAIL)
 ) {
     require_once ("../config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
     require_once ("../config/conexion.php"); //Contiene funcion que conecta a la base de datos

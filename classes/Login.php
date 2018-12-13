@@ -41,6 +41,7 @@ class Login
 
     public static function obtenerListadoPerfiles($id = array()){
         $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $db_connection->set_charset("utf8");
         if (count($id) > 0) {
             $sql = "SELECT * FROM us_tipo_usuario WHERE CS_TIPO_USUARIO IN (".implode(",", $id).")";
         }else{
@@ -60,6 +61,7 @@ class Login
     
     public static function obtenerSalas($id = array()){
         $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $db_connection->set_charset("utf8");
         if (count($id) > 0) {
             $sql = "SELECT * FROM rs_sala WHERE CS_SALA_ID IN (".implode(",", $id).") AND NM_ELIMINADO = 0";
         }else{

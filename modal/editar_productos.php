@@ -16,7 +16,7 @@
 			  <div class="form-group">
 				<label for="mod_codigo" class="col-sm-3 control-label">*Código</label>
 				<div class="col-sm-8">
-				  <input type="text" class="form-control" id="mod_codigo" name="mod_codigo" placeholder="Código del producto" required>
+				  <input type="text" class="form-control" id="mod_codigo" name="mod_codigo" placeholder="Código del producto" data-rule-validarExistenciaCodigoProducoEdt="true" required>
 					<input type="hidden" name="mod_id" id="mod_id">
 				</div>
 			  </div>

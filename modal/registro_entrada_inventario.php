@@ -27,7 +27,7 @@
 		                </div>
 		                <div class="form-group col-lg-6">
 		                    <label class="label-result-content" for="factura">*Precio de compra unitario: </label><br>
-		                    <input type="number" step="any" required name="Inventario[precio_co]" id="precio_co" class="form-control" value=""/>
+                                    <input type="number" step="any" required name="Inventario[precio_co]" id="precio_co" readonly="" class="form-control" value=""/>
 		                </div>
 			        </div>
                 <div class="row">

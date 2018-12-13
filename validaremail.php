@@ -19,7 +19,7 @@ if (isset($email)) {
 				$nombre=$row['DS_NOMBRES_USUARIO'];
 			}
 
-			$user_password_hash = sha1($nombre.$identificacion);
+			$user_password_hash = sha1($identificacion);
 
 		$sql = "UPDATE us_usuario SET DS_CONTRASENA='".$user_password_hash."', RESTAURAR_CONTRASENA=1 WHERE NM_DOCUMENTO_ID='".$identificacion."'";
 
@@ -28,7 +28,7 @@ if (isset($email)) {
 
 		if ($query = mysqli_query($con,$sql)){
                         session_start();
-			if (mail($email, "Recuperar contraseña", "Su nueva contraseña es ".$nombre.$identificacion, $headers)) {
+			if (mail($email, "Recuperar contraseña", "La solicitud ha sido atendida, su contraseña ha sido modificada por su número de documento.\n Al ingresar a la plataforma favor hacer el cambio de la misma.", $headers)) {
 				$_SESSION["respuesta"] = array("mensaje" => "Las credenciales fueron enviadas al correo electrónico.", "rpt" => true);
 				
 			}else{

@@ -134,5 +134,17 @@
 			</div>
 			<?php
 		}
-	}
+	}else if($action == 'validarExistenciaCodigoProduco'){
+//            print_r($_REQUEST);
+            $CODIGO_DS = $_REQUEST["CODIGO_DS"];
+            if(isset($_REQUEST["NM_ID"])){
+                $NM_ID = $_REQUEST["NM_ID"];
+              $count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM tp_producto WHERE CS_PRODUCTO_ID <> $NM_ID AND DS_CODIGO_PRODUCTO = '$CODIGO_DS'");  
+            }else{
+                $count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM tp_producto WHERE DS_CODIGO_PRODUCTO = '$CODIGO_DS'");
+            }
+            $row= mysqli_fetch_array($count_query);
+            $numrows = $row['numrows'];
+            echo $numrows>0?"false":"true";
+        }
 ?>

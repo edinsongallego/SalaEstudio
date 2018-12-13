@@ -16,14 +16,14 @@ if (isset($con)) {
                         <div class="form-group row">
                             <label for="firstname" class="col-sm-3 control-label">*Nombre Banda</label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" id="nombrebanda" name="nombrebanda" placeholder="*Nombre Banda" class="form-control" >
+                                <input type="text" required="" class="form-control" data-rule-validarExistenciaNombreBandaEdt="true" id="nombrebanda" name="nombrebanda" placeholder="*Nombre Banda" class="form-control" >
                                 <input type="hidden" id="mod_id_banda" name="mod_id_banda">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="lastname" class="col-sm-3 control-label">*Género</label>
                             <div class="col-sm-8">
-                                <input type="text" required="" class="form-control" id="descripcionbanda" name="descripcionbanda" placeholder="*Género Banda" class="form-control" >
+                                <input type="text" required="" class="form-control" id="descripcionbanda" name="descripcionbanda" data-rule-generoSoloLetras="true" placeholder="*Género Banda" class="form-control" >
                             </div>
                         </div>
 
