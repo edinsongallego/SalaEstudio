@@ -47,7 +47,6 @@ $title = "Usuarios | Sala Estudio";
                     <?php
                     include("modal/registro_usuarios.php");
                     include("modal/editar_usuarios.php");
-                    include("modal/cambiar_password.php");
                     ?>
                     <form class="form-horizontal" role="form" id="datos_cotizacion"autocomplete="off">
 
@@ -163,38 +162,6 @@ $title = "Usuarios | Sala Estudio";
                                         }
                                         event.preventDefault();
                                     })
-
-                                    $("#editar_password").submit(function (event) {
-                                        if ($(this).valid()) {
-                                            $('#actualizar_datos3').attr("disabled", true);
-
-                                            var parametros = $(this).serialize();
-                                            $.ajax({
-                                                type: "POST",
-                                                url: "ajax/editar_password.php",
-                                                data: parametros,
-                                                beforeSend: function (objeto) {
-                                                    $("#resultados_ajax3").html("Mensaje: Cargando...");
-                                                },
-                                                success: function (datos) {
-                                                    $("#resultados_ajax3").html(datos);
-                                                    $('#actualizar_datos3').attr("disabled", false);
-                                                    load(1);
-                                                    $("#mensaje_restaurar_contrasena").hide();
-                                                    $("#opt_menu_cambiar_clave").hide();
-                                                    setTimeout(function(){
-                                                        $("#myModal3").modal("toggle");
-                                                    },1500);
-                                                }
-                                            });
-                                        }
-                                        event.preventDefault();
-                                    })
-                                    function get_user_id(id) {
-                                        $("#user_id_mod").val(id);
-                                        $("#editar_password")[0].reset();
-                                        $("#resultados_ajax3").html("");
-                                    }
 
                                     function limpiar_formulario_edt() {
                                         $("#editar_usuario")[0].reset();

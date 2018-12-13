@@ -26,7 +26,6 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 	<body>
 		<?php
 		include("navbar_banda.php");
-		include("modal/cambiar_password.php");
 		include("modal/registro_banda.php");
 		?>
 		<div class="container">

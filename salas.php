@@ -20,17 +20,14 @@ $title = "Reservas | Sala Estudio";
 </head>
 <body>
 	<?php
-  if ($_SESSION['CS_TIPO_USUARIO_ID']==1) {
-    include("navbar.php");
-   
-  }elseif ($_SESSION['CS_TIPO_USUARIO_ID']==2) {
-    include("navbar_banda.php");
-  
-  }elseif ($_SESSION['CS_TIPO_USUARIO_ID']==4) {
-    include("navbar_docente.php");
-    
-  } 
-	?>
+        if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
+            include("navbar.php");
+        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 3) {
+            include("navbar_banda.php");
+        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 4) {
+            include("navbar_docente.php");
+        }
+        ?>
 	<section id="what-we-do">
 		<div class="container-fluid">
 			<div class="page-header">
@@ -38,7 +35,7 @@ $title = "Reservas | Sala Estudio";
 			</div>
                     
 			<div class="row">
-                            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6"></div>
+                            <div class="col-xs-12 col-sm-8 col-md-12 col-lg-12 col-xl-12"></div>
                             <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
                             <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 text-right">
                                 <a id="btn_adicionar_sala" class="btn btn-primary"><i class="glyphicon glyphicon-plus" style="margin-right: 25px;margin-left: 25px;margin-top: 5px;margin-bottom: 5px;"  title="Adicionar nueva sala"></i></a>

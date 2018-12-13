@@ -21,9 +21,7 @@ $title = "Menu Banda | Sala Estudio";
         <?php include("head.php"); ?>
     </head>
     <body>
-        <?php
-        include("modal/cambiar_password.php");
-        ?> 
+       
         <?php
         if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
             include("navbar.php");
@@ -133,32 +131,6 @@ include("footer.php");
         });
         event.preventDefault();
     })
-
-    $("#editar_password").submit(function (event) {
-        $('#actualizar_datos3').attr("disabled", true);
-
-        var parametros = $(this).serialize();
-        $.ajax({
-            type: "POST",
-            url: "ajax/editar_password.php",
-            data: parametros,
-            beforeSend: function (objeto) {
-                $("#resultados_ajax3").html("Mensaje: Cargando...");
-            },
-            success: function (datos) {
-                $("#resultados_ajax3").html(datos);
-                $('#actualizar_datos3').attr("disabled", false);
-                load(1);
-                $("#mensaje_restaurar_contrasena").hide();
-                $("#opt_menu_cambiar_clave").hide();
-                setTimeout(function(){ $("#myModal3").modal("toggle"); },1000)
-            }
-        });
-        event.preventDefault();
-    })
-    function get_user_id(id) {
-        $("#user_id_mod").val(id);
-    }
 
     function obtener_datos(id) {
         var nombres = $("#nombres" + id).val();

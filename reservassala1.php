@@ -61,9 +61,9 @@ $title = "Reservas | Sala Estudio";
         <?php
         if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
             include("navbar.php");
-        } elseif ($_SESSION['CS_TIPO_USUARIO_ID'] == 2) {
+        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 3) {
             include("navbar_banda.php");
-        } elseif ($_SESSION['CS_TIPO_USUARIO_ID'] == 4) {
+        } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 4) {
             include("navbar_docente.php");
         }
         ?>
@@ -175,9 +175,13 @@ $title = "Reservas | Sala Estudio";
                         <div class="modal-footer">
                             <button type="button" id="btnagregar" class="btn btn-primary"><b>Guardar</b></button>
                             <button type="button" data-dismiss="modal" class="btn btn-default"><b>Cerrar</b></button>
-                            <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
+                            <?php if($_SESSION['CS_TIPO_USUARIO_ID'] == 1){ ?>
+                                <button type="button" id="btnfactura" class="btn btn-primary"><b>Generar Factura</b></button>
+                            <?php } ?>
                             <button type="button" id="btneliminar" class="btn btn-danger"><b>Cancelar</b></button>
-                            <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
+                            <?php if($_SESSION['CS_TIPO_USUARIO_ID'] == 1){ ?>
+                                <button type="button" id="btnmulta" class="btn btn-danger"><b>Multar</b></button>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

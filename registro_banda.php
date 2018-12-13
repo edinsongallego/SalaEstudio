@@ -26,7 +26,6 @@ $title = "Registro Banda | Sala Estudio";
     <body>
         <?php
         include_once("navbar_banda.php");
-        include("modal/cambiar_password.php");
         ?>
         <div class="container">
             <form class="form-horizontal" method="post" id="guardar_banda2" name="guardar_banda2" autocomplete="off">
