@@ -37,7 +37,7 @@ $title = "Reservas | Sala Estudio";
 			<div class="row">
                             <div class="col-xs-12 col-sm-8 col-md-12 col-lg-12 col-xl-12"></div>
                             <?php if($_SESSION["CS_TIPO_USUARIO_ID"] == 1){ ?>
-                            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 col-xl-6 text-right">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
                                 <a id="btn_adicionar_sala" class="btn btn-primary"><i class="glyphicon glyphicon-plus" style="margin-right: 25px;margin-left: 25px;margin-top: 5px;margin-bottom: 5px;"  title="Adicionar nueva sala"></i></a>
                             </div>
                             <?php } ?>
