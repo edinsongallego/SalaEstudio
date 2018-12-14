@@ -104,7 +104,7 @@ switch ($accion) {
                     foreach ($query->fetchAll(PDO::FETCH_ASSOC) as $row) {
                         $mensaje = "<html>"
                                 . "<b>Hola " . $row["DS_NOMBRES_USUARIO"] . "</b>, se realizo una reserva a través de la aplicación de la banda <b>" . $row["DS_NOMBRE_BANDA"] . "</b>, de la cual eres integrante. Los siguientes datos corresponden a la reserva.<br/><br/>";
-                        $mensaje .= "<b>Lider de la bada: </b>" . $row["LIDER"] . ".<br/>";
+                        $mensaje .= "<b>Líder de la banda: </b>" . $row["LIDER"] . ".<br/>";
                         $mensaje .= "<b>Fecha: </b>" . date("Y-m-d", strtotime($_POST['start'])) . ".<br/>";
                         $mensaje .= "<b>Hora inicial: </b>" . date("H:i", strtotime($_POST['start'])) . ".<br/>";
                         $mensaje .= "<b>Hora final: </b>" . date("H:i", strtotime($_POST['end'])) . ".<br/>";
