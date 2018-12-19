@@ -44,11 +44,13 @@ switch ($accion) {
             echo json_encode(array("respuesta" => "hora"));
             break;
         } else {
-            $consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=".$_POST["id_sala"]." AND start BETWEEN :start and :end");
+            $consulta = $pdo->prepare("SELECT * FROM rs_reserva_sala where sala=".$_POST["id_sala"]." AND (start BETWEEN :start and :end) OR (end BETWEEN :start and :end)");
             $res = $consulta->execute(array(
                 "start" => $_POST['start'],
                 "end" => $_POST['end']
             ));
+            //echo ($consulta->rowCount());
+            //die($consulta->rowCount());
             if ($consulta->rowCount() > 0) {
                 echo json_encode(array("respuesta" => "error"));
                 break;
