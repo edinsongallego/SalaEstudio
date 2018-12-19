@@ -46,7 +46,13 @@ $title = "Soporte | Sala Estudio";
     </head>
     <body>
         <?php
-        include("navbar.php");
+            if ($_SESSION['CS_TIPO_USUARIO_ID'] == 1) {
+                include("navbar.php");
+            } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 3) {
+                include("navbar_banda.php");
+            } else if ($_SESSION['CS_TIPO_USUARIO_ID'] == 4) {
+                include("navbar_docente.php");
+            }
         ?>
         <div class="container container-fluid">
            
