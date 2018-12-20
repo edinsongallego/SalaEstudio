@@ -253,7 +253,7 @@ $title = "Reservas | Sala Estudio";
         <script type="text/javascript">
                                             var NuevoEvento;
                                             var sw1 = true;
-
+                                            var usuario = <?php echo json_encode($_SESSION)?>;
                                             $(document).ready(function () {
                                                 $("#frm_reserva").validate({
                                                    //errorLabelContainer: '.errorTxt'
@@ -347,6 +347,7 @@ $title = "Reservas | Sala Estudio";
                                                             $("#txtfechafinal").val(date.format("YYYY-MM-DD"));
                                                             $("#txthoraini").val(date.format("HH:mm"));
                                                             $("#Modalevento").modal();
+                                                            crearSelect2Documento({text:usuario.NM_DOCUMENTO_ID+" - "+usuario.DS_NOMBRES_USUARIO+" "+usuario.DS_APELLIDOS_USUARIO,id:usuario.NM_DOCUMENTO_ID});
                                                         }
                                                     },
                                                     showNonCurrentDates: false,
@@ -408,8 +409,7 @@ $title = "Reservas | Sala Estudio";
                                                     donetext: "Seleccionar"
 
                                                 });
-
-                                                crearSelect2Documento();
+                                                crearSelect2Documento({text:usuario.NM_DOCUMENTO_ID+" - "+usuario.DS_NOMBRES_USUARIO+" "+usuario.DS_APELLIDOS_USUARIO,id:usuario.NM_DOCUMENTO_ID});
                                                 crearSelect2Banda();
                                                 crearMultiselect2Instrumentos();
 
@@ -483,7 +483,7 @@ $title = "Reservas | Sala Estudio";
 
                                             function crearSelect2Documento(data) {
                                                 $("#txtdocumento").select2({
-                                                    allowClear: true,
+                                                    //allowClear: true,
                                                     language: "es",
                                                     placeholder: "Seleccione al usuario",
                                                     data: processData(data).results,

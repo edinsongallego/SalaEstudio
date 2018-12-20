@@ -107,7 +107,7 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
-                $sql = "SELECT NM_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, RESTAURAR_CONTRASENA, NM_ELIMINADO
+                $sql = "SELECT NM_DOCUMENTO_ID, DS_NOMBRES_USUARIO, DS_APELLIDOS_USUARIO, DS_CORREO, DS_CONTRASENA, CS_TIPO_USUARIO_ID, CS_ESTADO_ID, RESTAURAR_CONTRASENA, NM_ELIMINADO
                 FROM us_usuario
                 WHERE DS_CORREO = '" . $DS_CORREO . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
@@ -125,12 +125,12 @@ class Login
                         // write user data into PHP SESSION (a file on your server)
                         $_SESSION['NM_DOCUMENTO_ID'] = $result_row->NM_DOCUMENTO_ID;
                         $_SESSION['DS_NOMBRES_USUARIO'] = $result_row->DS_NOMBRES_USUARIO;
+                        $_SESSION['DS_APELLIDOS_USUARIO'] = $result_row->DS_APELLIDOS_USUARIO;
                         $_SESSION['DS_CORREO'] = $result_row->DS_CORREO;
                         $_SESSION['CS_TIPO_USUARIO_ID'] = $result_row->CS_TIPO_USUARIO_ID;
                         $_SESSION['CS_ESTADO_ID'] = $result_row->CS_ESTADO_ID;
                         $_SESSION['RESTAURAR_CONTRASENA'] = $result_row->RESTAURAR_CONTRASENA;
                         $_SESSION['user_login_status'] = 1;
-
 
                     } else {
                         $this->errors[] = "Usuario y/o contraseña no coinciden.";
