@@ -84,7 +84,7 @@ if ($action == 'ajax') {
     $q = mysqli_real_escape_string($con, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
     $aColumns = array('DS_NOMBRES_USUARIO', 'DS_APELLIDOS_USUARIO', 'NM_DOCUMENTO_ID'); //Columnas de busqueda
     $sTable = "us_usuario AS t2";
-    $sWhere = "WHERE CS_ESTADO_ID = 1 ";
+    $sWhere = "WHERE 1 ";
     if ($_GET['q'] != "") {
         $sWhere .= " AND (";
         for ($i = 0; $i < count($aColumns); $i++) {
