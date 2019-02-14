@@ -10,7 +10,7 @@ if ($con)
                 . "(SELECT tu.NM_PORCENTAJE_INCENTIVO, cl.*, CONCAT(DS_NOMBRES_USUARIO, ' ',DS_APELLIDOS_USUARIO) DS_NOMBRE, "
                 . "(SELECT DT_FECHA_CREACION FROM ft_factura WHERE NM_CLIENTE_ID = cl.NM_DOCUMENTO_ID ORDER BY CS_FACTURA_ID DESC LIMIT 1) ULTIMA_COMPRA "
                 . "FROM us_usuario cl "
-                . "INNER JOIN us_tipo_usuario tu ON tu.CS_TIPO_USUARIO = cl.CS_TIPO_USUARIO_ID WHERE NM_ELIMINADO = 0"
+                . "INNER JOIN us_tipo_usuario tu ON tu.CS_TIPO_USUARIO = cl.CS_TIPO_USUARIO_ID WHERE cl.CS_ESTADO_ID = 1"
                 . ") tmp  "
                 . "WHERE DS_NOMBRE LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' OR NM_DOCUMENTO_ID LIKE '%" . mysqli_real_escape_string($con,($term)) . "%' "
                 . "LIMIT 50";

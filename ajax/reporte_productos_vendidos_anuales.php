@@ -47,7 +47,7 @@ print_r(mysqli_error($con));
     $total_pages = ceil($numrows / $per_page);
     $reload = './reportes.php';
 //main query to fetch the data
-    $sql = "SELECT
+    echo $sql = "SELECT
                                         SUM(ft_factura_detalle.NM_CANTIDAD_COMPRA) NM_CANTIDAD_COMPRA,
                                         SUM(ft_factura_detalle.NM_PRECIO_TOTAL_PRODUCTO) NM_PRECIO_TOTAL_PRODUCTO,
                                         SUM(ft_factura_detalle.NM_PRECIO_UNITARIO) NM_PRECIO_UNITARIO,
@@ -62,7 +62,7 @@ print_r(mysqli_error($con));
 					LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
 } else {
-    $sql = "SELECT
+    echo $sql = "SELECT
                                         SUM(ft_factura_detalle.NM_CANTIDAD_COMPRA) NM_CANTIDAD_COMPRA,
                                         SUM(ft_factura_detalle.NM_PRECIO_TOTAL_PRODUCTO) NM_PRECIO_TOTAL_PRODUCTO,
                                         SUM(ft_factura_detalle.NM_PRECIO_UNITARIO) NM_PRECIO_UNITARIO,

@@ -8,9 +8,11 @@
     ],
     "minimum-stability": "alpha",
     "require": {
-        "mikehaertl/phpwkhtmltopdf": "^2.3"
+        "mikehaertl/phpwkhtmltopdf": "^2.3",
+        "dompdf/dompdf": "dev-master"
     },
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "2.*"
+        "phpdocumentor/phpdocumentor": "2.*",
+        "dompdf/dompdf": "dev-master"
     }
 }

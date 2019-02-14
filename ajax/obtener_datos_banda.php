@@ -31,7 +31,7 @@ if (isset($_REQUEST["id_banda"])) {
                 FROM
                 us_usuario
                 INNER JOIN us_banda_detalle_usuario ON us_banda_detalle_usuario.NM_DOCUMENTO_ID = us_usuario.NM_DOCUMENTO_ID
-                WHERE NM_ELIMINADO = 0 AND
+                WHERE CS_ESTADO_ID = 1 AND
                 us_banda_detalle_usuario.CS_BANDA_ID = $id_banda 
             ";
     $query = mysqli_query($con, $sql);

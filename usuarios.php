@@ -82,7 +82,7 @@ $title = "Usuarios | Sala Estudio";
         <?php
         include("footer.php");
         ?>
-        <script type="text/javascript" src="js/usuarios.js"></script>
+        <script type="text/javascript" src="js/usuarios.js?v=1"></script>
 
 
 

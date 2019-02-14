@@ -2,7 +2,9 @@
 	include_once "../../classes/Factura.php";
 	include_once "../../classes/Login.php";
 	require_once '../../vendor/autoload.php';
-	use mikehaertl\wkhtmlto\Pdf;
+	//use mikehaertl\wkhtmlto\Pdf;
+	use Dompdf\Dompdf;
+
 	if(!Login::inicioSession()){
 		header("location: ../../login.php");
 		exit;
@@ -35,14 +37,14 @@
 	$fecha_factura=$rw_factura['DT_FECHA_CREACION'];
         $porcentaje_incentivo_descuento=$rw_factura['NM_PORCENTAJE_DESCUENTO'];
 	$condiciones=1;
-	require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	//require_once(dirname(__FILE__).'/../html2pdf.class.php');
     // get the HTML
      ob_start();
      include(dirname('__FILE__').'/res/ver_factura_html.php');
 	 $html = ob_get_contents();
      ob_end_clean();
      //echo $html;die;
-     $pdf = new Pdf;
+    /* $pdf = new Pdf;
 		// On some systems you may have to set the path to the wkhtmltopdf executable
 		// $pdf->binary = 'C:\...';
 
@@ -65,5 +67,11 @@
 		    $error = $pdf->getError();
 		    print_r($error);
 		    // ... handle error here
-		}
+		}*/
+
+		$dompdf = new DOMPDF();  //if you use namespaces you may use new \DOMPDF()
+		$dompdf->loadHtml($html);
+		$dompdf->set_option('isRemoteEnabled', TRUE);
+		$dompdf->render();
+		$dompdf->stream("sample.pdf", array("Attachment"=>0));
 	    die();

@@ -31,11 +31,11 @@ if (isset($_GET['id'])) {
                 $count_query = mysqli_query($con, $SQL);
                 $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
                  if ($row["NUM_BANDAS"] == 0) {
-                if ($delete1 = mysqli_query($con, "UPDATE us_usuario SET NM_ELIMINADO = 1 WHERE NM_DOCUMENTO_ID = '" . $user_id . "'")) {
+                if ($delete1 = mysqli_query($con, "UPDATE us_usuario SET CS_ESTADO_ID = 2 WHERE NM_DOCUMENTO_ID = '" . $user_id . "'")) {
                     ?>
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Aviso!</strong> Datos eliminados exitosamente.
+                        <strong>Aviso!</strong> Usuario inactivado exitosamente.
                     </div>
                     <?php
                 } else {
@@ -84,7 +84,7 @@ if ($action == 'ajax') {
     $q = mysqli_real_escape_string($con, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
     $aColumns = array('DS_NOMBRES_USUARIO', 'DS_APELLIDOS_USUARIO', 'NM_DOCUMENTO_ID'); //Columnas de busqueda
     $sTable = "us_usuario AS t2";
-    $sWhere = "WHERE NM_ELIMINADO = 0 ";
+    $sWhere = "WHERE CS_ESTADO_ID = 1 ";
     if ($_GET['q'] != "") {
         $sWhere .= " AND (";
         for ($i = 0; $i < count($aColumns); $i++) {
@@ -169,7 +169,9 @@ if ($action == 'ajax') {
                         <td ><span class="pull-right">
                                 <a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="#" class='btn btn-default' title='Cambiar contraseña' onclick="get_user_id('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-cog"></i></a>
-                                <a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminar('<?php echo $NM_DOCUMENTO_ID; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+                                <?php if($CS_ESTADO_ID == 1){ ?>
+                                <a href="#" class='btn btn-default' title='Inactivar Usuario' onclick="eliminar('<?php echo $NM_DOCUMENTO_ID; ?>')"><i class="glyphicon glyphicon-ban-circle"></i> </a></span></td>
+                            <?php } ?>
 
                     </tr>
                     <?php

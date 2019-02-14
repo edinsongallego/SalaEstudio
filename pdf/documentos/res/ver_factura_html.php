@@ -53,8 +53,13 @@ echo $anio = date('Y'); ?>
     <table cellspacing="0" style="width: 100%;">
         <tr>
 
-            <td style="width: 20%; color: #444444;background-color: black;text-align: center;">
-                <img style="width: 50%;" src="<?php echo BASE_URL; ?>img/logo.png" alt="Logo"><br>
+            <td style="width: 20%; color: #444444;background-color: black; text-align: center;">
+                <?php 
+
+                    echo '<img style="" src="'.$_SERVER['DOCUMENT_ROOT'].'\img\logo.png">';
+
+                ?>
+
 
             </td>
             <td style="width: 45%; color: #34495e;font-size:12px;text-align:center;padding-left: 100px">
@@ -211,3 +216,5 @@ echo $anio = date('Y'); ?>
 
 </body>
 </html>
+
+<?php //die;?>

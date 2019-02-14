@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-12-13 17:12:20
+Date: 2019-01-25 16:53:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -311,7 +311,7 @@ CREATE TABLE `rs_reserva_instrumentos` (
   KEY `FK_INSTRUMENTOS` (`ID_INSTRUMENTO`),
   CONSTRAINT `FK_INSTRUMENTOS` FOREIGN KEY (`ID_INSTRUMENTO`) REFERENCES `rs_instrumentos` (`ID_INSTRUMENTO`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_RESERVA_INSTRUMENTOS` FOREIGN KEY (`ID_RESERVA`) REFERENCES `rs_reserva_sala` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rs_reserva_instrumentos
@@ -337,6 +337,19 @@ INSERT INTO `rs_reserva_instrumentos` VALUES ('21', '81', '2');
 INSERT INTO `rs_reserva_instrumentos` VALUES ('22', '81', '3');
 INSERT INTO `rs_reserva_instrumentos` VALUES ('23', '82', '2');
 INSERT INTO `rs_reserva_instrumentos` VALUES ('24', '82', '4');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('25', '83', '1');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('26', '83', '4');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('27', '84', '1');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('28', '85', '2');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('29', '85', '4');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('30', '85', '13');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('31', '86', '2');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('32', '86', '4');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('33', '86', '13');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('34', '87', '2');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('35', '88', '3');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('36', '89', '2');
+INSERT INTO `rs_reserva_instrumentos` VALUES ('37', '90', '4');
 
 -- ----------------------------
 -- Table structure for rs_reserva_sala
@@ -346,8 +359,8 @@ CREATE TABLE `rs_reserva_sala` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `documento` bigint(20) NOT NULL,
   `sala` int(4) NOT NULL,
-  `start` datetime DEFAULT NULL,
-  `end` datetime DEFAULT NULL,
+  `start` timestamp NULL DEFAULT NULL,
+  `end` timestamp NULL DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `DS_ESTADO` varchar(10) NOT NULL,
   `DT_FECHA_CREACION` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -361,7 +374,7 @@ CREATE TABLE `rs_reserva_sala` (
   CONSTRAINT `FK_BANDA_RESEVA` FOREIGN KEY (`id_banda`) REFERENCES `us_banda_usuario` (`CS_BANDA_ID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_SALA` FOREIGN KEY (`sala`) REFERENCES `rs_sala` (`CS_SALA_ID`),
   CONSTRAINT `FK_USUARIO` FOREIGN KEY (`documento`) REFERENCES `us_usuario` (`NM_DOCUMENTO_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of rs_reserva_sala
@@ -408,6 +421,15 @@ INSERT INTO `rs_reserva_sala` VALUES ('79', '34610553', '1', '2018-11-09 15:00:0
 INSERT INTO `rs_reserva_sala` VALUES ('80', '1152188863', '1', '2018-11-09 15:30:00', '2018-11-09 16:00:00', '1152188863 - Oscar Mesa - bla', 'Activo', '2018-11-09 13:41:20', '#0222fd', null, 'bla');
 INSERT INTO `rs_reserva_sala` VALUES ('81', '43101104', '2', '2018-11-23 12:30:00', '2018-11-23 14:30:00', '43101104 - nidia valencia - jajajajajaja', 'Activo', '2018-11-22 12:21:07', '#64739b', '3', 'jajajajajaja');
 INSERT INTO `rs_reserva_sala` VALUES ('82', '43101104', '1', '2018-12-15 11:00:00', '2018-12-15 14:00:00', '43101104 - nidia valencia - tales', 'Activo', '2018-12-13 16:54:47', '#ff8000', '3', 'tales');
+INSERT INTO `rs_reserva_sala` VALUES ('83', '94501690', '1', '2018-12-20 09:30:00', '2018-12-20 11:00:00', '94501690 - edinson gallego - dasdfasdf', 'Activo', '2018-12-17 18:40:10', '#ff8000', '6', 'dasdfasdf');
+INSERT INTO `rs_reserva_sala` VALUES ('84', '1152188863', '1', '2018-12-20 10:00:00', '2018-12-20 12:00:00', '1152188863 - Oscar Mesa - jkjhkjjhk', 'Activo', '2018-12-17 18:44:27', '#ff8000', '2', 'jkjhkjjhk');
+INSERT INTO `rs_reserva_sala` VALUES ('85', '43101104', '1', '2018-12-20 11:00:00', '2018-12-20 12:00:00', '43101104 - nidia valencia - dasdfasdf', 'Activo', '2018-12-17 20:07:40', '#ff8000', '3', 'dasdfasdf');
+INSERT INTO `rs_reserva_sala` VALUES ('86', '43101104', '1', '2018-12-20 08:00:00', '2018-12-20 09:00:00', '43101104 - nidia valencia - dasdfasdf', 'Activo', '2018-12-17 20:28:56', '#ff8000', '3', 'dasdfasdf');
+INSERT INTO `rs_reserva_sala` VALUES ('87', '94501690', '1', '2018-12-20 12:00:00', '2018-12-20 14:00:00', '94501690 - edinson gallego -  kj', 'Activo', '2018-12-17 20:31:19', '#ff8000', '5', ' kj');
+INSERT INTO `rs_reserva_sala` VALUES ('88', '43101104', '1', '2018-12-21 09:00:00', '2018-12-21 12:30:00', '43101104 - nidia valencia -  jj', 'Activo', '2018-12-17 20:32:06', '#ff8000', '3', ' jj');
+INSERT INTO `rs_reserva_sala` VALUES ('89', '34610553', '1', '2018-12-21 10:30:00', '2018-12-21 12:00:00', '34610553 - diana viveros - jjh', 'Activo', '2018-12-17 20:32:39', '#ff8000', '3', 'jjh');
+INSERT INTO `rs_reserva_sala` VALUES ('90', '43101104', '1', '2018-12-21 12:00:00', '2018-12-21 14:00:00', '43101104 - nidia valencia - sdfasdf', 'Activo', '2018-12-17 20:41:11', '#ff8000', '3', 'sdfasdf');
+INSERT INTO `rs_reserva_sala` VALUES ('91', '94501690', '1', '2018-12-19 09:00:00', '2018-12-19 12:00:00', '94501690 - edinson gallego - jhhj', 'Activo', '2018-12-19 08:55:52', '#ff8000', '5', 'jhhj');
 
 -- ----------------------------
 -- Table structure for rs_sala
@@ -429,7 +451,7 @@ CREATE TABLE `rs_sala` (
 INSERT INTO `rs_sala` VALUES ('1', 'Sala 1', 'sala con guitarra', '42000', '8', '0');
 INSERT INTO `rs_sala` VALUES ('2', 'Sala 2', 'Sala 2', '45000', '12000', '0');
 INSERT INTO `rs_sala` VALUES ('3', 'pepe lalo', 'éééeéééeóoóóoóññññ', '300', '20', '0');
-INSERT INTO `rs_sala` VALUES ('4', 'ñññññéééeé´´i', 'dasfsdfñññéééé\r\n', '32', '32', '0');
+INSERT INTO `rs_sala` VALUES ('4', 'ñññññéééeé´´i', 'dasfsdfñññéééé\r\n', '32', '32', '1');
 
 -- ----------------------------
 -- Table structure for tmp
@@ -618,7 +640,7 @@ CREATE TABLE `us_banda_detalle_usuario` (
 -- ----------------------------
 -- Records of us_banda_detalle_usuario
 -- ----------------------------
-INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '35611553', '1');
+INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '43101104', '1');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '95501690', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '36610553', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '982345456', '0');
@@ -629,7 +651,7 @@ INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '94501690333', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('1', '452345243523452', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('2', '1152188863', '1');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('2', '34610553', '0');
-INSERT INTO `us_banda_detalle_usuario` VALUES ('4', '356115453', '1');
+INSERT INTO `us_banda_detalle_usuario` VALUES ('4', '43101104', '1');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('4', '94501690', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('4', '94501690333', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('2', '897887879', '0');
@@ -640,9 +662,10 @@ INSERT INTO `us_banda_detalle_usuario` VALUES ('3', '43101104', '1');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('3', '34610553', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('3', '356115533', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('3', '94501690', '0');
-INSERT INTO `us_banda_detalle_usuario` VALUES ('6', '12453', '1');
+INSERT INTO `us_banda_detalle_usuario` VALUES ('6', '43101104', '1');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('6', '94501690', '0');
 INSERT INTO `us_banda_detalle_usuario` VALUES ('6', '12312', '0');
+INSERT INTO `us_banda_detalle_usuario` VALUES ('6', '1152204758', '0');
 
 -- ----------------------------
 -- Table structure for us_banda_usuario
@@ -775,40 +798,40 @@ CREATE TABLE `us_usuario` (
 -- ----------------------------
 -- Records of us_usuario
 -- ----------------------------
-INSERT INTO `us_usuario` VALUES ('12312', '1', 'Cárlos ñañañañañ', 'áááwéééééíí', '2280744', '2342343444', 'pepeeeee@gmail.con', 'cra 95 # 48D 58', '73da7bb9d2a475bbc2ab79da7d4e94940cb9f9d5', '4', '2', '2018-12-13 01:52:29', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('12453', '2', 'pepito', 'perez', '3234423', '3243532423', 'juan@del.com', 'calle 2334', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-11-06 12:55:22', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('34610553', '1', 'diana', 'viveros', '3214697', '3214636790', 'edinson_gallego23152@prueba.edu.cx', '', '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '1', '2018-08-28 15:31:00', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('35611553', '1', 'jairo', 'ortiz', '1200000', '8452530125', 'jairo@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-06 12:00:14', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('36610553', '1', 'jhon', 'valencia', '7896325', '8965635632', 'jhon@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-09-06 13:43:35', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('43101104', '1', 'nidia', 'valencia', '3127899', '3127852212', 'nidia123@elpoli.edu.co', '', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-08-25 11:15:21', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('94501690', '1', 'edinson', 'gallego', '3216366', '3216367908', 'edigahe77@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-08-25 11:10:33', '0', '0', '0');
-INSERT INTO `us_usuario` VALUES ('95501690', '1', 'juan', 'acevedo', '7896366', '1521521255', 'juan@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-06 15:03:01', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('123456789', '2', 'ana', 'herrera', '4545632', '2563254896', 'ana@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-09-06 03:50:32', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('323432423', '2', 'pepe', 'juarea', '3242343', '3243242342', 'oscarmesa.elpsssoli@gmail.com', 'calle 123', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-11-06 12:58:41', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('324343333', '1', 'pepe', 'dfsadf', '2342343', '3232432234', 'ososcar@fasdf.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-06 13:41:14', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('356115453', '1', 'carlos bab ', 'pepito perez', '3242342', '3243243243', 'jairwwwo@gmail.com', 'calle 13', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-16 14:04:30', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('356115533', '1', 'calos ', 'pedrada', '3242343', '3242342342', 'jairo3333@gmail.com', 'calle 1234', '887466750ccd269cf125a9ef1d66612db74b5a0e', '1', '2', '2018-10-17 02:37:57', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('789623778', '1', 'pedro', 'perez', '12369', '789632', 'pedro@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-06 18:15:44', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('897887879', '2', 'ááááeééééiíííííímanow..', 'talesáádsdf', '3242342', '3423412341', '4123@gmail.com', 'cra 95 # 48D 58', '9e49c38c79be1abbcd093561f47d0af5da3dbb8a', '4', '2', '2018-12-13 01:59:05', '0', '0', '0');
-INSERT INTO `us_usuario` VALUES ('982345456', '1', 'edinson', 'herrera', '7896152', '5634565625', 'edi@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '2', '2018-09-06 18:11:48', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('987412212', '1', 'fghjk', 'cvvbnm', '5623048', '9865320765', 'ediha@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '2', '2018-09-06 19:33:20', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('1152188863', '1', 'Oscar', 'Mesa', '5804661', '3012280744', 'oscarmesa.elpoli@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '1', '2018-09-10 19:01:51', '0', '0', '0');
-INSERT INTO `us_usuario` VALUES ('1152204758', '1', 'santiago', 'betancur', '6666666', '6666666666', 'poliaulink@gmail.com', '', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-08-25 13:59:36', '0', '0', '1');
-INSERT INTO `us_usuario` VALUES ('2147483647', '1', 'Diego', 'Mejia', '5555555', '5555555555', '555@gmail.com', null, 'a1611dad68e7b4ecea7e1b68d76c3a40c14f6a85', '3', '2', '2018-09-06 16:14:52', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('5435843958', '3', 'asdfasdf', 'sadfsdfasdf', '2313333', '3432423333', 'oscar@gmailc.om', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '2', '2018-09-07 16:10:45', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('23123213123', '1', 'calitos', 'pepo', '2131232', '1232131233', 'carlos234@gmail.com', 'calle 123', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-25 15:52:06', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('94501690333', '1', 'dfasdf', 'asdfasdf', '3242343', '3423423432', 'edinson_galleeeeego23152@elpoli.edu.co', 'cadfasdfa', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-16 12:59:06', '0', '0', '0');
-INSERT INTO `us_usuario` VALUES ('564353453454', '4', 'pepito', 'perez', '2342342', '3242343243', 'pepoooo@gmail.com', 'callle 324324', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-11 15:03:20', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('111111111111111', '1', 'ana', 'mesa', '2314324', '2342342342', 'anamesa@gmail.com', 'calle 23123', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-25 15:54:48', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('123123213123123', '1', 'carlos perez', 'calitos pppp', '2343243', '3423423423', 'edinson_wwwgallego23152@elpoli.edu.co', 'calle 12', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-16 12:55:50', '0', '1', '1');
-INSERT INTO `us_usuario` VALUES ('234324234234234', '1', 'pepito', 'asdfasdf', '3242342', '2342342343', 'casd@ksdfasdf.com', 'afsdfasdf', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-11 15:05:04', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('324123412341234', '1', 'carlos', 'mesa', '3242342', '3242234234', 'pepito@gmaill.com', 'calere', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-11 14:59:11', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('324234234324234', '1', 'carlos', 'landa', '2343243', '2342343243', 'jaime12321@gmail.com', '', '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '2', '2018-09-24 20:16:13', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('324333233233333', '2', 'ds', 'werasdfadsf', '3334444', '2333333333', 'pepeepepe@gmail.com', 'calle 234', '887466750ccd269cf125a9ef1d66612db74b5a0e', '4', '2', '2018-11-05 23:19:03', '0', '1', '1');
-INSERT INTO `us_usuario` VALUES ('345345435345345', '1', 'sdafasfdasdasdf', 'sadfsdfasdfasdfasdf', '2342342', '3423432423', '234324@fmaol.com', 'cale', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-11 15:08:17', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('432423432423423', '3', 'ewsadf', 'asdf', '2321312', '1231232342', 'pepe@gmail.com', 'calle 123', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-10-11 14:55:17', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('452345243523452', '1', 'pepe perez', 'aja', '3232231', '2343243432', 'vuelta22222222@gmail.com', 'calle 2234', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '1', '2018-10-17 01:56:17', '0', '1', '1');
-INSERT INTO `us_usuario` VALUES ('454385345849838', '2', 'asdfh', 'dfjsf', '3423333', '3333333333', 'oscar_mesa24092@elpoli.edu.co', 'calle falsa 1234', '9b72d28433768b3a902c32b7a51b7d2f2b438032', '3', '1', '2018-09-07 16:09:12', '1', '0', '1');
-INSERT INTO `us_usuario` VALUES ('877777777777777', '1', 'sdfasdf', 'adfgdgsdfg', '5555555', '5555555555', 'asdfasdf@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-07 16:44:43', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('996954695469456', '2', 'dfgksdfgksdkfgsdfkgs', 'dskjfskf', '3432423', '4234234234', '4535345@gmail.com', null, '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-07 16:13:32', '0', '1', '0');
-INSERT INTO `us_usuario` VALUES ('999999999999999', '1', 'Diego', 'Mejia', '5555555', '5555555555', '555@gmail.com', 'calle 1234', '887466750ccd269cf125a9ef1d66612db74b5a0e', '3', '2', '2018-09-07 16:35:21', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('12312', '1', 'Cárlos ñañañañañ', 'áááwéééééíí', '2280744', '2342343444', 'pepeeeee@gmail.con', 'cra 95 # 48D 58', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-12-13 01:52:29', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('12453', '2', 'pepito', 'perez', '3234423', '3243532423', 'juan@del.com', 'calle 2334', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-11-06 12:55:22', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('34610553', '1', 'diana', 'viveros', '3214697', '3214636790', 'edinson_gallego23152@prueba.edu.cx', '', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '1', '2018-08-28 15:31:00', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('35611553', '1', 'jairo', 'ortiz', '1200000', '8452530125', 'jairo@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-06 12:00:14', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('36610553', '1', 'jhon', 'valencia', '7896325', '8965635632', 'jhon@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-09-06 13:43:35', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('43101104', '1', 'nidia', 'valencia', '3127899', '3127852212', 'nidia123@elpoli.edu.co', '', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-08-25 11:15:21', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('94501690', '1', 'edinson', 'gallego', '3216366', '3216367908', 'edigahe77@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-08-25 11:10:33', '0', '0', '0');
+INSERT INTO `us_usuario` VALUES ('95501690', '1', 'juan', 'acevedo', '7896366', '1521521255', 'juan@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-06 15:03:01', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('123456789', '2', 'ana', 'herrera', '4545632', '2563254896', 'ana@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-09-06 03:50:32', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('323432423', '2', 'pepe', 'juarea', '3242343', '3243242342', 'oscarmesa.elpsssoli@gmail.com', 'calle 123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-11-06 12:58:41', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('324343333', '1', 'pepe', 'dfsadf', '2342343', '3232432234', 'ososcar@fasdf.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-06 13:41:14', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('356115453', '1', 'carlos bab ', 'pepito perez', '3242342', '3243243243', 'jairwwwo@gmail.com', 'calle 13', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-16 14:04:30', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('356115533', '1', 'calos ', 'pedrada', '3242343', '3242342342', 'jairo3333@gmail.com', 'calle 1234', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '1', '2018-10-17 02:37:57', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('789623778', '1', 'pedro', 'perez', '12369', '789632', 'pedro@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-06 18:15:44', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('897887879', '2', 'ááááeééééiíííííímanow..', 'talesáádsdf', '3242342', '3423412341', '4123@gmail.com', 'cra 95 # 48D 58', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-12-13 01:59:05', '0', '0', '0');
+INSERT INTO `us_usuario` VALUES ('982345456', '1', 'edinson', 'herrera', '7896152', '5634565625', 'edi@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-09-06 18:11:48', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('987412212', '1', 'fghjk', 'cvvbnm', '5623048', '9865320765', 'ediha@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-09-06 19:33:20', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('1152188863', '1', 'Oscar', 'Mesa', '5804661', '3012280744', 'oscarmesa.elpoli@gmail.com', null, '0ce23e5802655d180e1f9ef7e1461da2bfc5347d', '1', '1', '2018-09-10 19:01:51', '1', '0', '0');
+INSERT INTO `us_usuario` VALUES ('1152204758', '1', 'santiago', 'betancur', '6666666', '6666666666', 'poliaulink@gmail.com', '', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-08-25 13:59:36', '0', '0', '1');
+INSERT INTO `us_usuario` VALUES ('2147483647', '1', 'Diego', 'Mejia', '5555555', '5555555555', '555@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-06 16:14:52', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('5435843958', '3', 'asdfasdf', 'sadfsdfasdf', '2313333', '3432423333', 'oscar@gmailc.om', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-09-07 16:10:45', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('23123213123', '1', 'calitos', 'pepo', '2131232', '1232131233', 'carlos234@gmail.com', 'calle 123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-25 15:52:06', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('94501690333', '1', 'dfasdf', 'asdfasdf', '3242343', '3423423432', 'edinson_galleeeeego23152@elpoli.edu.co', 'cadfasdfa', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-16 12:59:06', '0', '0', '0');
+INSERT INTO `us_usuario` VALUES ('564353453454', '4', 'pepito', 'perez', '2342342', '3242343243', 'pepoooo@gmail.com', 'callle 324324', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-11 15:03:20', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('111111111111111', '1', 'ana', 'mesa', '2314324', '2342342342', 'anamesa@gmail.com', 'calle 23123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-25 15:54:48', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('123123213123123', '1', 'carlos perez', 'calitos pppp', '2343243', '3423423423', 'edinson_wwwgallego23152@elpoli.edu.co', 'calle 12', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-16 12:55:50', '0', '1', '1');
+INSERT INTO `us_usuario` VALUES ('234324234234234', '1', 'pepito', 'asdfasdf', '3242342', '2342342343', 'casd@ksdfasdf.com', 'afsdfasdf', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-11 15:05:04', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('324123412341234', '1', 'carlos', 'mesa', '3242342', '3242234234', 'pepito@gmaill.com', 'calere', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-11 14:59:11', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('324234234324234', '1', 'carlos', 'landa', '2343243', '2342343243', 'jaime12321@gmail.com', '', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-09-24 20:16:13', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('324333233233333', '2', 'ds', 'werasdfadsf', '3334444', '2333333333', 'pepeepepe@gmail.com', 'calle 234', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '4', '2', '2018-11-05 23:19:03', '0', '1', '1');
+INSERT INTO `us_usuario` VALUES ('345345435345345', '1', 'sdafasfdasdasdf', 'sadfsdfasdfasdfasdf', '2342342', '3423432423', '234324@fmaol.com', 'cale', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-11 15:08:17', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('432423432423423', '3', 'ewsadf', 'asdf', '2321312', '1231232342', 'pepe@gmail.com', 'calle 123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-10-11 14:55:17', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('452345243523452', '1', 'pepe perez', 'aja', '3232231', '2343243432', 'vuelta22222222@gmail.com', 'calle 2234', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-10-17 01:56:17', '0', '1', '1');
+INSERT INTO `us_usuario` VALUES ('454385345849838', '2', 'asdfh', 'dfjsf', '3423333', '3333333333', 'oscar_mesa24092@elpoli.edu.co', 'calle falsa 1234', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '1', '2018-09-07 16:09:12', '1', '0', '1');
+INSERT INTO `us_usuario` VALUES ('877777777777777', '1', 'sdfasdf', 'adfgdgsdfg', '5555555', '5555555555', 'asdfasdf@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-07 16:44:43', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('996954695469456', '2', 'dfgksdfgksdkfgsdfkgs', 'dskjfskf', '3432423', '4234234234', '4535345@gmail.com', null, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-07 16:13:32', '0', '1', '0');
+INSERT INTO `us_usuario` VALUES ('999999999999999', '1', 'Diego', 'Mejia', '5555555', '5555555555', '555@gmail.com', 'calle 1234', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '3', '2', '2018-09-07 16:35:21', '0', '1', '0');
