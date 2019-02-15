@@ -59,7 +59,7 @@ if (isset($con)) {
                         <div class="form-group">
                             <label for="estado" class="col-sm-3 control-label">*Estado</label>
                             <div class="col-sm-8"> 
-                                <select name="estado" data-rule-validarInactivacionReservaUsuarioEdt="true" data-rule-validarInactivacionUsuarioEdt="true" id="estado" class="form-control">
+                                <select name="estado" data-rule-validarInactivacionReservaUsuarioEdt="true" data-rule-validarInactivacionUsuarioEdt="true" validarIntegranteBandaUsuario="true" id="estado" class="form-control">
                                 </select>
                             </div>
                         </div>

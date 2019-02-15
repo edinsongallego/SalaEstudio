@@ -194,6 +194,7 @@ if ($action == 'ajax') {
         <?php
     }
 }else if($action == 'validarFacturasAsociadaUsuario'){
+    //facturas pendientes de pago
     $user_id = $_REQUEST["ID_USUARIO"];
     $SQL = "SELECT
                                     Count(ft_factura.NM_CLIENTE_ID) AS NUM_FACTURAS_PENDIENTES
@@ -208,10 +209,17 @@ if ($action == 'ajax') {
         echo $row["NUM_FACTURAS_PENDIENTES"] == 0?"true":"false";die;
         
 }elseif ($action == 'validarReservasAsociadaUsuario') {
+    //Reservas reservas pendientes
      $user_id = $_REQUEST["ID_USUARIO"];
       $SQL = "SELECT COUNT(documento) NUM_RESERVAS FROM rs_reserva_sala WHERE documento = '$user_id' AND `end` >= NOW() AND DS_ESTADO = 'Activo'";
             $count_query = mysqli_query($con, $SQL);
             $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
             echo $row["NUM_RESERVAS"] == 0?"true":"false";die;
+}elseif ($action == 'validarIntegranteBandaUsuario') {
+     $user_id = $_REQUEST["ID_USUARIO"];
+      $SQL = "SELECT COUNT(*) NUM_BANDAS FROM us_banda_detalle_usuario WHERE NM_DOCUMENTO_ID = '$user_id'";
+            $count_query = mysqli_query($con, $SQL);
+            $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+            echo $row["NUM_BANDAS"] == 0?"true":"false";die;
 }
 ?>

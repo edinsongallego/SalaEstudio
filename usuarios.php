@@ -240,7 +240,7 @@ $title = "Usuarios | Sala Estudio";
                                             isSuccess = true;
                                           }
                                         return isSuccess;
-                                        }, "Lo siento, pero este usuario tiene facturas pendientes por pagar. Por lo que no puede ser inactivado.");
+                                        }, "Lo sentimos, pero este usuario tiene facturas pendientes por pagar. Por lo que no puede ser inactivado.");
 
                                           $.validator.addMethod("validarInactivacionReservaUsuarioEdt", function (value, element) {
                                              var isSuccess = false;
@@ -256,8 +256,22 @@ $title = "Usuarios | Sala Estudio";
                                             isSuccess = true;
                                           }
                                         return isSuccess;
-                                        }, "Lo siento, pero este usuario esta asociado con una o varias bandas activas. Por lo que no puede ser inactivado.");
+                                        }, "Lo sentimos, pero este usuario tiene reservas activas y vigentes a la fecha. Por lo que no puede ser inactivado.");
 
+                                          $.validator.addMethod("validarIntegranteBandaUsuario", function (value, element) {
+                                             var isSuccess = false;
+                                             if(value == 2){
 
+                                             $.ajax({ url: "ajax/buscar_usuarios.php", 
+                                                data: {'action':'validarIntegranteBandaUsuario','ID_USUARIO':$("#mod_id").val()}, 
+                                                async: false, 
+                                                success: 
+                                                    function(msg) { isSuccess = msg === "true" ? true : false }
+                                              });
+                                          }else{
+                                            isSuccess = true;
+                                          }
+                                        return isSuccess;
+                                        }, "Lo sentimos, pero este usuario esta asociado a banda(s) activa(s). Por lo que no puede ser inactivado.");
                                     });
 </script>
