@@ -264,21 +264,21 @@ switch ($accion) {
 
     default:
         session_start();
+
         $query1 = $pdo->prepare("SELECT CS_TIPO_USUARIO_ID FROM us_usuario WHERE NM_DOCUMENTO_ID=" . $_SESSION["NM_DOCUMENTO_ID"] . "");
         $query1->execute();
         $resultado1 = $query1->fetch(PDO::FETCH_ASSOC);
         //print_r($resultado1);
         if ($resultado1["CS_TIPO_USUARIO_ID"] == 1) {
 
-            $query = $pdo->prepare("SELECT *, true AS editable FROM rs_reserva_sala where sala = ".$_POST["ID_SALA"]);
+            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, t1.*, true AS editable FROM rs_reserva_sala t1 where t1.sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($resultado);
             break;
         } else {
-
-            $query = $pdo->prepare("SELECT *,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala where sala = ".$_POST["ID_SALA"]);
+            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, t1.*,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala t1 where sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);

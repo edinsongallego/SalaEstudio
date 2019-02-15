@@ -353,7 +353,7 @@ $title = "Reservas | Sala Estudio";
                                                     showNonCurrentDates: false,
                                                     hiddenDays: [0],
                                                     events: {
-                                                        url: 'http://localhost/SalaEstudio/reservasala1.php',
+                                                        url: 'reservasala1.php',
                                                         type: 'POST',
                                                         data: function () { // a function that returns an object
                                                             return {
@@ -650,6 +650,7 @@ $title = "Reservas | Sala Estudio";
                                                     FechaHorafin = calEvent.end._i.split(" ");
                                                     $('#txtfechafinal').val(FechaHorafin[0]);
                                                     $('#txthorafin').val(FechaHorafin[1]);
+                                                    calEvent.NUM_FACT > 0?$("#btnfactura").prop("disabled", true):$("#btnfactura").prop("disabled", false);
                                                     $("#Modalevento").modal();
                                                     //docu = calEvent.sala;
                                                     //alert(docu);

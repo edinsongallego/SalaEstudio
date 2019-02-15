@@ -226,5 +226,38 @@ $title = "Usuarios | Sala Estudio";
                                             }
                                         });
 
+                                          $.validator.addMethod("validarInactivacionUsuarioEdt", function (value, element) {
+                                             var isSuccess = false;
+                                             if(value == 2){
+
+                                             $.ajax({ url: "ajax/buscar_usuarios.php", 
+                                                data: {'action':'validarFacturasAsociadaUsuario','ID_USUARIO':$("#mod_id").val()}, 
+                                                async: false, 
+                                                success: 
+                                                    function(msg) { isSuccess = msg === "true" ? true : false }
+                                              });
+                                          }else{
+                                            isSuccess = true;
+                                          }
+                                        return isSuccess;
+                                        }, "Lo siento, pero este usuario tiene facturas pendientes por pagar. Por lo que no puede ser inactivado.");
+
+                                          $.validator.addMethod("validarInactivacionReservaUsuarioEdt", function (value, element) {
+                                             var isSuccess = false;
+                                             if(value == 2){
+
+                                             $.ajax({ url: "ajax/buscar_usuarios.php", 
+                                                data: {'action':'validarReservasAsociadaUsuario','ID_USUARIO':$("#mod_id").val()}, 
+                                                async: false, 
+                                                success: 
+                                                    function(msg) { isSuccess = msg === "true" ? true : false }
+                                              });
+                                          }else{
+                                            isSuccess = true;
+                                          }
+                                        return isSuccess;
+                                        }, "Lo siento, pero este usuario esta asociado con una o varias bandas activas. Por lo que no puede ser inactivado.");
+
+
                                     });
 </script>

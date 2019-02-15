@@ -169,7 +169,7 @@ if ($action == 'ajax') {
                         <td ><span class="pull-right">
                                 <a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="#" class='btn btn-default' title='Cambiar contraseña' onclick="get_user_id('<?php echo $NM_DOCUMENTO_ID; ?>');" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-cog"></i></a>
-                                <?php if($CS_ESTADO_ID == 1){ ?>
+                                <?php if(false){ //if($CS_ESTADO_ID == 1) ?>
                                 <a href="#" class='btn btn-default' title='Inactivar Usuario' onclick="eliminar('<?php echo $NM_DOCUMENTO_ID; ?>')"><i class="glyphicon glyphicon-ban-circle"></i> </a></span></td>
                             <?php } ?>
 
@@ -193,5 +193,25 @@ if ($action == 'ajax') {
         </div>
         <?php
     }
+}else if($action == 'validarFacturasAsociadaUsuario'){
+    $user_id = $_REQUEST["ID_USUARIO"];
+    $SQL = "SELECT
+                                    Count(ft_factura.NM_CLIENTE_ID) AS NUM_FACTURAS_PENDIENTES
+                                    FROM
+                                    ft_factura
+                                    WHERE
+                                    ft_factura.NM_CLIENTE_ID = '$user_id' AND
+                                    ft_factura.ID_ESTADO = 2";
+        $count_query = mysqli_query($con, $SQL);
+        $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+        //print_r($row);die;
+        echo $row["NUM_FACTURAS_PENDIENTES"] == 0?"true":"false";die;
+        
+}elseif ($action == 'validarReservasAsociadaUsuario') {
+     $user_id = $_REQUEST["ID_USUARIO"];
+      $SQL = "SELECT COUNT(documento) NUM_RESERVAS FROM rs_reserva_sala WHERE documento = '$user_id' AND `end` >= NOW() AND DS_ESTADO = 'Activo'";
+            $count_query = mysqli_query($con, $SQL);
+            $row = mysqli_fetch_array($count_query, MYSQLI_ASSOC);
+            echo $row["NUM_RESERVAS"] == 0?"true":"false";die;
 }
 ?>
