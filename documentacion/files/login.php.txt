@@ -157,7 +157,7 @@ if ($login->isUserLoggedIn() == true) {
                                 <div class="panel-body">
                                     <div class="form-group">
 
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" size='30' maxlength='100' onKeyUp="javascript:validateMail('correo')" class="form-control" required>
+                                        <input type="email" id="email" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" onKeyUp="javascript:validateMail('correo')" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary" value="Enviar" >

@@ -171,7 +171,7 @@ Iniciar Sesión
                             <div class="modal-body">
 
                                 <div class="form-group">
-                                    <input type="email" id="email" data-rule-validar_existencia_correo="true" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" size='30' maxlength='30' class="form-control" required>
+                                    <input type="email" id="email" data-rule-validar_existencia_correo="true" class="form-control" name="email" placeholder="*Email" title="Dirección de correo (Escribe el email asociado a tu cuenta para recuperar tu contraseña)"  value="" class="form-control" required>
                                 </div>
 
                             </div>
