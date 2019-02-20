@@ -651,6 +651,7 @@ $title = "Reservas | Sala Estudio";
                                                     $('#txtfechafinal').val(FechaHorafin[0]);
                                                     $('#txthorafin').val(FechaHorafin[1]);
                                                     calEvent.NUM_FACT > 0?$("#btnfactura").prop("disabled", true):$("#btnfactura").prop("disabled", false);
+                                                    calEvent.NUM_MULTAS > 0?$("#btnmulta").prop("disabled", true):$("#btnmulta").prop("disabled", false);
                                                     $("#Modalevento").modal();
                                                     //docu = calEvent.sala;
                                                     //alert(docu);

@@ -271,14 +271,14 @@ switch ($accion) {
         //print_r($resultado1);
         if ($resultado1["CS_TIPO_USUARIO_ID"] == 1) {
 
-            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, t1.*, true AS editable FROM rs_reserva_sala t1 where t1.sala = ".$_POST["ID_SALA"]);
+            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, (SELECT COUNT(*) FROM rs_multas_reserva t3 WHERE t3.CS_RESERVA_ID = t1.id) NUM_MULTAS, t1.*, true AS editable FROM rs_reserva_sala t1 where t1.sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($resultado);
             break;
         } else {
-            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, t1.*,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala t1 where sala = ".$_POST["ID_SALA"]);
+            $query = $pdo->prepare("SELECT (SELECT COUNT(*) FROM ft_factura t2 WHERE t2.ID_RESERVA = t1.id) AS NUM_FACT, (SELECT COUNT(*) FROM rs_multas_reserva t3 WHERE t3.CS_RESERVA_ID = t1.id) NUM_MULTAS, t1.*,  IF(documento=" . $_SESSION["NM_DOCUMENTO_ID"] . ",true, false) AS editable FROM rs_reserva_sala t1 where sala = ".$_POST["ID_SALA"]);
             $query->execute();
 
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);

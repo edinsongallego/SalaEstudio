@@ -23,8 +23,9 @@
           
           <li class="<?php echo @$active_reservas;?>"><a href="salas.php"><i class='glyphicon glyphicon-calendar'></i> Reservas <span class="sr-only">(current)</span></a></li>
 
-          <?php if ($_SESSION['RESTAURAR_CONTRASENA'] == 1): ?>
-          <li class=""><a href="" id="opt_menu_cambiar_clave" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Clave</a></li>
+          <?php //if ($_SESSION['RESTAURAR_CONTRASENA'] == 1): ?>
+          <?php if (true): ?>
+          <li class=""><a href="" id="opt_menu_cambiar_clave" data-toggle="modal" data-target="#myModal3" onclick="get_user_id('<?php echo $_SESSION['NM_DOCUMENTO_ID']; ?>');"><i  class='glyphicon glyphicon-lock'></i>Cambiar Contraseña</a></li>
           <?php endif ?>  
          
         </ul>

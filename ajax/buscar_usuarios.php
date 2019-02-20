@@ -107,7 +107,7 @@ if ($action == 'ajax') {
     $total_pages = ceil($numrows / $per_page);
     $reload = './usuarios.php';
     //main query to fetch the data
-    $sql = "SELECT *, (SELECT GROUP_CONCAT(t.DS_DESCRIPCION_BANDA SEPARATOR ', ') FROM us_banda_usuario t INNER JOIN us_banda_detalle_usuario t1 ON t1.CS_BANDA_ID = t.CS_BANDA_ID WHERE t1.NM_DOCUMENTO_ID = t2.NM_DOCUMENTO_ID) BANDAS FROM  $sTable $sWhere LIMIT $offset,$per_page";
+    $sql = "SELECT *, (SELECT GROUP_CONCAT(t.DS_NOMBRE_BANDA SEPARATOR ', ') FROM us_banda_usuario t INNER JOIN us_banda_detalle_usuario t1 ON t1.CS_BANDA_ID = t.CS_BANDA_ID WHERE t1.NM_DOCUMENTO_ID = t2.NM_DOCUMENTO_ID) BANDAS FROM  $sTable $sWhere LIMIT $offset,$per_page";
     $query = mysqli_query($con, $sql);
     //loop through fetched data
     if ($numrows > 0) {
